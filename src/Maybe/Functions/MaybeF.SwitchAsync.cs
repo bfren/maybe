@@ -8,7 +8,7 @@ namespace Maybe.Functions;
 
 public static partial class MaybeF
 {
-	/// <inheritdoc cref="Switch{T, U}(Maybe{T}, Func{T, U}, Func{IReason, U})"/>
+	/// <inheritdoc cref="Switch{T, TReturn}(Maybe{T}, Func{T, TReturn}, Func{IReason, TReturn})"/>
 	public static Task<TReturn> SwitchAsync<T, TReturn>(Maybe<T> maybe, Func<T, Task<TReturn>> some, Func<IReason, Task<TReturn>> none) =>
 		Switch(
 			maybe,
@@ -16,7 +16,7 @@ public static partial class MaybeF
 			none: r => none(r)
 		);
 
-	/// <inheritdoc cref="Switch{T, U}(Maybe{T}, Func{T, U}, Func{IReason, U})"/>
+	/// <inheritdoc cref="Switch{T, TReturn}(Maybe{T}, Func{T, TReturn}, Func{IReason, TReturn})"/>
 	public static async Task<TReturn> SwitchAsync<T, TReturn>(Task<Maybe<T>> maybe, Func<T, Task<TReturn>> some, Func<IReason, Task<TReturn>> none) =>
 		await SwitchAsync(await maybe.ConfigureAwait(false), some, none).ConfigureAwait(false);
 }

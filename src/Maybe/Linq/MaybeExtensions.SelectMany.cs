@@ -28,7 +28,7 @@ public static partial class MaybeExtensions
 					.Map(y => g(x, y), MaybeF.DefaultHandler)
 		);
 
-	/// <inheritdoc cref="SelectMany{T, U, V}(Maybe{T}, Func{T, Maybe{U}}, Func{T, U, V})"/>
+	/// <inheritdoc cref="SelectMany{T, TInner, TReturn}(Maybe{T}, Func{T, Maybe{TInner}}, Func{T, TInner, TReturn})"/>
 	public static Task<Maybe<TReturn>> SelectMany<T, TInner, TReturn>(this Maybe<T> @this, Func<T, Task<Maybe<TInner>>> f, Func<T, TInner, TReturn> g) =>
 		MaybeF.BindAsync(@this,
 			x =>
@@ -36,7 +36,7 @@ public static partial class MaybeExtensions
 					.MapAsync(y => g(x, y), MaybeF.DefaultHandler)
 		);
 
-	/// <inheritdoc cref="SelectMany{T, U, V}(Maybe{T}, Func{T, Maybe{U}}, Func{T, U, V})"/>
+	/// <inheritdoc cref="SelectMany{T, TInner, TReturn}(Maybe{T}, Func{T, Maybe{TInner}}, Func{T, TInner, TReturn})"/>
 	/// <param name="this">Maybe (awaitable)</param>
 	/// <param name="f">Interim bind function</param>
 	/// <param name="g">Return map function</param>
@@ -49,7 +49,7 @@ public static partial class MaybeExtensions
 				)
 		);
 
-	/// <inheritdoc cref="SelectMany{T, U, V}(Maybe{T}, Func{T, Maybe{U}}, Func{T, U, V})"/>
+	/// <inheritdoc cref="SelectMany{T, TInner, TReturn}(Maybe{T}, Func{T, Maybe{TInner}}, Func{T, TInner, TReturn})"/>
 	/// <param name="this">Maybe (awaitable)</param>
 	/// <param name="f">Interim bind function</param>
 	/// <param name="g">Return map function</param>

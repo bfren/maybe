@@ -236,11 +236,11 @@ public abstract record class Maybe<T> : IEquatable<Maybe<T>>
 
 	#region Bind
 
-	/// <inheritdoc cref="MaybeF.Bind{T, U}(Maybe{T}, Func{T, Maybe{U}})"/>
+	/// <inheritdoc cref="MaybeF.Bind{T, TReturn}(Maybe{T}, Func{T, Maybe{TReturn}})"/>
 	public Maybe<TReturn> Bind<TReturn>(Func<T, Maybe<TReturn>> bind) =>
 		MaybeF.Bind(this, bind);
 
-	/// <inheritdoc cref="MaybeF.BindAsync{T, U}(Maybe{T}, Func{T, Task{Maybe{U}}})"/>
+	/// <inheritdoc cref="MaybeF.BindAsync{T, TReturn}(Maybe{T}, Func{T, Task{Maybe{TReturn}}})"/>
 	public Task<Maybe<TReturn>> BindAsync<TReturn>(Func<T, Task<Maybe<TReturn>>> bind) =>
 		MaybeF.BindAsync(this, bind);
 
@@ -293,11 +293,11 @@ public abstract record class Maybe<T> : IEquatable<Maybe<T>>
 
 	#region Map
 
-	/// <inheritdoc cref="MaybeF.Map{T, U}(Maybe{T}, Func{T, U}, MaybeF.Handler)"/>
+	/// <inheritdoc cref="MaybeF.Map{T, TReturn}(Maybe{T}, Func{T, TReturn}, MaybeF.Handler)"/>
 	public Maybe<TReturn> Map<TReturn>(Func<T, TReturn> map, MaybeF.Handler handler) =>
 		MaybeF.Map(this, map, handler);
 
-	/// <inheritdoc cref="MapAsync{T, U}(Maybe{T}, Func{T, Task{U}}, MaybeF.Handler)"/>
+	/// <inheritdoc cref="MaybeF.MapAsync{T, TReturn}(Maybe{T}, Func{T, Task{TReturn}}, MaybeF.Handler))"/>
 	public Task<Maybe<TReturn>> MapAsync<TReturn>(Func<T, Task<TReturn>> map, MaybeF.Handler handler) =>
 		MaybeF.MapAsync(this, map, handler);
 
@@ -313,51 +313,51 @@ public abstract record class Maybe<T> : IEquatable<Maybe<T>>
 	public void Switch(Action<T> some, Action<IReason> none) =>
 		MaybeF.Switch(this, some: some, none: none);
 
-	/// <inheritdoc cref="MaybeF.Switch{T, U}(Maybe{T}, Func{T, U}, Func{IReason, U})"/>
+	/// <inheritdoc cref="MaybeF.Switch{T, TReturn}(Maybe{T}, Func{T, TReturn}, Func{IReason, TReturn})"/>
 	public TReturn Switch<TReturn>(Func<T, TReturn> some, TReturn none) =>
 		MaybeF.Switch(this, some: some, none: _ => none);
 
-	/// <inheritdoc cref="MaybeF.Switch{T, U}(Maybe{T}, Func{T, U}, Func{IReason, U})"/>
+	/// <inheritdoc cref="MaybeF.Switch{T, TReturn}(Maybe{T}, Func{T, TReturn}, Func{IReason, TReturn})"/>
 	public TReturn Switch<TReturn>(Func<T, TReturn> some, Func<TReturn> none) =>
 		MaybeF.Switch(this, some: some, none: _ => none());
 
-	/// <inheritdoc cref="MaybeF.Switch{T, U}(Maybe{T}, Func{T, U}, Func{IReason, U})"/>
+	/// <inheritdoc cref="MaybeF.Switch{T, TReturn}(Maybe{T}, Func{T, TReturn}, Func{IReason, TReturn})"/>
 	public TReturn Switch<TReturn>(Func<T, TReturn> some, Func<IReason, TReturn> none) =>
 		MaybeF.Switch(this, some: some, none: none);
 
-	/// <inheritdoc cref="MaybeF.SwitchAsync{T, U}(Maybe{T}, Func{T, Task{U}}, Func{IReason, Task{U}})"/>
+	/// <inheritdoc cref="MaybeF.SwitchAsync{T, TReturn}(Maybe{T}, Func{T, Task{TReturn}}, Func{IReason, Task{TReturn}})"/>
 	public Task<TReturn> SwitchAsync<TReturn>(Func<T, Task<TReturn>> some, TReturn none) =>
 		MaybeF.SwitchAsync(this, some: some, none: _ => Task.FromResult(none));
 
-	/// <inheritdoc cref="MaybeF.SwitchAsync{T, U}(Maybe{T}, Func{T, Task{U}}, Func{IReason, Task{U}})"/>
+	/// <inheritdoc cref="MaybeF.SwitchAsync{T, TReturn}(Maybe{T}, Func{T, Task{TReturn}}, Func{IReason, Task{TReturn}})"/>
 	public Task<TReturn> SwitchAsync<TReturn>(Func<T, TReturn> some, Task<TReturn> none) =>
 		MaybeF.SwitchAsync(this, some: v => Task.FromResult(some(v)), none: _ => none);
 
-	/// <inheritdoc cref="MaybeF.SwitchAsync{T, U}(Maybe{T}, Func{T, Task{U}}, Func{IReason, Task{U}})"/>
+	/// <inheritdoc cref="MaybeF.SwitchAsync{T, TReturn}(Maybe{T}, Func{T, Task{TReturn}}, Func{IReason, Task{TReturn}})"/>
 	public Task<TReturn> SwitchAsync<TReturn>(Func<T, Task<TReturn>> some, Task<TReturn> none) =>
 		MaybeF.SwitchAsync(this, some: some, none: _ => none);
 
-	/// <inheritdoc cref="MaybeF.SwitchAsync{T, U}(Maybe{T}, Func{T, Task{U}}, Func{IReason, Task{U}})"/>
+	/// <inheritdoc cref="MaybeF.SwitchAsync{T, TReturn}(Maybe{T}, Func{T, Task{TReturn}}, Func{IReason, Task{TReturn}})"/>
 	public Task<TReturn> SwitchAsync<TReturn>(Func<T, Task<TReturn>> some, Func<TReturn> none) =>
 		MaybeF.SwitchAsync(this, some: some, none: _ => Task.FromResult(none()));
 
-	/// <inheritdoc cref="MaybeF.SwitchAsync{T, U}(Maybe{T}, Func{T, Task{U}}, Func{IReason, Task{U}})"/>
+	/// <inheritdoc cref="MaybeF.SwitchAsync{T, TReturn}(Maybe{T}, Func{T, Task{TReturn}}, Func{IReason, Task{TReturn}})"/>
 	public Task<TReturn> SwitchAsync<TReturn>(Func<T, TReturn> some, Func<Task<TReturn>> none) =>
 		MaybeF.SwitchAsync(this, some: v => Task.FromResult(some(v)), none: _ => none());
 
-	/// <inheritdoc cref="MaybeF.SwitchAsync{T, U}(Maybe{T}, Func{T, Task{U}}, Func{IReason, Task{U}})"/>
+	/// <inheritdoc cref="MaybeF.SwitchAsync{T, TReturn}(Maybe{T}, Func{T, Task{TReturn}}, Func{IReason, Task{TReturn}})"/>
 	public Task<TReturn> SwitchAsync<TReturn>(Func<T, Task<TReturn>> some, Func<Task<TReturn>> none) =>
 		MaybeF.SwitchAsync(this, some: some, none: _ => none());
 
-	/// <inheritdoc cref="MaybeF.SwitchAsync{T, U}(Maybe{T}, Func{T, Task{U}}, Func{IReason, Task{U}})"/>
+	/// <inheritdoc cref="MaybeF.SwitchAsync{T, TReturn}(Maybe{T}, Func{T, Task{TReturn}}, Func{IReason, Task{TReturn}})"/>
 	public Task<TReturn> SwitchAsync<TReturn>(Func<T, TReturn> some, Func<IReason, Task<TReturn>> none) =>
 		MaybeF.SwitchAsync(this, some: v => Task.FromResult(some(v)), none: none);
 
-	/// <inheritdoc cref="MaybeF.SwitchAsync{T, U}(Maybe{T}, Func{T, Task{U}}, Func{IReason, Task{U}})"/>
+	/// <inheritdoc cref="MaybeF.SwitchAsync{T, TReturn}(Maybe{T}, Func{T, Task{TReturn}}, Func{IReason, Task{TReturn}})"/>
 	public Task<TReturn> SwitchAsync<TReturn>(Func<T, Task<TReturn>> some, Func<IReason, TReturn> none) =>
 		MaybeF.SwitchAsync(this, some: some, none: r => Task.FromResult(none(r)));
 
-	/// <inheritdoc cref="MaybeF.SwitchAsync{T, U}(Maybe{T}, Func{T, Task{U}}, Func{IReason, Task{U}})"/>
+	/// <inheritdoc cref="MaybeF.SwitchAsync{T, TReturn}(Maybe{T}, Func{T, Task{TReturn}}, Func{IReason, Task{TReturn}})"/>
 	public Task<TReturn> SwitchAsync<TReturn>(Func<T, Task<TReturn>> some, Func<IReason, Task<TReturn>> none) =>
 		MaybeF.SwitchAsync(this, some: some, none: none);
 
@@ -385,7 +385,7 @@ public abstract record class Maybe<T> : IEquatable<Maybe<T>>
 	public T Unwrap(Func<IReason, T> ifNone) =>
 		MaybeF.Unwrap(this, ifNone: ifNone);
 
-	/// <inheritdoc cref="MaybeF.UnwrapSingle{T, U}(Maybe{T}, Func{IReason}?, Func{IReason}?, Func{IReason}?)"/>
+	/// <inheritdoc cref="MaybeF.UnwrapSingle{T, TReturn}(Maybe{T}, Func{IReason}?, Func{IReason}?, Func{IReason}?)"/>
 	public Maybe<TSingle> UnwrapSingle<TSingle>(Func<IReason>? noItems = null, Func<IReason>? tooMany = null, Func<IReason>? notAList = null) =>
 		MaybeF.UnwrapSingle<T, TSingle>(this, noItems, tooMany, notAList);
 

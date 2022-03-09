@@ -67,7 +67,7 @@ public static partial class MaybeF
 
 		/// <summary>
 		/// Possible reasons for
-		/// <see cref="UnwrapSingle{T, U}(Maybe{T}, Func{IReason}?, Func{IReason}?, Func{IReason}?)"/> failing
+		/// <see cref="UnwrapSingle{T, TReturn}(Maybe{T}, Func{IReason}?, Func{IReason}?, Func{IReason}?)"/> failing
 		/// </summary>
 		public enum UnwrapSingleError
 		{

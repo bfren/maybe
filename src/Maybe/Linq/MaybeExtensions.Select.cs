@@ -21,17 +21,17 @@ public static partial class MaybeExtensions
 	public static Maybe<TReturn> Select<T, TReturn>(this Maybe<T> @this, Func<T, TReturn> f) =>
 		MaybeF.Map(@this, f, MaybeF.DefaultHandler);
 
-	/// <inheritdoc cref="Select{T, U}(Maybe{T}, Func{T, U})"/>
+	/// <inheritdoc cref="Select{T, TReturn}(Maybe{T}, Func{T, TReturn})"/>
 	public static Task<Maybe<TReturn>> Select<T, TReturn>(this Maybe<T> @this, Func<T, Task<TReturn>> f) =>
 		MaybeF.MapAsync(@this, f, MaybeF.DefaultHandler);
 
-	/// <inheritdoc cref="Select{T, U}(Maybe{T}, Func{T, U})"/>
+	/// <inheritdoc cref="Select{T, TReturn}(Maybe{T}, Func{T, TReturn})"/>
 	/// <param name="this">Maybe (awaitable)</param>
 	/// <param name="f">Return map function</param>
 	public static Task<Maybe<TReturn>> Select<T, TReturn>(this Task<Maybe<T>> @this, Func<T, TReturn> f) =>
 		MaybeF.MapAsync(@this, x => Task.FromResult(f(x)), MaybeF.DefaultHandler);
 
-	/// <inheritdoc cref="Select{T, U}(Maybe{T}, Func{T, U})"/>
+	/// <inheritdoc cref="Select{T, TReturn}(Maybe{T}, Func{T, TReturn})"/>
 	/// <param name="this">Maybe (awaitable)</param>
 	/// <param name="f">Return map function</param>
 	public static Task<Maybe<TReturn>> Select<T, TReturn>(this Task<Maybe<T>> @this, Func<T, Task<TReturn>> f) =>

@@ -44,7 +44,7 @@ public static partial class MaybeF
 		public T Value(Func<IReason, T> ifNone) =>
 			Unwrap(maybe, ifNone);
 
-		/// <inheritdoc cref="UnwrapSingle{T, U}(Maybe{T}, Func{IReason}?, Func{IReason}?, Func{IReason}?)"/>
+		/// <inheritdoc cref="UnwrapSingle{T, TReturn}(Maybe{T}, Func{IReason}?, Func{IReason}?, Func{IReason}?)"/>
 		public Maybe<TSingle> SingleValue<TSingle>(Func<IReason>? noItems = null, Func<IReason>? tooMany = null, Func<IReason>? notAList = null) =>
 			UnwrapSingle<T, TSingle>(maybe, noItems, tooMany, notAList);
 	}
