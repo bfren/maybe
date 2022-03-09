@@ -297,7 +297,7 @@ public abstract record class Maybe<T> : IEquatable<Maybe<T>>
 	public Maybe<TReturn> Map<TReturn>(Func<T, TReturn> map, MaybeF.Handler handler) =>
 		MaybeF.Map(this, map, handler);
 
-	/// <inheritdoc cref="MaybeF.MapAsync{T, TReturn}(Maybe{T}, Func{T, Task{TReturn}}, MaybeF.Handler))"/>
+	/// <inheritdoc cref="MaybeF.MapAsync{T, TReturn}(Maybe{T}, Func{T, Task{TReturn}}, MaybeF.Handler)"/>
 	public Task<Maybe<TReturn>> MapAsync<TReturn>(Func<T, Task<TReturn>> map, MaybeF.Handler handler) =>
 		MaybeF.MapAsync(this, map, handler);
 
