@@ -3,17 +3,17 @@
 
 using System;
 using System.Collections.Generic;
-using Maybe.Functions;
+using MaybeF;
 
-namespace Maybe.Linq;
+namespace MaybeF.Linq;
 
 public static partial class EnumerableExtensions
 {
-	/// <inheritdoc cref="MaybeF.EnumerableF.Filter{T}(IEnumerable{Maybe{T}}, Func{T, bool}?)"/>
+	/// <inheritdoc cref="F.EnumerableF.Filter{T}(IEnumerable{Maybe{T}}, Func{T, bool}?)"/>
 	public static IEnumerable<T> Filter<T>(this IEnumerable<Maybe<T>> @this) =>
-		MaybeF.EnumerableF.Filter(@this, null);
+		F.EnumerableF.Filter(@this, null);
 
-	/// <inheritdoc cref="MaybeF.EnumerableF.Filter{T}(IEnumerable{Maybe{T}}, Func{T, bool}?)"/>
+	/// <inheritdoc cref="F.EnumerableF.Filter{T}(IEnumerable{Maybe{T}}, Func{T, bool}?)"/>
 	public static IEnumerable<T> Filter<T>(this IEnumerable<Maybe<T>> @this, Func<T, bool> predicate) =>
-		MaybeF.EnumerableF.Filter(@this, predicate);
+		F.EnumerableF.Filter(@this, predicate);
 }

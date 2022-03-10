@@ -3,9 +3,9 @@
 
 using Xunit;
 
-namespace Maybe.Linq.EnumerableExtensions_Tests;
+namespace MaybeF.Linq.EnumerableExtensions_Tests;
 
-public class ElementAtOrNone_Tests : Tests.Maybe.Abstracts.Enumerable.ElementAtOrNone_Tests
+public class ElementAtOrNone_Tests : Abstracts.Enumerable.ElementAtOrNone_Tests
 {
 	[Fact]
 	public override void Test00_Empty_List_Returns_None_With_ListIsEmptyReason()

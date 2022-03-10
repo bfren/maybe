@@ -4,9 +4,9 @@
 using System;
 using System.Threading.Tasks;
 
-namespace Maybe.Functions;
+namespace MaybeF;
 
-public static partial class MaybeF
+public static partial class F
 {
 	/// <inheritdoc cref="Catch{T}(Func{Maybe{T}}, Handler?)"/>
 	internal static async Task<Maybe<T>> CatchAsync<T>(Func<Task<Maybe<T>>> f, Handler handler)

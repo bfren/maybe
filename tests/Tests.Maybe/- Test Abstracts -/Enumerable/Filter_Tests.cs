@@ -4,13 +4,12 @@
 using System;
 using System.Collections.Generic;
 using Jeebs.Random;
-using Maybe;
-using Maybe.Functions;
-using Maybe.Testing;
+using MaybeF;
+using MaybeF.Testing;
 using NSubstitute;
 using Xunit;
 
-namespace Tests.Maybe.Abstracts.Enumerable;
+namespace Abstracts.Enumerable;
 
 public abstract class Filter_Tests
 {
@@ -21,8 +20,8 @@ public abstract class Filter_Tests
 		// Arrange
 		var v0 = Rnd.Int;
 		var v1 = Rnd.Int;
-		var o0 = MaybeF.Some(v0);
-		var o1 = MaybeF.Some(v1);
+		var o0 = F.Some(v0);
+		var o1 = F.Some(v1);
 		var o2 = Create.None<int>();
 		var o3 = Create.None<int>();
 		var list = new[] { o0, o1, o2, o3 };
@@ -44,8 +43,8 @@ public abstract class Filter_Tests
 		// Arrange
 		var v0 = Rnd.Int;
 		var v1 = Rnd.Int;
-		var o0 = MaybeF.Some(v0);
-		var o1 = MaybeF.Some(v1);
+		var o0 = F.Some(v0);
+		var o1 = F.Some(v1);
 		var o2 = Create.None<int>();
 		var o3 = Create.None<int>();
 		var list = new[] { o0, o1, o2, o3 };

@@ -3,27 +3,26 @@
 
 using System;
 using Jeebs.Random;
-using Maybe;
-using Maybe.Functions;
-using Maybe.Testing;
-using Maybe.Testing.Exceptions;
+using MaybeF;
+using MaybeF.Testing;
+using MaybeF.Testing.Exceptions;
 using NSubstitute;
 using Xunit;
-using static Maybe.Functions.MaybeF.R;
+using static MaybeF.F.R;
 
-namespace Tests.Maybe.Abstracts;
+namespace Abstracts;
 
 public abstract class Some_Tests
 {
 	public abstract void Test00_Exception_Thrown_Without_Handler_Returns_None_With_UnhandledExceptionReason();
 
-	protected static void Test00(Func<Func<int>, MaybeF.Handler, Maybe<int>> act)
+	protected static void Test00(Func<Func<int>, F.Handler, Maybe<int>> act)
 	{
 		// Arrange
 		var throwFunc = int () => throw new MaybeTestException();
 
 		// Act
-		var result = act(throwFunc, MaybeF.DefaultHandler);
+		var result = act(throwFunc, F.DefaultHandler);
 
 		// Assert
 		var none = result.AssertNone();
@@ -32,14 +31,14 @@ public abstract class Some_Tests
 
 	public abstract void Test01_Nullable_Exception_Thrown_Without_Handler_Returns_None_With_UnhandledExceptionReason();
 
-	protected static void Test01(Func<Func<int?>, bool, MaybeF.Handler, Maybe<int?>> act)
+	protected static void Test01(Func<Func<int?>, bool, F.Handler, Maybe<int?>> act)
 	{
 		// Arrange
 		var throwFunc = int? () => throw new MaybeTestException();
 
 		// Act
-		var r0 = act(throwFunc, true, MaybeF.DefaultHandler);
-		var r1 = act(throwFunc, false, MaybeF.DefaultHandler);
+		var r0 = act(throwFunc, true, F.DefaultHandler);
+		var r1 = act(throwFunc, false, F.DefaultHandler);
 
 		// Assert
 		var n0 = r0.AssertNone();
@@ -50,10 +49,10 @@ public abstract class Some_Tests
 
 	public abstract void Test02_Exception_Thrown_With_Handler_Returns_None_Calls_Handler();
 
-	protected static void Test02(Func<Func<int>, MaybeF.Handler, Maybe<int>> act)
+	protected static void Test02(Func<Func<int>, F.Handler, Maybe<int>> act)
 	{
 		// Arrange
-		var handler = Substitute.For<MaybeF.Handler>();
+		var handler = Substitute.For<F.Handler>();
 		var exception = new Exception();
 		var throwFunc = int () => throw exception;
 
@@ -67,10 +66,10 @@ public abstract class Some_Tests
 
 	public abstract void Test03_Nullable_Exception_Thrown_With_Handler_Returns_None_Calls_Handler();
 
-	protected static void Test03(Func<Func<int?>, bool, MaybeF.Handler, Maybe<int?>> act)
+	protected static void Test03(Func<Func<int?>, bool, F.Handler, Maybe<int?>> act)
 	{
 		// Arrange
-		var handler = Substitute.For<MaybeF.Handler>();
+		var handler = Substitute.For<F.Handler>();
 		var exception = new Exception();
 		var throwFunc = int? () => throw exception;
 
@@ -101,13 +100,13 @@ public abstract class Some_Tests
 
 	public abstract void Test05_Null_Input_Func_Returns_None();
 
-	protected static void Test05(Func<Func<int?>, MaybeF.Handler, Maybe<int?>> act)
+	protected static void Test05(Func<Func<int?>, F.Handler, Maybe<int?>> act)
 	{
 		// Arrange
 		var value = int? () => null;
 
 		// Act
-		var result = act(value, MaybeF.DefaultHandler);
+		var result = act(value, F.DefaultHandler);
 
 		// Assert
 		var none = result.AssertNone();
@@ -131,13 +130,13 @@ public abstract class Some_Tests
 
 	public abstract void Test07_Nullable_Allow_Null_False_Null_Input_Func_Returns_None_With_AllowNullWasFalseReason();
 
-	protected static void Test07(Func<Func<int?>, bool, MaybeF.Handler, Maybe<int?>> act)
+	protected static void Test07(Func<Func<int?>, bool, F.Handler, Maybe<int?>> act)
 	{
 		// Arrange
 		var value = int? () => null;
 
 		// Act
-		var result = act(value, false, MaybeF.DefaultHandler);
+		var result = act(value, false, F.DefaultHandler);
 
 		// Assert
 		var none = result.AssertNone();
@@ -161,13 +160,13 @@ public abstract class Some_Tests
 
 	public abstract void Test09_Nullable_Allow_Null_True_Null_Input_Func_Returns_Some_With_Null_Value();
 
-	protected static void Test09(Func<Func<int?>, bool, MaybeF.Handler, Maybe<int?>> act)
+	protected static void Test09(Func<Func<int?>, bool, F.Handler, Maybe<int?>> act)
 	{
 		// Arrange
 		var value = int? () => null;
 
 		// Act
-		var result = act(value, true, MaybeF.DefaultHandler);
+		var result = act(value, true, F.DefaultHandler);
 
 		// Assert
 		var some = result.AssertSome();
@@ -199,7 +198,7 @@ public abstract class Some_Tests
 
 	public abstract void Test11_Not_Null_Func_Returns_Some();
 
-	protected static void Test11(Func<Func<object>, MaybeF.Handler, Maybe<object>> act)
+	protected static void Test11(Func<Func<object>, F.Handler, Maybe<object>> act)
 	{
 		// Arrange
 		var v0 = Rnd.Str;
@@ -212,9 +211,9 @@ public abstract class Some_Tests
 		var f2 = object () => v2;
 
 		// Act
-		var r0 = act(f0, MaybeF.DefaultHandler);
-		var r1 = act(f1, MaybeF.DefaultHandler);
-		var r2 = act(f2, MaybeF.DefaultHandler);
+		var r0 = act(f0, F.DefaultHandler);
+		var r1 = act(f1, F.DefaultHandler);
+		var r2 = act(f2, F.DefaultHandler);
 
 		// Assert
 		var s0 = r0.AssertSome();
@@ -250,7 +249,7 @@ public abstract class Some_Tests
 
 	public abstract void Test13_Nullable_Not_Null_Func_Returns_Some();
 
-	protected static void Test13(Func<Func<object?>, bool, MaybeF.Handler, Maybe<object?>> act)
+	protected static void Test13(Func<Func<object?>, bool, F.Handler, Maybe<object?>> act)
 	{
 		// Arrange
 		var v0 = Rnd.Str;
@@ -263,9 +262,9 @@ public abstract class Some_Tests
 		var f2 = object? () => v2;
 
 		// Act
-		var r0 = act(f0, false, MaybeF.DefaultHandler);
-		var r1 = act(f1, false, MaybeF.DefaultHandler);
-		var r2 = act(f2, false, MaybeF.DefaultHandler);
+		var r0 = act(f0, false, F.DefaultHandler);
+		var r1 = act(f1, false, F.DefaultHandler);
+		var r2 = act(f2, false, F.DefaultHandler);
 
 		// Assert
 		var s0 = r0.AssertSome();

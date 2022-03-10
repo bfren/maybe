@@ -3,9 +3,9 @@
 
 using System;
 using System.Threading.Tasks;
-using Maybe.Functions;
+using MaybeF;
 
-namespace Maybe.Linq;
+namespace MaybeF.Linq;
 
 public static partial class MaybeExtensions
 {
@@ -22,18 +22,18 @@ public static partial class MaybeExtensions
 	/// <param name="f">Interim bind function</param>
 	/// <param name="g">Return map function</param>
 	public static Maybe<TReturn> SelectMany<T, TInner, TReturn>(this Maybe<T> @this, Func<T, Maybe<TInner>> f, Func<T, TInner, TReturn> g) =>
-		MaybeF.Bind(@this,
+		F.Bind(@this,
 			x =>
 				f(x)
-					.Map(y => g(x, y), MaybeF.DefaultHandler)
+					.Map(y => g(x, y), F.DefaultHandler)
 		);
 
 	/// <inheritdoc cref="SelectMany{T, TInner, TReturn}(Maybe{T}, Func{T, Maybe{TInner}}, Func{T, TInner, TReturn})"/>
 	public static Task<Maybe<TReturn>> SelectMany<T, TInner, TReturn>(this Maybe<T> @this, Func<T, Task<Maybe<TInner>>> f, Func<T, TInner, TReturn> g) =>
-		MaybeF.BindAsync(@this,
+		F.BindAsync(@this,
 			x =>
 				f(x)
-					.MapAsync(y => g(x, y), MaybeF.DefaultHandler)
+					.MapAsync(y => g(x, y), F.DefaultHandler)
 		);
 
 	/// <inheritdoc cref="SelectMany{T, TInner, TReturn}(Maybe{T}, Func{T, Maybe{TInner}}, Func{T, TInner, TReturn})"/>
@@ -41,11 +41,11 @@ public static partial class MaybeExtensions
 	/// <param name="f">Interim bind function</param>
 	/// <param name="g">Return map function</param>
 	public static Task<Maybe<TReturn>> SelectMany<T, TInner, TReturn>(this Task<Maybe<T>> @this, Func<T, Maybe<TInner>> f, Func<T, TInner, TReturn> g) =>
-		MaybeF.BindAsync(@this,
+		F.BindAsync(@this,
 			x =>
 				Task.FromResult(
 					f(x)
-						.Map(y => g(x, y), MaybeF.DefaultHandler)
+						.Map(y => g(x, y), F.DefaultHandler)
 				)
 		);
 
@@ -54,9 +54,9 @@ public static partial class MaybeExtensions
 	/// <param name="f">Interim bind function</param>
 	/// <param name="g">Return map function</param>
 	public static Task<Maybe<TReturn>> SelectMany<T, TInner, TReturn>(this Task<Maybe<T>> @this, Func<T, Task<Maybe<TInner>>> f, Func<T, TInner, TReturn> g) =>
-		MaybeF.BindAsync(@this,
+		F.BindAsync(@this,
 			x =>
 				f(x)
-					.MapAsync(y => g(x, y), MaybeF.DefaultHandler)
+					.MapAsync(y => g(x, y), F.DefaultHandler)
 		);
 }

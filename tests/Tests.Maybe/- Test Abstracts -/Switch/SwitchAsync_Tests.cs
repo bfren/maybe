@@ -4,13 +4,12 @@
 using System;
 using System.Threading.Tasks;
 using Jeebs.Random;
-using Maybe;
-using Maybe.Exceptions;
-using Maybe.Functions;
+using MaybeF;
+using MaybeF.Exceptions;
 using NSubstitute;
 using Xunit;
 
-namespace Tests.Maybe.Abstracts;
+namespace Abstracts;
 
 public abstract class SwitchAsync_Tests
 {
@@ -34,7 +33,7 @@ public abstract class SwitchAsync_Tests
 	{
 		// Arrange
 		var reason = new TestReason();
-		var maybe = MaybeF.None<int>(reason);
+		var maybe = F.None<int>(reason);
 		var none = Substitute.For<Func<IReason, Task<string>>>();
 
 		// Act
@@ -50,7 +49,7 @@ public abstract class SwitchAsync_Tests
 	{
 		// Arrange
 		var value = Rnd.Int;
-		var maybe = MaybeF.Some(value);
+		var maybe = F.Some(value);
 		var some = Substitute.For<Func<int, Task<string>>>();
 
 		// Act

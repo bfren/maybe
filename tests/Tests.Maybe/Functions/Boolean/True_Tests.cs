@@ -1,10 +1,10 @@
 ﻿// Maybe Unit Tests
 // Copyright (c) bfren - licensed under https://mit.bfren.dev/2019
 
-using Maybe.Testing;
+using MaybeF.Testing;
 using Xunit;
 
-namespace Maybe.Functions.MaybeF_Tests;
+namespace MaybeF.MaybeF_Tests;
 
 public class True_Tests
 {
@@ -14,7 +14,7 @@ public class True_Tests
 		// Arrange
 
 		// Act
-		var result = MaybeF.True;
+		var result = F.True;
 
 		// Assert
 		result.AssertTrue();

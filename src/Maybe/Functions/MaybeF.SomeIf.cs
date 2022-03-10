@@ -3,9 +3,9 @@
 
 using System;
 
-namespace Maybe.Functions;
+namespace MaybeF;
 
-public static partial class MaybeF
+public static partial class F
 {
 	/// <summary>
 	/// Create <see cref="Internals.Some{T}"/> with <paramref name="value"/> if <paramref name="predicate"/> is true

@@ -3,19 +3,19 @@
 
 using Xunit;
 
-namespace Maybe.Functions.MaybeF_Tests.Enumerable;
+namespace MaybeF.MaybeF_Tests.Enumerable;
 
-public class Filter_Tests : Tests.Maybe.Abstracts.Enumerable.Filter_Tests
+public class Filter_Tests : Abstracts.Enumerable.Filter_Tests
 {
 	[Fact]
 	public override void Test00_Maps_And_Returns_Only_Some_From_List()
 	{
-		Test00(list => MaybeF.EnumerableF.Filter(list, null));
+		Test00(list => F.EnumerableF.Filter(list, null));
 	}
 
 	[Fact]
 	public override void Test01_Maps_And_Returns_Matching_Some_From_List()
 	{
-		Test01((list, predicate) => MaybeF.EnumerableF.Filter(list, predicate));
+		Test01((list, predicate) => F.EnumerableF.Filter(list, predicate));
 	}
 }

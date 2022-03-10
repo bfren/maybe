@@ -4,17 +4,16 @@
 using System;
 using System.Threading.Tasks;
 using Jeebs.Random;
-using Maybe;
-using Maybe.Exceptions;
-using Maybe.Functions;
-using Maybe.Internals;
-using Maybe.Testing;
-using Maybe.Testing.Exceptions;
+using MaybeF;
+using MaybeF.Exceptions;
+using MaybeF.Internals;
+using MaybeF.Testing;
+using MaybeF.Testing.Exceptions;
 using NSubstitute;
 using Xunit;
-using static Maybe.Functions.MaybeF.R;
+using static MaybeF.F.R;
 
-namespace Tests.Maybe.Abstracts;
+namespace Abstracts;
 
 public abstract class SwitchIfAsync_Tests
 {
@@ -54,7 +53,7 @@ public abstract class SwitchIfAsync_Tests
 	protected static async Task Test02(Func<Task<Maybe<int>>, Func<int, bool>, Task<Maybe<int>>> act)
 	{
 		// Arrange
-		var maybe = MaybeF.Some(Rnd.Int);
+		var maybe = F.Some(Rnd.Int);
 		var check = bool (int _) => throw new MaybeTestException();
 
 		// Act
@@ -70,7 +69,7 @@ public abstract class SwitchIfAsync_Tests
 	protected static async Task Test03(Func<Task<Maybe<int>>, Func<int, bool>, Task<Maybe<int>>> act)
 	{
 		// Arrange
-		var maybe = MaybeF.Some(Rnd.Int);
+		var maybe = F.Some(Rnd.Int);
 		var check = Substitute.For<Func<int, bool>>();
 		_ = check.Invoke(Arg.Any<int>()).Returns(true);
 
@@ -86,7 +85,7 @@ public abstract class SwitchIfAsync_Tests
 	protected static async Task Test04(Func<Task<Maybe<int>>, Func<int, bool>, Task<Maybe<int>>> act)
 	{
 		// Arrange
-		var maybe = MaybeF.Some(Rnd.Int);
+		var maybe = F.Some(Rnd.Int);
 		var check = Substitute.For<Func<int, bool>>();
 		_ = check.Invoke(Arg.Any<int>()).Returns(false);
 
@@ -102,7 +101,7 @@ public abstract class SwitchIfAsync_Tests
 	protected static async Task Test05(Func<Task<Maybe<int>>, Func<int, bool>, Func<int, None<int>>, Task<Maybe<int>>> act)
 	{
 		// Arrange
-		var maybe = MaybeF.Some(Rnd.Int);
+		var maybe = F.Some(Rnd.Int);
 		var check = Substitute.For<Func<int, bool>>();
 		_ = check.Invoke(Arg.Any<int>()).Returns(true);
 		var ifTrue = None<int> (int _) => throw new MaybeTestException();
@@ -120,7 +119,7 @@ public abstract class SwitchIfAsync_Tests
 	protected static async Task Test06(Func<Task<Maybe<int>>, Func<int, bool>, Func<int, None<int>>, Task<Maybe<int>>> act)
 	{
 		// Arrange
-		var maybe = MaybeF.Some(Rnd.Int);
+		var maybe = F.Some(Rnd.Int);
 		var check = Substitute.For<Func<int, bool>>();
 		_ = check.Invoke(Arg.Any<int>()).Returns(false);
 		var ifFalse = None<int> (int _) => throw new MaybeTestException();
@@ -140,11 +139,11 @@ public abstract class SwitchIfAsync_Tests
 		// Arrange
 		var v0 = Rnd.Int;
 		var v1 = Rnd.Int;
-		var maybe = MaybeF.Some(v0);
+		var maybe = F.Some(v0);
 		var check = Substitute.For<Func<int, bool>>();
 		_ = check.Invoke(v0).Returns(true);
 		var ifTrue = Substitute.For<Func<int, Maybe<int>>>();
-		_ = ifTrue.Invoke(v0).Returns(MaybeF.Some(v0 + v1));
+		_ = ifTrue.Invoke(v0).Returns(F.Some(v0 + v1));
 
 		// Act
 		var result = await act(maybe.AsTask, check, ifTrue).ConfigureAwait(false);
@@ -161,11 +160,11 @@ public abstract class SwitchIfAsync_Tests
 	{
 		// Arrange
 		var value = Rnd.Int;
-		var maybe = MaybeF.Some(value);
+		var maybe = F.Some(value);
 		var check = Substitute.For<Func<int, bool>>();
 		_ = check.Invoke(value).Returns(false);
 		var ifFalse = Substitute.For<Func<int, None<int>>>();
-		_ = ifFalse.Invoke(value).Returns(MaybeF.None<int, TestReason>());
+		_ = ifFalse.Invoke(value).Returns(F.None<int, TestReason>());
 
 		// Act
 		var result = await act(maybe.AsTask, check, ifFalse).ConfigureAwait(false);

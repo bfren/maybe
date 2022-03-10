@@ -2,12 +2,11 @@
 // Copyright (c) bfren - licensed under https://mit.bfren.dev/2019
 
 using Jeebs.Random;
-using Maybe.Exceptions;
-using Maybe.Functions;
+using MaybeF.Exceptions;
 using NSubstitute;
 using Xunit;
 
-namespace Maybe.Maybe_Tests;
+namespace MaybeF.Maybe_Tests;
 
 public class GetHashCode_Tests
 {
@@ -29,8 +28,8 @@ public class GetHashCode_Tests
 	{
 		// Arrange
 		var value = Rnd.Str;
-		var s0 = MaybeF.Some(value);
-		var s1 = MaybeF.Some(value);
+		var s0 = F.Some(value);
+		var s1 = F.Some(value);
 
 		// Act
 		var h0 = s0.GetHashCode();
@@ -46,8 +45,8 @@ public class GetHashCode_Tests
 		// Arrange
 		var v0 = Rnd.Str;
 		var v1 = Rnd.Str;
-		var s0 = MaybeF.Some(v0);
-		var s1 = MaybeF.Some(v1);
+		var s0 = F.Some(v0);
+		var s1 = F.Some(v1);
 
 		// Act
 		var h0 = s0.GetHashCode();
@@ -63,8 +62,8 @@ public class GetHashCode_Tests
 		// Arrange
 		const string? v0 = null;
 		const string? v1 = null;
-		var s0 = MaybeF.Some(v0, true);
-		var s1 = MaybeF.Some(v1, true);
+		var s0 = F.Some(v0, true);
+		var s1 = F.Some(v1, true);
 
 		// Act
 		var h0 = s0.GetHashCode();
@@ -80,8 +79,8 @@ public class GetHashCode_Tests
 		// Arrange
 		const string? v0 = null;
 		int? v1 = null;
-		var s0 = MaybeF.Some(v0, true);
-		var s1 = MaybeF.Some(v1, true);
+		var s0 = F.Some(v0, true);
+		var s1 = F.Some(v1, true);
 
 		// Act
 		var h0 = s0.GetHashCode();
@@ -96,8 +95,8 @@ public class GetHashCode_Tests
 	{
 		// Arrange
 		var reason = Substitute.For<IReason>();
-		var n0 = MaybeF.None<int>(reason);
-		var n1 = MaybeF.None<int>(reason);
+		var n0 = F.None<int>(reason);
+		var n1 = F.None<int>(reason);
 
 		// Act
 		var h0 = n0.GetHashCode();
@@ -112,8 +111,8 @@ public class GetHashCode_Tests
 	{
 		// Arrange
 		var reason = Substitute.For<IReason>();
-		var n0 = MaybeF.None<int>(reason);
-		var n1 = MaybeF.None<string>(reason);
+		var n0 = F.None<int>(reason);
+		var n1 = F.None<string>(reason);
 
 		// Act
 		var h0 = n0.GetHashCode();
@@ -129,8 +128,8 @@ public class GetHashCode_Tests
 		// Arrange
 		var m0 = new TestReason0();
 		var m1 = new TestReason1();
-		var n0 = MaybeF.None<int>(m0);
-		var n1 = MaybeF.None<int>(m1);
+		var n0 = F.None<int>(m0);
+		var n1 = F.None<int>(m1);
 
 		// Act
 		var h0 = n0.GetHashCode();

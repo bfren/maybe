@@ -3,7 +3,7 @@
 
 using System;
 
-namespace Maybe.Testing.Exceptions;
+namespace MaybeF.Testing.Exceptions;
 
 /// <summary>
 /// Thrown when <see cref="MaybeExtensions.UnsafeUnwrap{T}(Maybe{T})"/> fails

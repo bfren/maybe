@@ -4,13 +4,13 @@
 using System;
 using System.Collections.Generic;
 using Jeebs.Random;
-using Maybe;
-using Maybe.Testing;
+using MaybeF;
+using MaybeF.Testing;
 using NSubstitute;
 using Xunit;
-using static Maybe.Functions.MaybeF.EnumerableF.R;
+using static MaybeF.F.EnumerableF.R;
 
-namespace Tests.Maybe.Abstracts.Enumerable;
+namespace Abstracts.Enumerable;
 
 public abstract class SingleOrNone_Tests
 {

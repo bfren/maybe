@@ -3,8 +3,7 @@
 
 using System;
 using Jeebs.Random;
-using Maybe;
-using Maybe.Functions;
+using MaybeF;
 using Xunit;
 
 namespace Jeebs.Internals.None_Tests;
@@ -17,7 +16,7 @@ public class ToString_Tests
 		// Arrange
 		var reason = new TestReason();
 		var expected = reason.ToString();
-		var maybe = MaybeF.None<int>(reason);
+		var maybe = F.None<int>(reason);
 
 		// Act
 		var result = maybe.ToString();
@@ -32,7 +31,7 @@ public class ToString_Tests
 		// Arrange
 		var value = Rnd.Str;
 		var exception = new Exception(value);
-		var maybe = MaybeF.None<int, TestExceptionReason>(exception);
+		var maybe = F.None<int, TestExceptionReason>(exception);
 
 		// Act
 		var result = maybe.ToString();

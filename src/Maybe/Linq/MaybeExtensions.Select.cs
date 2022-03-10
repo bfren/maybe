@@ -3,9 +3,9 @@
 
 using System;
 using System.Threading.Tasks;
-using Maybe.Functions;
+using MaybeF;
 
-namespace Maybe.Linq;
+namespace MaybeF.Linq;
 
 public static partial class MaybeExtensions
 {
@@ -19,21 +19,21 @@ public static partial class MaybeExtensions
 	/// <param name="this">Maybe</param>
 	/// <param name="f">Return map function</param>
 	public static Maybe<TReturn> Select<T, TReturn>(this Maybe<T> @this, Func<T, TReturn> f) =>
-		MaybeF.Map(@this, f, MaybeF.DefaultHandler);
+		F.Map(@this, f, F.DefaultHandler);
 
 	/// <inheritdoc cref="Select{T, TReturn}(Maybe{T}, Func{T, TReturn})"/>
 	public static Task<Maybe<TReturn>> Select<T, TReturn>(this Maybe<T> @this, Func<T, Task<TReturn>> f) =>
-		MaybeF.MapAsync(@this, f, MaybeF.DefaultHandler);
+		F.MapAsync(@this, f, F.DefaultHandler);
 
 	/// <inheritdoc cref="Select{T, TReturn}(Maybe{T}, Func{T, TReturn})"/>
 	/// <param name="this">Maybe (awaitable)</param>
 	/// <param name="f">Return map function</param>
 	public static Task<Maybe<TReturn>> Select<T, TReturn>(this Task<Maybe<T>> @this, Func<T, TReturn> f) =>
-		MaybeF.MapAsync(@this, x => Task.FromResult(f(x)), MaybeF.DefaultHandler);
+		F.MapAsync(@this, x => Task.FromResult<TReturn>(f(x)), F.DefaultHandler);
 
 	/// <inheritdoc cref="Select{T, TReturn}(Maybe{T}, Func{T, TReturn})"/>
 	/// <param name="this">Maybe (awaitable)</param>
 	/// <param name="f">Return map function</param>
 	public static Task<Maybe<TReturn>> Select<T, TReturn>(this Task<Maybe<T>> @this, Func<T, Task<TReturn>> f) =>
-		MaybeF.MapAsync(@this, f, MaybeF.DefaultHandler);
+		F.MapAsync(@this, f, F.DefaultHandler);
 }

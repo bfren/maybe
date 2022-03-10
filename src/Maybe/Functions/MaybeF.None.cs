@@ -2,11 +2,11 @@
 // Copyright (c) bfren - licensed under https://mit.bfren.dev/2019
 
 using System;
-using Maybe.Internals;
+using MaybeF.Internals;
 
-namespace Maybe.Functions;
+namespace MaybeF;
 
-public static partial class MaybeF
+public static partial class F
 {
 	/// <summary>
 	/// Create a <see cref="Internals.None{T}"/> Maybe with a Reason

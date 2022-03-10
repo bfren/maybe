@@ -3,17 +3,16 @@
 
 using System;
 using System.Threading.Tasks;
-using Maybe.Functions;
 
-namespace Maybe.Extensions;
+namespace MaybeF.Extensions;
 
 public static partial class ObjectExtensions
 {
-	/// <inheritdoc cref="MaybeF.SomeAsync{T}(Func{Task{T}}, MaybeF.Handler)"/>
-	public static Task<Maybe<T>> SomeAsync<T>(this Func<Task<T>> @this, MaybeF.Handler handler) =>
-		MaybeF.SomeAsync(@this, handler);
+	/// <inheritdoc cref="F.SomeAsync{T}(Func{Task{T}}, F.Handler)"/>
+	public static Task<Maybe<T>> SomeAsync<T>(this Func<Task<T>> @this, F.Handler handler) =>
+		F.SomeAsync(@this, handler);
 
-	/// <inheritdoc cref="MaybeF.SomeAsync{T}(Func{Task{T}}, bool, MaybeF.Handler)"/>
-	public static Task<Maybe<T?>> SomeAsync<T>(this Func<Task<T?>> @this, bool allowNull, MaybeF.Handler handler) =>
-		MaybeF.SomeAsync(@this, allowNull, handler);
+	/// <inheritdoc cref="F.SomeAsync{T}(Func{Task{T}}, bool, F.Handler)"/>
+	public static Task<Maybe<T?>> SomeAsync<T>(this Func<Task<T?>> @this, bool allowNull, F.Handler handler) =>
+		F.SomeAsync(@this, allowNull, handler);
 }

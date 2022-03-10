@@ -2,9 +2,9 @@
 // Copyright (c) bfren - licensed under https://mit.bfren.dev/2019
 
 using Jeebs.Random;
-using Maybe.Functions;
-using Maybe.Testing;
-using Maybe.Testing.Exceptions;
+using MaybeF;
+using MaybeF.Testing;
+using MaybeF.Testing.Exceptions;
 using Xunit;
 
 namespace MaybeExtensions_Tests;
@@ -16,7 +16,7 @@ public class UnsafeUnwrap_Tests
 	{
 		// Arrange
 		var value = Rnd.Int;
-		var maybe = MaybeF.Some(value);
+		var maybe = F.Some(value);
 
 		// Act
 		var result = maybe.UnsafeUnwrap();

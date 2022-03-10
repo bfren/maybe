@@ -3,13 +3,12 @@
 
 using System;
 using Jeebs.Random;
-using Maybe;
-using Maybe.Functions;
-using Maybe.Testing;
+using MaybeF;
+using MaybeF.Testing;
 using NSubstitute;
 using Xunit;
 
-namespace Tests.Maybe.Abstracts;
+namespace Abstracts;
 
 public abstract class Unwrap_Tests
 {
@@ -38,7 +37,7 @@ public abstract class Unwrap_Tests
 		// Arrange
 		var value = Rnd.Int;
 		var reason = Substitute.For<IReason>();
-		var maybe = MaybeF.None<int>(reason);
+		var maybe = F.None<int>(reason);
 		var ifNone = Substitute.For<Func<IReason, int>>();
 		_ = ifNone.Invoke(reason).Returns(value);
 
@@ -56,7 +55,7 @@ public abstract class Unwrap_Tests
 	{
 		// Arrange
 		var value = Rnd.Int;
-		var maybe = MaybeF.Some(value);
+		var maybe = F.Some(value);
 
 		// Act
 		var result = act(maybe);

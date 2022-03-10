@@ -2,10 +2,9 @@
 // Copyright (c) bfren - licensed under https://mit.bfren.dev/2019
 
 using Jeebs.Random;
-using Maybe.Functions;
 using Xunit;
 
-namespace Maybe.Maybe_Tests;
+namespace MaybeF.Maybe_Tests;
 
 public partial class Operator_Tests
 {
@@ -14,7 +13,7 @@ public partial class Operator_Tests
 	{
 		// Arrange
 		var value = Rnd.Int;
-		var some = MaybeF.Some(value);
+		var some = F.Some(value);
 
 		// Act
 		var r0 = some != value;
@@ -31,7 +30,7 @@ public partial class Operator_Tests
 		// Arrange
 		var v0 = Rnd.Int;
 		var v1 = Rnd.Int;
-		var some = MaybeF.Some(v0);
+		var some = F.Some(v0);
 
 		// Act
 		var r0 = some != v1;

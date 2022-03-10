@@ -3,9 +3,9 @@
 
 using Xunit;
 
-namespace Maybe.Extensions.ObjectExtensions_Tests;
+namespace MaybeF.Extensions.ObjectExtensions_Tests;
 
-public class SomeIf_Tests : Tests.Maybe.Abstracts.SomeIf_Tests
+public class SomeIf_Tests : Abstracts.SomeIf_Tests
 {
 	[Fact]
 	public override void Test00_Exception_Thrown_By_Predicate_With_Value_Calls_Handler_Returns_None()

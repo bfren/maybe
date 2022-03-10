@@ -3,10 +3,9 @@
 
 using System;
 using Jeebs.Random;
-using Maybe.Functions;
 using Xunit;
 
-namespace Maybe.Maybe_Tests;
+namespace MaybeF.Maybe_Tests;
 
 public class ToString_Tests
 {
@@ -15,7 +14,7 @@ public class ToString_Tests
 	{
 		// Arrange
 		var value = Rnd.Lng;
-		var maybe = MaybeF.Some(value);
+		var maybe = F.Some(value);
 
 		// Act
 		var result = maybe.ToString();
@@ -29,7 +28,7 @@ public class ToString_Tests
 	{
 		// Arrange
 		int? value = null;
-		var maybe = MaybeF.Some(value, true);
+		var maybe = F.Some(value, true);
 
 		// Act
 		var result = maybe.ToString();
@@ -44,7 +43,7 @@ public class ToString_Tests
 		// Arrange
 		var reason = new TestReason();
 		var expected = reason.ToString();
-		var maybe = MaybeF.None<int>(reason);
+		var maybe = F.None<int>(reason);
 
 		// Act
 		var result = maybe.ToString();
@@ -59,7 +58,7 @@ public class ToString_Tests
 		// Arrange
 		var value = Rnd.Str;
 		var exception = new Exception(value);
-		var maybe = MaybeF.None<int, TestExceptionReason>(exception);
+		var maybe = F.None<int, TestExceptionReason>(exception);
 
 		// Act
 		var result = maybe.ToString();

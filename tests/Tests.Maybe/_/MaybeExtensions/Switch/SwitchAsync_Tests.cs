@@ -7,9 +7,9 @@ using Jeebs.Random;
 using NSubstitute;
 using Xunit;
 
-namespace Maybe.MaybeExtensions_Tests;
+namespace MaybeF.MaybeExtensions_Tests;
 
-public class SwitchAsync_Tests : Tests.Maybe.Abstracts.SwitchAsync_Tests
+public class SwitchAsync_Tests : Abstracts.SwitchAsync_Tests
 {
 	[Fact]
 	public override async Task Test00_If_Unknown_Maybe_Throws_UnknownOptionException()

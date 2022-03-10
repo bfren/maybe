@@ -3,17 +3,17 @@
 
 using System;
 using System.Collections.Generic;
-using Maybe.Functions;
+using MaybeF;
 
-namespace Maybe.Linq;
+namespace MaybeF.Linq;
 
 public static partial class EnumerableExtensions
 {
-	/// <inheritdoc cref="MaybeF.EnumerableF.LastOrNone{T}(IEnumerable{T}, Func{T, bool}?)"/>
+	/// <inheritdoc cref="F.EnumerableF.LastOrNone{T}(IEnumerable{T}, Func{T, bool}?)"/>
 	public static Maybe<T> LastOrNone<T>(this IEnumerable<T> @this) =>
-		MaybeF.EnumerableF.LastOrNone(@this, null);
+		F.EnumerableF.LastOrNone(@this, null);
 
-	/// <inheritdoc cref="MaybeF.EnumerableF.LastOrNone{T}(IEnumerable{T}, Func{T, bool}?)"/>
+	/// <inheritdoc cref="F.EnumerableF.LastOrNone{T}(IEnumerable{T}, Func{T, bool}?)"/>
 	public static Maybe<T> LastOrNone<T>(this IEnumerable<T> @this, Func<T, bool> predicate) =>
-		MaybeF.EnumerableF.LastOrNone(@this, predicate);
+		F.EnumerableF.LastOrNone(@this, predicate);
 }

@@ -2,12 +2,12 @@
 // Copyright (c) bfren - licensed under https://mit.bfren.dev/2019
 
 using System;
-using Maybe.Exceptions;
-using Maybe.Internals;
+using MaybeF.Exceptions;
+using MaybeF.Internals;
 
-namespace Maybe.Functions;
+namespace MaybeF;
 
-public static partial class MaybeF
+public static partial class F
 {
 	/// <summary>
 	/// If the input <paramref name="maybe"/> is <see cref="Internals.Some{T}"/>, runs <paramref name="check"/> function -<br/>

@@ -3,9 +3,9 @@
 
 using System.Collections.Generic;
 
-namespace Maybe.Functions;
+namespace MaybeF;
 
-public static partial class MaybeF
+public static partial class F
 {
 	public static partial class DictionaryF
 	{

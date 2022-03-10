@@ -3,7 +3,7 @@
 
 using System;
 
-namespace Maybe.Testing.Exceptions;
+namespace MaybeF.Testing.Exceptions;
 
 /// <summary>
 /// Used during test so System Exceptions don't need to be thrown

@@ -4,13 +4,12 @@
 using System;
 using System.Collections.Generic;
 using Jeebs.Random;
-using Maybe;
-using Maybe.Functions;
-using Maybe.Testing;
+using MaybeF;
+using MaybeF.Testing;
 using NSubstitute;
 using Xunit;
 
-namespace Tests.Maybe.Abstracts.Enumerable;
+namespace Abstracts.Enumerable;
 
 public abstract class FilterMap_Tests
 {
@@ -21,8 +20,8 @@ public abstract class FilterMap_Tests
 		// Arrange
 		var v0 = Rnd.Int;
 		var v1 = Rnd.Int;
-		var o0 = MaybeF.Some(v0);
-		var o1 = MaybeF.Some(v1);
+		var o0 = F.Some(v0);
+		var o1 = F.Some(v1);
 		var o2 = Create.None<int>();
 		var o3 = Create.None<int>();
 		var list = new[] { o0, o1, o2, o3 };
@@ -47,13 +46,13 @@ public abstract class FilterMap_Tests
 		// Arrange
 		var v0 = Rnd.Int;
 		var v1 = Rnd.Int;
-		var o0 = MaybeF.Some(v0);
-		var o1 = MaybeF.Some(v1);
+		var o0 = F.Some(v0);
+		var o1 = F.Some(v1);
 		var o2 = Create.None<int>();
 		var o3 = Create.None<int>();
 		var list = new[] { o0, o1, o2, o3 };
 		var map = Substitute.For<Func<int, Maybe<string>>>();
-		_ = map.Invoke(Arg.Any<int>()).Returns(x => MaybeF.Some(x.ArgAt<int>(0).ToString()));
+		_ = map.Invoke(Arg.Any<int>()).Returns(x => F.Some(x.ArgAt<int>(0).ToString()));
 
 		// Act
 		var result = act(list, map);
@@ -81,8 +80,8 @@ public abstract class FilterMap_Tests
 		// Arrange
 		var v0 = Rnd.Int;
 		var v1 = Rnd.Int;
-		var o0 = MaybeF.Some(v0);
-		var o1 = MaybeF.Some(v1);
+		var o0 = F.Some(v0);
+		var o1 = F.Some(v1);
 		var o2 = Create.None<int>();
 		var o3 = Create.None<int>();
 		var list = new[] { o0, o1, o2, o3 };
@@ -110,14 +109,14 @@ public abstract class FilterMap_Tests
 		// Arrange
 		var v0 = Rnd.Int;
 		var v1 = Rnd.Int;
-		var o0 = MaybeF.Some(v0);
-		var o1 = MaybeF.Some(v1);
+		var o0 = F.Some(v0);
+		var o1 = F.Some(v1);
 		var o2 = Create.None<int>();
 		var o3 = Create.None<int>();
 		var list = new[] { o0, o1, o2, o3 };
 
 		var map = Substitute.For<Func<int, Maybe<string>>>();
-		_ = map.Invoke(Arg.Any<int>()).Returns(x => MaybeF.Some(x.ArgAt<int>(0).ToString()));
+		_ = map.Invoke(Arg.Any<int>()).Returns(x => F.Some(x.ArgAt<int>(0).ToString()));
 
 		var predicate = Substitute.For<Func<int, bool>>();
 		_ = predicate.Invoke(v1).Returns(true);

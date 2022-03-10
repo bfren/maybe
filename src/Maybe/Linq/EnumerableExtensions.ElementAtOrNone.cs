@@ -2,13 +2,13 @@
 // Copyright (c) bfren - licensed under https://mit.bfren.dev/2019
 
 using System.Collections.Generic;
-using Maybe.Functions;
+using MaybeF;
 
-namespace Maybe.Linq;
+namespace MaybeF.Linq;
 
 public static partial class EnumerableExtensions
 {
-	/// <inheritdoc cref="MaybeF.EnumerableF.ElementAtOrNone{T}(IEnumerable{T}, int)"/>
+	/// <inheritdoc cref="F.EnumerableF.ElementAtOrNone{T}(IEnumerable{T}, int)"/>
 	public static Maybe<T> ElementAtOrNone<T>(this IEnumerable<T> @this, int index) =>
-		MaybeF.EnumerableF.ElementAtOrNone(@this, index);
+		F.EnumerableF.ElementAtOrNone(@this, index);
 }

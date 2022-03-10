@@ -2,11 +2,11 @@
 // Copyright (c) bfren - licensed under https://mit.bfren.dev/2019
 
 using System;
-using Maybe.Testing;
+using MaybeF.Testing;
 using NSubstitute;
 using Xunit;
 
-namespace Maybe.Functions.MaybeF_Tests;
+namespace MaybeF.MaybeF_Tests;
 
 public class None_Tests
 {
@@ -29,7 +29,7 @@ public class None_Tests
 		var reason = Substitute.For<IReason>();
 
 		// Act
-		var result = MaybeF.None<int>(reason);
+		var result = F.None<int>(reason);
 
 		// Assert
 		var none = result.AssertNone();
@@ -42,7 +42,7 @@ public class None_Tests
 		// Arrange
 
 		// Act
-		var result = MaybeF.None<int, TestReason>();
+		var result = F.None<int, TestReason>();
 
 		// Assert
 		var none = result.AssertNone();
@@ -56,7 +56,7 @@ public class None_Tests
 		var exception = new Exception();
 
 		// Act
-		var result = MaybeF.None<int, TestExceptionReason>(exception);
+		var result = F.None<int, TestExceptionReason>(exception);
 
 		// Assert
 		var none = result.AssertNone();

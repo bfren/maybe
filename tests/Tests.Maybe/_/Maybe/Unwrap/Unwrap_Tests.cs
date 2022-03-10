@@ -5,9 +5,9 @@ using System;
 using NSubstitute;
 using Xunit;
 
-namespace Maybe.Maybe_Tests;
+namespace MaybeF.Maybe_Tests;
 
-public class Unwrap_Tests : Tests.Maybe.Abstracts.Unwrap_Tests
+public class Unwrap_Tests : Abstracts.Unwrap_Tests
 {
 	[Fact]
 	public override void Test00_None_Runs_IfNone_Func_Returns_Value()

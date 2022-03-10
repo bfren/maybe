@@ -7,28 +7,28 @@ using Jeebs.Random;
 using NSubstitute;
 using Xunit;
 
-namespace Maybe.Functions.MaybeF_Tests;
+namespace MaybeF.MaybeF_Tests;
 
-public class UnwrapAsync_Tests : Tests.Maybe.Abstracts.UnwrapAsync_Tests
+public class UnwrapAsync_Tests : Abstracts.UnwrapAsync_Tests
 {
 	[Fact]
 	public override async Task Test00_None_Runs_IfNone_Func_Returns_Value()
 	{
-		await Test00((mbe, ifNone) => MaybeF.UnwrapAsync(mbe, x => x.Value(ifNone()))).ConfigureAwait(false);
-		await Test00((mbe, ifNone) => MaybeF.UnwrapAsync(mbe, x => x.Value(ifNone))).ConfigureAwait(false);
+		await Test00((mbe, ifNone) => F.UnwrapAsync(mbe, x => x.Value(ifNone()))).ConfigureAwait(false);
+		await Test00((mbe, ifNone) => F.UnwrapAsync(mbe, x => x.Value(ifNone))).ConfigureAwait(false);
 	}
 
 	[Fact]
 	public override async Task Test01_None_With_Reason_Runs_IfNone_Func_Passes_Reason_Returns_Value()
 	{
-		await Test01((mbe, ifNone) => MaybeF.UnwrapAsync(mbe, x => x.Value(ifNone))).ConfigureAwait(false);
+		await Test01((mbe, ifNone) => F.UnwrapAsync(mbe, x => x.Value(ifNone))).ConfigureAwait(false);
 	}
 
 	[Fact]
 	public override async Task Test02_Some_Returns_Value()
 	{
-		await Test02(mbe => MaybeF.UnwrapAsync(mbe, x => x.Value(Rnd.Int))).ConfigureAwait(false);
-		await Test02(mbe => MaybeF.UnwrapAsync(mbe, x => x.Value(Substitute.For<Func<int>>()))).ConfigureAwait(false);
-		await Test02(mbe => MaybeF.UnwrapAsync(mbe, x => x.Value(Substitute.For<Func<IReason, int>>()))).ConfigureAwait(false);
+		await Test02(mbe => F.UnwrapAsync(mbe, x => x.Value(Rnd.Int))).ConfigureAwait(false);
+		await Test02(mbe => F.UnwrapAsync(mbe, x => x.Value(Substitute.For<Func<int>>()))).ConfigureAwait(false);
+		await Test02(mbe => F.UnwrapAsync(mbe, x => x.Value(Substitute.For<Func<IReason, int>>()))).ConfigureAwait(false);
 	}
 }

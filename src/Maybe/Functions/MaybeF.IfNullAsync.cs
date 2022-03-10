@@ -3,11 +3,11 @@
 
 using System;
 using System.Threading.Tasks;
-using Maybe.Internals;
+using MaybeF.Internals;
 
-namespace Maybe.Functions;
+namespace MaybeF;
 
-public static partial class MaybeF
+public static partial class F
 {
 	/// <inheritdoc cref="IfNull{T}(Maybe{T}, Func{Maybe{T}})"/>
 	public static Task<Maybe<T>> IfNullAsync<T>(Maybe<T> maybe, Func<Task<Maybe<T>>> ifNull) =>

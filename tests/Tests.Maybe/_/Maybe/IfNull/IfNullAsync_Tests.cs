@@ -4,9 +4,9 @@
 using System.Threading.Tasks;
 using Xunit;
 
-namespace Maybe.Maybe_Tests;
+namespace MaybeF.Maybe_Tests;
 
-public class IfNullAsync_Tests : Tests.Maybe.Abstracts.IfNullAsync_Tests
+public class IfNullAsync_Tests : Abstracts.IfNullAsync_Tests
 {
 	[Fact]
 	public override async Task Test00_Exception_In_NullValue_Func_Returns_None_With_UnhandledExceptionReason()

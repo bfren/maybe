@@ -3,13 +3,13 @@
 
 using System;
 using System.Threading.Tasks;
-using Maybe.Functions;
+using MaybeF;
 
-namespace Maybe;
+namespace MaybeF;
 
 public static partial class MaybeExtensions
 {
-	/// <inheritdoc cref="MaybeF.UnwrapAsync{T, TSingle}(Task{Maybe{T}}, Func{MaybeF.FluentUnwrapAsync{T}, TSingle})"/>
-	public static Task<TReturn> UnwrapAsync<T, TReturn>(this Task<Maybe<T>> @this, Func<MaybeF.FluentUnwrapAsync<T>, TReturn> unwrap) =>
-		MaybeF.UnwrapAsync(@this, unwrap);
+	/// <inheritdoc cref="F.UnwrapAsync{T, TSingle}(Task{Maybe{T}}, Func{F.FluentUnwrapAsync{T}, TSingle})"/>
+	public static Task<TReturn> UnwrapAsync<T, TReturn>(this Task<Maybe<T>> @this, Func<F.FluentUnwrapAsync<T>, TReturn> unwrap) =>
+		F.UnwrapAsync(@this, unwrap);
 }

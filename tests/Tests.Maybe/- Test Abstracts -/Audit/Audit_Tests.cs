@@ -3,15 +3,14 @@
 
 using System;
 using Jeebs.Random;
-using Maybe;
-using Maybe.Exceptions;
-using Maybe.Functions;
-using Maybe.Testing;
-using Maybe.Testing.Exceptions;
+using MaybeF;
+using MaybeF.Exceptions;
+using MaybeF.Testing;
+using MaybeF.Testing.Exceptions;
 using NSubstitute;
 using Xunit;
 
-namespace Tests.Maybe.Abstracts;
+namespace Abstracts;
 
 public abstract class Audit_Tests
 {
@@ -54,7 +53,7 @@ public abstract class Audit_Tests
 	protected static void Test02(Func<Maybe<bool>, Action<Maybe<bool>>, Maybe<bool>> act)
 	{
 		// Arrange
-		var maybe = MaybeF.True;
+		var maybe = F.True;
 		var audit = Substitute.For<Action<Maybe<bool>>>();
 
 		// Act
@@ -86,7 +85,7 @@ public abstract class Audit_Tests
 	protected static void Test04(Func<Maybe<bool>, Action<Maybe<bool>>, Maybe<bool>> act)
 	{
 		// Arrange
-		var some = MaybeF.True;
+		var some = F.True;
 		var throwException = void (Maybe<bool> _) => throw new MaybeTestException();
 
 		// Act
@@ -121,7 +120,7 @@ public abstract class Audit_Tests
 	{
 		// Arrange
 		var value = Rnd.Int;
-		var maybe = MaybeF.Some(value);
+		var maybe = F.Some(value);
 		var some = Substitute.For<Action<int>>();
 
 		// Act
@@ -138,7 +137,7 @@ public abstract class Audit_Tests
 	{
 		// Arrange
 		var reason = new TestReason();
-		var maybe = MaybeF.None<int>(reason);
+		var maybe = F.None<int>(reason);
 		var none = Substitute.For<Action<IReason>>();
 
 		// Act
@@ -154,7 +153,7 @@ public abstract class Audit_Tests
 	protected static void Test08(Func<Maybe<int>, Action<int>, Maybe<int>> act)
 	{
 		// Arrange
-		var maybe = MaybeF.Some(Rnd.Int);
+		var maybe = F.Some(Rnd.Int);
 		var throwException = void (int _) => throw new MaybeTestException();
 
 		// Act

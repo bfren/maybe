@@ -7,7 +7,7 @@ using Jeebs.Random;
 using NSubstitute;
 using Xunit;
 
-namespace Maybe.Functions.MaybeF_Tests;
+namespace MaybeF.MaybeF_Tests;
 
 public class Handler_Tests
 {
@@ -19,7 +19,7 @@ public class Handler_Tests
 		var exception = new Exception();
 
 		// Act
-		MaybeF.HandleAuditException(exception, log, Console.Out);
+		F.HandleAuditException(exception, log, Console.Out);
 
 		// Assert
 		log.Received().Invoke(exception);
@@ -34,7 +34,7 @@ public class Handler_Tests
 		var writer = Substitute.For<TextWriter>();
 
 		// Act
-		MaybeF.HandleAuditException(exception, null, writer);
+		F.HandleAuditException(exception, null, writer);
 
 		// Assert
 		writer.Received().WriteLine("Audit Error: {0}", exception);
@@ -45,16 +45,16 @@ public class Handler_Tests
 	{
 		// Arrange
 		var handler = Substitute.For<Action<Exception>>();
-		MaybeF.LogAuditExceptions = handler;
+		F.LogAuditExceptions = handler;
 		var exception = new Exception();
 
 		// Act
-		MaybeF.HandleAuditException(exception);
+		F.HandleAuditException(exception);
 
 		// Assert
 		handler.Received().Invoke(exception);
 
 		// Reset
-		MaybeF.LogAuditExceptions = null;
+		F.LogAuditExceptions = null;
 	}
 }

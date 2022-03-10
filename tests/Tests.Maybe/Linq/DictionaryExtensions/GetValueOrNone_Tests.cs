@@ -3,9 +3,9 @@
 
 using Xunit;
 
-namespace Maybe.Linq.DictionaryExtensions_Tests;
+namespace MaybeF.Linq.DictionaryExtensions_Tests;
 
-public class GetValueOrNone_Tests : Tests.Maybe.Abstracts.Dictionary.GetValueOrNone_Tests
+public class GetValueOrNone_Tests : Abstracts.Dictionary.GetValueOrNone_Tests
 {
 	[Fact]
 	public override void Test00_Empty_Dictionary_Returns_None_With_ListIsEmptyReason()

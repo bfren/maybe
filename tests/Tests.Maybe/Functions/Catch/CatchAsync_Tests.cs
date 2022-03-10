@@ -4,12 +4,12 @@
 using System;
 using System.Threading.Tasks;
 using Jeebs.Random;
-using Maybe.Testing;
+using MaybeF.Testing;
 using NSubstitute;
 using Xunit;
-using static Maybe.Functions.MaybeF.R;
+using static MaybeF.F.R;
 
-namespace Maybe.Functions.MaybeF_Tests;
+namespace MaybeF.MaybeF_Tests;
 
 public class CatchAsync_Tests
 {
@@ -20,7 +20,7 @@ public class CatchAsync_Tests
 		var value = Rnd.Int;
 
 		// Act
-		var result = await MaybeF.CatchAsync(() => MaybeF.Some(value).AsTask, MaybeF.DefaultHandler).ConfigureAwait(false);
+		var result = await F.CatchAsync(() => F.Some(value).AsTask, F.DefaultHandler).ConfigureAwait(false);
 
 		// Assert
 		var some = result.AssertSome();
@@ -34,7 +34,7 @@ public class CatchAsync_Tests
 		var message = Rnd.Str;
 
 		// Act
-		var result = await MaybeF.CatchAsync<int>(() => throw new Exception(message), MaybeF.DefaultHandler).ConfigureAwait(false);
+		var result = await F.CatchAsync<int>(() => throw new Exception(message), F.DefaultHandler).ConfigureAwait(false);
 
 		// Assert
 		var none = result.AssertNone();
@@ -48,10 +48,10 @@ public class CatchAsync_Tests
 		// Arrange
 		var message = Rnd.Str;
 		var exception = new Exception(message);
-		var handler = Substitute.For<MaybeF.Handler>();
+		var handler = Substitute.For<F.Handler>();
 
 		// Act
-		var result = await MaybeF.CatchAsync<int>(() => throw exception, handler).ConfigureAwait(false);
+		var result = await F.CatchAsync<int>(() => throw exception, handler).ConfigureAwait(false);
 
 		// Assert
 		_ = result.AssertNone();

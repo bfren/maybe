@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 using NSubstitute;
 using Xunit;
 
-namespace Maybe.MaybeExtensions_Tests;
+namespace MaybeF.MaybeExtensions_Tests;
 
-public class SwitchIfAsync_Tests : Tests.Maybe.Abstracts.SwitchIfAsync_Tests
+public class SwitchIfAsync_Tests : Abstracts.SwitchIfAsync_Tests
 {
 	[Fact]
 	public override async Task Test00_Unknown_Maybe_Throws_UnknownOptionException()

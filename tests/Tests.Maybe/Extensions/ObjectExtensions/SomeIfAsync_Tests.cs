@@ -4,9 +4,9 @@
 using System.Threading.Tasks;
 using Xunit;
 
-namespace Maybe.Extensions.ObjectExtensions_Tests;
+namespace MaybeF.Extensions.ObjectExtensions_Tests;
 
-public class SomeIfAsync_Tests : Tests.Maybe.Abstracts.SomeIfAsync_Tests
+public class SomeIfAsync_Tests : Abstracts.SomeIfAsync_Tests
 {
 	[Fact]
 	public override async Task Test01_Exception_Thrown_By_Predicate_With_Value_Func_Calls_Handler_Returns_None()

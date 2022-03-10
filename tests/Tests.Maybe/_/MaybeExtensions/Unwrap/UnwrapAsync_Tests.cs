@@ -7,9 +7,9 @@ using Jeebs.Random;
 using NSubstitute;
 using Xunit;
 
-namespace Maybe.MaybeExtensions_Tests;
+namespace MaybeF.MaybeExtensions_Tests;
 
-public class UnwrapAsync_Tests : Tests.Maybe.Abstracts.UnwrapAsync_Tests
+public class UnwrapAsync_Tests : Abstracts.UnwrapAsync_Tests
 {
 	[Fact]
 	public override async Task Test00_None_Runs_IfNone_Func_Returns_Value()

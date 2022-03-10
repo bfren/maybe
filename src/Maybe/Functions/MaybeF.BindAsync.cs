@@ -4,9 +4,9 @@
 using System;
 using System.Threading.Tasks;
 
-namespace Maybe.Functions;
+namespace MaybeF;
 
-public static partial class MaybeF
+public static partial class F
 {
 	/// <inheritdoc cref="Bind{T, TReturn}(Maybe{T}, Func{T, Maybe{TReturn}})"/>
 	public static Task<Maybe<TReturn>> BindAsync<T, TReturn>(Maybe<T> maybe, Func<T, Task<Maybe<TReturn>>> bind) =>

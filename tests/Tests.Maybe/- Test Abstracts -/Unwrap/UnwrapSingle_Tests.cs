@@ -3,15 +3,14 @@
 
 using System;
 using Jeebs.Random;
-using Maybe;
-using Maybe.Exceptions;
-using Maybe.Functions;
-using Maybe.Testing;
+using MaybeF;
+using MaybeF.Exceptions;
+using MaybeF.Testing;
 using NSubstitute;
 using Xunit;
-using static Maybe.Functions.MaybeF.R;
+using static MaybeF.F.R;
 
-namespace Tests.Maybe.Abstracts;
+namespace Abstracts;
 
 public abstract class UnwrapSingle_Tests
 {
@@ -51,7 +50,7 @@ public abstract class UnwrapSingle_Tests
 	{
 		// Arrange
 		var reason = new TestReason();
-		var maybe = MaybeF.None<int>(reason);
+		var maybe = F.None<int>(reason);
 
 		// Act
 		var result = act(maybe);
@@ -67,7 +66,7 @@ public abstract class UnwrapSingle_Tests
 	{
 		// Arrange
 		var empty = Array.Empty<int>();
-		var maybe = MaybeF.Some(empty);
+		var maybe = F.Some(empty);
 
 		// Act
 		var result = act(maybe);
@@ -83,7 +82,7 @@ public abstract class UnwrapSingle_Tests
 	{
 		// Arrange
 		var empty = Array.Empty<int>();
-		var maybe = MaybeF.Some(empty);
+		var maybe = F.Some(empty);
 		var noItems = Substitute.For<Func<IReason>>();
 
 		// Act
@@ -99,7 +98,7 @@ public abstract class UnwrapSingle_Tests
 	{
 		// Arrange
 		var list = new[] { Rnd.Int, Rnd.Int };
-		var maybe = MaybeF.Some(list);
+		var maybe = F.Some(list);
 
 		// Act
 		var result = act(maybe);
@@ -115,7 +114,7 @@ public abstract class UnwrapSingle_Tests
 	{
 		// Arrange
 		var list = new[] { Rnd.Int, Rnd.Int };
-		var maybe = MaybeF.Some(list);
+		var maybe = F.Some(list);
 		var tooMany = Substitute.For<Func<IReason>>();
 
 		// Act
@@ -131,7 +130,7 @@ public abstract class UnwrapSingle_Tests
 	{
 		// Arrange
 		var value = Rnd.Int;
-		var maybe = MaybeF.Some(value);
+		var maybe = F.Some(value);
 
 		// Act
 		var result = act(maybe);
@@ -147,7 +146,7 @@ public abstract class UnwrapSingle_Tests
 	{
 		// Arrange
 		var value = Rnd.Int;
-		var maybe = MaybeF.Some(value);
+		var maybe = F.Some(value);
 		var notAList = Substitute.For<Func<IReason>>();
 
 		// Act
@@ -164,7 +163,7 @@ public abstract class UnwrapSingle_Tests
 		// Arrange
 		var value = Rnd.Int;
 		var list = new[] { value };
-		var maybe = MaybeF.Some(list);
+		var maybe = F.Some(list);
 
 		// Act
 		var result = act(maybe);
@@ -181,7 +180,7 @@ public abstract class UnwrapSingle_Tests
 		// Arrange
 		var value = Rnd.Int;
 		var list = new[] { value };
-		var maybe = MaybeF.Some(list);
+		var maybe = F.Some(list);
 
 		// Act
 		var result = act(maybe);

@@ -4,9 +4,9 @@
 using System;
 using System.Threading.Tasks;
 
-namespace Maybe.Functions;
+namespace MaybeF;
 
-public static partial class MaybeF
+public static partial class F
 {
 	/// <inheritdoc cref="Map{T, TReturn}(Maybe{T}, Func{T, TReturn}, Handler)"/>
 	public static Task<Maybe<TReturn>> MapAsync<T, TReturn>(Maybe<T> maybe, Func<T, Task<TReturn>> map, Handler handler) =>

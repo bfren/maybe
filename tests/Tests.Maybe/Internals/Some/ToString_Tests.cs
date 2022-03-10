@@ -2,7 +2,7 @@
 // Copyright (c) bfren - licensed under https://mit.bfren.dev/2019
 
 using Jeebs.Random;
-using Maybe.Functions;
+using MaybeF;
 using Xunit;
 
 namespace Jeebs.Internals.Some_Tests;
@@ -14,7 +14,7 @@ public class ToString_Tests
 	{
 		// Arrange
 		var value = Rnd.Lng;
-		var maybe = MaybeF.Some(value);
+		var maybe = F.Some(value);
 
 		// Act
 		var result = maybe.ToString();
@@ -28,7 +28,7 @@ public class ToString_Tests
 	{
 		// Arrange
 		int? value = null;
-		var maybe = MaybeF.Some(value, true);
+		var maybe = F.Some(value, true);
 
 		// Act
 		var result = maybe.ToString();

@@ -3,11 +3,10 @@
 
 using System.Threading.Tasks;
 using Jeebs.Random;
-using Maybe.Functions;
-using Maybe.Testing;
+using MaybeF.Testing;
 using Xunit;
 
-namespace Maybe.Linq.MaybeExtensions_Tests;
+namespace MaybeF.Linq.MaybeExtensions_Tests;
 
 public class Where_Tests
 {
@@ -16,7 +15,7 @@ public class Where_Tests
 	{
 		// Arrange
 		var value = Rnd.Int;
-		var maybe = MaybeF.Some(value);
+		var maybe = F.Some(value);
 
 		// Act
 		var r0 = maybe.Where(s => s == value).Select(s => s ^ 2);
@@ -36,7 +35,7 @@ public class Where_Tests
 	{
 		// Arrange
 		var value = Rnd.Int;
-		var maybe = MaybeF.Some(value);
+		var maybe = F.Some(value);
 
 		// Act
 		var r0 = await maybe.AsTask.Where(s => s == value).Select(s => s ^ 2).ConfigureAwait(false);
@@ -78,7 +77,7 @@ public class Where_Tests
 	{
 		// Arrange
 		var value = Rnd.Int;
-		var maybe = MaybeF.Some(value);
+		var maybe = F.Some(value);
 
 		// Act
 		var r0 = maybe.Where(s => s != value).Select(s => s ^ 2);
@@ -96,7 +95,7 @@ public class Where_Tests
 	{
 		// Arrange
 		var value = Rnd.Int;
-		var maybe = MaybeF.Some(value);
+		var maybe = F.Some(value);
 
 		// Act
 		var r0 = await maybe.AsTask.Where(s => s != value).Select(s => s ^ 2).ConfigureAwait(false);
@@ -131,7 +130,7 @@ public class Where_Tests
 	public void Where_With_None_Returns_None()
 	{
 		// Arrange
-		var maybe = MaybeF.None<int>(new InvalidIntegerReason());
+		var maybe = F.None<int>(new InvalidIntegerReason());
 
 		// Act
 		var r0 = maybe.Where(s => s == 0).Select(s => s ^ 2);
@@ -150,7 +149,7 @@ public class Where_Tests
 	public async Task Async_Where_With_None_Returns_None()
 	{
 		// Arrange
-		var maybe = MaybeF.None<int>(new InvalidIntegerReason());
+		var maybe = F.None<int>(new InvalidIntegerReason());
 
 		// Act
 		var r0 = await maybe.AsTask.Where(s => s != 0).Select(s => s ^ 2).ConfigureAwait(false);

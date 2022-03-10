@@ -2,7 +2,7 @@
 // Copyright (c) bfren - licensed under https://mit.bfren.dev/2019
 
 using Jeebs.Random;
-using Maybe.Internals;
+using MaybeF.Internals;
 using Xunit;
 
 namespace Jeebs.Internals.Some_Tests;

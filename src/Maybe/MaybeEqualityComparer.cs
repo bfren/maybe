@@ -3,9 +3,9 @@
 
 using System.Collections;
 using System.Collections.Generic;
-using Maybe.Internals;
+using MaybeF.Internals;
 
-namespace Maybe;
+namespace MaybeF;
 
 /// <summary>
 /// Maybe Equality Comparer

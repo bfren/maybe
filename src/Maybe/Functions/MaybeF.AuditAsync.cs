@@ -4,9 +4,9 @@
 using System;
 using System.Threading.Tasks;
 
-namespace Maybe.Functions;
+namespace MaybeF;
 
-public static partial class MaybeF
+public static partial class F
 {
 	/// <inheritdoc cref="Audit{T}(Maybe{T}, Action{Maybe{T}}, Action{T}?, Action{IReason}?)"/>
 	public static async Task<Maybe<T>> AuditAsync<T>(Maybe<T> maybe, Func<Maybe<T>, Task>? any, Func<T, Task>? some, Func<IReason, Task>? none)

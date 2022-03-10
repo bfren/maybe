@@ -6,9 +6,9 @@ using Jeebs.Random;
 using NSubstitute;
 using Xunit;
 
-namespace Maybe.Maybe_Tests;
+namespace MaybeF.Maybe_Tests;
 
-public class Switch_Tests : Tests.Maybe.Abstracts.Switch_Tests
+public class Switch_Tests : Abstracts.Switch_Tests
 {
 	[Fact]
 	public override void Test00_Return_Void_If_Unknown_Maybe_Throws_UnknownOptionException()

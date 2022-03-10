@@ -3,12 +3,12 @@
 
 using System;
 using Jeebs.Random;
-using Maybe.Testing;
+using MaybeF.Testing;
 using NSubstitute;
 using Xunit;
-using static Maybe.Functions.MaybeF.R;
+using static MaybeF.F.R;
 
-namespace Maybe.Functions.MaybeF_Tests;
+namespace MaybeF.MaybeF_Tests;
 
 public class Catch_Tests
 {
@@ -19,7 +19,7 @@ public class Catch_Tests
 		var value = Rnd.Int;
 
 		// Act
-		var result = MaybeF.Catch(() => MaybeF.Some(value), MaybeF.DefaultHandler);
+		var result = F.Catch(() => F.Some(value), F.DefaultHandler);
 
 		// Assert
 		var some = result.AssertSome();
@@ -33,7 +33,7 @@ public class Catch_Tests
 		var message = Rnd.Str;
 
 		// Act
-		var result = MaybeF.Catch<int>(() => throw new Exception(message), MaybeF.DefaultHandler);
+		var result = F.Catch<int>(() => throw new Exception(message), F.DefaultHandler);
 
 		// Assert
 		var none = result.AssertNone();
@@ -47,10 +47,10 @@ public class Catch_Tests
 		// Arrange
 		var message = Rnd.Str;
 		var exception = new Exception(message);
-		var handler = Substitute.For<MaybeF.Handler>();
+		var handler = Substitute.For<F.Handler>();
 
 		// Act
-		var result = MaybeF.Catch<int>(() => throw exception, handler);
+		var result = F.Catch<int>(() => throw exception, handler);
 
 		// Assert
 		_ = result.AssertNone();

@@ -3,11 +3,10 @@
 
 using System.Threading.Tasks;
 using Jeebs.Random;
-using Maybe.Functions;
-using Maybe.Testing;
+using MaybeF.Testing;
 using Xunit;
 
-namespace Maybe.MaybeExtensions_Tests;
+namespace MaybeF.MaybeExtensions_Tests;
 
 public class GetAsyncEnumerator_Tests
 {
@@ -16,7 +15,7 @@ public class GetAsyncEnumerator_Tests
 	{
 		// Arrange
 		var value = Rnd.Int;
-		var maybe = MaybeF.Some(value).AsTask;
+		var maybe = F.Some(value).AsTask;
 
 		// Act
 		var result = 0;

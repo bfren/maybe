@@ -4,27 +4,26 @@
 using System;
 using System.Threading.Tasks;
 using Jeebs.Random;
-using Maybe;
-using Maybe.Functions;
-using Maybe.Testing;
-using Maybe.Testing.Exceptions;
+using MaybeF;
+using MaybeF.Testing;
+using MaybeF.Testing.Exceptions;
 using NSubstitute;
 using Xunit;
-using static Maybe.Functions.MaybeF.R;
+using static MaybeF.F.R;
 
-namespace Tests.Maybe.Abstracts;
+namespace Abstracts;
 
 public abstract class SomeAsync_Tests
 {
 	public abstract Task Test00_Exception_Thrown_Without_Handler_Returns_None_With_UnhandledExceptionReason();
 
-	protected static async Task Test00(Func<Func<Task<int>>, MaybeF.Handler, Task<Maybe<int>>> act)
+	protected static async Task Test00(Func<Func<Task<int>>, F.Handler, Task<Maybe<int>>> act)
 	{
 		// Arrange
 		var throwFunc = Task<int> () => throw new MaybeTestException();
 
 		// Act
-		var result = await act(throwFunc, MaybeF.DefaultHandler).ConfigureAwait(false);
+		var result = await act(throwFunc, F.DefaultHandler).ConfigureAwait(false);
 
 		// Assert
 		var none = result.AssertNone();
@@ -33,14 +32,14 @@ public abstract class SomeAsync_Tests
 
 	public abstract Task Test01_Nullable_Exception_Thrown_Without_Handler_Returns_None_With_UnhandledExceptionReason();
 
-	protected static async Task Test01(Func<Func<Task<int?>>, bool, MaybeF.Handler, Task<Maybe<int?>>> act)
+	protected static async Task Test01(Func<Func<Task<int?>>, bool, F.Handler, Task<Maybe<int?>>> act)
 	{
 		// Arrange
 		var throwFunc = Task<int?> () => throw new MaybeTestException();
 
 		// Act
-		var r0 = await act(throwFunc, true, MaybeF.DefaultHandler).ConfigureAwait(false);
-		var r1 = await act(throwFunc, false, MaybeF.DefaultHandler).ConfigureAwait(false);
+		var r0 = await act(throwFunc, true, F.DefaultHandler).ConfigureAwait(false);
+		var r1 = await act(throwFunc, false, F.DefaultHandler).ConfigureAwait(false);
 
 		// Assert
 		var n0 = r0.AssertNone();
@@ -51,10 +50,10 @@ public abstract class SomeAsync_Tests
 
 	public abstract Task Test02_Exception_Thrown_With_Handler_Returns_None_Calls_Handler();
 
-	protected static async Task Test02(Func<Func<Task<int>>, MaybeF.Handler, Task<Maybe<int>>> act)
+	protected static async Task Test02(Func<Func<Task<int>>, F.Handler, Task<Maybe<int>>> act)
 	{
 		// Arrange
-		var handler = Substitute.For<MaybeF.Handler>();
+		var handler = Substitute.For<F.Handler>();
 		var exception = new Exception();
 		var throwFunc = Task<int> () => throw exception;
 
@@ -68,10 +67,10 @@ public abstract class SomeAsync_Tests
 
 	public abstract Task Test03_Nullable_Exception_Thrown_With_Handler_Returns_None_Calls_Handler();
 
-	protected static async Task Test03(Func<Func<Task<int?>>, bool, MaybeF.Handler, Task<Maybe<int?>>> act)
+	protected static async Task Test03(Func<Func<Task<int?>>, bool, F.Handler, Task<Maybe<int?>>> act)
 	{
 		// Arrange
-		var handler = Substitute.For<MaybeF.Handler>();
+		var handler = Substitute.For<F.Handler>();
 		var exception = new Exception();
 		var throwFunc = Task<int?> () => throw exception;
 
@@ -87,13 +86,13 @@ public abstract class SomeAsync_Tests
 
 	public abstract Task Test04_Null_Input_Returns_None();
 
-	protected static async Task Test04(Func<Func<Task<int?>>, MaybeF.Handler, Task<Maybe<int?>>> act)
+	protected static async Task Test04(Func<Func<Task<int?>>, F.Handler, Task<Maybe<int?>>> act)
 	{
 		// Arrange
 		var value = Task<int?> () => Task.FromResult<int?>(null);
 
 		// Act
-		var result = await act(value, MaybeF.DefaultHandler).ConfigureAwait(false);
+		var result = await act(value, F.DefaultHandler).ConfigureAwait(false);
 
 		// Assert
 		var none = result.AssertNone();
@@ -102,13 +101,13 @@ public abstract class SomeAsync_Tests
 
 	public abstract Task Test05_Nullable_Allow_Null_False_Null_Input_Returns_None_With_AllowNullWasFalseReason();
 
-	protected static async Task Test05(Func<Func<Task<int?>>, bool, MaybeF.Handler, Task<Maybe<int?>>> act)
+	protected static async Task Test05(Func<Func<Task<int?>>, bool, F.Handler, Task<Maybe<int?>>> act)
 	{
 		// Arrange
 		var value = Task<int?> () => Task.FromResult<int?>(null);
 
 		// Act
-		var result = await act(value, false, MaybeF.DefaultHandler).ConfigureAwait(false);
+		var result = await act(value, false, F.DefaultHandler).ConfigureAwait(false);
 
 		// Assert
 		var none = result.AssertNone();
@@ -117,13 +116,13 @@ public abstract class SomeAsync_Tests
 
 	public abstract Task Test06_Nullable_Allow_Null_True_Null_Input_Returns_Some_With_Null_Value();
 
-	protected static async Task Test06(Func<Func<Task<int?>>, bool, MaybeF.Handler, Task<Maybe<int?>>> act)
+	protected static async Task Test06(Func<Func<Task<int?>>, bool, F.Handler, Task<Maybe<int?>>> act)
 	{
 		// Arrange
 		var value = Task<int?> () => Task.FromResult<int?>(null);
 
 		// Act
-		var result = await act(value, true, MaybeF.DefaultHandler).ConfigureAwait(false);
+		var result = await act(value, true, F.DefaultHandler).ConfigureAwait(false);
 
 		// Assert
 		var some = result.AssertSome();
@@ -132,7 +131,7 @@ public abstract class SomeAsync_Tests
 
 	public abstract Task Test07_Not_Null_Returns_Some();
 
-	protected static async Task Test07(Func<Func<Task<object>>, MaybeF.Handler, Task<Maybe<object>>> act)
+	protected static async Task Test07(Func<Func<Task<object>>, F.Handler, Task<Maybe<object>>> act)
 	{
 		// Arrange
 		var v0 = Rnd.Str;
@@ -145,9 +144,9 @@ public abstract class SomeAsync_Tests
 		var f2 = Task<object> () => Task.FromResult<object>(v2);
 
 		// Act
-		var r0 = await act(f0, MaybeF.DefaultHandler).ConfigureAwait(false);
-		var r1 = await act(f1, MaybeF.DefaultHandler).ConfigureAwait(false);
-		var r2 = await act(f2, MaybeF.DefaultHandler).ConfigureAwait(false);
+		var r0 = await act(f0, F.DefaultHandler).ConfigureAwait(false);
+		var r1 = await act(f1, F.DefaultHandler).ConfigureAwait(false);
+		var r2 = await act(f2, F.DefaultHandler).ConfigureAwait(false);
 
 		// Assert
 		var s0 = r0.AssertSome();
@@ -160,7 +159,7 @@ public abstract class SomeAsync_Tests
 
 	public abstract Task Test08_Nullable_Not_Null_Returns_Some();
 
-	protected static async Task Test08(Func<Func<Task<object?>>, bool, MaybeF.Handler, Task<Maybe<object?>>> act)
+	protected static async Task Test08(Func<Func<Task<object?>>, bool, F.Handler, Task<Maybe<object?>>> act)
 	{
 		// Arrange
 		var v0 = Rnd.Str;
@@ -173,9 +172,9 @@ public abstract class SomeAsync_Tests
 		var f2 = Task<object?> () => Task.FromResult<object?>(v2);
 
 		// Act
-		var r0 = await act(f0, false, MaybeF.DefaultHandler).ConfigureAwait(false);
-		var r1 = await act(f1, false, MaybeF.DefaultHandler).ConfigureAwait(false);
-		var r2 = await act(f2, false, MaybeF.DefaultHandler).ConfigureAwait(false);
+		var r0 = await act(f0, false, F.DefaultHandler).ConfigureAwait(false);
+		var r1 = await act(f1, false, F.DefaultHandler).ConfigureAwait(false);
+		var r2 = await act(f2, false, F.DefaultHandler).ConfigureAwait(false);
 
 		// Assert
 		var s0 = r0.AssertSome();

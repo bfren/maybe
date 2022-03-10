@@ -3,9 +3,9 @@
 
 using System.Threading.Tasks;
 
-namespace Maybe.Maybe_Tests;
+namespace MaybeF.Maybe_Tests;
 
-public class BindAsync_Tests : Tests.Maybe.Abstracts.BindAsync_Tests
+public class BindAsync_Tests : Abstracts.BindAsync_Tests
 {
 	public override async Task Test00_If_Unknown_Maybe_Returns_None_With_UnhandledExceptionReason()
 	{

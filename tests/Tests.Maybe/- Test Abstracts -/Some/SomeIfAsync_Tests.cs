@@ -4,23 +4,22 @@
 using System;
 using System.Threading.Tasks;
 using Jeebs.Random;
-using Maybe;
-using Maybe.Functions;
-using Maybe.Testing;
+using MaybeF;
+using MaybeF.Testing;
 using NSubstitute;
 using Xunit;
-using static Maybe.Functions.MaybeF.R;
+using static MaybeF.F.R;
 
-namespace Tests.Maybe.Abstracts;
+namespace Abstracts;
 
 public abstract class SomeIfAsync_Tests
 {
 	public abstract Task Test00_Exception_Thrown_By_Predicate_With_Value_Calls_Handler_Returns_None();
 
-	protected static async Task Test00(Func<Func<bool>, Task<int>, MaybeF.Handler, Task<Maybe<int>>> act)
+	protected static async Task Test00(Func<Func<bool>, Task<int>, F.Handler, Task<Maybe<int>>> act)
 	{
 		// Arrange
-		var handler = Substitute.For<MaybeF.Handler>();
+		var handler = Substitute.For<F.Handler>();
 		var exception = new Exception();
 		var throwFunc = bool () => throw exception;
 
@@ -34,10 +33,10 @@ public abstract class SomeIfAsync_Tests
 
 	public abstract Task Test01_Exception_Thrown_By_Predicate_With_Value_Func_Calls_Handler_Returns_None();
 
-	protected static async Task Test01(Func<Func<bool>, Func<Task<int>>, MaybeF.Handler, Task<Maybe<int>>> act)
+	protected static async Task Test01(Func<Func<bool>, Func<Task<int>>, F.Handler, Task<Maybe<int>>> act)
 	{
 		// Arrange
-		var handler = Substitute.For<MaybeF.Handler>();
+		var handler = Substitute.For<F.Handler>();
 		var exception = new Exception();
 		var throwFunc = bool () => throw exception;
 
@@ -51,10 +50,10 @@ public abstract class SomeIfAsync_Tests
 
 	public abstract Task Test02_Exception_Thrown_By_Value_Func_Calls_Handler_Returns_None();
 
-	protected static async Task Test02(Func<Func<bool>, Func<Task<int>>, MaybeF.Handler, Task<Maybe<int>>> act)
+	protected static async Task Test02(Func<Func<bool>, Func<Task<int>>, F.Handler, Task<Maybe<int>>> act)
 	{
 		// Arrange
-		var handler = Substitute.For<MaybeF.Handler>();
+		var handler = Substitute.For<F.Handler>();
 		var exception = new Exception();
 		var throwFunc = Task<int> () => throw exception;
 
@@ -68,13 +67,13 @@ public abstract class SomeIfAsync_Tests
 
 	public abstract Task Test03_Predicate_True_With_Value_Returns_Some();
 
-	protected static async Task Test03(Func<Func<bool>, Task<int>, MaybeF.Handler, Task<Maybe<int>>> act)
+	protected static async Task Test03(Func<Func<bool>, Task<int>, F.Handler, Task<Maybe<int>>> act)
 	{
 		// Arrange
 		var value = Rnd.Int;
 
 		// Act
-		var result = await act(() => true, Task.FromResult(value), MaybeF.DefaultHandler).ConfigureAwait(false);
+		var result = await act(() => true, Task.FromResult(value), F.DefaultHandler).ConfigureAwait(false);
 
 		// Assert
 		var some = result.AssertSome();
@@ -83,13 +82,13 @@ public abstract class SomeIfAsync_Tests
 
 	public abstract Task Test04_Predicate_True_With_Value_Func_Returns_Some();
 
-	protected static async Task Test04(Func<Func<bool>, Func<Task<int>>, MaybeF.Handler, Task<Maybe<int>>> act)
+	protected static async Task Test04(Func<Func<bool>, Func<Task<int>>, F.Handler, Task<Maybe<int>>> act)
 	{
 		// Arrange
 		var value = Rnd.Int;
 
 		// Act
-		var result = await act(() => true, () => Task.FromResult(value), MaybeF.DefaultHandler).ConfigureAwait(false);
+		var result = await act(() => true, () => Task.FromResult(value), F.DefaultHandler).ConfigureAwait(false);
 
 		// Assert
 		var some = result.AssertSome();
@@ -98,13 +97,13 @@ public abstract class SomeIfAsync_Tests
 
 	public abstract Task Test05_Predicate_False_With_Value_Returns_None_With_PredicateWasFalseReason();
 
-	protected static async Task Test05(Func<Func<bool>, Task<int>, MaybeF.Handler, Task<Maybe<int>>> act)
+	protected static async Task Test05(Func<Func<bool>, Task<int>, F.Handler, Task<Maybe<int>>> act)
 	{
 		// Arrange
 		var value = Rnd.Int;
 
 		// Act
-		var result = await act(() => false, Task.FromResult(value), MaybeF.DefaultHandler).ConfigureAwait(false);
+		var result = await act(() => false, Task.FromResult(value), F.DefaultHandler).ConfigureAwait(false);
 
 		// Assert
 		var none = result.AssertNone();
@@ -113,13 +112,13 @@ public abstract class SomeIfAsync_Tests
 
 	public abstract Task Test06_Predicate_False_With_Value_Func_Returns_None_With_PredicateWasFalseReason();
 
-	protected static async Task Test06(Func<Func<bool>, Func<Task<int>>, MaybeF.Handler, Task<Maybe<int>>> act)
+	protected static async Task Test06(Func<Func<bool>, Func<Task<int>>, F.Handler, Task<Maybe<int>>> act)
 	{
 		// Arrange
 		var value = Rnd.Int;
 
 		// Act
-		var result = await act(() => false, () => Task.FromResult(value), MaybeF.DefaultHandler).ConfigureAwait(false);
+		var result = await act(() => false, () => Task.FromResult(value), F.DefaultHandler).ConfigureAwait(false);
 
 		// Assert
 		var none = result.AssertNone();
@@ -128,13 +127,13 @@ public abstract class SomeIfAsync_Tests
 
 	public abstract Task Test07_Predicate_False_Bypasses_Value_Func();
 
-	protected static async Task Test07(Func<Func<bool>, Func<Task<int>>, MaybeF.Handler, Task<Maybe<int>>> act)
+	protected static async Task Test07(Func<Func<bool>, Func<Task<int>>, F.Handler, Task<Maybe<int>>> act)
 	{
 		// Arrange
 		var getValue = Substitute.For<Func<Task<int>>>();
 
 		// Act
-		var result = await act(() => false, getValue, MaybeF.DefaultHandler).ConfigureAwait(false);
+		var result = await act(() => false, getValue, F.DefaultHandler).ConfigureAwait(false);
 
 		// Assert
 		_ = result.AssertNone();

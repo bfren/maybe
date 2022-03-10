@@ -2,11 +2,11 @@
 // Copyright (c) bfren - licensed under https://mit.bfren.dev/2019
 
 using System;
-using Maybe.Internals;
+using MaybeF.Internals;
 
-namespace Maybe.Functions;
+namespace MaybeF;
 
-public static partial class MaybeF
+public static partial class F
 {
 	/// <summary>
 	/// If <paramref name="maybe"/> is <see cref="Internals.None{T}"/> and the reason is <see cref="R.NullValueReason"/>,

@@ -3,25 +3,25 @@
 
 using System;
 using System.Collections.Generic;
-using Maybe.Functions;
+using MaybeF;
 
-namespace Maybe.Linq;
+namespace MaybeF.Linq;
 
 public static partial class EnumerableExtensions
 {
-	/// <inheritdoc cref="MaybeF.EnumerableF.FilterMap{T, TReturn}(IEnumerable{Maybe{T}}, Func{T, TReturn}, Func{T, bool}?)"/>
+	/// <inheritdoc cref="F.EnumerableF.FilterMap{T, TReturn}(IEnumerable{Maybe{T}}, Func{T, TReturn}, Func{T, bool}?)"/>
 	public static IEnumerable<TReturn> FilterMap<T, TReturn>(this IEnumerable<Maybe<T>> @this, Func<T, TReturn> map) =>
-		MaybeF.EnumerableF.FilterMap(@this, map, null);
+		F.EnumerableF.FilterMap(@this, map, null);
 
-	/// <inheritdoc cref="MaybeF.EnumerableF.FilterMap{T, TReturn}(IEnumerable{Maybe{T}}, Func{T, TReturn}, Func{T, bool}?)"/>
+	/// <inheritdoc cref="F.EnumerableF.FilterMap{T, TReturn}(IEnumerable{Maybe{T}}, Func{T, TReturn}, Func{T, bool}?)"/>
 	public static IEnumerable<TReturn> FilterMap<T, TReturn>(this IEnumerable<Maybe<T>> @this, Func<T, TReturn> map, Func<T, bool> predicate) =>
-		MaybeF.EnumerableF.FilterMap(@this, map, predicate);
+		F.EnumerableF.FilterMap(@this, map, predicate);
 
-	/// <inheritdoc cref="MaybeF.EnumerableF.FilterMap{T, TReturn}(IEnumerable{Maybe{T}}, Func{T, TReturn}, Func{T, bool}?)"/>
+	/// <inheritdoc cref="F.EnumerableF.FilterMap{T, TReturn}(IEnumerable{Maybe{T}}, Func{T, TReturn}, Func{T, bool}?)"/>
 	public static IEnumerable<Maybe<TReturn>> FilterMap<T, TReturn>(this IEnumerable<Maybe<T>> @this, Func<T, Maybe<TReturn>> map) =>
-		MaybeF.EnumerableF.FilterMap(@this, map, null);
+		F.EnumerableF.FilterMap(@this, map, null);
 
-	/// <inheritdoc cref="MaybeF.EnumerableF.FilterMap{T, TReturn}(IEnumerable{Maybe{T}}, Func{T, TReturn}, Func{T, bool}?)"/>
+	/// <inheritdoc cref="F.EnumerableF.FilterMap{T, TReturn}(IEnumerable{Maybe{T}}, Func{T, TReturn}, Func{T, bool}?)"/>
 	public static IEnumerable<Maybe<TReturn>> FilterMap<T, TReturn>(this IEnumerable<Maybe<T>> @this, Func<T, Maybe<TReturn>> map, Func<T, bool> predicate) =>
-		MaybeF.EnumerableF.FilterMap(@this, map, predicate);
+		F.EnumerableF.FilterMap(@this, map, predicate);
 }

@@ -4,12 +4,12 @@
 using System;
 using System.Collections.Generic;
 using Jeebs.Random;
-using Maybe;
-using Maybe.Testing;
+using MaybeF;
+using MaybeF.Testing;
 using Xunit;
-using static Maybe.Functions.MaybeF.DictionaryF.R;
+using static MaybeF.F.DictionaryF.R;
 
-namespace Tests.Maybe.Abstracts.Dictionary;
+namespace Abstracts.Dictionary;
 
 public abstract class GetValueOrNone_Tests
 {

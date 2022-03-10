@@ -4,15 +4,14 @@
 using System;
 using System.Threading.Tasks;
 using Jeebs.Random;
-using Maybe;
-using Maybe.Exceptions;
-using Maybe.Functions;
-using Maybe.Testing;
+using MaybeF;
+using MaybeF.Exceptions;
+using MaybeF.Testing;
 using NSubstitute;
 using Xunit;
-using static Maybe.Functions.MaybeF.R;
+using static MaybeF.F.R;
 
-namespace Tests.Maybe.Abstracts;
+namespace Abstracts;
 
 public abstract class BindAsync_Tests
 {
@@ -38,7 +37,7 @@ public abstract class BindAsync_Tests
 	protected static async Task Test01(Func<Maybe<int>, Func<int, Task<Maybe<string>>>, Task<Maybe<string>>> act)
 	{
 		// Arrange
-		var maybe = MaybeF.Some(Rnd.Int);
+		var maybe = F.Some(Rnd.Int);
 		var exception = new Exception();
 		var throwFunc = Task<Maybe<string>> () => throw exception;
 
@@ -71,7 +70,7 @@ public abstract class BindAsync_Tests
 	{
 		// Arrange
 		var reason = new TestReason();
-		var maybe = MaybeF.None<int>(reason);
+		var maybe = F.None<int>(reason);
 		var bind = Substitute.For<Func<int, Task<Maybe<string>>>>();
 
 		// Act
@@ -88,7 +87,7 @@ public abstract class BindAsync_Tests
 	{
 		// Arrange
 		var value = Rnd.Int;
-		var maybe = MaybeF.Some(value);
+		var maybe = F.Some(value);
 		var bind = Substitute.For<Func<int, Task<Maybe<string>>>>();
 
 		// Act

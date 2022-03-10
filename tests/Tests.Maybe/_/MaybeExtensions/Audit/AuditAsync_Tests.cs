@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 using NSubstitute;
 using Xunit;
 
-namespace Maybe.MaybeExtensions_Tests;
+namespace MaybeF.MaybeExtensions_Tests;
 
-public class AuditAsync_Tests : Tests.Maybe.Abstracts.AuditAsync_Tests
+public class AuditAsync_Tests : Abstracts.AuditAsync_Tests
 {
 	#region General
 

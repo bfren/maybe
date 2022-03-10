@@ -3,12 +3,12 @@
 
 using System.Collections.Generic;
 
-namespace Maybe.Functions;
+namespace MaybeF;
 
 /// <summary>
 /// Functions for interacting with and manipulating <see cref="Maybe{T}"/>
 /// </summary>
-public static partial class MaybeF
+public static partial class F
 {
 	/// <summary>
 	/// Functions for interacting with <see cref="IDictionary{TKey, TValue}"/>

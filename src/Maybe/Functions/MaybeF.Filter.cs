@@ -3,9 +3,9 @@
 
 using System;
 
-namespace Maybe.Functions;
+namespace MaybeF;
 
-public static partial class MaybeF
+public static partial class F
 {
 	/// <summary>
 	/// Return the current type if it is <see cref="Internals.Some{T}"/> and the predicate is true

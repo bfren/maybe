@@ -1,7 +1,7 @@
 // Maybe .NET Monad
 // Copyright (c) bfren - licensed under https://mit.bfren.dev/2019
 
-namespace Maybe.Linq;
+namespace MaybeF.Linq;
 
 /// <summary>
 /// <see cref="Maybe{T}"/> Extensions

@@ -3,15 +3,14 @@
 
 using System;
 using Jeebs.Random;
-using Maybe;
-using Maybe.Exceptions;
-using Maybe.Functions;
-using Maybe.Testing;
+using MaybeF;
+using MaybeF.Exceptions;
+using MaybeF.Testing;
 using NSubstitute;
 using Xunit;
-using static Maybe.Functions.MaybeF.R;
+using static MaybeF.F.R;
 
-namespace Tests.Maybe.Abstracts;
+namespace Abstracts;
 
 public abstract class Bind_Tests
 {
@@ -37,7 +36,7 @@ public abstract class Bind_Tests
 	protected static void Test01(Func<Maybe<int>, Func<int, Maybe<string>>, Maybe<string>> act)
 	{
 		// Arrange
-		var maybe = MaybeF.Some(Rnd.Int);
+		var maybe = F.Some(Rnd.Int);
 		var exception = new Exception();
 		var throwFunc = Maybe<string> () => throw exception;
 
@@ -70,7 +69,7 @@ public abstract class Bind_Tests
 	{
 		// Arrange
 		var reason = new TestReason();
-		var maybe = MaybeF.None<int>(reason);
+		var maybe = F.None<int>(reason);
 		var bind = Substitute.For<Func<int, Maybe<string>>>();
 
 		// Act
@@ -87,7 +86,7 @@ public abstract class Bind_Tests
 	{
 		// Arrange
 		var value = Rnd.Int;
-		var maybe = MaybeF.Some(value);
+		var maybe = F.Some(value);
 		var bind = Substitute.For<Func<int, Maybe<string>>>();
 
 		// Act

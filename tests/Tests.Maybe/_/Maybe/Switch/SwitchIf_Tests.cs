@@ -5,9 +5,9 @@ using System;
 using NSubstitute;
 using Xunit;
 
-namespace Maybe.Maybe_Tests;
+namespace MaybeF.Maybe_Tests;
 
-public class SwitchIf_Tests : Tests.Maybe.Abstracts.SwitchIf_Tests
+public class SwitchIf_Tests : Abstracts.SwitchIf_Tests
 {
 	[Fact]
 	public override void Test00_Unknown_Maybe_Throws_UnknownOptionException()

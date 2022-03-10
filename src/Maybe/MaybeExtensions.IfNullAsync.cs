@@ -3,22 +3,22 @@
 
 using System;
 using System.Threading.Tasks;
-using Maybe.Functions;
+using MaybeF;
 
-namespace Maybe;
+namespace MaybeF;
 
 public static partial class MaybeExtensions
 {
-	/// <inheritdoc cref="MaybeF.IfNullAsync{T, TReason}(Task{Maybe{T}}, Func{TReason})"/>
+	/// <inheritdoc cref="F.IfNullAsync{T, TReason}(Task{Maybe{T}}, Func{TReason})"/>
 	public static Task<Maybe<T>> IfNullAsync<T>(this Task<Maybe<T>> @this, Func<Maybe<T>> ifNull) =>
-		MaybeF.IfNullAsync(@this, () => Task.FromResult(ifNull()));
+		F.IfNullAsync(@this, () => Task.FromResult(ifNull()));
 
-	/// <inheritdoc cref="MaybeF.IfNullAsync{T, TReason}(Task{Maybe{T}}, Func{TReason})"/>
+	/// <inheritdoc cref="F.IfNullAsync{T, TReason}(Task{Maybe{T}}, Func{TReason})"/>
 	public static Task<Maybe<T>> IfNullAsync<T>(this Task<Maybe<T>> @this, Func<Task<Maybe<T>>> ifNull) =>
-		MaybeF.IfNullAsync(@this, ifNull);
+		F.IfNullAsync(@this, ifNull);
 
-	/// <inheritdoc cref="MaybeF.IfNullAsync{T, TReason}(Task{Maybe{T}}, Func{TReason})"/>
+	/// <inheritdoc cref="F.IfNullAsync{T, TReason}(Task{Maybe{T}}, Func{TReason})"/>
 	public static Task<Maybe<T>> IfNullAsync<T, TReason>(this Task<Maybe<T>> @this, Func<TReason> ifNull)
 		where TReason : IReason =>
-		MaybeF.IfNullAsync(@this, ifNull);
+		F.IfNullAsync(@this, ifNull);
 }

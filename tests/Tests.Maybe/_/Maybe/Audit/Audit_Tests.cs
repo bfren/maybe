@@ -5,9 +5,9 @@ using System;
 using NSubstitute;
 using Xunit;
 
-namespace Maybe.Maybe_Tests;
+namespace MaybeF.Maybe_Tests;
 
-public class Audit_Tests : Tests.Maybe.Abstracts.Audit_Tests
+public class Audit_Tests : Abstracts.Audit_Tests
 {
 	#region General
 

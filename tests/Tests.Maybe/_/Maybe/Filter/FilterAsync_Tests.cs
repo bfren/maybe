@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 using NSubstitute;
 using Xunit;
 
-namespace Maybe.Maybe_Tests;
+namespace MaybeF.Maybe_Tests;
 
-public class FilterAsync_Tests : Tests.Maybe.Abstracts.FilterAsync_Tests
+public class FilterAsync_Tests : Abstracts.FilterAsync_Tests
 {
 	[Fact]
 	public override async Task Test00_If_Unknown_Maybe_Returns_None_With_UnhandledExceptionReason()

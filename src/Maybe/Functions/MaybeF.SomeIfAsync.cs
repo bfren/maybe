@@ -4,9 +4,9 @@
 using System;
 using System.Threading.Tasks;
 
-namespace Maybe.Functions;
+namespace MaybeF;
 
-public static partial class MaybeF
+public static partial class F
 {
 	/// <inheritdoc cref="SomeIf{T}(Func{bool}, Func{T}, Handler)"/>
 	public static Task<Maybe<T>> SomeIfAsync<T>(Func<bool> predicate, Func<Task<T>> value, Handler handler) =>

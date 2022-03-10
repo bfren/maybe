@@ -4,15 +4,14 @@
 using System;
 using System.Threading.Tasks;
 using Jeebs.Random;
-using Maybe;
-using Maybe.Exceptions;
-using Maybe.Functions;
-using Maybe.Testing;
+using MaybeF;
+using MaybeF.Exceptions;
+using MaybeF.Testing;
 using NSubstitute;
 using Xunit;
-using static Maybe.Functions.MaybeF.R;
+using static MaybeF.F.R;
 
-namespace Tests.Maybe.Abstracts;
+namespace Abstracts;
 
 public abstract class FilterAsync_Tests
 {
@@ -37,7 +36,7 @@ public abstract class FilterAsync_Tests
 	protected static async Task Test01(Func<Maybe<string>, Func<string, Task<bool>>, Task<Maybe<string>>> act)
 	{
 		// Arrange
-		var maybe = MaybeF.Some(Rnd.Str);
+		var maybe = F.Some(Rnd.Str);
 		var exception = new Exception();
 		var throwFunc = Task<bool> (string _) => throw exception;
 
@@ -55,7 +54,7 @@ public abstract class FilterAsync_Tests
 	{
 		// Arrange
 		var value = Rnd.Int;
-		var maybe = MaybeF.Some(value);
+		var maybe = F.Some(value);
 		var predicate = Substitute.For<Func<int, Task<bool>>>();
 		_ = predicate.Invoke(Arg.Any<int>()).Returns(true);
 
@@ -73,7 +72,7 @@ public abstract class FilterAsync_Tests
 	{
 		// Arrange
 		var value = Rnd.Str;
-		var maybe = MaybeF.Some(value);
+		var maybe = F.Some(value);
 		var predicate = Substitute.For<Func<string, Task<bool>>>();
 		_ = predicate.Invoke(Arg.Any<string>()).Returns(false);
 
@@ -91,7 +90,7 @@ public abstract class FilterAsync_Tests
 	{
 		// Arrange
 		var reason = new TestReason();
-		var maybe = MaybeF.None<int>(reason);
+		var maybe = F.None<int>(reason);
 		var predicate = Substitute.For<Func<int, Task<bool>>>();
 
 		// Act

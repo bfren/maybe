@@ -1,8 +1,8 @@
 ﻿// Maybe Unit Tests
 // Copyright (c) bfren - licensed under https://mit.bfren.dev/2019
 
-using Maybe;
-using Maybe.Internals;
+using MaybeF;
+using MaybeF.Internals;
 using Xunit;
 
 namespace Jeebs.Internals.None_Tests;

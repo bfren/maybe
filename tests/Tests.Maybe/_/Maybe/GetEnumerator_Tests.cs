@@ -2,11 +2,10 @@
 // Copyright (c) bfren - licensed under https://mit.bfren.dev/2019
 
 using Jeebs.Random;
-using Maybe.Functions;
-using Maybe.Testing;
+using MaybeF.Testing;
 using Xunit;
 
-namespace Maybe.Maybe_Tests;
+namespace MaybeF.Maybe_Tests;
 
 public class GetEnumerator_Tests
 {
@@ -15,7 +14,7 @@ public class GetEnumerator_Tests
 	{
 		// Arrange
 		var value = Rnd.Int;
-		var maybe = MaybeF.Some(value);
+		var maybe = F.Some(value);
 
 		// Act
 		var result = 0;

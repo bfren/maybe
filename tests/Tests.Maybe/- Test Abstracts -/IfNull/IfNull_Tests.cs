@@ -2,15 +2,14 @@
 // Copyright (c) bfren - licensed under https://mit.bfren.dev/2019
 
 using System;
-using Maybe;
-using Maybe.Functions;
-using Maybe.Testing;
+using MaybeF;
+using MaybeF.Testing;
 using NSubstitute;
 using NSubstitute.ExceptionExtensions;
 using Xunit;
-using static Maybe.Functions.MaybeF.R;
+using static MaybeF.F.R;
 
-namespace Tests.Maybe.Abstracts;
+namespace Abstracts;
 
 public abstract class IfNull_Tests
 {
@@ -19,8 +18,8 @@ public abstract class IfNull_Tests
 	protected static void Test00(Func<Maybe<object?>, Func<Maybe<object?>>, Maybe<object?>> act)
 	{
 		// Arrange
-		var some = MaybeF.Some<object>(null, true);
-		var none = MaybeF.None<object?, NullValueReason>();
+		var some = F.Some<object>(null, true);
+		var none = F.None<object?, NullValueReason>();
 		var throws = Substitute.For<Func<Maybe<object?>>>();
 		_ = throws.Invoke().Throws<Exception>();
 
@@ -40,7 +39,7 @@ public abstract class IfNull_Tests
 	protected static void Test01(Func<Maybe<object?>, Func<Maybe<object?>>, Maybe<object?>> act)
 	{
 		// Arrange
-		var maybe = MaybeF.Some<object>(null, true);
+		var maybe = F.Some<object>(null, true);
 		var ifNull = Substitute.For<Func<Maybe<object?>>>();
 
 		// Act
@@ -55,7 +54,7 @@ public abstract class IfNull_Tests
 	protected static void Test02(Func<Maybe<object>, Func<Maybe<object>>, Maybe<object>> act)
 	{
 		// Arrange
-		var maybe = MaybeF.None<object, NullValueReason>();
+		var maybe = F.None<object, NullValueReason>();
 		var ifNull = Substitute.For<Func<Maybe<object>>>();
 
 		// Act
@@ -70,7 +69,7 @@ public abstract class IfNull_Tests
 	protected static void Test03(Func<Maybe<object?>, Func<IReason>, Maybe<object?>> act)
 	{
 		// Arrange
-		var maybe = MaybeF.Some<object>(null, true);
+		var maybe = F.Some<object>(null, true);
 		var ifNull = Substitute.For<Func<IReason>>();
 		var reason = new TestReason();
 		_ = ifNull.Invoke().Returns(reason);
@@ -89,7 +88,7 @@ public abstract class IfNull_Tests
 	protected static void Test04(Func<Maybe<object>, Func<IReason>, Maybe<object>> act)
 	{
 		// Arrange
-		var maybe = MaybeF.None<object, NullValueReason>();
+		var maybe = F.None<object, NullValueReason>();
 		var ifNull = Substitute.For<Func<IReason>>();
 		var reason = new TestReason();
 		_ = ifNull.Invoke().Returns(reason);

@@ -1,7 +1,7 @@
 // Maybe .NET Monad
 // Copyright (c) bfren - licensed under https://mit.bfren.dev/2019
 
-namespace Maybe.Internals;
+namespace MaybeF.Internals;
 
 /// <summary>
 /// 'Some' Maybe - wraps value to enable safe non-null returns (see <seealso cref="None{T}"/>)

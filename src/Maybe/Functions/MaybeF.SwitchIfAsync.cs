@@ -4,9 +4,9 @@
 using System;
 using System.Threading.Tasks;
 
-namespace Maybe.Functions;
+namespace MaybeF;
 
-public static partial class MaybeF
+public static partial class F
 {
 	/// <inheritdoc cref="SwitchIf{T}(Maybe{T}, Func{T, bool}, Func{T, Maybe{T}}?, Func{T, Maybe{T}}?)"/>
 	public static async Task<Maybe<T>> SwitchIfAsync<T>(Task<Maybe<T>> maybe, Func<T, bool> check, Func<T, Maybe<T>>? ifTrue, Func<T, Maybe<T>>? ifFalse) =>

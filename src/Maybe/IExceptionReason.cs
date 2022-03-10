@@ -3,7 +3,7 @@
 
 using System;
 
-namespace Maybe;
+namespace MaybeF;
 
 /// <summary>
 /// Contains information about the reason why a <see cref="Maybe{T}"/> is <see cref="Internals.None{T}"/>,

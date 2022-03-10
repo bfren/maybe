@@ -3,7 +3,7 @@
 
 using System;
 
-namespace Maybe.Exceptions;
+namespace MaybeF.Exceptions;
 
 /// <summary>
 /// Thrown when an unknown <see cref="Maybe{T}"/> type is matched -

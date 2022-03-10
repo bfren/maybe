@@ -3,7 +3,7 @@
 
 using Xunit;
 
-namespace Maybe.Testing;
+namespace MaybeF.Testing;
 
 public static partial class MaybeExtensions
 {

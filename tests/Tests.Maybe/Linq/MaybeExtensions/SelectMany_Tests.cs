@@ -3,11 +3,10 @@
 
 using System.Threading.Tasks;
 using Jeebs.Random;
-using Maybe.Functions;
-using Maybe.Testing;
+using MaybeF.Testing;
 using Xunit;
 
-namespace Maybe.Linq.MaybeExtensions_Tests;
+namespace MaybeF.Linq.MaybeExtensions_Tests;
 
 public class SelectMany_Tests
 {
@@ -17,8 +16,8 @@ public class SelectMany_Tests
 		// Arrange
 		var v0 = Rnd.Int;
 		var v1 = Rnd.Int;
-		var o0 = MaybeF.Some(v0);
-		var o1 = MaybeF.Some(v1);
+		var o0 = F.Some(v0);
+		var o1 = F.Some(v1);
 
 		// Act
 		var result = from a in o0
@@ -36,8 +35,8 @@ public class SelectMany_Tests
 		// Arrange
 		var v0 = Rnd.Int;
 		var v1 = Rnd.Int;
-		var o0 = MaybeF.Some(v0).AsTask;
-		var o1 = MaybeF.Some(v1).AsTask;
+		var o0 = F.Some(v0).AsTask;
+		var o1 = F.Some(v1).AsTask;
 
 		// Act
 		var result = await (
@@ -59,10 +58,10 @@ public class SelectMany_Tests
 		var v1 = Rnd.Int;
 		var v2 = Rnd.Int;
 		var v3 = Rnd.Int;
-		var o0 = MaybeF.Some(v0).AsTask;
-		var o1 = MaybeF.Some(v1);
-		var o2 = MaybeF.Some(v2).AsTask;
-		var o3 = MaybeF.Some(v3);
+		var o0 = F.Some(v0).AsTask;
+		var o1 = F.Some(v1);
+		var o2 = F.Some(v2).AsTask;
+		var o3 = F.Some(v3);
 
 		// Act
 		var result = await (
@@ -84,9 +83,9 @@ public class SelectMany_Tests
 		// Arrange
 		var v0 = Rnd.Int;
 		var v1 = Rnd.Int;
-		var o0 = MaybeF.Some(v0);
-		var o1 = MaybeF.Some(v1);
-		var o2 = MaybeF.None<int>(new InvalidIntegerReason());
+		var o0 = F.Some(v0);
+		var o1 = F.Some(v1);
+		var o2 = F.None<int>(new InvalidIntegerReason());
 
 		// Act
 		var result = from a in o0
@@ -105,9 +104,9 @@ public class SelectMany_Tests
 		// Arrange
 		var v0 = Rnd.Int;
 		var v1 = Rnd.Int;
-		var o0 = MaybeF.Some(v0).AsTask;
-		var o1 = MaybeF.Some(v1).AsTask;
-		var o2 = MaybeF.None<int>(new InvalidIntegerReason()).AsTask;
+		var o0 = F.Some(v0).AsTask;
+		var o1 = F.Some(v1).AsTask;
+		var o2 = F.None<int>(new InvalidIntegerReason()).AsTask;
 
 		// Act
 		var result = await (
@@ -128,9 +127,9 @@ public class SelectMany_Tests
 		// Arrange
 		var v0 = Rnd.Int;
 		var v1 = Rnd.Int;
-		var o0 = MaybeF.Some(v0).AsTask;
-		var o1 = MaybeF.Some(v1).AsTask;
-		var o2 = MaybeF.None<int>(new InvalidIntegerReason());
+		var o0 = F.Some(v0).AsTask;
+		var o1 = F.Some(v1).AsTask;
+		var o2 = F.None<int>(new InvalidIntegerReason());
 
 		// Act
 		var result = await (

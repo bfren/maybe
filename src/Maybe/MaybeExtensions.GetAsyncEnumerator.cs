@@ -3,9 +3,9 @@
 
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using Maybe.Internals;
+using MaybeF.Internals;
 
-namespace Maybe;
+namespace MaybeF;
 
 public static partial class MaybeExtensions
 {

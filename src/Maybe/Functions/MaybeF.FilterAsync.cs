@@ -4,9 +4,9 @@
 using System;
 using System.Threading.Tasks;
 
-namespace Maybe.Functions;
+namespace MaybeF;
 
-public static partial class MaybeF
+public static partial class F
 {
 	/// <inheritdoc cref="Filter{T}(Maybe{T}, Func{T, bool})"/>
 	public static Task<Maybe<T>> FilterAsync<T>(Maybe<T> maybe, Func<T, Task<bool>> predicate) =>

@@ -3,9 +3,9 @@
 
 using Xunit;
 
-namespace Maybe.Maybe_Tests;
+namespace MaybeF.Maybe_Tests;
 
-public class Bind_Tests : Tests.Maybe.Abstracts.Bind_Tests
+public class Bind_Tests : Abstracts.Bind_Tests
 {
 	[Fact]
 	public override void Test00_If_Unknown_Maybe_Returns_None_With_UnhandledExceptionReason()

@@ -3,17 +3,17 @@
 
 using System;
 using System.Threading.Tasks;
-using Maybe.Functions;
+using MaybeF;
 
-namespace Maybe;
+namespace MaybeF;
 
 public static partial class MaybeExtensions
 {
-	/// <inheritdoc cref="MaybeF.MapAsync{T, TReturn}(Maybe{T}, Func{T, Task{TReturn}}, MaybeF.Handler)"/>
-	public static Task<Maybe<TReturn>> MapAsync<T, TReturn>(this Task<Maybe<T>> @this, Func<T, TReturn> map, MaybeF.Handler handler) =>
-		MaybeF.MapAsync(@this, x => Task.FromResult(map(x)), handler);
+	/// <inheritdoc cref="F.MapAsync{T, TReturn}(Maybe{T}, Func{T, Task{TReturn}}, F.Handler)"/>
+	public static Task<Maybe<TReturn>> MapAsync<T, TReturn>(this Task<Maybe<T>> @this, Func<T, TReturn> map, F.Handler handler) =>
+		F.MapAsync(@this, x => Task.FromResult<TReturn>(map(x)), handler);
 
-	/// <inheritdoc cref="MaybeF.MapAsync{T, TReturn}(Maybe{T}, Func{T, Task{TReturn}}, MaybeF.Handler)"/>
-	public static Task<Maybe<TReturn>> MapAsync<T, TReturn>(this Task<Maybe<T>> @this, Func<T, Task<TReturn>> map, MaybeF.Handler handler) =>
-		MaybeF.MapAsync(@this, map, handler);
+	/// <inheritdoc cref="F.MapAsync{T, TReturn}(Maybe{T}, Func{T, Task{TReturn}}, F.Handler)"/>
+	public static Task<Maybe<TReturn>> MapAsync<T, TReturn>(this Task<Maybe<T>> @this, Func<T, Task<TReturn>> map, F.Handler handler) =>
+		F.MapAsync(@this, map, handler);
 }

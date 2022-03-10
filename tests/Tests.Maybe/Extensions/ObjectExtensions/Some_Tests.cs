@@ -3,9 +3,9 @@
 
 using Xunit;
 
-namespace Maybe.Extensions.ObjectExtensions_Tests;
+namespace MaybeF.Extensions.ObjectExtensions_Tests;
 
-public class Some_Tests : Tests.Maybe.Abstracts.Some_Tests
+public class Some_Tests : Abstracts.Some_Tests
 {
 	[Fact]
 	public override void Test04_Null_Input_Value_Returns_None()

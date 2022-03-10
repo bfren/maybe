@@ -3,9 +3,9 @@
 
 using System;
 
-namespace Maybe.Functions;
+namespace MaybeF;
 
-public static partial class MaybeF
+public static partial class F
 {
 	/// <summary>
 	/// Use <paramref name="bind"/> to convert the value of <paramref name="maybe"/> to type <typeparamref name="TReturn"/>,

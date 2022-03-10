@@ -3,9 +3,9 @@
 
 using System;
 
-namespace Maybe.Functions;
+namespace MaybeF;
 
-public static partial class MaybeF
+public static partial class F
 {
 	/// <summary>
 	/// Catch any unhandled exceptions in the chain

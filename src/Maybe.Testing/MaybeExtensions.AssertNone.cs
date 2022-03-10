@@ -1,10 +1,10 @@
 // Maybe .NET Monad
 // Copyright (c) bfren - licensed under https://mit.bfren.dev/2019
 
-using Maybe.Internals;
+using MaybeF.Internals;
 using Xunit;
 
-namespace Maybe.Testing;
+namespace MaybeF.Testing;
 
 public static partial class MaybeExtensions
 {

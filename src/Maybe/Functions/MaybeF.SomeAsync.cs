@@ -3,11 +3,11 @@
 
 using System;
 using System.Threading.Tasks;
-using Maybe.Internals;
+using MaybeF.Internals;
 
-namespace Maybe.Functions;
+namespace MaybeF;
 
-public static partial class MaybeF
+public static partial class F
 {
 	/// <inheritdoc cref="Some{T}(Func{T}, Handler?)"/>
 	public static async Task<Maybe<T>> SomeAsync<T>(Func<Task<T>> value, Handler handler)

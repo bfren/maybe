@@ -4,12 +4,12 @@
 using System;
 using System.IO;
 
-namespace Maybe.Functions;
+namespace MaybeF;
 
 /// <summary>
 /// Create <see cref="Maybe{T}"/> types and begin chains
 /// </summary>
-public static partial class MaybeF
+public static partial class F
 {
 	/// <summary>
 	/// Exception handler delegate - takes exception and must return a Reason of type <see cref="IExceptionReason"/>

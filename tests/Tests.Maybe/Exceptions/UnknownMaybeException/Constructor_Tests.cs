@@ -5,7 +5,7 @@ using System;
 using Jeebs.Random;
 using Xunit;
 
-namespace Maybe.Exceptions.UnknownMaybeException_Tests;
+namespace MaybeF.Exceptions.UnknownMaybeException_Tests;
 
 public class Constructor_Tests
 {

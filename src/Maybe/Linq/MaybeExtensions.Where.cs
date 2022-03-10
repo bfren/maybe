@@ -3,9 +3,9 @@
 
 using System;
 using System.Threading.Tasks;
-using Maybe.Functions;
+using MaybeF;
 
-namespace Maybe.Linq;
+namespace MaybeF.Linq;
 
 public static partial class MaybeExtensions
 {
@@ -19,21 +19,21 @@ public static partial class MaybeExtensions
 	/// <param name="this">Maybe</param>
 	/// <param name="predicate">Select where predicate</param>
 	public static Maybe<T> Where<T>(this Maybe<T> @this, Func<T, bool> predicate) =>
-		MaybeF.Filter(@this, predicate);
+		F.Filter(@this, predicate);
 
 	/// <inheritdoc cref="Where{T}(Maybe{T}, Func{T, bool})"/>
 	public static Task<Maybe<T>> Where<T>(this Maybe<T> @this, Func<T, Task<bool>> predicate) =>
-		MaybeF.FilterAsync(@this, predicate);
+		F.FilterAsync(@this, predicate);
 
 	/// <inheritdoc cref="Where{T}(Maybe{T}, Func{T, bool})"/>
 	/// <param name="this">Maybe (awaitable)</param>
 	/// <param name="predicate">Select where predicate</param>
 	public static Task<Maybe<T>> Where<T>(this Task<Maybe<T>> @this, Func<T, bool> predicate) =>
-		MaybeF.FilterAsync(@this, x => Task.FromResult(predicate(x)));
+		F.FilterAsync(@this, x => Task.FromResult(predicate(x)));
 
 	/// <inheritdoc cref="Where{T}(Maybe{T}, Func{T, bool})"/>
 	/// <param name="this">Maybe (awaitable)</param>
 	/// <param name="predicate">Select where predicate</param>
 	public static Task<Maybe<T>> Where<T>(this Task<Maybe<T>> @this, Func<T, Task<bool>> predicate) =>
-		MaybeF.FilterAsync(@this, predicate);
+		F.FilterAsync(@this, predicate);
 }

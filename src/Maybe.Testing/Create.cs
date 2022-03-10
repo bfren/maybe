@@ -1,9 +1,9 @@
 // Maybe .NET Monad
 // Copyright (c) bfren - licensed under https://mit.bfren.dev/2019
 
-using Maybe.Functions;
+using MaybeF;
 
-namespace Maybe.Testing;
+namespace MaybeF.Testing;
 
 /// <summary>
 /// Create objects for testing
@@ -15,7 +15,7 @@ public static class Create
 	/// </summary>
 	/// <typeparam name="T">Maybe value type</typeparam>
 	public static Maybe<T> None<T>() =>
-		MaybeF.None<T, R.EmptyNoneForTestingReason>();
+		F.None<T, R.EmptyNoneForTestingReason>();
 
 	/// <summary>Reasons</summary>
 	public static class R

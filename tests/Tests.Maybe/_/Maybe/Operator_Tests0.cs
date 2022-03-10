@@ -1,11 +1,11 @@
 ﻿// Maybe Unit Tests
 // Copyright (c) bfren - licensed under https://mit.bfren.dev/2019
 
-using Maybe.Testing;
+using MaybeF.Testing;
 using Xunit;
-using static Maybe.Functions.MaybeF.R;
+using static MaybeF.F.R;
 
-namespace Maybe.Maybe_Tests;
+namespace MaybeF.Maybe_Tests;
 
 public partial class Operator_Tests
 {

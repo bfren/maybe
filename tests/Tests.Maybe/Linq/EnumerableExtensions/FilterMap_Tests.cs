@@ -3,9 +3,9 @@
 
 using Xunit;
 
-namespace Maybe.Linq.EnumerableExtensions_Tests;
+namespace MaybeF.Linq.EnumerableExtensions_Tests;
 
-public class FilterMap_Tests : Tests.Maybe.Abstracts.Enumerable.FilterMap_Tests
+public class FilterMap_Tests : Abstracts.Enumerable.FilterMap_Tests
 {
 	[Fact]
 	public override void Test00_Maps_And_Returns_Only_Some_From_List()

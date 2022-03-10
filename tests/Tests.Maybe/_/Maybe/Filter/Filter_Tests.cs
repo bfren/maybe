@@ -5,9 +5,9 @@ using System;
 using NSubstitute;
 using Xunit;
 
-namespace Maybe.Maybe_Tests;
+namespace MaybeF.Maybe_Tests;
 
-public class Filter_Tests : Tests.Maybe.Abstracts.Filter_Tests
+public class Filter_Tests : Abstracts.Filter_Tests
 {
 	[Fact]
 	public override void Test00_If_Unknown_Maybe_Returns_None_With_UnhandledExceptionReason()

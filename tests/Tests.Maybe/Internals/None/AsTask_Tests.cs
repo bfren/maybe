@@ -2,8 +2,8 @@
 // Copyright (c) bfren - licensed under https://mit.bfren.dev/2019
 
 using System.Threading.Tasks;
-using Maybe;
-using Maybe.Testing;
+using MaybeF;
+using MaybeF.Testing;
 using Xunit;
 
 namespace Jeebs.Internals.None_Tests;

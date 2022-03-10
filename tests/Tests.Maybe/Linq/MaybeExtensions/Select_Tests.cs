@@ -3,11 +3,10 @@
 
 using System.Threading.Tasks;
 using Jeebs.Random;
-using Maybe.Functions;
-using Maybe.Testing;
+using MaybeF.Testing;
 using Xunit;
 
-namespace Maybe.Linq.MaybeExtensions_Tests;
+namespace MaybeF.Linq.MaybeExtensions_Tests;
 
 public class Select_Tests
 {
@@ -16,7 +15,7 @@ public class Select_Tests
 	{
 		// Arrange
 		var value = Rnd.Int;
-		var maybe = MaybeF.Some(value);
+		var maybe = F.Some(value);
 
 		// Act
 		var r0 = maybe.Select(s => s ^ 2);
@@ -35,7 +34,7 @@ public class Select_Tests
 	{
 		// Arrange
 		var value = Rnd.Int;
-		var maybe = MaybeF.Some(value);
+		var maybe = F.Some(value);
 
 		// Act
 		var r0 = await maybe.AsTask.Select(s => s ^ 2).ConfigureAwait(false);
@@ -73,7 +72,7 @@ public class Select_Tests
 	public void Select_With_None_Returns_None()
 	{
 		// Arrange
-		var maybe = MaybeF.None<int>(new InvalidIntegerReason());
+		var maybe = F.None<int>(new InvalidIntegerReason());
 
 		// Act
 		var r0 = maybe.Select(s => s ^ 2);
@@ -91,7 +90,7 @@ public class Select_Tests
 	public async Task Async_Select_With_None_Returns_None()
 	{
 		// Arrange
-		var maybe = MaybeF.None<int>(new InvalidIntegerReason());
+		var maybe = F.None<int>(new InvalidIntegerReason());
 
 		// Act
 		var r0 = await maybe.AsTask.Select(s => s ^ 2).ConfigureAwait(false);

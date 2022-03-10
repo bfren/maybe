@@ -3,13 +3,12 @@
 
 using System;
 using Jeebs.Random;
-using Maybe;
-using Maybe.Exceptions;
-using Maybe.Functions;
+using MaybeF;
+using MaybeF.Exceptions;
 using NSubstitute;
 using Xunit;
 
-namespace Tests.Maybe.Abstracts;
+namespace Abstracts;
 
 public abstract class Switch_Tests
 {
@@ -47,7 +46,7 @@ public abstract class Switch_Tests
 	{
 		// Arrange
 		var reason = new TestReason();
-		var maybe = MaybeF.None<int>(reason);
+		var maybe = F.None<int>(reason);
 		var none = Substitute.For<Action<IReason>>();
 
 		// Act
@@ -63,7 +62,7 @@ public abstract class Switch_Tests
 	{
 		// Arrange
 		var reason = new TestReason();
-		var maybe = MaybeF.None<int>(reason);
+		var maybe = F.None<int>(reason);
 		var none = Substitute.For<Func<IReason, string>>();
 
 		// Act
@@ -79,7 +78,7 @@ public abstract class Switch_Tests
 	{
 		// Arrange
 		var value = Rnd.Int;
-		var maybe = MaybeF.Some(value);
+		var maybe = F.Some(value);
 		var some = Substitute.For<Action<int>>();
 
 		// Act
@@ -95,7 +94,7 @@ public abstract class Switch_Tests
 	{
 		// Arrange
 		var value = Rnd.Int;
-		var maybe = MaybeF.Some(value);
+		var maybe = F.Some(value);
 		var some = Substitute.For<Func<int, string>>();
 
 		// Act

@@ -3,7 +3,7 @@
 
 using System.Collections.Generic;
 
-namespace Maybe.Linq;
+namespace MaybeF.Linq;
 
 /// <summary>
 /// <see cref="IDictionary{TKey, TValue}"/> Extensions

@@ -4,9 +4,9 @@
 using System.Threading.Tasks;
 using Xunit;
 
-namespace Maybe.Extensions.ObjectExtensions_Tests;
+namespace MaybeF.Extensions.ObjectExtensions_Tests;
 
-public class SomeAsync_Tests : Tests.Maybe.Abstracts.SomeAsync_Tests
+public class SomeAsync_Tests : Abstracts.SomeAsync_Tests
 {
 	[Fact]
 	public override async Task Test00_Exception_Thrown_Without_Handler_Returns_None_With_UnhandledExceptionReason()

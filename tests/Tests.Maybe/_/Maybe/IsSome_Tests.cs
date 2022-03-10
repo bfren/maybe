@@ -2,11 +2,10 @@
 // Copyright (c) bfren - licensed under https://mit.bfren.dev/2019
 
 using Jeebs.Random;
-using Maybe.Functions;
-using Maybe.Testing;
+using MaybeF.Testing;
 using Xunit;
 
-namespace Maybe.Maybe_Tests;
+namespace MaybeF.Maybe_Tests;
 
 public class IsSome_Tests
 {
@@ -14,7 +13,7 @@ public class IsSome_Tests
 	public void Is_Some_Returns_True()
 	{
 		// Arrange
-		var some = MaybeF.Some(Rnd.Str);
+		var some = F.Some(Rnd.Str);
 
 		// Act
 		var result = some.IsSome;

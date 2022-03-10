@@ -2,12 +2,12 @@
 // Copyright (c) bfren - licensed under https://mit.bfren.dev/2019
 
 using System;
-using Maybe.Exceptions;
-using Maybe.Internals;
+using MaybeF.Exceptions;
+using MaybeF.Internals;
 
-namespace Maybe.Functions;
+namespace MaybeF;
 
-public static partial class MaybeF
+public static partial class F
 {
 	/// <summary>
 	/// Run an action depending on whether <paramref name="maybe"/> is a <see cref="Internals.Some{T}"/> or <see cref="Internals.None{T}"/>

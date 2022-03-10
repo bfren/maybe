@@ -2,11 +2,10 @@
 // Copyright (c) bfren - licensed under https://mit.bfren.dev/2019
 
 using Jeebs.Random;
-using Maybe.Functions;
-using Maybe.Testing;
+using MaybeF.Testing;
 using Xunit;
 
-namespace Maybe.OptionEqualityComparer_Tests;
+namespace MaybeF.OptionEqualityComparer_Tests;
 
 public class Equals_Tests
 {
@@ -15,7 +14,7 @@ public class Equals_Tests
 	{
 		// Arrange
 		var fake = new FakeMaybe();
-		var maybe = MaybeF.Some(Rnd.Int);
+		var maybe = F.Some(Rnd.Int);
 		var comparer = new MaybeEqualityComparer<int>();
 
 		// Act
@@ -33,9 +32,9 @@ public class Equals_Tests
 		// Arrange
 		var v0 = Rnd.Int;
 		var v1 = Rnd.Int;
-		var o0 = MaybeF.Some(v0);
-		var o1 = MaybeF.Some(v0);
-		var o2 = MaybeF.Some(v1);
+		var o0 = F.Some(v0);
+		var o1 = F.Some(v0);
+		var o2 = F.Some(v1);
 		var comparer = new MaybeEqualityComparer<int>();
 
 		// Act
@@ -53,9 +52,9 @@ public class Equals_Tests
 		// Arrange
 		var m0 = new TestReason0();
 		var m1 = new TestReason1();
-		var o0 = MaybeF.None<int>(m0);
-		var o1 = MaybeF.None<int>(m0);
-		var o2 = MaybeF.None<int>(m1);
+		var o0 = F.None<int>(m0);
+		var o1 = F.None<int>(m0);
+		var o2 = F.None<int>(m1);
 		var comparer = new MaybeEqualityComparer<int>();
 
 		// Act
@@ -71,7 +70,7 @@ public class Equals_Tests
 	public void Mixed_Returns_False()
 	{
 		// Arrange
-		var o0 = MaybeF.Some(Rnd.Int);
+		var o0 = F.Some(Rnd.Int);
 		var o1 = Create.None<int>();
 		var comparer = new MaybeEqualityComparer<int>();
 
