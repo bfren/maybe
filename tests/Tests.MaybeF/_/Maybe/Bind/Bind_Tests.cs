@@ -1,8 +1,6 @@
 ﻿// Maybe Unit Tests
 // Copyright (c) bfren - licensed under https://mit.bfren.dev/2019
 
-using Xunit;
-
 namespace MaybeF.Maybe_Tests;
 
 public class Bind_Tests : Abstracts.Bind_Tests

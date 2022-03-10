@@ -1,10 +1,6 @@
 ﻿// Maybe Unit Tests
 // Copyright (c) bfren - licensed under https://mit.bfren.dev/2019
 
-using System;
-using NSubstitute;
-using Xunit;
-
 namespace MaybeF.Maybe_Tests;
 
 public class Filter_Tests : Abstracts.Filter_Tests

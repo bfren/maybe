@@ -1,8 +1,6 @@
 ﻿// Maybe Unit Tests
 // Copyright (c) bfren - licensed under https://mit.bfren.dev/2019
 
-using Xunit;
-
 namespace MaybeF.Linq.DictionaryExtensions_Tests;
 
 public class GetValueOrNone_Tests : Abstracts.Dictionary.GetValueOrNone_Tests

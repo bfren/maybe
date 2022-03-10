@@ -2,7 +2,4 @@
 	<ItemGroup>
 		<ProjectReference Include="..\..\src\MaybeF.Testing\MaybeF.Testing.csproj" />
 	</ItemGroup>
-	<ItemGroup>
-		<PackageReference Include="Jeebs.Random" Version="8.0.0-beta.5" />
-	</ItemGroup>
 </Project>

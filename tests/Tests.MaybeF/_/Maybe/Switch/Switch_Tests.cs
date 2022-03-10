@@ -1,11 +1,6 @@
 ﻿// Maybe Unit Tests
 // Copyright (c) bfren - licensed under https://mit.bfren.dev/2019
 
-using System;
-using Jeebs.Random;
-using NSubstitute;
-using Xunit;
-
 namespace MaybeF.Maybe_Tests;
 
 public class Switch_Tests : Abstracts.Switch_Tests

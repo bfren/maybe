@@ -1,13 +1,7 @@
 ﻿// Maybe Unit Tests
 // Copyright (c) bfren - licensed under https://mit.bfren.dev/2019
 
-using System;
-using System.Threading.Tasks;
-using Jeebs.Random;
-using NSubstitute;
-using Xunit;
-
-namespace MaybeF.MaybeF_Tests;
+namespace MaybeF.F_Tests;
 
 public class UnwrapAsync_Tests : Abstracts.UnwrapAsync_Tests
 {

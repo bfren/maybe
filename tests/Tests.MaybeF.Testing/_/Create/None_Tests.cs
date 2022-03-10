@@ -1,11 +1,10 @@
 ﻿// Maybe Unit Tests
 // Copyright (c) bfren - licensed under https://mit.bfren.dev/2019
 
-using MaybeF.Testing;
 using Xunit;
 using static MaybeF.Testing.Create.R;
 
-namespace MaybeF.Create_Tests;
+namespace MaybeF.Testing.Create_Tests;
 
 public class None_Tests
 {

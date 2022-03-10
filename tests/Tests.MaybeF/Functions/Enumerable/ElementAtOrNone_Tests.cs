@@ -1,9 +1,7 @@
 ﻿// Maybe Unit Tests
 // Copyright (c) bfren - licensed under https://mit.bfren.dev/2019
 
-using Xunit;
-
-namespace MaybeF.MaybeF_Tests.Enumerable;
+namespace MaybeF.F_Tests.Enumerable;
 
 public class ElementAtOrNone_Tests : Abstracts.Enumerable.ElementAtOrNone_Tests
 {

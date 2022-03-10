@@ -1,12 +1,9 @@
 ﻿// Maybe Unit Tests
 // Copyright (c) bfren - licensed under https://mit.bfren.dev/2019
 
-using System;
 using MaybeF;
 using MaybeF.Testing;
-using NSubstitute;
 using NSubstitute.ExceptionExtensions;
-using Xunit;
 using static MaybeF.F.R;
 
 namespace Abstracts;

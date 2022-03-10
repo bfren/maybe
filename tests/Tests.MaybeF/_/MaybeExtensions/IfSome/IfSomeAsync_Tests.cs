@@ -1,9 +1,6 @@
 ﻿// Maybe Unit Tests
 // Copyright (c) bfren - licensed under https://mit.bfren.dev/2019
 
-using System.Threading.Tasks;
-using Xunit;
-
 namespace MaybeF.MaybeExtensions_Tests;
 
 public class IfSomeAsync_Tests : Abstracts.IfSomeAsync_Tests

@@ -1,11 +1,6 @@
 ﻿// Maybe Unit Tests
 // Copyright (c) bfren - licensed under https://mit.bfren.dev/2019
 
-using System;
-using System.Threading.Tasks;
-using NSubstitute;
-using Xunit;
-
 namespace MaybeF.MaybeExtensions_Tests;
 
 public class FilterAsync_Tests : Abstracts.FilterAsync_Tests

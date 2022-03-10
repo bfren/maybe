@@ -1,9 +1,7 @@
 ﻿// Maybe Unit Tests
 // Copyright (c) bfren - licensed under https://mit.bfren.dev/2019
 
-using Jeebs.Random;
 using MaybeF.Testing;
-using Xunit;
 
 namespace MaybeF.Maybe_Tests;
 

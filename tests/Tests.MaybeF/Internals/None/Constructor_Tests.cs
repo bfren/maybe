@@ -3,7 +3,6 @@
 
 using MaybeF;
 using MaybeF.Internals;
-using Xunit;
 
 namespace Jeebs.Internals.None_Tests;
 

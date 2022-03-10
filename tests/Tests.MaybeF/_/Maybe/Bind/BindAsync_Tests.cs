@@ -1,8 +1,6 @@
 ﻿// Maybe Unit Tests
 // Copyright (c) bfren - licensed under https://mit.bfren.dev/2019
 
-using System.Threading.Tasks;
-
 namespace MaybeF.Maybe_Tests;
 
 public class BindAsync_Tests : Abstracts.BindAsync_Tests

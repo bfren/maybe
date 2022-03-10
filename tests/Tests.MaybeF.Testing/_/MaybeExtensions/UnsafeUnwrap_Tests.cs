@@ -2,12 +2,10 @@
 // Copyright (c) bfren - licensed under https://mit.bfren.dev/2019
 
 using Jeebs.Random;
-using MaybeF;
-using MaybeF.Testing;
 using MaybeF.Testing.Exceptions;
 using Xunit;
 
-namespace MaybeExtensions_Tests;
+namespace MaybeF.Testing.MaybeExtensions_Tests;
 
 public class UnsafeUnwrap_Tests
 {

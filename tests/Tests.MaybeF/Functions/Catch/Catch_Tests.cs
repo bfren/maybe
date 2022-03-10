@@ -1,14 +1,10 @@
 ﻿// Maybe Unit Tests
 // Copyright (c) bfren - licensed under https://mit.bfren.dev/2019
 
-using System;
-using Jeebs.Random;
 using MaybeF.Testing;
-using NSubstitute;
-using Xunit;
 using static MaybeF.F.R;
 
-namespace MaybeF.MaybeF_Tests;
+namespace MaybeF.F_Tests;
 
 public class Catch_Tests
 {

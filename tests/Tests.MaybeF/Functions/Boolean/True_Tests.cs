@@ -2,9 +2,8 @@
 // Copyright (c) bfren - licensed under https://mit.bfren.dev/2019
 
 using MaybeF.Testing;
-using Xunit;
 
-namespace MaybeF.MaybeF_Tests;
+namespace MaybeF.F_Tests;
 
 public class True_Tests
 {

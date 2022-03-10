@@ -1,10 +1,7 @@
 ﻿// Maybe Unit Tests
 // Copyright (c) bfren - licensed under https://mit.bfren.dev/2019
 
-using System.Threading.Tasks;
-using Jeebs.Random;
 using MaybeF.Testing;
-using Xunit;
 
 namespace MaybeF.Linq.MaybeExtensions_Tests;
 

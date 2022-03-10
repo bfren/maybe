@@ -1,8 +1,6 @@
 ﻿// Maybe Unit Tests
 // Copyright (c) bfren - licensed under https://mit.bfren.dev/2019
 
-using Xunit;
-
 namespace MaybeF.Extensions.ObjectExtensions_Tests;
 
 public class SomeIf_Tests : Abstracts.SomeIf_Tests

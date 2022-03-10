@@ -1,8 +1,6 @@
 ﻿// Maybe Unit Tests
 // Copyright (c) bfren - licensed under https://mit.bfren.dev/2019
 
-using Xunit;
-
 namespace MaybeF.Linq.EnumerableExtensions_Tests;
 
 public class SingleOrNone_Tests : Abstracts.Enumerable.SingleOrNone_Tests

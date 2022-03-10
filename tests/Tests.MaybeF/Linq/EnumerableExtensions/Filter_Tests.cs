@@ -1,8 +1,6 @@
 ﻿// Maybe Unit Tests
 // Copyright (c) bfren - licensed under https://mit.bfren.dev/2019
 
-using Xunit;
-
 namespace MaybeF.Linq.EnumerableExtensions_Tests;
 
 public class Filter_Tests : Abstracts.Enumerable.Filter_Tests

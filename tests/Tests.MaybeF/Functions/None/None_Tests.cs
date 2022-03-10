@@ -1,12 +1,9 @@
 ﻿// Maybe Unit Tests
 // Copyright (c) bfren - licensed under https://mit.bfren.dev/2019
 
-using System;
 using MaybeF.Testing;
-using NSubstitute;
-using Xunit;
 
-namespace MaybeF.MaybeF_Tests;
+namespace MaybeF.F_Tests;
 
 public class None_Tests
 {

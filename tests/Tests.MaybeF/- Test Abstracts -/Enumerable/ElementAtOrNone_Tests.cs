@@ -1,12 +1,8 @@
 ﻿// Maybe Unit Tests
 // Copyright (c) bfren - licensed under https://mit.bfren.dev/2019
 
-using System;
-using System.Collections.Generic;
-using Jeebs.Random;
 using MaybeF;
 using MaybeF.Testing;
-using Xunit;
 using static MaybeF.F.EnumerableF.R;
 
 namespace Abstracts.Enumerable;
