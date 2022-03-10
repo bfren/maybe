@@ -1,8 +1,6 @@
 // Maybe .NET Monad
 // Copyright (c) bfren - licensed under https://mit.bfren.dev/2019
 
-using MaybeF;
-
 namespace MaybeF.Extensions;
 
 public static partial class ObjectExtensions

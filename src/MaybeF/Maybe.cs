@@ -6,7 +6,6 @@ using System.Collections.Generic;
 using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 using MaybeF.Exceptions;
-using MaybeF;
 using MaybeF.Internals;
 
 namespace MaybeF;
@@ -271,7 +270,7 @@ public abstract record class Maybe<T> : IEquatable<Maybe<T>>
 	/// <inheritdoc cref="F.IfNull{T, TReason}(Maybe{T}, Func{TReason})"/>
 	public Maybe<T> IfNull<TReason>(Func<TReason> ifNull)
 		where TReason : IReason =>
-		F.IfNull<T,TReason>(this, ifNull);
+		F.IfNull<T, TReason>(this, ifNull);
 
 	/// <inheritdoc cref="F.IfNull{T}(Maybe{T}, Func{Maybe{T}})"/>
 	public Task<Maybe<T>> IfNullAsync(Func<Task<Maybe<T>>> ifNull) =>
