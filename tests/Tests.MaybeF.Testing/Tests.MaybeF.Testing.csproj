@@ -1,6 +1,6 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 	<ItemGroup>
-		<ProjectReference Include="..\..\src\Maybe.Testing\MaybeF.Testing.csproj" />
+		<ProjectReference Include="..\..\src\MaybeF.Testing\MaybeF.Testing.csproj" />
 	</ItemGroup>
 	<ItemGroup>
 		<PackageReference Include="Jeebs.Random" Version="8.0.0-beta.5" />

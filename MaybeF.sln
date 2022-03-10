@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.1.32210.238
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MaybeF", "src\Maybe\MaybeF.csproj", "{4A7A43F9-3B1B-4456-8C18-1B730DFFFECE}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MaybeF", "src\MaybeF\MaybeF.csproj", "{4A7A43F9-3B1B-4456-8C18-1B730DFFFECE}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{D52D67FD-8B6D-4B0B-9F15-E0CECFF4725D}"
 	ProjectSection(SolutionItems) = preProject
@@ -18,9 +18,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{8C66E4E1
 		tests\Directory.Build.props = tests\Directory.Build.props
 	EndProjectSection
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MaybeF.Testing", "src\Maybe.Testing\MaybeF.Testing.csproj", "{2E8A44DB-6F73-4F8A-8215-C9A97E5A52D1}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MaybeF.Testing", "src\MaybeF.Testing\MaybeF.Testing.csproj", "{2E8A44DB-6F73-4F8A-8215-C9A97E5A52D1}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Tests.MaybeF", "tests\Tests.Maybe\Tests.MaybeF.csproj", "{DA96DC9B-2DB9-4561-9AE7-DF4DAE02BE80}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Tests.MaybeF", "tests\Tests.MaybeF\Tests.MaybeF.csproj", "{DA96DC9B-2DB9-4561-9AE7-DF4DAE02BE80}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{222B8A91-C219-40F4-B12B-27341DDB7670}"
 	ProjectSection(SolutionItems) = preProject
@@ -33,7 +33,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		Version = Version
 	EndProjectSection
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Tests.MaybeF.Testing", "tests\Tests.Maybe.Testing\Tests.MaybeF.Testing.csproj", "{1F844C37-77C3-4704-8629-655EF70915F2}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Tests.MaybeF.Testing", "tests\Tests.MaybeF.Testing\Tests.MaybeF.Testing.csproj", "{1F844C37-77C3-4704-8629-655EF70915F2}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
