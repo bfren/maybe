@@ -88,7 +88,7 @@ public static partial class F
 	/// <summary>Reasons</summary>
 	public static partial class R
 	{
-		/// <summary>Value was null when trying to wrap using Return</summary>
+		/// <summary>Value was null when trying to wrap using Some</summary>
 		public sealed record class NullValueReason : IReason;
 
 		/// <summary>Allow null was set to false when trying to return null value</summary>

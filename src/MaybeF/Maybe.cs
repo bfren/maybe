@@ -31,20 +31,6 @@ public abstract record class Maybe<T> : IEquatable<Maybe<T>>
 		ValueTask.FromResult(this);
 
 	/// <summary>
-	/// Whether or not this is <see cref="Some{T}"/>
-	/// </summary>
-	[JsonIgnore]
-	public bool IsSome =>
-		this is Some<T>;
-
-	/// <summary>
-	/// Whether or not this is <see cref="None{T}"/>
-	/// </summary>
-	[JsonIgnore]
-	public bool IsNone =>
-		this is None<T>;
-
-	/// <summary>
 	/// Returns an enumerator to enable use in foreach blocks
 	/// </summary>
 	public IEnumerator<T> GetEnumerator()
@@ -289,6 +275,22 @@ public abstract record class Maybe<T> : IEquatable<Maybe<T>>
 		F.IfSomeAsync(this, ifSome);
 
 	#endregion IfSome
+
+	#region IsNone
+
+	/// <inheritdoc cref="F.IsNone{T}(Maybe{T}, out IReason)"/>
+	public bool IsNone(out IReason reason) =>
+		F.IsNone(this, out reason);
+
+	#endregion IsNone
+
+	#region IsSome
+
+	/// <inheritdoc cref="F.IsSome{T}(Maybe{T}, out T)"/>
+	public bool IsSome(out T value) =>
+		F.IsSome(this, out value);
+
+	#endregion IsSome
 
 	#region Map
 

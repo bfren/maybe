@@ -2,3 +2,6 @@
 
 # Add file header
 file_header_template = Maybe Unit Tests\nCopyright (c) bfren - licensed under https://mit.bfren.dev/2019
+
+# Use file-scoped namespaces
+csharp_style_namespace_declarations = file_scoped:warning
