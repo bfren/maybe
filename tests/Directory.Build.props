@@ -8,15 +8,15 @@
 		<ImplicitUsings>enable</ImplicitUsings>
 	</PropertyGroup>
 	<ItemGroup>
-		<Using Include="Jeebs.Random"/>
 		<Using Include="NSubstitute"/>
+		<Using Include="Rnd.Generators"/>
 		<Using Include="Xunit"/>
 	</ItemGroup>
 	<ItemGroup>
-		<PackageReference Include="Jeebs.Random" Version="8.0.0-beta.5" />
 		<PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.1.0" />
 		<PackageReference Include="NSubstitute" Version="4.3.0" />
 		<PackageReference Include="NSubstitute.Analyzers.CSharp" Version="1.0.15" />
+		<PackageReference Include="Rnd" Version="8.0.*" />
 		<PackageReference Include="xunit" Version="2.4.1" />
 		<PackageReference Include="xunit.runner.visualstudio" Version="2.4.3">
 			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
