@@ -460,7 +460,7 @@ tab_size = 4
 
 [*.{cs,csx,cake,vb,vbx}]
 
-file_header_template = Maybe .NET Monad\nCopyright (c) bfren - licensed under https://mit.bfren.dev/2019
+file_header_template = Maybe: .NET Monad.\nCopyright (c) bfren - licensed under https://mit.bfren.dev/2019
 # SA1636: File header copyright text should match.
 dotnet_diagnostic.SA1636.severity = none
 
