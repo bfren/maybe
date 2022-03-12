@@ -47,6 +47,7 @@
 		<Version>$(MaybeVersion)</Version>
 		<Description>$(MSBuildProjectName) library</Description>
 		<PackageLicenseFile>LICENSE</PackageLicenseFile>
+		<PackageProjectUrl>https://github.com/bfren/maybe</PackageProjectUrl>
 		<RepositoryUrl>https://github.com/bfren/maybe</RepositoryUrl>
 		<RepositoryType>git</RepositoryType>
 	</PropertyGroup>
