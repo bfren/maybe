@@ -1,4 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk">
+	<PropertyGroup>
+		<Description>Methods for writing unit tests using MaybeF.</Description>
+	</PropertyGroup>
   <ItemGroup>
     <PackageReference Include="xunit.assert" Version="2.4.1" />
   </ItemGroup>
