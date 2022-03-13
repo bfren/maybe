@@ -1,4 +1,4 @@
-// Maybe .NET Monad
+// Maybe: .NET Monad.
 // Copyright (c) bfren - licensed under https://mit.bfren.dev/2019
 
 using Xunit;
