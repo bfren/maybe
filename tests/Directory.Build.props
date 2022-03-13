@@ -9,7 +9,7 @@
 	</PropertyGroup>
 	<ItemGroup>
 		<Using Include="NSubstitute"/>
-		<Using Include="Rnd.Generators"/>
+		<Using Include="RndF"/>
 		<Using Include="Xunit"/>
 	</ItemGroup>
 	<ItemGroup>
