@@ -34,13 +34,13 @@
 	</PropertyGroup>
 
 	<!-- Import Files -->
-	<ItemGroup Label="Files">
+	<ItemGroup Label="Files" Condition="'$(Configuration)'=='Release'">
 		<None Include="$(LicencePath)" Pack="true" PackagePath="/"/>
 		<None Include="$(ReadmePath)" Pack="true" PackagePath="/"/>
 	</ItemGroup>
 
 	<!-- Get Version -->
-	<PropertyGroup>
+	<PropertyGroup Label="Version">
 		<MaybeVersion>$([System.IO.File]::ReadAllText('$(VersionPath)'))</MaybeVersion>
 	</PropertyGroup>
 
