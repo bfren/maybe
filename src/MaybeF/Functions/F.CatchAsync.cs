@@ -11,13 +11,14 @@ public static partial class F
 	/// <inheritdoc cref="Catch{T}(Func{Maybe{T}}, Handler?)"/>
 	internal static async Task<Maybe<T>> CatchAsync<T>(Func<Task<Maybe<T>>> f, Handler handler)
 	{
+		if (f is null)
+		{
+			return None<T, R.MaybeCannotBeNullReason>();
+		}
+
 		try
 		{
 			return await f().ConfigureAwait(false);
-		}
-		catch (NullReferenceException)
-		{
-			return None<T, R.MaybeCannotBeNullReason>();
 		}
 		catch (Exception e)
 		{
