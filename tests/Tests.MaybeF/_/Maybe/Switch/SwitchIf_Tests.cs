@@ -69,7 +69,10 @@ public class SwitchIf_Tests : Abstracts.SwitchIf_Tests
 
 	#region Unused
 
-	public override void Test01_If_Null_Throws_MaybeCannotBeNullException(Maybe<int> input) { }
+	[Theory]
+	[InlineData(null)]
+	public override void Test01_If_Null_Throws_MaybeCannotBeNullException(Maybe<int> input) =>
+		Assert.Null(input);
 
 	#endregion Unused
 }
