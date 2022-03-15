@@ -3,7 +3,7 @@
 
 using MaybeF.Testing;
 
-namespace MaybeF.OptionEqualityComparer_Tests;
+namespace MaybeF.MaybeEqualityComparer_Tests;
 
 public class Equals_Tests
 {

@@ -12,13 +12,13 @@ public class IfSomeAsync_Tests : Abstracts.IfSomeAsync_Tests
 	}
 
 	[Fact]
-	public override async Task Test01_None_Returns_Original_Option()
+	public override async Task Test01_None_Returns_Original_Maybe()
 	{
 		await Test01((mbe, ifSome) => mbe.IfSomeAsync(ifSome)).ConfigureAwait(false);
 	}
 
 	[Fact]
-	public override async Task Test02_Some_Runs_IfSome_Func_And_Returns_Original_Option()
+	public override async Task Test02_Some_Runs_IfSome_Func_And_Returns_Original_Maybe()
 	{
 		await Test02((mbe, ifSome) => mbe.IfSomeAsync(ifSome)).ConfigureAwait(false);
 	}

@@ -26,7 +26,7 @@ public abstract class IfSome_Tests
 		_ = Assert.IsType<UnhandledExceptionReason>(none);
 	}
 
-	public abstract void Test01_None_Returns_Original_Option();
+	public abstract void Test01_None_Returns_Original_Maybe();
 
 	protected static void Test01(Func<Maybe<int>, Action<int>, Maybe<int>> act)
 	{
@@ -42,7 +42,7 @@ public abstract class IfSome_Tests
 		ifSome.DidNotReceiveWithAnyArgs().Invoke(default);
 	}
 
-	public abstract void Test02_Some_Runs_IfSome_Action_And_Returns_Original_Option();
+	public abstract void Test02_Some_Runs_IfSome_Action_And_Returns_Original_Maybe();
 
 	protected static void Test02(Func<Maybe<int>, Action<int>, Maybe<int>> act)
 	{
