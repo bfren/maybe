@@ -26,7 +26,7 @@ public abstract class IfSomeAsync_Tests
 		_ = Assert.IsType<UnhandledExceptionReason>(none);
 	}
 
-	public abstract Task Test01_None_Returns_Original_Option();
+	public abstract Task Test01_None_Returns_Original_Maybe();
 
 	protected static async Task Test01(Func<Maybe<int>, Func<int, Task>, Task<Maybe<int>>> act)
 	{
@@ -42,7 +42,7 @@ public abstract class IfSomeAsync_Tests
 		await ifSome.DidNotReceiveWithAnyArgs().Invoke(default).ConfigureAwait(false);
 	}
 
-	public abstract Task Test02_Some_Runs_IfSome_Func_And_Returns_Original_Option();
+	public abstract Task Test02_Some_Runs_IfSome_Func_And_Returns_Original_Maybe();
 
 	protected static async Task Test02(Func<Maybe<int>, Func<int, Task>, Task<Maybe<int>>> act)
 	{

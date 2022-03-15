@@ -12,13 +12,13 @@ public class IfSome_Tests : Abstracts.IfSome_Tests
 	}
 
 	[Fact]
-	public override void Test01_None_Returns_Original_Option()
+	public override void Test01_None_Returns_Original_Maybe()
 	{
 		Test01((mbe, ifSome) => mbe.IfSome(ifSome));
 	}
 
 	[Fact]
-	public override void Test02_Some_Runs_IfSome_Action_And_Returns_Original_Option()
+	public override void Test02_Some_Runs_IfSome_Action_And_Returns_Original_Maybe()
 	{
 		Test02((mbe, ifSome) => mbe.IfSome(ifSome));
 	}

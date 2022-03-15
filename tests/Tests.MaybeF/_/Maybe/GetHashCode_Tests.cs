@@ -8,7 +8,7 @@ namespace MaybeF.Maybe_Tests;
 public class GetHashCode_Tests
 {
 	[Fact]
-	public void If_Unknown_Maybe_Throws_UnknownOptionException()
+	public void If_Unknown_Maybe_Throws_UnknownMaybeException()
 	{
 		// Arrange
 		var maybe = new FakeMaybe();

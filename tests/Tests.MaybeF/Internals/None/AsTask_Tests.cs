@@ -9,7 +9,7 @@ namespace Jeebs.Internals.None_Tests;
 public class AsTask_Tests
 {
 	[Fact]
-	public void Returns_None_As_Generic_Option()
+	public void Returns_None_As_Generic_Maybe()
 	{
 		// Arrange
 		var none = Create.None<int>();
