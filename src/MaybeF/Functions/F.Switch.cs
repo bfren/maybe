@@ -16,6 +16,7 @@ public static partial class F
 	/// <param name="maybe">Maybe being switched</param>
 	/// <param name="some">Action to run if <see cref="Internals.Some{T}"/> - receives value <typeparamref name="T"/> as input</param>
 	/// <param name="none">Action to run if <see cref="Internals.None{T}"/></param>
+	/// <exception cref="MaybeCannotBeNullException"></exception>
 	/// <exception cref="UnknownMaybeException"></exception>
 	public static void Switch<T>(Maybe<T> maybe, Action<T> some, Action<IReason> none)
 	{
@@ -29,9 +30,13 @@ public static partial class F
 		{
 			none(y.Reason);
 		}
-		else
+		else if (maybe is not null)
 		{
 			throw new UnknownMaybeException(); // as Maybe<T> is internal implementation only this should never happen...
+		}
+		else
+		{
+			throw new MaybeCannotBeNullException();
 		}
 	}
 
@@ -44,6 +49,7 @@ public static partial class F
 	/// <param name="some">Function to run if <see cref="Internals.Some{T}"/> - receives value <typeparamref name="T"/> as input</param>
 	/// <param name="none">Function to run if <see cref="Internals.None{T}"/></param>
 	/// <exception cref="UnknownMaybeException"></exception>
+	/// <exception cref="MaybeCannotBeNullException"></exception>
 	public static TReturn Switch<T, TReturn>(Maybe<T> maybe, Func<T, TReturn> some, Func<IReason, TReturn> none) =>
 		maybe switch
 		{
@@ -53,7 +59,10 @@ public static partial class F
 			None<T> x =>
 				none(x.Reason),
 
+			{ } =>
+				throw new UnknownMaybeException(), // as Maybe<T> is internal implementation only this should never happen...
+
 			_ =>
-				throw new UnknownMaybeException() // as Maybe<T> is internal implementation only this should never happen...
+				throw new MaybeCannotBeNullException()
 		};
 }

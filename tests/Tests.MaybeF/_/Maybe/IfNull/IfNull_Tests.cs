@@ -35,4 +35,10 @@ public class IfNull_Tests : Abstracts.IfNull_Tests
 	{
 		Test04((mbe, ifNull) => mbe.IfNull(ifNull));
 	}
+
+	#region Unused
+
+	public override void Test05_Null_Maybe_Runs_IfNull_Func(Maybe<int> input) { }
+
+	#endregion Unused
 }

@@ -21,6 +21,7 @@ public static partial class F
 	/// <param name="ifTrue">Function to run if <paramref name="check"/> returns true</param>
 	/// <param name="ifFalse">Function to run if <paramref name="check"/> returns false</param>
 	/// <exception cref="UnknownMaybeException"></exception>
+	/// <exception cref="MaybeCannotBeNullException"></exception>
 	public static Maybe<T> SwitchIf<T>(
 		Maybe<T> maybe,
 		Func<T, bool> check,
@@ -50,9 +51,13 @@ public static partial class F
 		{
 			return y;
 		}
-		else
+		else if (maybe is not null)
 		{
 			throw new UnknownMaybeException(); // as Maybe<T> is internal implementation only this should never happen...
+		}
+		else
+		{
+			throw new MaybeCannotBeNullException();
 		}
 	}
 
