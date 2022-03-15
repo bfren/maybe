@@ -99,5 +99,19 @@ public abstract class IfNullAsync_Tests
 		Assert.Same(reason, none);
 	}
 
+	public abstract Task Test05_Null_Maybe_Runs_IfNull_Func(Maybe<int> input);
+
+	protected static async Task Test05(Func<Func<Task<Maybe<int>>>, Task<Maybe<int>>> act)
+	{
+		// Arrange
+		var ifNull = Substitute.For<Func<Task<Maybe<int>>>>();
+
+		// Act
+		_ = await act(ifNull).ConfigureAwait(false);
+
+		// Assert
+		_ = await ifNull.Received().Invoke().ConfigureAwait(false);
+	}
+
 	public sealed record class TestReason : IReason;
 }

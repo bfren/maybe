@@ -19,9 +19,19 @@ public static partial class F
 		{
 			return f();
 		}
+		catch (NullReferenceException)
+		{
+			return None<T, R.MaybeCannotBeNullReason>();
+		}
 		catch (Exception e)
 		{
 			return None<T>(handler(e));
 		}
+	}
+
+	public static partial class R
+	{
+		/// <summary>Maybe input cannot be null</summary>
+		public sealed record class MaybeCannotBeNullReason : IReason;
 	}
 }

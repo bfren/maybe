@@ -99,5 +99,19 @@ public abstract class IfNull_Tests
 		Assert.Same(reason, none);
 	}
 
+	public abstract void Test05_Null_Maybe_Runs_IfNull_Func(Maybe<int> input);
+
+	protected static void Test05(Func<Func<Maybe<int>>, Maybe<int>> act)
+	{
+		// Arrange
+		var ifNull = Substitute.For<Func<Maybe<int>>>();
+
+		// Act
+		_ = act(ifNull);
+
+		// Assert
+		_ = ifNull.Received().Invoke();
+	}
+
 	public sealed record class TestReason : IReason;
 }

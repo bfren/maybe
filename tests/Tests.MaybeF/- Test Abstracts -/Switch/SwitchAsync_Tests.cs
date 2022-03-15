@@ -8,7 +8,7 @@ namespace Abstracts;
 
 public abstract class SwitchAsync_Tests
 {
-	public abstract Task Test00_If_Unknown_Maybe_Throws_UnknownOptionException();
+	public abstract Task Test00_If_Unknown_Maybe_Throws_UnknownMaybeException();
 
 	protected static async Task Test00(Func<Maybe<int>, Task<string>> act)
 	{
@@ -22,9 +22,22 @@ public abstract class SwitchAsync_Tests
 		_ = await Assert.ThrowsAsync<UnknownMaybeException>(action).ConfigureAwait(false);
 	}
 
-	public abstract Task Test01_If_None_Runs_None_Func_With_Reason();
+	public abstract Task Test01_If_Null_Throws_MaybeCannotBeNullException(Maybe<int> input);
 
-	protected static async Task Test01(Func<Maybe<int>, Func<IReason, Task<string>>, Task<string>> act)
+	protected static async Task Test01(Func<Task<string>> act)
+	{
+		// Arrange
+
+		// Act
+		var action = async Task<string> () => await act().ConfigureAwait(false);
+
+		// Assert
+		_ = await Assert.ThrowsAsync<MaybeCannotBeNullException>(action).ConfigureAwait(false);
+	}
+
+	public abstract Task Test02_If_None_Runs_None_Func_With_Reason();
+
+	protected static async Task Test02(Func<Maybe<int>, Func<IReason, Task<string>>, Task<string>> act)
 	{
 		// Arrange
 		var reason = new TestReason();
@@ -38,9 +51,9 @@ public abstract class SwitchAsync_Tests
 		_ = await none.Received().Invoke(reason).ConfigureAwait(false);
 	}
 
-	public abstract Task Test02_If_Some_Runs_Some_Func_With_Value();
+	public abstract Task Test03_If_Some_Runs_Some_Func_With_Value();
 
-	protected static async Task Test02(Func<Maybe<int>, Func<int, Task<string>>, Task<string>> act)
+	protected static async Task Test03(Func<Maybe<int>, Func<int, Task<string>>, Task<string>> act)
 	{
 		// Arrange
 		var value = Rnd.Int;

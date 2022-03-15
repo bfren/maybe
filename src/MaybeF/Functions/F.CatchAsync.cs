@@ -15,6 +15,10 @@ public static partial class F
 		{
 			return await f().ConfigureAwait(false);
 		}
+		catch (NullReferenceException)
+		{
+			return None<T, R.MaybeCannotBeNullReason>();
+		}
 		catch (Exception e)
 		{
 			return None<T>(handler(e));

@@ -8,6 +8,20 @@ namespace MaybeF.F_Tests;
 
 public class Catch_Tests
 {
+	[Theory]
+	[InlineData(null)]
+	public void Catches_Null_Maybe(Func<Maybe<int>> input)
+	{
+		// Arrange
+
+		// Act
+		var result = F.Catch(input, F.DefaultHandler);
+
+		// Assert
+		var none = result.AssertNone();
+		Assert.IsType<MaybeCannotBeNullReason>(none);
+	}
+
 	[Fact]
 	public void Executes_Chain()
 	{
