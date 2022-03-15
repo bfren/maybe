@@ -3,7 +3,4 @@
 		<ProjectReference Include="..\..\src\MaybeF\MaybeF.csproj" />
 		<ProjectReference Include="..\..\src\MaybeF.Testing\MaybeF.Testing.csproj" />
 	</ItemGroup>
-	<ItemGroup>
-	  <PackageReference Update="Rnd" Version="8.0.2" />
-	</ItemGroup>
 </Project>
