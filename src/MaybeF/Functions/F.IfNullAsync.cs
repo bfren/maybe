@@ -20,8 +20,11 @@ public static partial class F
 				None<T> x when x.Reason is R.NullValueReason =>
 					ifNull(),
 
+				{ } =>
+					maybe.AsTask,
+
 				_ =>
-					maybe.AsTask
+					ifNull()
 			},
 			DefaultHandler
 		);

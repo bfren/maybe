@@ -8,7 +8,7 @@ public class Audit_Tests : Abstracts.Audit_Tests
 	#region General
 
 	[Fact]
-	public override void Test01_If_Unknown_Maybe_Throws_UnknownOptionException()
+	public override void Test01_If_Unknown_Maybe_Throws_UnknownMaybeException()
 	{
 		Test01(mbe => mbe.Audit(Substitute.For<Action<Maybe<int>>>()));
 		Test01(mbe => mbe.Audit(Substitute.For<Action<int>>()));
@@ -21,25 +21,25 @@ public class Audit_Tests : Abstracts.Audit_Tests
 	#region Any
 
 	[Fact]
-	public override void Test02_Some_Runs_Audit_And_Returns_Original_Option()
+	public override void Test02_Some_Runs_Audit_And_Returns_Original_Maybe()
 	{
 		Test02((mbe, any) => mbe.Audit(any));
 	}
 
 	[Fact]
-	public override void Test03_None_Runs_Audit_And_Returns_Original_Option()
+	public override void Test03_None_Runs_Audit_And_Returns_Original_Maybe()
 	{
 		Test03((mbe, any) => mbe.Audit(any));
 	}
 
 	[Fact]
-	public override void Test04_Some_Catches_Exception_And_Returns_Original_Option()
+	public override void Test04_Some_Catches_Exception_And_Returns_Original_Maybe()
 	{
 		Test04((mbe, any) => mbe.Audit(any));
 	}
 
 	[Fact]
-	public override void Test05_None_Catches_Exception_And_Returns_Original_Option()
+	public override void Test05_None_Catches_Exception_And_Returns_Original_Maybe()
 	{
 		Test05((mbe, any) => mbe.Audit(any));
 	}
@@ -49,7 +49,7 @@ public class Audit_Tests : Abstracts.Audit_Tests
 	#region Some / None
 
 	[Fact]
-	public override void Test06_Some_Runs_Some_And_Returns_Original_Option()
+	public override void Test06_Some_Runs_Some_And_Returns_Original_Maybe()
 	{
 		Test06((mbe, some) => mbe.Audit(some));
 		Test06((mbe, some) => mbe.Audit(some, Substitute.For<Action<IReason>>()));
@@ -57,21 +57,21 @@ public class Audit_Tests : Abstracts.Audit_Tests
 
 	[Fact]
 
-	public override void Test07_None_Runs_None_And_Returns_Original_Option()
+	public override void Test07_None_Runs_None_And_Returns_Original_Maybe()
 	{
 		Test07((mbe, none) => mbe.Audit(none));
 		Test07((mbe, none) => mbe.Audit(Substitute.For<Action<int>>(), none));
 	}
 
 	[Fact]
-	public override void Test08_Some_Catches_Exception_And_Returns_Original_Option()
+	public override void Test08_Some_Catches_Exception_And_Returns_Original_Maybe()
 	{
 		Test08((mbe, some) => mbe.Audit(some));
 		Test08((mbe, some) => mbe.Audit(some, Substitute.For<Action<IReason>>()));
 	}
 
 	[Fact]
-	public override void Test09_None_Catches_Exception_And_Returns_Original_Option()
+	public override void Test09_None_Catches_Exception_And_Returns_Original_Maybe()
 	{
 		Test09((mbe, none) => mbe.Audit(none));
 		Test09((mbe, none) => mbe.Audit(Substitute.For<Action<int>>(), none));
@@ -82,7 +82,7 @@ public class Audit_Tests : Abstracts.Audit_Tests
 	#region Unused
 
 	[Fact]
-	public override void Test00_Null_Args_Returns_Original_Option()
+	public override void Test00_Null_Args_Returns_Original_Maybe()
 	{
 		// Unused
 	}

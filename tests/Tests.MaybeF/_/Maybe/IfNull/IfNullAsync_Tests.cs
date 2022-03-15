@@ -25,12 +25,13 @@ public class IfNullAsync_Tests : Abstracts.IfNullAsync_Tests
 
 	#region Unused
 
-	[Fact]
 	public override Task Test03_Some_With_Null_Value_Runs_IfNull_Func_Returns_None_With_Reason() =>
 		Task.CompletedTask;
 
-	[Fact]
 	public override Task Test04_None_With_NullValueReason_Runs_IfNull_Func_Returns_None_With_Reason() =>
+		Task.CompletedTask;
+
+	public override Task Test05_Null_Maybe_Runs_IfNull_Func(Maybe<int> input) =>
 		Task.CompletedTask;
 
 	#endregion Unused

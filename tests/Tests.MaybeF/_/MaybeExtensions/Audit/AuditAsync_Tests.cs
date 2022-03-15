@@ -8,7 +8,7 @@ public class AuditAsync_Tests : Abstracts.AuditAsync_Tests
 	#region General
 
 	[Fact]
-	public override async Task Test01_If_Unknown_Maybe_Throws_UnknownOptionException()
+	public override async Task Test01_If_Unknown_Maybe_Throws_UnknownMaybeException()
 	{
 		var anyA = Substitute.For<Action<Maybe<int>>>();
 		var anyF = Substitute.For<Func<Maybe<int>, Task>>();
@@ -32,49 +32,49 @@ public class AuditAsync_Tests : Abstracts.AuditAsync_Tests
 	#region Any
 
 	[Fact]
-	public override async Task Test02_Some_Runs_Audit_Action_And_Returns_Original_Option()
+	public override async Task Test02_Some_Runs_Audit_Action_And_Returns_Original_Maybe()
 	{
 		await Test02((some, any) => some.AsTask.AuditAsync(any)).ConfigureAwait(false);
 	}
 
 	[Fact]
-	public override async Task Test03_None_Runs_Audit_Action_And_Returns_Original_Option()
+	public override async Task Test03_None_Runs_Audit_Action_And_Returns_Original_Maybe()
 	{
 		await Test03((none, any) => none.AsTask.AuditAsync(any)).ConfigureAwait(false);
 	}
 
 	[Fact]
-	public override async Task Test04_Some_Runs_Audit_Func_And_Returns_Original_Option()
+	public override async Task Test04_Some_Runs_Audit_Func_And_Returns_Original_Maybe()
 	{
 		await Test04((some, any) => some.AsTask.AuditAsync(any)).ConfigureAwait(false);
 	}
 
 	[Fact]
-	public override async Task Test05_None_Runs_Audit_Func_And_Returns_Original_Option()
+	public override async Task Test05_None_Runs_Audit_Func_And_Returns_Original_Maybe()
 	{
 		await Test05((none, any) => none.AsTask.AuditAsync(any)).ConfigureAwait(false);
 	}
 
 	[Fact]
-	public override async Task Test06_Some_Runs_Audit_Action_Catches_Exception_And_Returns_Original_Option()
+	public override async Task Test06_Some_Runs_Audit_Action_Catches_Exception_And_Returns_Original_Maybe()
 	{
 		await Test06((some, any) => some.AsTask.AuditAsync(any)).ConfigureAwait(false);
 	}
 
 	[Fact]
-	public override async Task Test07_None_Runs_Audit_Action_Catches_Exception_And_Returns_Original_Option()
+	public override async Task Test07_None_Runs_Audit_Action_Catches_Exception_And_Returns_Original_Maybe()
 	{
 		await Test07((none, any) => none.AsTask.AuditAsync(any)).ConfigureAwait(false);
 	}
 
 	[Fact]
-	public override async Task Test08_Some_Runs_Audit_Func_Catches_Exception_And_Returns_Original_Option()
+	public override async Task Test08_Some_Runs_Audit_Func_Catches_Exception_And_Returns_Original_Maybe()
 	{
 		await Test08((some, any) => some.AsTask.AuditAsync(any)).ConfigureAwait(false);
 	}
 
 	[Fact]
-	public override async Task Test09_None_Runs_Audit_Func_Catches_Exception_And_Returns_Original_Option()
+	public override async Task Test09_None_Runs_Audit_Func_Catches_Exception_And_Returns_Original_Maybe()
 	{
 		await Test09((none, any) => none.AsTask.AuditAsync(any)).ConfigureAwait(false);
 	}
@@ -83,7 +83,7 @@ public class AuditAsync_Tests : Abstracts.AuditAsync_Tests
 
 	#region Some / None
 	[Fact]
-	public override async Task Test10_Some_Runs_Some_Action_And_Returns_Original_Option()
+	public override async Task Test10_Some_Runs_Some_Action_And_Returns_Original_Maybe()
 	{
 		var none = Substitute.For<Action<IReason>>();
 
@@ -92,7 +92,7 @@ public class AuditAsync_Tests : Abstracts.AuditAsync_Tests
 	}
 
 	[Fact]
-	public override async Task Test11_Some_Runs_Some_Func_And_Returns_Original_Option()
+	public override async Task Test11_Some_Runs_Some_Func_And_Returns_Original_Maybe()
 	{
 		var none = Substitute.For<Func<IReason, Task>>();
 
@@ -101,7 +101,7 @@ public class AuditAsync_Tests : Abstracts.AuditAsync_Tests
 	}
 
 	[Fact]
-	public override async Task Test12_None_Runs_None_Action_And_Returns_Original_Option()
+	public override async Task Test12_None_Runs_None_Action_And_Returns_Original_Maybe()
 	{
 		var some = Substitute.For<Action<int>>();
 
@@ -110,7 +110,7 @@ public class AuditAsync_Tests : Abstracts.AuditAsync_Tests
 	}
 
 	[Fact]
-	public override async Task Test13_None_Runs_None_Func_And_Returns_Original_Option()
+	public override async Task Test13_None_Runs_None_Func_And_Returns_Original_Maybe()
 	{
 		var some = Substitute.For<Func<int, Task>>();
 
@@ -119,7 +119,7 @@ public class AuditAsync_Tests : Abstracts.AuditAsync_Tests
 	}
 
 	[Fact]
-	public override async Task Test14_Some_Runs_Some_Action_Catches_Exception_And_Returns_Original_Option()
+	public override async Task Test14_Some_Runs_Some_Action_Catches_Exception_And_Returns_Original_Maybe()
 	{
 		var none = Substitute.For<Action<IReason>>();
 
@@ -128,7 +128,7 @@ public class AuditAsync_Tests : Abstracts.AuditAsync_Tests
 	}
 
 	[Fact]
-	public override async Task Test15_Some_Runs_Some_Func_Catches_Exception_And_Returns_Original_Option()
+	public override async Task Test15_Some_Runs_Some_Func_Catches_Exception_And_Returns_Original_Maybe()
 	{
 		var none = Substitute.For<Func<IReason, Task>>();
 
@@ -137,7 +137,7 @@ public class AuditAsync_Tests : Abstracts.AuditAsync_Tests
 	}
 
 	[Fact]
-	public override async Task Test16_None_Runs_None_Action_Catches_Exception_And_Returns_Original_Option()
+	public override async Task Test16_None_Runs_None_Action_Catches_Exception_And_Returns_Original_Maybe()
 	{
 		var some = Substitute.For<Action<int>>();
 
@@ -146,7 +146,7 @@ public class AuditAsync_Tests : Abstracts.AuditAsync_Tests
 	}
 
 	[Fact]
-	public override async Task Test17_None_Runs_None_Func_Catches_Exception_And_Returns_Original_Option()
+	public override async Task Test17_None_Runs_None_Func_Catches_Exception_And_Returns_Original_Maybe()
 	{
 		var some = Substitute.For<Func<int, Task>>();
 
@@ -158,7 +158,7 @@ public class AuditAsync_Tests : Abstracts.AuditAsync_Tests
 
 	#region Unused
 
-	public override Task Test00_Null_Args_Returns_Original_Option() =>
+	public override Task Test00_Null_Args_Returns_Original_Maybe() =>
 		Task.CompletedTask;
 
 	#endregion Unused
