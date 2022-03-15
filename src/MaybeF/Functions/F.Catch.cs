@@ -15,13 +15,14 @@ public static partial class F
 	/// <param name="handler">Caught exception handler</param>
 	internal static Maybe<T> Catch<T>(Func<Maybe<T>> f, Handler handler)
 	{
+		if (f is null)
+		{
+			return None<T, R.MaybeCannotBeNullReason>();
+		}
+
 		try
 		{
 			return f();
-		}
-		catch (NullReferenceException)
-		{
-			return None<T, R.MaybeCannotBeNullReason>();
 		}
 		catch (Exception e)
 		{
