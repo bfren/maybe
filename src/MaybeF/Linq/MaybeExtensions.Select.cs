@@ -28,7 +28,7 @@ public static partial class MaybeExtensions
 	/// <param name="this">Maybe (awaitable)</param>
 	/// <param name="f">Return map function</param>
 	public static Task<Maybe<TReturn>> Select<T, TReturn>(this Task<Maybe<T>> @this, Func<T, TReturn> f) =>
-		F.MapAsync(@this, x => Task.FromResult<TReturn>(f(x)), F.DefaultHandler);
+		F.MapAsync(@this, x => Task.FromResult(f(x)), F.DefaultHandler);
 
 	/// <inheritdoc cref="Select{T, TReturn}(Maybe{T}, Func{T, TReturn})"/>
 	/// <param name="this">Maybe (awaitable)</param>
