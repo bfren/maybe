@@ -1,6 +1,6 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 	<PropertyGroup>
-	  <AssemblyName>MaybeF.Testing</AssemblyName>
+	  <RootNamespace>MaybeF.Testing</RootNamespace>
 	</PropertyGroup>
 	<ItemGroup>
 		<ProjectReference Include="..\..\src\MaybeF.Testing\MaybeF.Testing.csproj" />
