@@ -1,4 +1,4 @@
-﻿// Maybe: Unit Tests
+// Maybe: Unit Tests
 // Copyright (c) bfren - licensed under https://mit.bfren.dev/2019
 
 using MaybeF;
@@ -12,7 +12,7 @@ public abstract class Parse_Tests<T>
 
 	public delegate Maybe<T> ParseString(string input);
 
-	public abstract void Test00_Valid_Input_Returns_Parsed_Result(string input, T expected);
+	public abstract void Test00_Valid_Input_Returns_Parsed_Result(string input);
 
 	protected static void Test00(string input, T expected, ParseSpan parseSpan, ParseString parseString)
 	{
