@@ -1,4 +1,4 @@
-﻿// Maybe: Unit Tests
+// Maybe: Unit Tests
 // Copyright (c) bfren - licensed under https://mit.bfren.dev/2019
 
 namespace MaybeF.Functions.Parse_Tests;
@@ -6,16 +6,17 @@ namespace MaybeF.Functions.Parse_Tests;
 public class ParseBool_Tests : Abstracts.Parse_Tests<bool>
 {
 	[Theory]
-	[InlineData("false", false)]
-	[InlineData("true", true)]
-	[InlineData("False", false)]
-	[InlineData("True", true)]
-	[InlineData("FALSE", false)]
-	[InlineData("TRUE", true)]
-	[InlineData("fAlSe", false)]
-	[InlineData("tRuE", true)]
-	public override void Test00_Valid_Input_Returns_Parsed_Result(string input, bool expected)
+	[InlineData("false")]
+	[InlineData("true")]
+	[InlineData("False")]
+	[InlineData("True")]
+	[InlineData("FALSE")]
+	[InlineData("TRUE")]
+	[InlineData("fAlSe")]
+	[InlineData("tRuE")]
+	public override void Test00_Valid_Input_Returns_Parsed_Result(string input)
 	{
+		var expected = bool.Parse(input);
 		Test00(input, expected, F.ParseBool, F.ParseBool);
 	}
 
