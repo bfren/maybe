@@ -49,4 +49,25 @@ public abstract class Parse_Tests<T>
 		Assert.Equal(typeof(T), m1.Type);
 		Assert.Equal(input, m1.Value);
 	}
+
+	public abstract void Test02_Null_Input_Returns_None_With_UnableToParseValueAsReason(string input);
+
+	protected static void Test02(string input, ParseSpan parseSpan, ParseString parseString)
+	{
+		// Arrange
+
+		// Act
+		var r0 = parseSpan(input.AsSpan());
+		var r1 = parseString(input);
+
+		// Assert
+		var n0 = r0.AssertNone();
+		var m0 = Assert.IsType<UnableToParseValueAsReason>(n0);
+		Assert.Equal(typeof(T), m0.Type);
+		Assert.Empty(m0.Value);
+		var n1 = r1.AssertNone();
+		var m1 = Assert.IsType<UnableToParseValueAsReason>(n1);
+		Assert.Equal(typeof(T), m1.Type);
+		Assert.Empty(m1.Value);
+	}
 }
