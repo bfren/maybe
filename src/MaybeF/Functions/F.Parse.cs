@@ -31,7 +31,7 @@ public static partial class F
 				result,
 
 			false =>
-				None<T>(new R.UnableToParseValueAs(typeof(T), value.ToString()))
+				None<T>(new R.UnableToParseValueAsReason(typeof(T), value.ToString()))
 		};
 
 	/// <inheritdoc cref="Parse{T}(ReadOnlySpan{char}, TryParseSpan{T})"/>
@@ -42,7 +42,7 @@ public static partial class F
 				result,
 
 			false =>
-				None<T>(new R.UnableToParseValueAs(typeof(T), value))
+				None<T>(new R.UnableToParseValueAsReason(typeof(T), value))
 		};
 
 	public static partial class R
@@ -50,6 +50,6 @@ public static partial class F
 		/// <summary>Unable to parse the specified value</summary>
 		/// <param name="Type">Type to parse as</param>
 		/// <param name="Value">Input value</param>
-		public sealed record class UnableToParseValueAs(Type Type, string Value) : IReason;
+		public sealed record class UnableToParseValueAsReason(Type Type, string Value) : IReason;
 	}
 }

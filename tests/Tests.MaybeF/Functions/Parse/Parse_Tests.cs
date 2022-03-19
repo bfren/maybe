@@ -1,8 +1,6 @@
 ﻿// Maybe: Unit Tests
 // Copyright (c) bfren - licensed under https://mit.bfren.dev/2019
 
-using MaybeF.Testing;
-
 namespace MaybeF.Functions.Parse_Tests;
 
 public class Parse_Tests
@@ -61,11 +59,11 @@ public class Parse_Tests
 
 		// Assert
 		var n0 = r0.AssertNone();
-		var m0 = Assert.IsType<F.R.UnableToParseValueAs>(n0);
+		var m0 = Assert.IsType<F.R.UnableToParseValueAsReason>(n0);
 		Assert.Equal(typeof(int), m0.Type);
 		Assert.Equal(valueSpan.ToString(), m0.Value);
 		var n1 = r1.AssertNone();
-		var m1 = Assert.IsType<F.R.UnableToParseValueAs>(n1);
+		var m1 = Assert.IsType<F.R.UnableToParseValueAsReason>(n1);
 		Assert.Equal(typeof(int), m1.Type);
 		Assert.Equal(valueString, m1.Value);
 	}
