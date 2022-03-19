@@ -16,8 +16,7 @@ public class ParseBool_Tests : Abstracts.Parse_Tests<bool>
 	[InlineData("tRuE")]
 	public override void Test00_Valid_Input_Returns_Parsed_Result(string input)
 	{
-		var expected = bool.Parse(input);
-		Test00(input, expected, F.ParseBool, F.ParseBool);
+		Test00(input, bool.Parse, F.ParseBool, F.ParseBool);
 	}
 
 	[Theory]
