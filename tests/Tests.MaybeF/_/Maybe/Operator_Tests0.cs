@@ -1,7 +1,6 @@
 ﻿// Maybe: Unit Tests
 // Copyright (c) bfren - licensed under https://mit.bfren.dev/2019
 
-using MaybeF.Testing;
 using static MaybeF.F.R;
 
 namespace MaybeF.Maybe_Tests;

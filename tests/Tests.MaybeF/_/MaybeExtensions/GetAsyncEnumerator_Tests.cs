@@ -1,8 +1,6 @@
 ﻿// Maybe: Unit Tests
 // Copyright (c) bfren - licensed under https://mit.bfren.dev/2019
 
-using MaybeF.Testing;
-
 namespace MaybeF.MaybeExtensions_Tests;
 
 public class GetAsyncEnumerator_Tests
