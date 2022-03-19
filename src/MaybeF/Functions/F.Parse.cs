@@ -42,7 +42,7 @@ public static partial class F
 				result,
 
 			false =>
-				None<T>(new R.UnableToParseValueAsReason(typeof(T), value))
+				None<T>(new R.UnableToParseValueAsReason(typeof(T), value ?? string.Empty))
 		};
 
 	public static partial class R
