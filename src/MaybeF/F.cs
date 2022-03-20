@@ -2,6 +2,7 @@
 // Copyright (c) bfren - licensed under https://mit.bfren.dev/2019
 
 using System.Collections.Generic;
+using System.Globalization;
 
 namespace MaybeF;
 
@@ -10,6 +11,11 @@ namespace MaybeF;
 /// </summary>
 public static partial class F
 {
+	/// <summary>
+	/// Default culture (en-GB) - used when parsing strings
+	/// </summary>
+	public static CultureInfo DefaultCulture { get; set; } = CultureInfo.GetCultureInfo("en-GB");
+
 	/// <summary>
 	/// Functions for interacting with <see cref="IDictionary{TKey, TValue}"/>
 	/// </summary>

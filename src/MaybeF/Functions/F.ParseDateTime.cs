@@ -2,6 +2,7 @@
 // Copyright (c) bfren - licensed under https://mit.bfren.dev/2019
 
 using System;
+using System.Globalization;
 
 namespace MaybeF;
 
@@ -9,33 +10,33 @@ public static partial class F
 {
 	/// <inheritdoc cref="TryParseSpan{T}"/>
 	public static Maybe<DateOnly> ParseDateOnly(string input) =>
-		Parse<DateOnly>(input, DateOnly.TryParse);
+		Parse(input, (string s, out DateOnly result) => DateOnly.TryParse(s, DefaultCulture, DateTimeStyles.None, out result));
 
 	/// <inheritdoc cref="TryParseSpan{T}"/>
 	public static Maybe<DateOnly> ParseDateOnly(ReadOnlySpan<char> input) =>
-		Parse<DateOnly>(input, DateOnly.TryParse);
+		Parse(input, (ReadOnlySpan<char> s, out DateOnly result) => DateOnly.TryParse(s, DefaultCulture, DateTimeStyles.None, out result));
 
 	/// <inheritdoc cref="TryParseSpan{T}"/>
 	public static Maybe<DateTime> ParseDateTime(string input) =>
-		Parse<DateTime>(input, DateTime.TryParse);
+		Parse(input, (string s, out DateTime result) => DateTime.TryParse(s, DefaultCulture, DateTimeStyles.None, out result));
 
 	/// <inheritdoc cref="TryParseSpan{T}"/>
 	public static Maybe<DateTime> ParseDateTime(ReadOnlySpan<char> input) =>
-		Parse<DateTime>(input, DateTime.TryParse);
+		Parse(input, (ReadOnlySpan<char> s, out DateTime result) => DateTime.TryParse(s, DefaultCulture, DateTimeStyles.None, out result));
 
 	/// <inheritdoc cref="TryParseSpan{T}"/>
 	public static Maybe<DateTimeOffset> ParseDateTimeOffset(string input) =>
-		Parse<DateTimeOffset>(input, DateTimeOffset.TryParse);
+		Parse(input, (string s, out DateTimeOffset result) => DateTimeOffset.TryParse(s, DefaultCulture, DateTimeStyles.None, out result));
 
 	/// <inheritdoc cref="TryParseSpan{T}"/>
 	public static Maybe<DateTimeOffset> ParseDateTimeOffset(ReadOnlySpan<char> input) =>
-		Parse<DateTimeOffset>(input, DateTimeOffset.TryParse);
+		Parse(input, (ReadOnlySpan<char> s, out DateTimeOffset result) => DateTimeOffset.TryParse(s, DefaultCulture, DateTimeStyles.None, out result));
 
 	/// <inheritdoc cref="TryParseSpan{T}"/>
 	public static Maybe<TimeOnly> ParseTimeOnly(string input) =>
-		Parse<TimeOnly>(input, TimeOnly.TryParse);
+		Parse(input, (string s, out TimeOnly result) => TimeOnly.TryParse(s, DefaultCulture, DateTimeStyles.None, out result));
 
 	/// <inheritdoc cref="TryParseSpan{T}"/>
 	public static Maybe<TimeOnly> ParseTimeOnly(ReadOnlySpan<char> input) =>
-		Parse<TimeOnly>(input, TimeOnly.TryParse);
+		Parse(input, (ReadOnlySpan<char> s, out TimeOnly result) => TimeOnly.TryParse(s, DefaultCulture, DateTimeStyles.None, out result));
 }
