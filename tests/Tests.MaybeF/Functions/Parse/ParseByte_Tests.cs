@@ -33,7 +33,7 @@ public class ParseByte_Tests : Abstracts.Parse_Tests<byte>
 	[MemberData(nameof(Valid_Byte_Input))]
 	public override void Test00_Valid_Input_Returns_Parsed_Result(string input)
 	{
-		Test00(input, byte.Parse, F.ParseByte, F.ParseByte);
+		Test00(input, s => byte.Parse(s, F.DefaultCulture), F.ParseByte, F.ParseByte);
 	}
 
 	[Theory]

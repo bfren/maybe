@@ -10,7 +10,7 @@ public class ParseSByte_Tests : Abstracts.Parse_Tests<sbyte>
 	[MemberData(nameof(ParseByte_Tests.Negative_Byte_Input), MemberType = typeof(ParseByte_Tests))]
 	public override void Test00_Valid_Input_Returns_Parsed_Result(string input)
 	{
-		Test00(input, sbyte.Parse, F.ParseSByte, F.ParseSByte);
+		Test00(input, s => sbyte.Parse(s, F.DefaultCulture), F.ParseSByte, F.ParseSByte);
 	}
 
 	[Theory]
