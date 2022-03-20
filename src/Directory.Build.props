@@ -54,7 +54,7 @@
 		<Copyright>Copyright © bfren.dev 2019-$([System.DateTime]::Now.ToString(yyyy))</Copyright>
 		<Version>$(MaybeVersion)</Version>
 		<Description>$(MSBuildProjectName) library</Description>
-		<PackageLicenseFile>LICENSE</PackageLicenseFile>
+		<PackageLicenseFile>$(LicenceFile)</PackageLicenseFile>
 		<PackageProjectUrl>https://github.com/bfren/maybe/wiki</PackageProjectUrl>
 		<PackageReadmeFile>$(ReadmeFile)</PackageReadmeFile>
 		<RepositoryUrl>https://github.com/bfren/maybe</RepositoryUrl>
