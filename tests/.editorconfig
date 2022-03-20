@@ -1,6 +1,7 @@
 ﻿[*.{cs,csx,cake,vb,vbx}]
 
 file_header_template = Maybe: Unit Tests\nCopyright (c) bfren - licensed under https://mit.bfren.dev/2019
+insert_final_newline = true
 
 # CA1305: Specify IFormatProvider
 dotnet_diagnostic.CA1305.severity = none
