@@ -16,7 +16,7 @@ public static partial class F
 	internal delegate bool TryParseSpan<T>(ReadOnlySpan<char> input, out T result);
 
 	/// <inheritdoc cref="TryParseSpan{T}"/>
-	internal delegate bool TryParseString<T>(string input, out T result);
+	internal delegate bool TryParseString<T>(string? input, out T result);
 
 	/// <summary>
 	/// Attempt to parse the specified <paramref name="value"/> using <paramref name="tryParse"/>
@@ -35,7 +35,7 @@ public static partial class F
 		};
 
 	/// <inheritdoc cref="Parse{T}(ReadOnlySpan{char}, TryParseSpan{T})"/>
-	internal static Maybe<T> Parse<T>(string value, TryParseString<T> tryParse) =>
+	internal static Maybe<T> Parse<T>(string? value, TryParseString<T> tryParse) =>
 		tryParse(value, out var result) switch
 		{
 			true =>

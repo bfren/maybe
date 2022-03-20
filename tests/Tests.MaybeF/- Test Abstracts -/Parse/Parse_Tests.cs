@@ -10,14 +10,14 @@ public abstract class Parse_Tests<T>
 {
 	public delegate Maybe<T> ParseSpan(ReadOnlySpan<char> input);
 
-	public delegate Maybe<T> ParseString(string input);
+	public delegate Maybe<T> ParseString(string? input);
 
-	public abstract void Test00_Valid_Input_Returns_Parsed_Result(string input);
+	public abstract void Test00_Valid_Input_Returns_Parsed_Result(string? input);
 
-	protected static void Test00(string input, Func<string, T> parse, ParseSpan parseSpan, ParseString parseString)
+	protected static void Test00(string? input, Func<string, T> parse, ParseSpan parseSpan, ParseString parseString)
 	{
 		// Arrange
-		var expected = parse(input);
+		var expected = parse(input ?? string.Empty);
 
 		// Act
 		var r0 = parseSpan(input.AsSpan());
@@ -30,9 +30,9 @@ public abstract class Parse_Tests<T>
 		Assert.Equal(expected, s1);
 	}
 
-	public abstract void Test01_Invalid_Input_Returns_None_With_UnableToParseValueAsReason(string input);
+	public abstract void Test01_Invalid_Input_Returns_None_With_UnableToParseValueAsReason(string? input);
 
-	protected static void Test01(string input, ParseSpan parseSpan, ParseString parseString)
+	protected static void Test01(string? input, ParseSpan parseSpan, ParseString parseString)
 	{
 		// Arrange
 
@@ -51,9 +51,9 @@ public abstract class Parse_Tests<T>
 		Assert.Equal(input, m1.Value);
 	}
 
-	public abstract void Test02_Null_Input_Returns_None_With_UnableToParseValueAsReason(string input);
+	public abstract void Test02_Null_Input_Returns_None_With_UnableToParseValueAsReason(string? input);
 
-	protected static void Test02(string input, ParseSpan parseSpan, ParseString parseString)
+	protected static void Test02(string? input, ParseSpan parseSpan, ParseString parseString)
 	{
 		// Arrange
 

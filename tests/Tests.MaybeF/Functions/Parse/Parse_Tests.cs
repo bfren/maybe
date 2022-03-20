@@ -18,7 +18,7 @@ public class Parse_Tests
 			result = valueInt;
 			return true;
 		});
-		var tryParseString = new F.TryParseString<int>((string _, out int result) =>
+		var tryParseString = new F.TryParseString<int>((string? _, out int result) =>
 		{
 			result = valueInt;
 			return true;
@@ -47,7 +47,7 @@ public class Parse_Tests
 			result = Rnd.Int;
 			return false;
 		});
-		var tryParseString = new F.TryParseString<int>((string _, out int result) =>
+		var tryParseString = new F.TryParseString<int>((string? _, out int result) =>
 		{
 			result = Rnd.Int;
 			return false;

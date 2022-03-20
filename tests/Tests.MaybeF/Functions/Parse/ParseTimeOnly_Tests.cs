@@ -26,7 +26,7 @@ public class ParseTimeOnly_Tests : Abstracts.Parse_Tests<TimeOnly>
 
 	[Theory]
 	[MemberData(nameof(Valid_TimeOnly_Input))]
-	public override void Test00_Valid_Input_Returns_Parsed_Result(string input)
+	public override void Test00_Valid_Input_Returns_Parsed_Result(string? input)
 	{
 		Test00(input, s => TimeOnly.Parse(s, F.DefaultCulture), F.ParseTimeOnly, F.ParseTimeOnly);
 	}
@@ -35,14 +35,14 @@ public class ParseTimeOnly_Tests : Abstracts.Parse_Tests<TimeOnly>
 	[MemberData(nameof(Invalid_TimeOnly_Input))]
 	[MemberData(nameof(ParseDateTime_Tests.Invalid_DateTime_Input), MemberType = typeof(ParseDateTime_Tests))]
 	[MemberData(nameof(ParseDateTime_Tests.Valid_DateTime_Input), MemberType = typeof(ParseDateTime_Tests))]
-	public override void Test01_Invalid_Input_Returns_None_With_UnableToParseValueAsReason(string input)
+	public override void Test01_Invalid_Input_Returns_None_With_UnableToParseValueAsReason(string? input)
 	{
 		Test01(input, F.ParseTimeOnly, F.ParseTimeOnly);
 	}
 
 	[Theory]
 	[InlineData(null)]
-	public override void Test02_Null_Input_Returns_None_With_UnableToParseValueAsReason(string input)
+	public override void Test02_Null_Input_Returns_None_With_UnableToParseValueAsReason(string? input)
 	{
 		Test02(input, F.ParseTimeOnly, F.ParseTimeOnly);
 	}

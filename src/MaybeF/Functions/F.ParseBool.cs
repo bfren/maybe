@@ -8,7 +8,7 @@ namespace MaybeF;
 public static partial class F
 {
 	/// <inheritdoc cref="TryParseSpan{T}"/>
-	public static Maybe<bool> ParseBool(string input) =>
+	public static Maybe<bool> ParseBool(string? input) =>
 		Parse<bool>(input, bool.TryParse);
 
 	/// <inheritdoc cref="TryParseSpan{T}"/>
