@@ -14,21 +14,21 @@ public class ParseDecimal_Tests : Abstracts.Parse_Tests<decimal>
 	[Theory]
 	[MemberData(nameof(ParseSingle_Tests.Valid_Float_Input), MemberType = typeof(ParseSingle_Tests))]
 	[MemberData(nameof(Extreme_Decimal_Input))]
-	public override void Test00_Valid_Input_Returns_Parsed_Result(string input)
+	public override void Test00_Valid_Input_Returns_Parsed_Result(string? input)
 	{
 		Test00(input, s => decimal.Parse(s, F.DefaultCulture), F.ParseDecimal, F.ParseDecimal);
 	}
 
 	[Theory]
 	[MemberData(nameof(ParseSingle_Tests.Invalid_Float_Input), MemberType = typeof(ParseSingle_Tests))]
-	public override void Test01_Invalid_Input_Returns_None_With_UnableToParseValueAsReason(string input)
+	public override void Test01_Invalid_Input_Returns_None_With_UnableToParseValueAsReason(string? input)
 	{
 		Test01(input, F.ParseDecimal, F.ParseDecimal);
 	}
 
 	[Theory]
 	[InlineData(null)]
-	public override void Test02_Null_Input_Returns_None_With_UnableToParseValueAsReason(string input)
+	public override void Test02_Null_Input_Returns_None_With_UnableToParseValueAsReason(string? input)
 	{
 		Test02(input, F.ParseDecimal, F.ParseDecimal);
 	}

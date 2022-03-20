@@ -40,21 +40,21 @@ public class ParseInt16_Tests : Abstracts.Parse_Tests<short>
 	[Theory]
 	[MemberData(nameof(Valid_Integer_Input))]
 	[MemberData(nameof(Extreme_Short_Input))]
-	public override void Test00_Valid_Input_Returns_Parsed_Result(string input)
+	public override void Test00_Valid_Input_Returns_Parsed_Result(string? input)
 	{
 		Test00(input, s => short.Parse(s, F.DefaultCulture), F.ParseInt16, F.ParseInt16);
 	}
 
 	[Theory]
 	[MemberData(nameof(Invalid_Integer_Input))]
-	public override void Test01_Invalid_Input_Returns_None_With_UnableToParseValueAsReason(string input)
+	public override void Test01_Invalid_Input_Returns_None_With_UnableToParseValueAsReason(string? input)
 	{
 		Test01(input, F.ParseInt16, F.ParseInt16);
 	}
 
 	[Theory]
 	[InlineData(null)]
-	public override void Test02_Null_Input_Returns_None_With_UnableToParseValueAsReason(string input)
+	public override void Test02_Null_Input_Returns_None_With_UnableToParseValueAsReason(string? input)
 	{
 		Test02(input, F.ParseInt16, F.ParseInt16);
 	}

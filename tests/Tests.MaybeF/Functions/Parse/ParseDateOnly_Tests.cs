@@ -30,7 +30,7 @@ public class ParseDateOnly_Tests : Abstracts.Parse_Tests<DateOnly>
 
 	[Theory]
 	[MemberData(nameof(Valid_DateOnly_Input))]
-	public override void Test00_Valid_Input_Returns_Parsed_Result(string input)
+	public override void Test00_Valid_Input_Returns_Parsed_Result(string? input)
 	{
 		Test00(input, s => DateOnly.Parse(s, F.DefaultCulture), F.ParseDateOnly, F.ParseDateOnly);
 	}
@@ -39,14 +39,14 @@ public class ParseDateOnly_Tests : Abstracts.Parse_Tests<DateOnly>
 	[MemberData(nameof(Invalid_DateOnly_Input))]
 	[MemberData(nameof(ParseDateTime_Tests.Invalid_DateTime_Input), MemberType = typeof(ParseDateTime_Tests))]
 	[MemberData(nameof(ParseDateTime_Tests.Valid_DateTime_Input), MemberType = typeof(ParseDateTime_Tests))]
-	public override void Test01_Invalid_Input_Returns_None_With_UnableToParseValueAsReason(string input)
+	public override void Test01_Invalid_Input_Returns_None_With_UnableToParseValueAsReason(string? input)
 	{
 		Test01(input, F.ParseDateOnly, F.ParseDateOnly);
 	}
 
 	[Theory]
 	[InlineData(null)]
-	public override void Test02_Null_Input_Returns_None_With_UnableToParseValueAsReason(string input)
+	public override void Test02_Null_Input_Returns_None_With_UnableToParseValueAsReason(string? input)
 	{
 		Test02(input, F.ParseDateOnly, F.ParseDateOnly);
 	}

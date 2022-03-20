@@ -14,7 +14,7 @@ public class ParseBool_Tests : Abstracts.Parse_Tests<bool>
 	[InlineData("TRUE")]
 	[InlineData("fAlSe")]
 	[InlineData("tRuE")]
-	public override void Test00_Valid_Input_Returns_Parsed_Result(string input)
+	public override void Test00_Valid_Input_Returns_Parsed_Result(string? input)
 	{
 		Test00(input, bool.Parse, F.ParseBool, F.ParseBool);
 	}
@@ -26,14 +26,14 @@ public class ParseBool_Tests : Abstracts.Parse_Tests<bool>
 	[InlineData("no")]
 	[InlineData("yes")]
 	[InlineData("Invalid")]
-	public override void Test01_Invalid_Input_Returns_None_With_UnableToParseValueAsReason(string input)
+	public override void Test01_Invalid_Input_Returns_None_With_UnableToParseValueAsReason(string? input)
 	{
 		Test01(input, F.ParseBool, F.ParseBool);
 	}
 
 	[Theory]
 	[InlineData(null)]
-	public override void Test02_Null_Input_Returns_None_With_UnableToParseValueAsReason(string input)
+	public override void Test02_Null_Input_Returns_None_With_UnableToParseValueAsReason(string? input)
 	{
 		Test02(input, F.ParseBool, F.ParseBool);
 	}
