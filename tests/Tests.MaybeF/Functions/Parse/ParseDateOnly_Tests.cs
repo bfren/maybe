@@ -32,7 +32,6 @@ public class ParseDateOnly_Tests : Abstracts.Parse_Tests<DateOnly>
 	[MemberData(nameof(Valid_DateOnly_Input))]
 	public override void Test00_Valid_Input_Returns_Parsed_Result(string input)
 	{
-		Test00(input, DateOnly.Parse, F.ParseDateOnly, F.ParseDateOnly);
 		Test00(input, s => DateOnly.Parse(s, F.DefaultCulture), F.ParseDateOnly, F.ParseDateOnly);
 	}
 

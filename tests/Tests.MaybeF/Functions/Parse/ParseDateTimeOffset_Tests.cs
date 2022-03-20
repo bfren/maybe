@@ -11,7 +11,6 @@ public class ParseDateTimeOffset_Tests : Abstracts.Parse_Tests<DateTimeOffset>
 	[MemberData(nameof(ParseTimeOnly_Tests.Valid_TimeOnly_Input), MemberType = typeof(ParseTimeOnly_Tests))]
 	public override void Test00_Valid_Input_Returns_Parsed_Result(string input)
 	{
-		Test00(input, DateTimeOffset.Parse, F.ParseDateTimeOffset, F.ParseDateTimeOffset);
 		Test00(input, s => DateTimeOffset.Parse(s, F.DefaultCulture), F.ParseDateTimeOffset, F.ParseDateTimeOffset);
 	}
 
