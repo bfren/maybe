@@ -28,7 +28,6 @@ public class ParseTimeOnly_Tests : Abstracts.Parse_Tests<TimeOnly>
 	[MemberData(nameof(Valid_TimeOnly_Input))]
 	public override void Test00_Valid_Input_Returns_Parsed_Result(string input)
 	{
-		Test00(input, TimeOnly.Parse, F.ParseTimeOnly, F.ParseTimeOnly);
 		Test00(input, s => TimeOnly.Parse(s, F.DefaultCulture), F.ParseTimeOnly, F.ParseTimeOnly);
 	}
 

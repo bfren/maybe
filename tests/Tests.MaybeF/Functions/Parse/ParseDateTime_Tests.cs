@@ -33,7 +33,6 @@ public class ParseDateTime_Tests : Abstracts.Parse_Tests<DateTime>
 	[MemberData(nameof(ParseTimeOnly_Tests.Valid_TimeOnly_Input), MemberType = typeof(ParseTimeOnly_Tests))]
 	public override void Test00_Valid_Input_Returns_Parsed_Result(string input)
 	{
-		Test00(input, DateTime.Parse, F.ParseDateTime, F.ParseDateTime);
 		Test00(input, s => DateTime.Parse(s, F.DefaultCulture), F.ParseDateTime, F.ParseDateTime);
 	}
 
