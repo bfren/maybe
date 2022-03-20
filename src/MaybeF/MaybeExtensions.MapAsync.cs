@@ -10,7 +10,7 @@ public static partial class MaybeExtensions
 {
 	/// <inheritdoc cref="F.MapAsync{T, TReturn}(Maybe{T}, Func{T, Task{TReturn}}, F.Handler)"/>
 	public static Task<Maybe<TReturn>> MapAsync<T, TReturn>(this Task<Maybe<T>> @this, Func<T, TReturn> map, F.Handler handler) =>
-		F.MapAsync(@this, x => Task.FromResult<TReturn>(map(x)), handler);
+		F.MapAsync(@this, x => Task.FromResult(map(x)), handler);
 
 	/// <inheritdoc cref="F.MapAsync{T, TReturn}(Maybe{T}, Func{T, Task{TReturn}}, F.Handler)"/>
 	public static Task<Maybe<TReturn>> MapAsync<T, TReturn>(this Task<Maybe<T>> @this, Func<T, Task<TReturn>> map, F.Handler handler) =>

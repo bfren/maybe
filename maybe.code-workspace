@@ -1,0 +1,17 @@
+{
+	"folders": [
+		{
+			"path": "."
+		}
+	],
+	"settings": {
+		"editor.renderWhitespace": "all",
+		"files.exclude": {
+			"**/.git": true,
+			"**/.DS_Store": true,
+			".vs/**": true,
+			".vscode/**": true,
+		},
+		"files.trimTrailingWhitespace": true
+	}
+}

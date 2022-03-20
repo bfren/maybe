@@ -2,7 +2,6 @@
 // Copyright (c) bfren - licensed under https://mit.bfren.dev/2019
 
 using MaybeF;
-using MaybeF.Testing;
 using MaybeF.Testing.Exceptions;
 using static MaybeF.F.R;
 
