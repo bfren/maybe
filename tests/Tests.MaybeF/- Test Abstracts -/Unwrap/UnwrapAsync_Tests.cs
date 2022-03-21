@@ -15,13 +15,13 @@ public abstract class UnwrapAsync_Tests
 		var value = Rnd.Int;
 		var maybe = Create.None<int>();
 		var ifNone = Substitute.For<Func<int>>();
-		_ = ifNone.Invoke().Returns(value);
+		ifNone.Invoke().Returns(value);
 
 		// Act
 		var result = await act(maybe.AsTask, ifNone).ConfigureAwait(false);
 
 		// Assert
-		_ = ifNone.Received().Invoke();
+		ifNone.Received().Invoke();
 		Assert.Equal(value, result);
 	}
 
@@ -34,13 +34,13 @@ public abstract class UnwrapAsync_Tests
 		var reason = Substitute.For<IReason>();
 		var maybe = F.None<int>(reason);
 		var ifNone = Substitute.For<Func<IReason, int>>();
-		_ = ifNone.Invoke(reason).Returns(value);
+		ifNone.Invoke(reason).Returns(value);
 
 		// Act
 		var result = await act(maybe.AsTask, ifNone).ConfigureAwait(false);
 
 		// Assert
-		_ = ifNone.Received().Invoke(reason);
+		ifNone.Received().Invoke(reason);
 		Assert.Equal(value, result);
 	}
 

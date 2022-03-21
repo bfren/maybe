@@ -22,7 +22,7 @@ public abstract class IfSome_Tests
 
 		// Assert
 		var none = result.AssertNone();
-		_ = Assert.IsType<UnhandledExceptionReason>(none);
+		Assert.IsType<UnhandledExceptionReason>(none);
 	}
 
 	public abstract void Test01_None_Returns_Original_Maybe();

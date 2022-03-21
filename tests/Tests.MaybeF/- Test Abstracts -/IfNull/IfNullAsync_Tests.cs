@@ -17,7 +17,7 @@ public abstract class IfNullAsync_Tests
 		var some = F.Some<object>(null, true);
 		var none = F.None<object?, NullValueReason>();
 		var throws = Substitute.For<Func<Task<Maybe<object?>>>>();
-		_ = throws.Invoke().Throws<Exception>();
+		throws.Invoke().Throws<Exception>();
 
 		// Act
 		var r0 = await act(some, throws).ConfigureAwait(false);
@@ -25,9 +25,9 @@ public abstract class IfNullAsync_Tests
 
 		// Assert
 		var n0 = r0.AssertNone();
-		_ = Assert.IsType<UnhandledExceptionReason>(n0);
+		Assert.IsType<UnhandledExceptionReason>(n0);
 		var n1 = r1.AssertNone();
-		_ = Assert.IsType<UnhandledExceptionReason>(n1);
+		Assert.IsType<UnhandledExceptionReason>(n1);
 	}
 
 	public abstract Task Test01_Some_With_Null_Value_Runs_IfNull_Func();
@@ -39,10 +39,10 @@ public abstract class IfNullAsync_Tests
 		var ifNull = Substitute.For<Func<Task<Maybe<object?>>>>();
 
 		// Act
-		_ = await act(some, ifNull).ConfigureAwait(false);
+		await act(some, ifNull).ConfigureAwait(false);
 
 		// Assert
-		_ = await ifNull.Received().Invoke().ConfigureAwait(false);
+		await ifNull.Received().Invoke().ConfigureAwait(false);
 	}
 
 	public abstract Task Test02_None_With_NullValueReason_Runs_IfNull_Func();
@@ -54,10 +54,10 @@ public abstract class IfNullAsync_Tests
 		var ifNull = Substitute.For<Func<Task<Maybe<object>>>>();
 
 		// Act
-		_ = await act(none, ifNull).ConfigureAwait(false);
+		await act(none, ifNull).ConfigureAwait(false);
 
 		// Assert
-		_ = await ifNull.Received().Invoke().ConfigureAwait(false);
+		await ifNull.Received().Invoke().ConfigureAwait(false);
 	}
 
 	public abstract Task Test03_Some_With_Null_Value_Runs_IfNull_Func_Returns_None_With_Reason();
@@ -68,13 +68,13 @@ public abstract class IfNullAsync_Tests
 		var maybe = F.Some<object>(null, true);
 		var ifNull = Substitute.For<Func<IReason>>();
 		var reason = new TestReason();
-		_ = ifNull.Invoke().Returns(reason);
+		ifNull.Invoke().Returns(reason);
 
 		// Act
 		var result = await act(maybe, ifNull).ConfigureAwait(false);
 
 		// Assert
-		_ = ifNull.Received().Invoke();
+		ifNull.Received().Invoke();
 		var none = result.AssertNone();
 		Assert.Same(reason, none);
 	}
@@ -87,13 +87,13 @@ public abstract class IfNullAsync_Tests
 		var maybe = F.None<object, NullValueReason>();
 		var ifNull = Substitute.For<Func<IReason>>();
 		var reason = new TestReason();
-		_ = ifNull.Invoke().Returns(reason);
+		ifNull.Invoke().Returns(reason);
 
 		// Act
 		var result = await act(maybe, ifNull).ConfigureAwait(false);
 
 		// Assert
-		_ = ifNull.Received().Invoke();
+		ifNull.Received().Invoke();
 		var none = result.AssertNone();
 		Assert.Same(reason, none);
 	}
@@ -106,10 +106,10 @@ public abstract class IfNullAsync_Tests
 		var ifNull = Substitute.For<Func<Task<Maybe<int>>>>();
 
 		// Act
-		_ = await act(ifNull).ConfigureAwait(false);
+		await act(ifNull).ConfigureAwait(false);
 
 		// Assert
-		_ = await ifNull.Received().Invoke().ConfigureAwait(false);
+		await ifNull.Received().Invoke().ConfigureAwait(false);
 	}
 
 	public sealed record class TestReason : IReason;

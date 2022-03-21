@@ -19,7 +19,7 @@ public abstract class Switch_Tests
 		var action = void () => act(maybe);
 
 		// Assert
-		_ = Assert.Throws<UnknownMaybeException>(action);
+		Assert.Throws<UnknownMaybeException>(action);
 	}
 
 	public abstract void Test01_Return_Value_If_Unknown_Maybe_Throws_UnknownMaybeException();
@@ -33,7 +33,7 @@ public abstract class Switch_Tests
 		var action = void () => act(maybe);
 
 		// Assert
-		_ = Assert.Throws<UnknownMaybeException>(action);
+		Assert.Throws<UnknownMaybeException>(action);
 	}
 
 	public abstract void Test02_If_Null_Throws_MaybeCannotBeNullException(Maybe<int> input);
@@ -46,7 +46,7 @@ public abstract class Switch_Tests
 		var action = void () => act();
 
 		// Assert
-		_ = Assert.Throws<MaybeCannotBeNullException>(action);
+		Assert.Throws<MaybeCannotBeNullException>(action);
 	}
 
 	public abstract void Test03_Return_Void_If_None_Runs_None_Action_With_Reason();
@@ -75,10 +75,10 @@ public abstract class Switch_Tests
 		var none = Substitute.For<Func<IReason, string>>();
 
 		// Act
-		_ = act(maybe, none);
+		act(maybe, none);
 
 		// Assert
-		_ = none.Received().Invoke(reason);
+		none.Received().Invoke(reason);
 	}
 
 	public abstract void Test05_Return_Void_If_Some_Runs_Some_Action_With_Value();
@@ -107,10 +107,10 @@ public abstract class Switch_Tests
 		var some = Substitute.For<Func<int, string>>();
 
 		// Act
-		_ = act(maybe, some);
+		act(maybe, some);
 
 		// Assert
-		_ = some.Received().Invoke(value);
+		some.Received().Invoke(value);
 	}
 
 	public record class FakeMaybe : Maybe<int> { }

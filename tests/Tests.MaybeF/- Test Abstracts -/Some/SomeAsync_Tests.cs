@@ -21,7 +21,7 @@ public abstract class SomeAsync_Tests
 
 		// Assert
 		var none = result.AssertNone();
-		_ = Assert.IsType<UnhandledExceptionReason>(none);
+		Assert.IsType<UnhandledExceptionReason>(none);
 	}
 
 	public abstract Task Test01_Nullable_Exception_Thrown_Without_Handler_Returns_None_With_UnhandledExceptionReason();
@@ -37,9 +37,9 @@ public abstract class SomeAsync_Tests
 
 		// Assert
 		var n0 = r0.AssertNone();
-		_ = Assert.IsType<UnhandledExceptionReason>(n0);
+		Assert.IsType<UnhandledExceptionReason>(n0);
 		var n1 = r1.AssertNone();
-		_ = Assert.IsType<UnhandledExceptionReason>(n1);
+		Assert.IsType<UnhandledExceptionReason>(n1);
 	}
 
 	public abstract Task Test02_Exception_Thrown_With_Handler_Returns_None_Calls_Handler();
@@ -55,8 +55,8 @@ public abstract class SomeAsync_Tests
 		var result = await act(throwFunc, handler).ConfigureAwait(false);
 
 		// Assert
-		_ = result.AssertNone();
-		_ = handler.Received().Invoke(exception);
+		result.AssertNone();
+		handler.Received().Invoke(exception);
 	}
 
 	public abstract Task Test03_Nullable_Exception_Thrown_With_Handler_Returns_None_Calls_Handler();
@@ -73,9 +73,9 @@ public abstract class SomeAsync_Tests
 		var r1 = await act(throwFunc, false, handler).ConfigureAwait(false);
 
 		// Assert
-		_ = r0.AssertNone();
-		_ = r1.AssertNone();
-		_ = handler.Received(2).Invoke(exception);
+		r0.AssertNone();
+		r1.AssertNone();
+		handler.Received(2).Invoke(exception);
 	}
 
 	public abstract Task Test04_Null_Input_Returns_None();
@@ -90,7 +90,7 @@ public abstract class SomeAsync_Tests
 
 		// Assert
 		var none = result.AssertNone();
-		_ = Assert.IsType<NullValueReason>(none);
+		Assert.IsType<NullValueReason>(none);
 	}
 
 	public abstract Task Test05_Nullable_Allow_Null_False_Null_Input_Returns_None_With_AllowNullWasFalseReason();
@@ -105,7 +105,7 @@ public abstract class SomeAsync_Tests
 
 		// Assert
 		var none = result.AssertNone();
-		_ = Assert.IsType<AllowNullWasFalseReason>(none);
+		Assert.IsType<AllowNullWasFalseReason>(none);
 	}
 
 	public abstract Task Test06_Nullable_Allow_Null_True_Null_Input_Returns_Some_With_Null_Value();

@@ -90,7 +90,7 @@ public class SelectMany_Tests
 
 		// Assert
 		var none = result.AssertNone();
-		_ = Assert.IsType<InvalidIntegerReason>(none);
+		Assert.IsType<InvalidIntegerReason>(none);
 	}
 
 	[Fact]
@@ -113,7 +113,7 @@ public class SelectMany_Tests
 
 		// Assert
 		var none = result.AssertNone();
-		_ = Assert.IsType<InvalidIntegerReason>(none);
+		Assert.IsType<InvalidIntegerReason>(none);
 	}
 
 	[Fact]
@@ -136,7 +136,7 @@ public class SelectMany_Tests
 
 		// Assert
 		var none = result.AssertNone();
-		_ = Assert.IsType<InvalidIntegerReason>(none);
+		Assert.IsType<InvalidIntegerReason>(none);
 	}
 
 	public record class InvalidIntegerReason : IReason;

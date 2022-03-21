@@ -17,7 +17,7 @@ public class GetHashCode_Tests
 		var action = void () => maybe.GetHashCode();
 
 		// Assert
-		_ = Assert.Throws<UnknownMaybeException>(action);
+		Assert.Throws<UnknownMaybeException>(action);
 	}
 
 	[Fact]

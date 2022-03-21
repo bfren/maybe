@@ -62,7 +62,7 @@ public class CatchAsync_Tests
 		var result = await F.CatchAsync<int>(() => throw exception, handler).ConfigureAwait(false);
 
 		// Assert
-		_ = result.AssertNone();
-		_ = handler.Received().Invoke(exception);
+		result.AssertNone();
+		handler.Received().Invoke(exception);
 	}
 }

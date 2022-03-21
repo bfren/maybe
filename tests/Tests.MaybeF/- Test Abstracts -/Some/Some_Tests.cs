@@ -21,7 +21,7 @@ public abstract class Some_Tests
 
 		// Assert
 		var none = result.AssertNone();
-		_ = Assert.IsType<UnhandledExceptionReason>(none);
+		Assert.IsType<UnhandledExceptionReason>(none);
 	}
 
 	public abstract void Test01_Nullable_Exception_Thrown_Without_Handler_Returns_None_With_UnhandledExceptionReason();
@@ -37,9 +37,9 @@ public abstract class Some_Tests
 
 		// Assert
 		var n0 = r0.AssertNone();
-		_ = Assert.IsType<UnhandledExceptionReason>(n0);
+		Assert.IsType<UnhandledExceptionReason>(n0);
 		var n1 = r1.AssertNone();
-		_ = Assert.IsType<UnhandledExceptionReason>(n1);
+		Assert.IsType<UnhandledExceptionReason>(n1);
 	}
 
 	public abstract void Test02_Exception_Thrown_With_Handler_Returns_None_Calls_Handler();
@@ -55,8 +55,8 @@ public abstract class Some_Tests
 		var result = act(throwFunc, handler);
 
 		// Assert
-		_ = result.AssertNone();
-		_ = handler.Received().Invoke(exception);
+		result.AssertNone();
+		handler.Received().Invoke(exception);
 	}
 
 	public abstract void Test03_Nullable_Exception_Thrown_With_Handler_Returns_None_Calls_Handler();
@@ -73,9 +73,9 @@ public abstract class Some_Tests
 		var r1 = act(throwFunc, false, handler);
 
 		// Assert
-		_ = r0.AssertNone();
-		_ = r1.AssertNone();
-		_ = handler.Received(2).Invoke(exception);
+		r0.AssertNone();
+		r1.AssertNone();
+		handler.Received(2).Invoke(exception);
 	}
 
 	public abstract void Test04_Null_Input_Value_Returns_None();
@@ -90,7 +90,7 @@ public abstract class Some_Tests
 
 		// Assert
 		var none = result.AssertNone();
-		_ = Assert.IsType<NullValueReason>(none);
+		Assert.IsType<NullValueReason>(none);
 	}
 
 	public abstract void Test05_Null_Input_Func_Returns_None();
@@ -105,7 +105,7 @@ public abstract class Some_Tests
 
 		// Assert
 		var none = result.AssertNone();
-		_ = Assert.IsType<NullValueReason>(none);
+		Assert.IsType<NullValueReason>(none);
 	}
 
 	public abstract void Test06_Nullable_Allow_Null_False_Null_Input_Value_Returns_None_With_AllowNullWasFalseReason();
@@ -120,7 +120,7 @@ public abstract class Some_Tests
 
 		// Assert
 		var none = result.AssertNone();
-		_ = Assert.IsType<AllowNullWasFalseReason>(none);
+		Assert.IsType<AllowNullWasFalseReason>(none);
 	}
 
 	public abstract void Test07_Nullable_Allow_Null_False_Null_Input_Func_Returns_None_With_AllowNullWasFalseReason();
@@ -135,7 +135,7 @@ public abstract class Some_Tests
 
 		// Assert
 		var none = result.AssertNone();
-		_ = Assert.IsType<AllowNullWasFalseReason>(none);
+		Assert.IsType<AllowNullWasFalseReason>(none);
 	}
 
 	public abstract void Test08_Nullable_Allow_Null_True_Null_Input_Value_Returns_Some_With_Null_Value();

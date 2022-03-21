@@ -76,9 +76,9 @@ public class Select_Tests
 
 		// Assert
 		var n0 = r0.AssertNone();
-		_ = Assert.IsType<InvalidIntegerReason>(n0);
+		Assert.IsType<InvalidIntegerReason>(n0);
 		var n1 = r1.AssertNone();
-		_ = Assert.IsType<InvalidIntegerReason>(n1);
+		Assert.IsType<InvalidIntegerReason>(n1);
 	}
 
 	[Fact]
@@ -106,17 +106,17 @@ public class Select_Tests
 
 		// Assert
 		var n0 = r0.AssertNone();
-		_ = Assert.IsType<InvalidIntegerReason>(n0);
+		Assert.IsType<InvalidIntegerReason>(n0);
 		var n1 = r1.AssertNone();
-		_ = Assert.IsType<InvalidIntegerReason>(n1);
+		Assert.IsType<InvalidIntegerReason>(n1);
 		var n2 = r2.AssertNone();
-		_ = Assert.IsType<InvalidIntegerReason>(n2);
+		Assert.IsType<InvalidIntegerReason>(n2);
 		var n3 = r3.AssertNone();
-		_ = Assert.IsType<InvalidIntegerReason>(n3);
+		Assert.IsType<InvalidIntegerReason>(n3);
 		var n4 = r4.AssertNone();
-		_ = Assert.IsType<InvalidIntegerReason>(n4);
+		Assert.IsType<InvalidIntegerReason>(n4);
 		var n5 = r5.AssertNone();
-		_ = Assert.IsType<InvalidIntegerReason>(n5);
+		Assert.IsType<InvalidIntegerReason>(n5);
 	}
 
 	public record class InvalidIntegerReason : IReason;

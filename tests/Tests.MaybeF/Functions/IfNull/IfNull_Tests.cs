@@ -9,7 +9,7 @@ public class IfNull_Tests : Abstracts.IfNull_Tests
 	public override void Test00_Exception_In_IfNull_Func_Returns_None_With_UnhandledExceptionReason()
 	{
 		Test00((mbe, ifNull) => F.IfNull(mbe, ifNull));
-		Test00((mbe, ifNull) => F.IfNull(mbe, () => { _ = ifNull(); return new TestReason(); }));
+		Test00((mbe, ifNull) => F.IfNull(mbe, () => { ifNull(); return new TestReason(); }));
 	}
 
 	[Fact]
