@@ -21,7 +21,10 @@ public static partial class F
 		{
 			foreach (var item in list)
 			{
-				yield return F.Bind(item, bind);
+				foreach (var value in F.Bind(item, bind))
+				{
+					yield return value;
+				}
 			}
 		}
 	}

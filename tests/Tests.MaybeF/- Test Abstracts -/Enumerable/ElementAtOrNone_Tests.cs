@@ -1,4 +1,4 @@
-﻿// Maybe: Unit Tests
+// Maybe: Unit Tests
 // Copyright (c) bfren - licensed under https://mit.bfren.dev/2019
 
 using MaybeF;
@@ -20,7 +20,7 @@ public abstract class ElementAtOrNone_Tests
 
 		// Assert
 		var none = result.AssertNone();
-		_ = Assert.IsType<ListIsEmptyReason>(none);
+		Assert.IsType<ListIsEmptyReason>(none);
 	}
 
 	public abstract void Test01_No_Value_At_Index_Returns_None_With_ElementAtIsNullReason();
@@ -35,7 +35,7 @@ public abstract class ElementAtOrNone_Tests
 
 		// Assert
 		var none = result.AssertNone();
-		_ = Assert.IsType<ElementAtIsNullReason>(none);
+		Assert.IsType<ElementAtIsNullReason>(none);
 	}
 
 	public abstract void Test02_Value_At_Index_Returns_Some_With_Value();

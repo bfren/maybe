@@ -20,7 +20,7 @@ public abstract class FilterBind_Tests
 		var o3 = Create.None<int>();
 		var list = new[] { o0, o1, o2, o3 };
 		var bind = Substitute.For<Func<int, Maybe<string>>>();
-		_ = bind.Invoke(Arg.Any<int>()).Returns(x => F.Some(x.ArgAt<int>(0).ToString()));
+		bind.Invoke(Arg.Any<int>()).Returns(x => F.Some(x.ArgAt<int>(0).ToString()));
 
 		// Act
 		var result = act(list, bind);
@@ -38,7 +38,7 @@ public abstract class FilterBind_Tests
 				Assert.Equal(v1.ToString(), s1);
 			}
 		);
-		_ = bind.ReceivedWithAnyArgs(2).Invoke(Arg.Any<int>());
+		bind.ReceivedWithAnyArgs(2).Invoke(Arg.Any<int>());
 	}
 
 	public abstract void Test01_Returns_Matching_Some_From_List();
@@ -55,10 +55,10 @@ public abstract class FilterBind_Tests
 		var list = new[] { o0, o1, o2, o3 };
 
 		var bind = Substitute.For<Func<int, Maybe<string>>>();
-		_ = bind.Invoke(Arg.Any<int>()).Returns(x => F.Some(x.ArgAt<int>(0).ToString()));
+		bind.Invoke(Arg.Any<int>()).Returns(x => F.Some(x.ArgAt<int>(0).ToString()));
 
 		var predicate = Substitute.For<Func<int, bool>>();
-		_ = predicate.Invoke(v1).Returns(true);
+		predicate.Invoke(v1).Returns(true);
 
 		// Act
 		var r0 = act(list, bind, predicate);
@@ -67,6 +67,6 @@ public abstract class FilterBind_Tests
 		Assert.Collection(r0,
 			x => Assert.Equal(v1.ToString(), x)
 		);
-		_ = bind.ReceivedWithAnyArgs(1).Invoke(Arg.Any<int>());
+		bind.ReceivedWithAnyArgs(1).Invoke(Arg.Any<int>());
 	}
 }
