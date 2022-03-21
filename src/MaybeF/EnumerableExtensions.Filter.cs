@@ -4,7 +4,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace MaybeF.Linq;
+namespace MaybeF;
 
 public static partial class EnumerableExtensions
 {

@@ -3,9 +3,9 @@
 
 using System.Collections.Generic;
 
-namespace MaybeF.Linq;
+namespace MaybeF;
 
 /// <summary>
-/// <see cref="IEnumerable{T}"/> Linq Extensions
+/// <see cref="IEnumerable{T}"/> Extensions
 /// </summary>
 public static partial class EnumerableExtensions { }

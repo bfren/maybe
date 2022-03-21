@@ -6,6 +6,6 @@ using System.Collections.Generic;
 namespace MaybeF.Linq;
 
 /// <summary>
-/// <see cref="IDictionary{TKey, TValue}"/> Extensions
+/// <see cref="IDictionary{TKey, TValue}"/> Linq Extensions
 /// </summary>
 public static partial class DictionaryExtensions { }
