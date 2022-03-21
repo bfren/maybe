@@ -13,10 +13,6 @@ public static partial class EnumerableExtensions
 		F.EnumerableF.Map(@this);
 
 	/// <inheritdoc cref="F.EnumerableF.Map{T, TReturn}(IEnumerable{T}, Func{T, Maybe{TReturn}})"/>
-	public static IEnumerable<Maybe<TReturn>> Map<T, TReturn>(this IEnumerable<T> @this, Func<T, TReturn> map) =>
-		F.EnumerableF.Map(@this, map);
-
-	/// <inheritdoc cref="F.EnumerableF.Map{T, TReturn}(IEnumerable{T}, Func{T, Maybe{TReturn}})"/>
 	public static IEnumerable<Maybe<TReturn>> Map<T, TReturn>(this IEnumerable<T> @this, Func<T, Maybe<TReturn>> map) =>
 		F.EnumerableF.Map(@this, map);
 }

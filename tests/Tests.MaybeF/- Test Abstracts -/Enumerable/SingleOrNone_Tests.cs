@@ -20,7 +20,7 @@ public abstract class SingleOrNone_Tests
 
 		// Assert
 		var none = result.AssertNone();
-		_ = Assert.IsType<ListIsEmptyReason>(none);
+		Assert.IsType<ListIsEmptyReason>(none);
 	}
 
 	public abstract void Test01_Multiple_Items_Returns_None_With_MultipleItemsReason();
@@ -35,7 +35,7 @@ public abstract class SingleOrNone_Tests
 
 		// Assert
 		var none = result.AssertNone();
-		_ = Assert.IsType<MultipleItemsReason>(none);
+		Assert.IsType<MultipleItemsReason>(none);
 	}
 
 	public abstract void Test02_No_Matching_Items_Returns_None_With_NoMatchingItemsReason();
@@ -45,14 +45,14 @@ public abstract class SingleOrNone_Tests
 		// Arrange
 		var list = new int[] { Rnd.Int, Rnd.Int, Rnd.Int };
 		var predicate = Substitute.For<Func<int, bool>>();
-		_ = predicate.Invoke(Arg.Any<int>()).Returns(false);
+		predicate.Invoke(Arg.Any<int>()).Returns(false);
 
 		// Act
 		var result = act(list, predicate);
 
 		// Assert
 		var none = result.AssertNone();
-		_ = Assert.IsType<NoMatchingItemsReason>(none);
+		Assert.IsType<NoMatchingItemsReason>(none);
 	}
 
 	public abstract void Test03_Null_Item_Returns_None_With_NullItemReason();
@@ -62,14 +62,14 @@ public abstract class SingleOrNone_Tests
 		// Arrange
 		var list = new int?[] { Rnd.Int, null, Rnd.Int };
 		var predicate = Substitute.For<Func<int?, bool>>();
-		_ = predicate.Invoke(null).Returns(true);
+		predicate.Invoke(null).Returns(true);
 
 		// Act
 		var result = act(list, predicate);
 
 		// Assert
 		var none = result.AssertNone();
-		_ = Assert.IsType<NullItemReason>(none);
+		Assert.IsType<NullItemReason>(none);
 	}
 
 	public abstract void Test04_Returns_Single_Element();
@@ -96,7 +96,7 @@ public abstract class SingleOrNone_Tests
 		var value = Rnd.Int;
 		var list = new[] { Rnd.Int, value, Rnd.Int };
 		var predicate = Substitute.For<Func<int, bool>>();
-		_ = predicate.Invoke(value).Returns(true);
+		predicate.Invoke(value).Returns(true);
 
 		// Act
 		var result = act(list, predicate);
