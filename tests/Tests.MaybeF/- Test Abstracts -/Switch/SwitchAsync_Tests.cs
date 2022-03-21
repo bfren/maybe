@@ -19,7 +19,7 @@ public abstract class SwitchAsync_Tests
 		var action = async Task<string> () => await act(maybe).ConfigureAwait(false);
 
 		// Assert
-		_ = await Assert.ThrowsAsync<UnknownMaybeException>(action).ConfigureAwait(false);
+		await Assert.ThrowsAsync<UnknownMaybeException>(action).ConfigureAwait(false);
 	}
 
 	public abstract Task Test01_If_Null_Throws_MaybeCannotBeNullException(Maybe<int> input);
@@ -32,7 +32,7 @@ public abstract class SwitchAsync_Tests
 		var action = async Task<string> () => await act().ConfigureAwait(false);
 
 		// Assert
-		_ = await Assert.ThrowsAsync<MaybeCannotBeNullException>(action).ConfigureAwait(false);
+		await Assert.ThrowsAsync<MaybeCannotBeNullException>(action).ConfigureAwait(false);
 	}
 
 	public abstract Task Test02_If_None_Runs_None_Func_With_Reason();
@@ -45,10 +45,10 @@ public abstract class SwitchAsync_Tests
 		var none = Substitute.For<Func<IReason, Task<string>>>();
 
 		// Act
-		_ = await act(maybe, none).ConfigureAwait(false);
+		await act(maybe, none).ConfigureAwait(false);
 
 		// Assert
-		_ = await none.Received().Invoke(reason).ConfigureAwait(false);
+		await none.Received().Invoke(reason).ConfigureAwait(false);
 	}
 
 	public abstract Task Test03_If_Some_Runs_Some_Func_With_Value();
@@ -61,10 +61,10 @@ public abstract class SwitchAsync_Tests
 		var some = Substitute.For<Func<int, Task<string>>>();
 
 		// Act
-		_ = await act(maybe, some).ConfigureAwait(false);
+		await act(maybe, some).ConfigureAwait(false);
 
 		// Assert
-		_ = await some.Received().Invoke(value).ConfigureAwait(false);
+		await some.Received().Invoke(value).ConfigureAwait(false);
 	}
 
 	public record class FakeMaybe : Maybe<int> { }

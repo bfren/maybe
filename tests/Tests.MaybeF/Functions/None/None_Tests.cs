@@ -14,7 +14,7 @@ public class None_Tests
 		var result = Create.None<int>();
 
 		// Assert
-		_ = result.AssertNone();
+		result.AssertNone();
 	}
 
 	[Fact]
@@ -41,7 +41,7 @@ public class None_Tests
 
 		// Assert
 		var none = result.AssertNone();
-		_ = Assert.IsType<TestReason>(none);
+		Assert.IsType<TestReason>(none);
 	}
 
 	[Fact]

@@ -21,8 +21,8 @@ public abstract class SomeIfAsync_Tests
 		var result = await act(throwFunc, Task.FromResult(Rnd.Int), handler).ConfigureAwait(false);
 
 		// Assert
-		_ = result.AssertNone();
-		_ = handler.Received().Invoke(exception);
+		result.AssertNone();
+		handler.Received().Invoke(exception);
 	}
 
 	public abstract Task Test01_Exception_Thrown_By_Predicate_With_Value_Func_Calls_Handler_Returns_None();
@@ -38,8 +38,8 @@ public abstract class SomeIfAsync_Tests
 		var result = await act(throwFunc, () => Task.FromResult(Rnd.Int), handler).ConfigureAwait(false);
 
 		// Assert
-		_ = result.AssertNone();
-		_ = handler.Received().Invoke(exception);
+		result.AssertNone();
+		handler.Received().Invoke(exception);
 	}
 
 	public abstract Task Test02_Exception_Thrown_By_Value_Func_Calls_Handler_Returns_None();
@@ -55,8 +55,8 @@ public abstract class SomeIfAsync_Tests
 		var result = await act(() => true, throwFunc, handler).ConfigureAwait(false);
 
 		// Assert
-		_ = result.AssertNone();
-		_ = handler.Received().Invoke(exception);
+		result.AssertNone();
+		handler.Received().Invoke(exception);
 	}
 
 	public abstract Task Test03_Predicate_True_With_Value_Returns_Some();
@@ -101,7 +101,7 @@ public abstract class SomeIfAsync_Tests
 
 		// Assert
 		var none = result.AssertNone();
-		_ = Assert.IsType<PredicateWasFalseReason>(none);
+		Assert.IsType<PredicateWasFalseReason>(none);
 	}
 
 	public abstract Task Test06_Predicate_False_With_Value_Func_Returns_None_With_PredicateWasFalseReason();
@@ -116,7 +116,7 @@ public abstract class SomeIfAsync_Tests
 
 		// Assert
 		var none = result.AssertNone();
-		_ = Assert.IsType<PredicateWasFalseReason>(none);
+		Assert.IsType<PredicateWasFalseReason>(none);
 	}
 
 	public abstract Task Test07_Predicate_False_Bypasses_Value_Func();
@@ -130,7 +130,7 @@ public abstract class SomeIfAsync_Tests
 		var result = await act(() => false, getValue, F.DefaultHandler).ConfigureAwait(false);
 
 		// Assert
-		_ = result.AssertNone();
-		_ = await getValue.DidNotReceive().Invoke().ConfigureAwait(false);
+		result.AssertNone();
+		await getValue.DidNotReceive().Invoke().ConfigureAwait(false);
 	}
 }

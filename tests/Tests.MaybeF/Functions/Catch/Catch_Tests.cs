@@ -62,7 +62,7 @@ public class Catch_Tests
 		var result = F.Catch<int>(() => throw exception, handler);
 
 		// Assert
-		_ = result.AssertNone();
-		_ = handler.Received().Invoke(exception);
+		result.AssertNone();
+		handler.Received().Invoke(exception);
 	}
 }

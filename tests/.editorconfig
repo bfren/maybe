@@ -15,5 +15,11 @@ dotnet_diagnostic.CA2201.severity = none
 # IDE0022: Use expression body for methods
 dotnet_diagnostic.IDE0022.severity = none
 
+# IDE0058: Expression value is never used
+dotnet_diagnostic.IDE0058.severity = silent
+
 # IDE0130: Namespace does not match folder structure
 dotnet_diagnostic.IDE0130.severity = none
+
+# RCS1118: Mark local variable as const.
+dotnet_diagnostic.RCS1118.severity = none

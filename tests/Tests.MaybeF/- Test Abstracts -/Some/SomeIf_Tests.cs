@@ -21,8 +21,8 @@ public abstract class SomeIf_Tests
 		var result = act(throwFunc, Rnd.Int, handler);
 
 		// Assert
-		_ = result.AssertNone();
-		_ = handler.Received().Invoke(exception);
+		result.AssertNone();
+		handler.Received().Invoke(exception);
 	}
 
 	public abstract void Test01_Exception_Thrown_By_Predicate_With_Value_Func_Calls_Handler_Returns_None();
@@ -38,8 +38,8 @@ public abstract class SomeIf_Tests
 		var result = act(throwFunc, () => Rnd.Int, handler);
 
 		// Assert
-		_ = result.AssertNone();
-		_ = handler.Received().Invoke(exception);
+		result.AssertNone();
+		handler.Received().Invoke(exception);
 	}
 
 	public abstract void Test02_Exception_Thrown_By_Value_Func_Calls_Handler_Returns_None();
@@ -55,8 +55,8 @@ public abstract class SomeIf_Tests
 		var result = act(() => true, throwFunc, handler);
 
 		// Assert
-		_ = result.AssertNone();
-		_ = handler.Received().Invoke(exception);
+		result.AssertNone();
+		handler.Received().Invoke(exception);
 	}
 
 	public abstract void Test03_Predicate_True_With_Value_Returns_Some();
@@ -101,7 +101,7 @@ public abstract class SomeIf_Tests
 
 		// Assert
 		var none = result.AssertNone();
-		_ = Assert.IsType<PredicateWasFalseReason>(none);
+		Assert.IsType<PredicateWasFalseReason>(none);
 	}
 
 	public abstract void Test06_Predicate_False_With_Value_Func_Returns_None_With_PredicateWasFalseReason();
@@ -116,7 +116,7 @@ public abstract class SomeIf_Tests
 
 		// Assert
 		var none = result.AssertNone();
-		_ = Assert.IsType<PredicateWasFalseReason>(none);
+		Assert.IsType<PredicateWasFalseReason>(none);
 	}
 
 	public abstract void Test07_Predicate_False_Bypasses_Value_Func();
@@ -130,7 +130,7 @@ public abstract class SomeIf_Tests
 		var result = act(() => false, getValue, F.DefaultHandler);
 
 		// Assert
-		_ = result.AssertNone();
-		_ = getValue.DidNotReceive().Invoke();
+		result.AssertNone();
+		getValue.DidNotReceive().Invoke();
 	}
 }

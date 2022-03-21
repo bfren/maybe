@@ -17,7 +17,7 @@ public abstract class IfNull_Tests
 		var some = F.Some<object>(null, true);
 		var none = F.None<object?, NullValueReason>();
 		var throws = Substitute.For<Func<Maybe<object?>>>();
-		_ = throws.Invoke().Throws<Exception>();
+		throws.Invoke().Throws<Exception>();
 
 		// Act
 		var r0 = act(some, throws);
@@ -25,9 +25,9 @@ public abstract class IfNull_Tests
 
 		// Assert
 		var n0 = r0.AssertNone();
-		_ = Assert.IsType<UnhandledExceptionReason>(n0);
+		Assert.IsType<UnhandledExceptionReason>(n0);
 		var n1 = r1.AssertNone();
-		_ = Assert.IsType<UnhandledExceptionReason>(n1);
+		Assert.IsType<UnhandledExceptionReason>(n1);
 	}
 
 	public abstract void Test01_Some_With_Null_Value_Runs_IfNull_Func();
@@ -39,10 +39,10 @@ public abstract class IfNull_Tests
 		var ifNull = Substitute.For<Func<Maybe<object?>>>();
 
 		// Act
-		_ = act(maybe, ifNull);
+		act(maybe, ifNull);
 
 		// Assert
-		_ = ifNull.Received().Invoke();
+		ifNull.Received().Invoke();
 	}
 
 	public abstract void Test02_None_With_NullValueReason_Runs_IfNull_Func();
@@ -54,10 +54,10 @@ public abstract class IfNull_Tests
 		var ifNull = Substitute.For<Func<Maybe<object>>>();
 
 		// Act
-		_ = act(maybe, ifNull);
+		act(maybe, ifNull);
 
 		// Assert
-		_ = ifNull.Received().Invoke();
+		ifNull.Received().Invoke();
 	}
 
 	public abstract void Test03_Some_With_Null_Value_Runs_IfNull_Func_Returns_None_With_Reason();
@@ -68,13 +68,13 @@ public abstract class IfNull_Tests
 		var maybe = F.Some<object>(null, true);
 		var ifNull = Substitute.For<Func<IReason>>();
 		var reason = new TestReason();
-		_ = ifNull.Invoke().Returns(reason);
+		ifNull.Invoke().Returns(reason);
 
 		// Act
 		var result = act(maybe, ifNull);
 
 		// Assert
-		_ = ifNull.Received().Invoke();
+		ifNull.Received().Invoke();
 		var none = result.AssertNone();
 		Assert.Same(reason, none);
 	}
@@ -87,13 +87,13 @@ public abstract class IfNull_Tests
 		var maybe = F.None<object, NullValueReason>();
 		var ifNull = Substitute.For<Func<IReason>>();
 		var reason = new TestReason();
-		_ = ifNull.Invoke().Returns(reason);
+		ifNull.Invoke().Returns(reason);
 
 		// Act
 		var result = act(maybe, ifNull);
 
 		// Assert
-		_ = ifNull.Received().Invoke();
+		ifNull.Received().Invoke();
 		var none = result.AssertNone();
 		Assert.Same(reason, none);
 	}
@@ -106,10 +106,10 @@ public abstract class IfNull_Tests
 		var ifNull = Substitute.For<Func<Maybe<int>>>();
 
 		// Act
-		_ = act(ifNull);
+		act(ifNull);
 
 		// Assert
-		_ = ifNull.Received().Invoke();
+		ifNull.Received().Invoke();
 	}
 
 	public sealed record class TestReason : IReason;

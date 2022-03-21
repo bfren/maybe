@@ -36,7 +36,7 @@ public abstract class AuditAsync_Tests
 		var action = Task () => act(maybe);
 
 		// Assert
-		_ = await Assert.ThrowsAsync<UnknownMaybeException>(action).ConfigureAwait(false);
+		await Assert.ThrowsAsync<UnknownMaybeException>(action).ConfigureAwait(false);
 	}
 
 	#endregion General

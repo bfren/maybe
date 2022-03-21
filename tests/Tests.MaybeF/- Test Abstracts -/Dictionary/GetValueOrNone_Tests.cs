@@ -20,7 +20,7 @@ public abstract class GetValueOrNone_Tests
 
 		// Assert
 		var none = result.AssertNone();
-		_ = Assert.IsType<DictionaryIsEmptyReason>(none);
+		Assert.IsType<DictionaryIsEmptyReason>(none);
 	}
 
 	public abstract void Test01_Null_Key_Returns_None_With_KeyCannotBeNullReason(string input);
@@ -38,7 +38,7 @@ public abstract class GetValueOrNone_Tests
 
 		// Assert
 		var none = result.AssertNone();
-		_ = Assert.IsType<KeyCannotBeNullReason>(none);
+		Assert.IsType<KeyCannotBeNullReason>(none);
 	}
 
 	public abstract void Test02_Key_Does_Not_Exists_Returns_None_With_KeyDoesNotExistReason();

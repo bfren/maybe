@@ -81,8 +81,8 @@ public class Where_Tests
 				 select a ^ 2;
 
 		// Assert
-		_ = r0.AssertNone();
-		_ = r1.AssertNone();
+		r0.AssertNone();
+		r1.AssertNone();
 	}
 
 	[Fact]
@@ -113,12 +113,12 @@ public class Where_Tests
 		).ConfigureAwait(false);
 
 		// Assert
-		_ = r0.AssertNone();
-		_ = r1.AssertNone();
-		_ = r2.AssertNone();
-		_ = r3.AssertNone();
-		_ = r4.AssertNone();
-		_ = r5.AssertNone();
+		r0.AssertNone();
+		r1.AssertNone();
+		r2.AssertNone();
+		r3.AssertNone();
+		r4.AssertNone();
+		r5.AssertNone();
 	}
 
 	[Fact]
@@ -135,9 +135,9 @@ public class Where_Tests
 
 		// Assert
 		var n0 = r0.AssertNone();
-		_ = Assert.IsType<InvalidIntegerReason>(n0);
+		Assert.IsType<InvalidIntegerReason>(n0);
 		var n1 = r1.AssertNone();
-		_ = Assert.IsType<InvalidIntegerReason>(n1);
+		Assert.IsType<InvalidIntegerReason>(n1);
 	}
 
 	[Fact]
@@ -168,17 +168,17 @@ public class Where_Tests
 
 		// Assert
 		var n0 = r0.AssertNone();
-		_ = Assert.IsType<InvalidIntegerReason>(n0);
+		Assert.IsType<InvalidIntegerReason>(n0);
 		var n1 = r1.AssertNone();
-		_ = Assert.IsType<InvalidIntegerReason>(n1);
+		Assert.IsType<InvalidIntegerReason>(n1);
 		var n2 = r2.AssertNone();
-		_ = Assert.IsType<InvalidIntegerReason>(n2);
+		Assert.IsType<InvalidIntegerReason>(n2);
 		var n3 = r3.AssertNone();
-		_ = Assert.IsType<InvalidIntegerReason>(n3);
+		Assert.IsType<InvalidIntegerReason>(n3);
 		var n4 = r4.AssertNone();
-		_ = Assert.IsType<InvalidIntegerReason>(n4);
+		Assert.IsType<InvalidIntegerReason>(n4);
 		var n5 = r5.AssertNone();
-		_ = Assert.IsType<InvalidIntegerReason>(n5);
+		Assert.IsType<InvalidIntegerReason>(n5);
 	}
 
 	public record class InvalidIntegerReason : IReason;

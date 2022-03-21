@@ -10,7 +10,7 @@ public class IfNullAsync_Tests : Abstracts.IfNullAsync_Tests
 	{
 		await Test00((mbe, ifNull) => F.IfNullAsync(mbe, ifNull)).ConfigureAwait(false);
 		await Test00((mbe, ifNull) => F.IfNullAsync(mbe.AsTask, ifNull)).ConfigureAwait(false);
-		await Test00((mbe, ifNull) => F.IfNullAsync(mbe.AsTask, () => { _ = ifNull(); return new TestReason(); })).ConfigureAwait(false);
+		await Test00((mbe, ifNull) => F.IfNullAsync(mbe.AsTask, () => { ifNull(); return new TestReason(); })).ConfigureAwait(false);
 	}
 
 	[Fact]

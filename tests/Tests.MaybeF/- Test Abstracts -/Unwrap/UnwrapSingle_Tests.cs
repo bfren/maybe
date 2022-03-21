@@ -22,7 +22,7 @@ public abstract class UnwrapSingle_Tests
 		// Assert
 		var none = result.AssertNone();
 		var reason = Assert.IsType<UnhandledExceptionReason>(none);
-		_ = Assert.IsType<UnknownMaybeException>(reason.Value);
+		Assert.IsType<UnknownMaybeException>(reason.Value);
 	}
 
 	public abstract void Test01_None_Returns_None();
@@ -36,7 +36,7 @@ public abstract class UnwrapSingle_Tests
 		var result = act(maybe);
 
 		// Assert
-		_ = result.AssertNone();
+		result.AssertNone();
 	}
 
 	public abstract void Test02_None_With_Reason_Returns_None_With_Reason();
@@ -68,7 +68,7 @@ public abstract class UnwrapSingle_Tests
 
 		// Assert
 		var none = result.AssertNone();
-		_ = Assert.IsType<UnwrapSingleNoItemsReason>(none);
+		Assert.IsType<UnwrapSingleNoItemsReason>(none);
 	}
 
 	public abstract void Test04_No_Items_Runs_NoItems();
@@ -81,10 +81,10 @@ public abstract class UnwrapSingle_Tests
 		var noItems = Substitute.For<Func<IReason>>();
 
 		// Act
-		_ = act(maybe, noItems);
+		act(maybe, noItems);
 
 		// Assert
-		_ = noItems.Received().Invoke();
+		noItems.Received().Invoke();
 	}
 
 	public abstract void Test05_Too_Many_Items_Returns_None_With_UnwrapSingleTooManyItemsErrorReason();
@@ -100,7 +100,7 @@ public abstract class UnwrapSingle_Tests
 
 		// Assert
 		var none = result.AssertNone();
-		_ = Assert.IsType<UnwrapSingleTooManyItemsErrorReason>(none);
+		Assert.IsType<UnwrapSingleTooManyItemsErrorReason>(none);
 	}
 
 	public abstract void Test06_Too_Many_Items_Runs_TooMany();
@@ -113,10 +113,10 @@ public abstract class UnwrapSingle_Tests
 		var tooMany = Substitute.For<Func<IReason>>();
 
 		// Act
-		_ = act(maybe, tooMany);
+		act(maybe, tooMany);
 
 		// Assert
-		_ = tooMany.Received().Invoke();
+		tooMany.Received().Invoke();
 	}
 
 	public abstract void Test07_Not_A_List_Returns_None_With_UnwrapSingleNotAListReason();
@@ -132,7 +132,7 @@ public abstract class UnwrapSingle_Tests
 
 		// Assert
 		var none = result.AssertNone();
-		_ = Assert.IsType<UnwrapSingleNotAListReason>(none);
+		Assert.IsType<UnwrapSingleNotAListReason>(none);
 	}
 
 	public abstract void Test08_Not_A_List_Runs_NotAList();
@@ -145,10 +145,10 @@ public abstract class UnwrapSingle_Tests
 		var notAList = Substitute.For<Func<IReason>>();
 
 		// Act
-		_ = act(maybe, notAList);
+		act(maybe, notAList);
 
 		// Assert
-		_ = notAList.Received().Invoke();
+		notAList.Received().Invoke();
 	}
 
 	public abstract void Test09_Incorrect_Type_Returns_None_With_UnwrapSingleIncorrectTypeErrorReason();
@@ -165,7 +165,7 @@ public abstract class UnwrapSingle_Tests
 
 		// Assert
 		var none = result.AssertNone();
-		_ = Assert.IsType<UnwrapSingleIncorrectTypeErrorReason>(none);
+		Assert.IsType<UnwrapSingleIncorrectTypeErrorReason>(none);
 	}
 
 	public abstract void Test10_List_With_Single_Item_Returns_Single();
