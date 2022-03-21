@@ -1,5 +1,5 @@
 <Project Sdk="Microsoft.NET.Sdk">
 	<PropertyGroup>
-		<Description>Maybe monad for C#, with Linq support.</Description>
+		<Description>Maybe monad for C# - to handle null values and exceptions better - including Linq support, chaining, and asynchronous programming.</Description>
 	</PropertyGroup>
 </Project>
