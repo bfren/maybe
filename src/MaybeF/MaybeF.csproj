@@ -2,4 +2,12 @@
 	<PropertyGroup>
 		<Description>Maybe monad for C# - to handle null values and exceptions better - including Linq support, chaining, and asynchronous programming.</Description>
 	</PropertyGroup>
+	<ItemGroup Label="Test Internals">
+		<AssemblyAttribute Include="System.Runtime.CompilerServices.InternalsVisibleToAttribute">
+			<_Parameter1>DynamicProxyGenAssembly2</_Parameter1>
+		</AssemblyAttribute>
+		<AssemblyAttribute Include="System.Runtime.CompilerServices.InternalsVisibleToAttribute">
+			<_Parameter1>Tests.$(AssemblyName).Testing</_Parameter1>
+		</AssemblyAttribute>
+	</ItemGroup>
 </Project>
