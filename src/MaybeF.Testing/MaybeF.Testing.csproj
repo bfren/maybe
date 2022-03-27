@@ -2,10 +2,13 @@
 	<PropertyGroup>
 		<Description>Helper methods for writing unit tests using Maybe types.</Description>
 	</PropertyGroup>
-  <ItemGroup>
-    <PackageReference Include="xunit.assert" Version="2.4.1" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\MaybeF\MaybeF.csproj" />
-  </ItemGroup>
+	<ItemGroup>
+		<Using Include="Xunit"/>
+	</ItemGroup>
+	<ItemGroup>
+		<PackageReference Include="xunit.assert" Version="2.4.1" />
+	</ItemGroup>
+	<ItemGroup>
+		<ProjectReference Include="..\MaybeF\MaybeF.csproj" />
+	</ItemGroup>
 </Project>
