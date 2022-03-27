@@ -19,7 +19,7 @@ public class AssertType_Tests
 	}
 
 	[Fact]
-	public void Is_Not_Type_Throws_Exception()
+	public void Is_Not_Type_Throws_IsTypeException()
 	{
 		// Arrange
 		var reason = Substitute.For<IReason>();

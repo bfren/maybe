@@ -1,8 +1,6 @@
 // Maybe: .NET Monad.
 // Copyright (c) bfren - licensed under https://mit.bfren.dev/2019
 
-using Xunit;
-
 namespace MaybeF.Testing;
 
 public static partial class ReasonExtensions
