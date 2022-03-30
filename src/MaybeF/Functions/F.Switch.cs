@@ -28,7 +28,7 @@ public static partial class F
 		}
 		else if (maybe is None<T> y)
 		{
-			none(y.Msg);
+			none(y.Reason);
 		}
 		else if (maybe is not null)
 		{
@@ -57,7 +57,7 @@ public static partial class F
 				some(x.Value),
 
 			None<T> x =>
-				none(x.Msg),
+				none(x.Reason),
 
 			{ } =>
 				throw new UnknownMaybeException(), // as Maybe<T> is internal implementation only this should never happen...

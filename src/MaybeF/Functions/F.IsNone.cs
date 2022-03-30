@@ -7,7 +7,7 @@ public static partial class F
 {
 	/// <summary>
 	/// If <paramref name="maybe"/> is a <see cref="Internals.None{T}"/>, set <paramref name="message"/>
-	/// to be <see cref="Internals.None{T}.Msg"/>
+	/// to be <see cref="Internals.None{T}.Reason"/>
 	/// </summary>
 	/// <remarks>
 	/// Warning: <paramref name="message"/> will be <see langword="null"/> if <paramref name="maybe"/>
@@ -20,7 +20,7 @@ public static partial class F
 	{
 		if (maybe is Internals.None<T> none)
 		{
-			message = none.Msg;
+			message = none.Reason;
 			return true;
 		}
 

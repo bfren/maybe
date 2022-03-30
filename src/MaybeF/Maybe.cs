@@ -155,7 +155,7 @@ public abstract record class Maybe<T> : IEquatable<Maybe<T>>
 				Equals(x.Value, y.Value),
 
 			None<T> x when other is None<T> y =>
-				Equals(x.Msg, y.Msg),
+				Equals(x.Reason, y.Reason),
 
 			_ =>
 				false
@@ -175,7 +175,7 @@ public abstract record class Maybe<T> : IEquatable<Maybe<T>>
 				typeof(Some<>).GetHashCode() ^ typeof(T).GetHashCode(),
 
 			None<T> x =>
-				typeof(None<>).GetHashCode() ^ typeof(T).GetHashCode() ^ x.Msg.GetHashCode(),
+				typeof(None<>).GetHashCode() ^ typeof(T).GetHashCode() ^ x.Reason.GetHashCode(),
 
 			_ =>
 				throw new UnknownMaybeException() // as Maybe<T> is internal implementation only this should never happen...

@@ -18,7 +18,7 @@ public class Constructor_Tests
 		var result = new None<string>(message);
 
 		// Assert
-		Assert.Equal(message, result.Msg);
+		Assert.Equal(message, result.Reason);
 	}
 }
 

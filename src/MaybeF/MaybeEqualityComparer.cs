@@ -28,7 +28,7 @@ public sealed class MaybeEqualityComparer<T> : IEqualityComparer<Maybe<T>>, IEqu
 				Equals(objA: a.Value, objB: b.Value),
 
 			None<T> a when y is None<T> b =>
-				Equals(objA: a.Msg, objB: b.Msg),
+				Equals(objA: a.Reason, objB: b.Reason),
 
 			_ =>
 				false

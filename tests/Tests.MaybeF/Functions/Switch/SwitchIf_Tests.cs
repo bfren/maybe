@@ -60,7 +60,7 @@ public class SwitchIf_Tests : Abstracts.SwitchIf_Tests
 	public override void Test07_Check_Returns_False_And_IfFalse_Throws_Exception_Returns_None_With_SwitchIfFuncExceptionMsg()
 	{
 		Test07((mbe, check, ifFalse) => F.SwitchIf(mbe, check, null, ifFalse));
-		Test07((mbe, check, ifFalse) => F.SwitchIf(mbe, check, x => ifFalse(x).Msg));
+		Test07((mbe, check, ifFalse) => F.SwitchIf(mbe, check, x => ifFalse(x).Reason));
 	}
 
 	[Fact]
@@ -73,6 +73,6 @@ public class SwitchIf_Tests : Abstracts.SwitchIf_Tests
 	public override void Test09_Check_Returns_False_Runs_IfFalse_Returns_Value()
 	{
 		Test09((mbe, check, ifFalse) => F.SwitchIf(mbe, check, null, ifFalse));
-		Test09((mbe, check, ifFalse) => F.SwitchIf(mbe, check, x => ifFalse(x).Msg));
+		Test09((mbe, check, ifFalse) => F.SwitchIf(mbe, check, x => ifFalse(x).Reason));
 	}
 }

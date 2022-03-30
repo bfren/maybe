@@ -8,10 +8,10 @@ namespace MaybeF.Testing;
 public static partial class MaybeExtensions
 {
 	/// <summary>
-	/// Assert that <paramref name="this"/> is <see cref="None{T}"/> and return the Msg
+	/// Assert that <paramref name="this"/> is <see cref="None{T}"/> and return the Reason
 	/// </summary>
 	/// <typeparam name="T">Maybe value type</typeparam>
 	/// <param name="this">Maybe</param>
 	public static IMsg AssertNone<T>(this Maybe<T> @this) =>
-		Assert.IsType<None<T>>(@this).Msg;
+		Assert.IsType<None<T>>(@this).Reason;
 }

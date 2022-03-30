@@ -17,7 +17,7 @@ public static partial class F
 				Some<T> x when x.Value is null =>
 					ifNull(),
 
-				None<T> x when x.Msg is M.NullValueMsg =>
+				None<T> x when x.Reason is M.NullValueMsg =>
 					ifNull(),
 
 				{ } =>
