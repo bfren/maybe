@@ -3,13 +3,13 @@
 
 using MaybeF;
 using MaybeF.Exceptions;
-using static MaybeF.F.R;
+using static MaybeF.F.M;
 
 namespace Abstracts;
 
 public abstract class UnwrapSingleAsync_Tests
 {
-	public abstract Task Test00_If_Unknown_Maybe_Returns_None_With_UnhandledExceptionReason();
+	public abstract Task Test00_If_Unknown_Maybe_Returns_None_With_UnhandledExceptionMsg();
 
 	protected static async Task Test00(Func<Task<Maybe<int>>, Task<Maybe<int>>> act)
 	{
@@ -21,8 +21,8 @@ public abstract class UnwrapSingleAsync_Tests
 
 		// Assert
 		var none = result.AssertNone();
-		var reason = Assert.IsType<UnhandledExceptionReason>(none);
-		Assert.IsType<UnknownMaybeException>(reason.Value);
+		var message = Assert.IsType<UnhandledExceptionMsg>(none);
+		Assert.IsType<UnknownMaybeException>(message.Value);
 	}
 
 	public abstract Task Test01_None_Returns_None();
@@ -39,23 +39,23 @@ public abstract class UnwrapSingleAsync_Tests
 		result.AssertNone();
 	}
 
-	public abstract Task Test02_None_With_Reason_Returns_None_With_Reason();
+	public abstract Task Test02_None_With_Msg_Returns_None_With_Msg();
 
 	protected static async Task Test02(Func<Task<Maybe<int>>, Task<Maybe<int>>> act)
 	{
 		// Arrange
-		var reason = new TestReason();
-		var maybe = F.None<int>(reason);
+		var message = new TestMsg();
+		var maybe = F.None<int>(message);
 
 		// Act
 		var result = await act(maybe.AsTask).ConfigureAwait(false);
 
 		// Assert
 		var none = result.AssertNone();
-		Assert.Same(reason, none);
+		Assert.Same(message, none);
 	}
 
-	public abstract Task Test03_No_Items_Returns_None_With_UnwrapSingleNoItemsReason();
+	public abstract Task Test03_No_Items_Returns_None_With_UnwrapSingleNoItemsMsg();
 
 	protected static async Task Test03(Func<Task<Maybe<int[]>>, Task<Maybe<int>>> act)
 	{
@@ -68,17 +68,17 @@ public abstract class UnwrapSingleAsync_Tests
 
 		// Assert
 		var none = result.AssertNone();
-		Assert.IsType<UnwrapSingleNoItemsReason>(none);
+		Assert.IsType<UnwrapSingleNoItemsMsg>(none);
 	}
 
 	public abstract Task Test04_No_Items_Runs_NoItems();
 
-	protected static async Task Test04(Func<Task<Maybe<int[]>>, Func<IReason>?, Task<Maybe<int>>> act)
+	protected static async Task Test04(Func<Task<Maybe<int[]>>, Func<IMsg>?, Task<Maybe<int>>> act)
 	{
 		// Arrange
 		var empty = Array.Empty<int>();
 		var maybe = F.Some(empty);
-		var noItems = Substitute.For<Func<IReason>>();
+		var noItems = Substitute.For<Func<IMsg>>();
 
 		// Act
 		await act(maybe.AsTask, noItems).ConfigureAwait(false);
@@ -87,7 +87,7 @@ public abstract class UnwrapSingleAsync_Tests
 		noItems.Received().Invoke();
 	}
 
-	public abstract Task Test05_Too_Many_Items_Returns_None_With_UnwrapSingleTooManyItemsErrorReason();
+	public abstract Task Test05_Too_Many_Items_Returns_None_With_UnwrapSingleTooManyItemsErrorMsg();
 
 	protected static async Task Test05(Func<Task<Maybe<int[]>>, Task<Maybe<int>>> act)
 	{
@@ -100,17 +100,17 @@ public abstract class UnwrapSingleAsync_Tests
 
 		// Assert
 		var none = result.AssertNone();
-		Assert.IsType<UnwrapSingleTooManyItemsErrorReason>(none);
+		Assert.IsType<UnwrapSingleTooManyItemsErrorMsg>(none);
 	}
 
 	public abstract Task Test06_Too_Many_Items_Runs_TooMany();
 
-	protected static async Task Test06(Func<Task<Maybe<int[]>>, Func<IReason>?, Task<Maybe<int>>> act)
+	protected static async Task Test06(Func<Task<Maybe<int[]>>, Func<IMsg>?, Task<Maybe<int>>> act)
 	{
 		// Arrange
 		var list = new[] { Rnd.Int, Rnd.Int };
 		var maybe = F.Some(list);
-		var tooMany = Substitute.For<Func<IReason>>();
+		var tooMany = Substitute.For<Func<IMsg>>();
 
 		// Act
 		await act(maybe.AsTask, tooMany).ConfigureAwait(false);
@@ -119,7 +119,7 @@ public abstract class UnwrapSingleAsync_Tests
 		tooMany.Received().Invoke();
 	}
 
-	public abstract Task Test07_Not_A_List_Returns_None_With_UnwrapSingleNotAListReason();
+	public abstract Task Test07_Not_A_List_Returns_None_With_UnwrapSingleNotAListMsg();
 
 	protected static async Task Test07(Func<Task<Maybe<int>>, Task<Maybe<int>>> act)
 	{
@@ -132,17 +132,17 @@ public abstract class UnwrapSingleAsync_Tests
 
 		// Assert
 		var none = result.AssertNone();
-		Assert.IsType<UnwrapSingleNotAListReason>(none);
+		Assert.IsType<UnwrapSingleNotAListMsg>(none);
 	}
 
 	public abstract Task Test08_Not_A_List_Runs_NotAList();
 
-	protected static async Task Test08(Func<Task<Maybe<int>>, Func<IReason>?, Task<Maybe<int>>> act)
+	protected static async Task Test08(Func<Task<Maybe<int>>, Func<IMsg>?, Task<Maybe<int>>> act)
 	{
 		// Arrange
 		var value = Rnd.Int;
 		var maybe = F.Some(value);
-		var notAList = Substitute.For<Func<IReason>>();
+		var notAList = Substitute.For<Func<IMsg>>();
 
 		// Act
 		await act(maybe.AsTask, notAList).ConfigureAwait(false);
@@ -151,7 +151,7 @@ public abstract class UnwrapSingleAsync_Tests
 		notAList.Received().Invoke();
 	}
 
-	public abstract Task Test09_Incorrect_Type_Returns_None_With_UnwrapSingleIncorrectTypeErrorReason();
+	public abstract Task Test09_Incorrect_Type_Returns_None_With_UnwrapSingleIncorrectTypeErrorMsg();
 
 	protected static async Task Test09(Func<Task<Maybe<int[]>>, Task<Maybe<string>>> act)
 	{
@@ -165,7 +165,7 @@ public abstract class UnwrapSingleAsync_Tests
 
 		// Assert
 		var none = result.AssertNone();
-		Assert.IsType<UnwrapSingleIncorrectTypeErrorReason>(none);
+		Assert.IsType<UnwrapSingleIncorrectTypeErrorMsg>(none);
 	}
 
 	public abstract Task Test10_List_With_Single_Item_Returns_Single();
@@ -186,5 +186,5 @@ public abstract class UnwrapSingleAsync_Tests
 
 	public record class FakeMaybe : Maybe<int> { }
 
-	public record class TestReason : IReason;
+	public record class TestMsg : IMsg;
 }

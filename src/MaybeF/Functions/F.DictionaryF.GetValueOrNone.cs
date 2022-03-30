@@ -29,39 +29,39 @@ public static partial class F
 									value,
 
 								true =>
-									None<TValue>(new R.NullValueReason<TKey>(key)),
+									None<TValue>(new M.NullValueMsg<TKey>(key)),
 
 								false =>
-									None<TValue>(new R.KeyDoesNotExistReason<TKey>(key))
+									None<TValue>(new M.KeyDoesNotExistMsg<TKey>(key))
 							},
 
 						_ =>
-							None<TValue, R.KeyCannotBeNullReason>()
+							None<TValue, M.KeyCannotBeNullMsg>()
 					},
 
 				false =>
-					None<TValue, R.DictionaryIsEmptyReason>()
+					None<TValue, M.DictionaryIsEmptyMsg>()
 
 			};
 
-		/// <summary>Reasons</summary>
-		public static class R
+		/// <summary>Msgs</summary>
+		public static class M
 		{
 			/// <summary>The dictionary is empty</summary>
-			public sealed record class DictionaryIsEmptyReason : IReason;
+			public sealed record class DictionaryIsEmptyMsg : IMsg;
 
 			/// <summary>The dictionary key cannot be null</summary>
-			public sealed record class KeyCannotBeNullReason : IReason;
+			public sealed record class KeyCannotBeNullMsg : IMsg;
 
 			/// <summary>The specified key does not exist in the dictionary</summary>
 			/// <typeparam name="TKey">Key type</typeparam>
 			/// <param name="Key">Dictionary key</param>
-			public sealed record class KeyDoesNotExistReason<TKey>(TKey Key) : IReason;
+			public sealed record class KeyDoesNotExistMsg<TKey>(TKey Key) : IMsg;
 
 			/// <summary>The dictionary value for the specified key was null</summary>
 			/// <typeparam name="TKey">Key type</typeparam>
 			/// <param name="Key">Dictionary key</param>
-			public sealed record class NullValueReason<TKey>(TKey Key) : IReason;
+			public sealed record class NullValueMsg<TKey>(TKey Key) : IMsg;
 		}
 	}
 }

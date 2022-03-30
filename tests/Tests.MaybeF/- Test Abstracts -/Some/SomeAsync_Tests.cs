@@ -3,13 +3,13 @@
 
 using MaybeF;
 using MaybeF.Testing.Exceptions;
-using static MaybeF.F.R;
+using static MaybeF.F.M;
 
 namespace Abstracts;
 
 public abstract class SomeAsync_Tests
 {
-	public abstract Task Test00_Exception_Thrown_Without_Handler_Returns_None_With_UnhandledExceptionReason();
+	public abstract Task Test00_Exception_Thrown_Without_Handler_Returns_None_With_UnhandledExceptionMsg();
 
 	protected static async Task Test00(Func<Func<Task<int>>, F.Handler, Task<Maybe<int>>> act)
 	{
@@ -21,10 +21,10 @@ public abstract class SomeAsync_Tests
 
 		// Assert
 		var none = result.AssertNone();
-		Assert.IsType<UnhandledExceptionReason>(none);
+		Assert.IsType<UnhandledExceptionMsg>(none);
 	}
 
-	public abstract Task Test01_Nullable_Exception_Thrown_Without_Handler_Returns_None_With_UnhandledExceptionReason();
+	public abstract Task Test01_Nullable_Exception_Thrown_Without_Handler_Returns_None_With_UnhandledExceptionMsg();
 
 	protected static async Task Test01(Func<Func<Task<int?>>, bool, F.Handler, Task<Maybe<int?>>> act)
 	{
@@ -37,9 +37,9 @@ public abstract class SomeAsync_Tests
 
 		// Assert
 		var n0 = r0.AssertNone();
-		Assert.IsType<UnhandledExceptionReason>(n0);
+		Assert.IsType<UnhandledExceptionMsg>(n0);
 		var n1 = r1.AssertNone();
-		Assert.IsType<UnhandledExceptionReason>(n1);
+		Assert.IsType<UnhandledExceptionMsg>(n1);
 	}
 
 	public abstract Task Test02_Exception_Thrown_With_Handler_Returns_None_Calls_Handler();
@@ -90,10 +90,10 @@ public abstract class SomeAsync_Tests
 
 		// Assert
 		var none = result.AssertNone();
-		Assert.IsType<NullValueReason>(none);
+		Assert.IsType<NullValueMsg>(none);
 	}
 
-	public abstract Task Test05_Nullable_Allow_Null_False_Null_Input_Returns_None_With_AllowNullWasFalseReason();
+	public abstract Task Test05_Nullable_Allow_Null_False_Null_Input_Returns_None_With_AllowNullWasFalseMsg();
 
 	protected static async Task Test05(Func<Func<Task<int?>>, bool, F.Handler, Task<Maybe<int?>>> act)
 	{
@@ -105,7 +105,7 @@ public abstract class SomeAsync_Tests
 
 		// Assert
 		var none = result.AssertNone();
-		Assert.IsType<AllowNullWasFalseReason>(none);
+		Assert.IsType<AllowNullWasFalseMsg>(none);
 	}
 
 	public abstract Task Test06_Nullable_Allow_Null_True_Null_Input_Returns_Some_With_Null_Value();

@@ -1,7 +1,7 @@
 ﻿// Maybe: Unit Tests
 // Copyright (c) bfren - licensed under https://mit.bfren.dev/2019
 
-using static MaybeF.Testing.Create.R;
+using static MaybeF.Testing.Create.M;
 
 namespace MaybeF.Testing.Create_Tests;
 
@@ -17,6 +17,6 @@ public class None_Tests
 
 		// Assert
 		var none = result.AssertNone();
-		Assert.IsType<EmptyNoneForTestingReason>(none);
+		Assert.IsType<EmptyNoneForTestingMsg>(none);
 	}
 }

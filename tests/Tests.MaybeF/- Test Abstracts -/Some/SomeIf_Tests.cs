@@ -2,7 +2,7 @@
 // Copyright (c) bfren - licensed under https://mit.bfren.dev/2019
 
 using MaybeF;
-using static MaybeF.F.R;
+using static MaybeF.F.M;
 
 namespace Abstracts;
 
@@ -89,7 +89,7 @@ public abstract class SomeIf_Tests
 		Assert.Equal(value, some);
 	}
 
-	public abstract void Test05_Predicate_False_With_Value_Returns_None_With_PredicateWasFalseReason();
+	public abstract void Test05_Predicate_False_With_Value_Returns_None_With_PredicateWasFalseMsg();
 
 	protected static void Test05(Func<Func<bool>, int, F.Handler, Maybe<int>> act)
 	{
@@ -101,10 +101,10 @@ public abstract class SomeIf_Tests
 
 		// Assert
 		var none = result.AssertNone();
-		Assert.IsType<PredicateWasFalseReason>(none);
+		Assert.IsType<PredicateWasFalseMsg>(none);
 	}
 
-	public abstract void Test06_Predicate_False_With_Value_Func_Returns_None_With_PredicateWasFalseReason();
+	public abstract void Test06_Predicate_False_With_Value_Func_Returns_None_With_PredicateWasFalseMsg();
 
 	protected static void Test06(Func<Func<bool>, Func<int>, F.Handler, Maybe<int>> act)
 	{
@@ -116,7 +116,7 @@ public abstract class SomeIf_Tests
 
 		// Assert
 		var none = result.AssertNone();
-		Assert.IsType<PredicateWasFalseReason>(none);
+		Assert.IsType<PredicateWasFalseMsg>(none);
 	}
 
 	public abstract void Test07_Predicate_False_Bypasses_Value_Func();

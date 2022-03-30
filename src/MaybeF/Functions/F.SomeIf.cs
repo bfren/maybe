@@ -23,7 +23,7 @@ public static partial class F
 					Some(value, handler),
 
 				false =>
-					None<T, R.PredicateWasFalseReason>()
+					None<T, M.PredicateWasFalseMsg>()
 			},
 			handler
 		);
@@ -32,10 +32,10 @@ public static partial class F
 	public static Maybe<T> SomeIf<T>(Func<bool> predicate, T value, Handler handler) =>
 		SomeIf(predicate, () => value, handler);
 
-	/// <summary>Reasons</summary>
-	public static partial class R
+	/// <summary>Msgs</summary>
+	public static partial class M
 	{
 		/// <summary>Predicate was false</summary>
-		public sealed record class PredicateWasFalseReason : IReason;
+		public sealed record class PredicateWasFalseMsg : IMsg;
 	}
 }

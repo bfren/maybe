@@ -26,7 +26,7 @@ public static partial class F
 	/// <typeparam name="T">Maybe value type</typeparam>
 	/// <param name="maybe">Input Maybe</param>
 	/// <param name="ifNone">Value to return if <paramref name="maybe"/> is a <see cref="Internals.None{T}"/></param>
-	public static T Unwrap<T>(Maybe<T> maybe, Func<IReason, T> ifNone) =>
+	public static T Unwrap<T>(Maybe<T> maybe, Func<IMsg, T> ifNone) =>
 		Switch(
 			maybe,
 			some: v => v,

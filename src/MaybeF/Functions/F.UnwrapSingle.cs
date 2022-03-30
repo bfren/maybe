@@ -20,7 +20,7 @@ public static partial class F
 	/// <param name="noItems">Function to run if the Maybe value is a list with no items</param>
 	/// <param name="tooMany">Function to run if the Maybe value is a list with more than one item</param>
 	/// <param name="notAList">Function to run if the Maybe value is not a list</param>
-	public static Maybe<TSingle> UnwrapSingle<TList, TSingle>(Maybe<TList> maybe, Func<IReason>? noItems, Func<IReason>? tooMany, Func<IReason>? notAList) =>
+	public static Maybe<TSingle> UnwrapSingle<TList, TSingle>(Maybe<TList> maybe, Func<IMsg>? noItems, Func<IMsg>? tooMany, Func<IMsg>? notAList) =>
 		Catch(() =>
 			Switch(
 				maybe,
@@ -30,57 +30,57 @@ public static partial class F
 						Some(list.Single()),
 
 					IList<TSingle> list when list.Count == 0 =>
-						None<TSingle>(noItems?.Invoke() ?? new R.UnwrapSingleNoItemsReason()),
+						None<TSingle>(noItems?.Invoke() ?? new M.UnwrapSingleNoItemsMsg()),
 
 					IList<TSingle> =>
-						None<TSingle>(tooMany?.Invoke() ?? new R.UnwrapSingleTooManyItemsErrorReason()),
+						None<TSingle>(tooMany?.Invoke() ?? new M.UnwrapSingleTooManyItemsErrorMsg()),
 
 					IList =>
-						None<TSingle, R.UnwrapSingleIncorrectTypeErrorReason>(),
+						None<TSingle, M.UnwrapSingleIncorrectTypeErrorMsg>(),
 
 					_ =>
-						None<TSingle>(notAList?.Invoke() ?? new R.UnwrapSingleNotAListReason())
+						None<TSingle>(notAList?.Invoke() ?? new M.UnwrapSingleNotAListMsg())
 				},
 				none: r => None<TSingle>(r)
 			),
 			DefaultHandler
 		);
 
-	/// <summary>Reasons</summary>
-	public static partial class R
+	/// <summary>Msgs</summary>
+	public static partial class M
 	{
-		/// <summary>Base UnwrapSingle error Reason</summary>
+		/// <summary>Base UnwrapSingle error Msg</summary>
 		/// <param name="Error">UnwrapSingleError</param>
-		public abstract record class UnwrapSingleErrorReason(UnwrapSingleError Error) : IReason;
+		public abstract record class UnwrapSingleErrorMsg(UnwrapSingleError Error) : IMsg;
 
 		/// <summary>No items in the list</summary>
-		public sealed record class UnwrapSingleNoItemsReason() : UnwrapSingleErrorReason(UnwrapSingleError.NoItems) { }
+		public sealed record class UnwrapSingleNoItemsMsg() : UnwrapSingleErrorMsg(UnwrapSingleError.NoItems) { }
 
 		/// <summary>Too many items in the list</summary>
-		public sealed record class UnwrapSingleTooManyItemsErrorReason() : UnwrapSingleErrorReason(UnwrapSingleError.TooManyItems) { }
+		public sealed record class UnwrapSingleTooManyItemsErrorMsg() : UnwrapSingleErrorMsg(UnwrapSingleError.TooManyItems) { }
 
 		/// <summary>Too many items in the list</summary>
-		public sealed record class UnwrapSingleIncorrectTypeErrorReason() : UnwrapSingleErrorReason(UnwrapSingleError.IncorrectType) { }
+		public sealed record class UnwrapSingleIncorrectTypeErrorMsg() : UnwrapSingleErrorMsg(UnwrapSingleError.IncorrectType) { }
 
 		/// <summary>Not a list</summary>
-		public sealed record class UnwrapSingleNotAListReason() : UnwrapSingleErrorReason(UnwrapSingleError.NoItems) { }
+		public sealed record class UnwrapSingleNotAListMsg() : UnwrapSingleErrorMsg(UnwrapSingleError.NoItems) { }
 
 		/// <summary>
 		/// Possible reasons for
-		/// <see cref="UnwrapSingle{T, TReturn}(Maybe{T}, Func{IReason}?, Func{IReason}?, Func{IReason}?)"/> failing
+		/// <see cref="UnwrapSingle{T, TReturn}(Maybe{T}, Func{IMsg}?, Func{IMsg}?, Func{IMsg}?)"/> failing
 		/// </summary>
 		public enum UnwrapSingleError
 		{
-			/// <inheritdoc cref="UnwrapSingleNoItemsReason"/>
+			/// <inheritdoc cref="UnwrapSingleNoItemsMsg"/>
 			NoItems = 0,
 
-			/// <inheritdoc cref="UnwrapSingleTooManyItemsErrorReason"/>
+			/// <inheritdoc cref="UnwrapSingleTooManyItemsErrorMsg"/>
 			TooManyItems = 1,
 
-			/// <inheritdoc cref="UnwrapSingleIncorrectTypeErrorReason"/>
+			/// <inheritdoc cref="UnwrapSingleIncorrectTypeErrorMsg"/>
 			IncorrectType = 2,
 
-			/// <inheritdoc cref="UnwrapSingleNotAListReason"/>
+			/// <inheritdoc cref="UnwrapSingleNotAListMsg"/>
 			NotAList = 3
 		}
 	}

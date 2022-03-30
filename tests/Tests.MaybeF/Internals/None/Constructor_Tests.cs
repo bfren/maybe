@@ -9,17 +9,17 @@ namespace Jeebs.Internals.None_Tests;
 public class Constructor_Tests
 {
 	[Fact]
-	public void Sets_Reason()
+	public void Sets_Msg()
 	{
 		// Arrange
-		var reason = new TestReason();
+		var message = new TestMsg();
 
 		// Act
-		var result = new None<string>(reason);
+		var result = new None<string>(message);
 
 		// Assert
-		Assert.Equal(reason, result.Reason);
+		Assert.Equal(message, result.Msg);
 	}
 }
 
-public record class TestReason : IReason;
+public record class TestMsg : IMsg;

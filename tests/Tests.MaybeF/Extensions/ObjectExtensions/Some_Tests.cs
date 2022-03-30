@@ -12,7 +12,7 @@ public class Some_Tests : Abstracts.Some_Tests
 	}
 
 	[Fact]
-	public override void Test06_Nullable_Allow_Null_False_Null_Input_Value_Returns_None_With_AllowNullWasFalseReason()
+	public override void Test06_Nullable_Allow_Null_False_Null_Input_Value_Returns_None_With_AllowNullWasFalseMsg()
 	{
 		Test06((val, nullable) => val.Some(nullable));
 	}
@@ -38,13 +38,13 @@ public class Some_Tests : Abstracts.Some_Tests
 	#region Unused
 
 	[Fact]
-	public override void Test00_Exception_Thrown_Without_Handler_Returns_None_With_UnhandledExceptionReason()
+	public override void Test00_Exception_Thrown_Without_Handler_Returns_None_With_UnhandledExceptionMsg()
 	{
 		// Unused
 	}
 
 	[Fact]
-	public override void Test01_Nullable_Exception_Thrown_Without_Handler_Returns_None_With_UnhandledExceptionReason()
+	public override void Test01_Nullable_Exception_Thrown_Without_Handler_Returns_None_With_UnhandledExceptionMsg()
 	{
 		// Unused
 	}
@@ -68,7 +68,7 @@ public class Some_Tests : Abstracts.Some_Tests
 	}
 
 	[Fact]
-	public override void Test07_Nullable_Allow_Null_False_Null_Input_Func_Returns_None_With_AllowNullWasFalseReason()
+	public override void Test07_Nullable_Allow_Null_False_Null_Input_Func_Returns_None_With_AllowNullWasFalseMsg()
 	{
 		// Unused
 	}

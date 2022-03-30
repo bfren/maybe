@@ -3,13 +3,13 @@
 
 using MaybeF;
 using MaybeF.Testing.Exceptions;
-using static MaybeF.F.R;
+using static MaybeF.F.M;
 
 namespace Abstracts;
 
 public abstract class IfSome_Tests
 {
-	public abstract void Test00_Exception_In_IfSome_Action_Returns_None_With_UnhandledExceptionReason();
+	public abstract void Test00_Exception_In_IfSome_Action_Returns_None_With_UnhandledExceptionMsg();
 
 	protected static void Test00(Func<Maybe<int>, Action<int>, Maybe<int>> act)
 	{
@@ -22,7 +22,7 @@ public abstract class IfSome_Tests
 
 		// Assert
 		var none = result.AssertNone();
-		Assert.IsType<UnhandledExceptionReason>(none);
+		Assert.IsType<UnhandledExceptionMsg>(none);
 	}
 
 	public abstract void Test01_None_Returns_Original_Maybe();

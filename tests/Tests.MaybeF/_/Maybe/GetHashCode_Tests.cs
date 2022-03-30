@@ -88,12 +88,12 @@ public class GetHashCode_Tests
 	}
 
 	[Fact]
-	public void None_With_Same_Type_And_Same_Reason_Generates_Same_HashCode()
+	public void None_With_Same_Type_And_Same_Msg_Generates_Same_HashCode()
 	{
 		// Arrange
-		var reason = Substitute.For<IReason>();
-		var n0 = F.None<int>(reason);
-		var n1 = F.None<int>(reason);
+		var message = Substitute.For<IMsg>();
+		var n0 = F.None<int>(message);
+		var n1 = F.None<int>(message);
 
 		// Act
 		var h0 = n0.GetHashCode();
@@ -104,12 +104,12 @@ public class GetHashCode_Tests
 	}
 
 	[Fact]
-	public void None_With_Different_Type_And_Same_Reason_Generates_Different_HashCode()
+	public void None_With_Different_Type_And_Same_Msg_Generates_Different_HashCode()
 	{
 		// Arrange
-		var reason = Substitute.For<IReason>();
-		var n0 = F.None<int>(reason);
-		var n1 = F.None<string>(reason);
+		var message = Substitute.For<IMsg>();
+		var n0 = F.None<int>(message);
+		var n1 = F.None<string>(message);
 
 		// Act
 		var h0 = n0.GetHashCode();
@@ -120,11 +120,11 @@ public class GetHashCode_Tests
 	}
 
 	[Fact]
-	public void None_With_Same_Type_And_Different_Reason_Generates_Different_HashCode()
+	public void None_With_Same_Type_And_Different_Msg_Generates_Different_HashCode()
 	{
 		// Arrange
-		var m0 = new TestReason0();
-		var m1 = new TestReason1();
+		var m0 = new TestMsg0();
+		var m1 = new TestMsg1();
 		var n0 = F.None<int>(m0);
 		var n1 = F.None<int>(m1);
 
@@ -138,7 +138,7 @@ public class GetHashCode_Tests
 
 	public record class FakeMaybe : Maybe<int> { }
 
-	public record class TestReason0 : IReason;
+	public record class TestMsg0 : IMsg;
 
-	public record class TestReason1 : IReason;
+	public record class TestMsg1 : IMsg;
 }

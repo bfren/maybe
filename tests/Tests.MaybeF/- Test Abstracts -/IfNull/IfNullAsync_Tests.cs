@@ -3,19 +3,19 @@
 
 using MaybeF;
 using NSubstitute.ExceptionExtensions;
-using static MaybeF.F.R;
+using static MaybeF.F.M;
 
 namespace Abstracts;
 
 public abstract class IfNullAsync_Tests
 {
-	public abstract Task Test00_Exception_In_NullValue_Func_Returns_None_With_UnhandledExceptionReason();
+	public abstract Task Test00_Exception_In_NullValue_Func_Returns_None_With_UnhandledExceptionMsg();
 
 	protected static async Task Test00(Func<Maybe<object?>, Func<Task<Maybe<object?>>>, Task<Maybe<object?>>> act)
 	{
 		// Arrange
 		var some = F.Some<object>(null, true);
-		var none = F.None<object?, NullValueReason>();
+		var none = F.None<object?, NullValueMsg>();
 		var throws = Substitute.For<Func<Task<Maybe<object?>>>>();
 		throws.Invoke().Throws<Exception>();
 
@@ -25,9 +25,9 @@ public abstract class IfNullAsync_Tests
 
 		// Assert
 		var n0 = r0.AssertNone();
-		Assert.IsType<UnhandledExceptionReason>(n0);
+		Assert.IsType<UnhandledExceptionMsg>(n0);
 		var n1 = r1.AssertNone();
-		Assert.IsType<UnhandledExceptionReason>(n1);
+		Assert.IsType<UnhandledExceptionMsg>(n1);
 	}
 
 	public abstract Task Test01_Some_With_Null_Value_Runs_IfNull_Func();
@@ -45,12 +45,12 @@ public abstract class IfNullAsync_Tests
 		await ifNull.Received().Invoke().ConfigureAwait(false);
 	}
 
-	public abstract Task Test02_None_With_NullValueReason_Runs_IfNull_Func();
+	public abstract Task Test02_None_With_NullValueMsg_Runs_IfNull_Func();
 
 	protected static async Task Test02(Func<Maybe<object>, Func<Task<Maybe<object>>>, Task<Maybe<object>>> act)
 	{
 		// Arrange
-		var none = F.None<object, NullValueReason>();
+		var none = F.None<object, NullValueMsg>();
 		var ifNull = Substitute.For<Func<Task<Maybe<object>>>>();
 
 		// Act
@@ -60,15 +60,15 @@ public abstract class IfNullAsync_Tests
 		await ifNull.Received().Invoke().ConfigureAwait(false);
 	}
 
-	public abstract Task Test03_Some_With_Null_Value_Runs_IfNull_Func_Returns_None_With_Reason();
+	public abstract Task Test03_Some_With_Null_Value_Runs_IfNull_Func_Returns_None_With_Msg();
 
-	protected static async Task Test03(Func<Maybe<object?>, Func<IReason>, Task<Maybe<object?>>> act)
+	protected static async Task Test03(Func<Maybe<object?>, Func<IMsg>, Task<Maybe<object?>>> act)
 	{
 		// Arrange
 		var maybe = F.Some<object>(null, true);
-		var ifNull = Substitute.For<Func<IReason>>();
-		var reason = new TestReason();
-		ifNull.Invoke().Returns(reason);
+		var ifNull = Substitute.For<Func<IMsg>>();
+		var message = new TestMsg();
+		ifNull.Invoke().Returns(message);
 
 		// Act
 		var result = await act(maybe, ifNull).ConfigureAwait(false);
@@ -76,18 +76,18 @@ public abstract class IfNullAsync_Tests
 		// Assert
 		ifNull.Received().Invoke();
 		var none = result.AssertNone();
-		Assert.Same(reason, none);
+		Assert.Same(message, none);
 	}
 
-	public abstract Task Test04_None_With_NullValueReason_Runs_IfNull_Func_Returns_None_With_Reason();
+	public abstract Task Test04_None_With_NullValueMsg_Runs_IfNull_Func_Returns_None_With_Msg();
 
-	protected static async Task Test04(Func<Maybe<object>, Func<IReason>, Task<Maybe<object>>> act)
+	protected static async Task Test04(Func<Maybe<object>, Func<IMsg>, Task<Maybe<object>>> act)
 	{
 		// Arrange
-		var maybe = F.None<object, NullValueReason>();
-		var ifNull = Substitute.For<Func<IReason>>();
-		var reason = new TestReason();
-		ifNull.Invoke().Returns(reason);
+		var maybe = F.None<object, NullValueMsg>();
+		var ifNull = Substitute.For<Func<IMsg>>();
+		var message = new TestMsg();
+		ifNull.Invoke().Returns(message);
 
 		// Act
 		var result = await act(maybe, ifNull).ConfigureAwait(false);
@@ -95,7 +95,7 @@ public abstract class IfNullAsync_Tests
 		// Assert
 		ifNull.Received().Invoke();
 		var none = result.AssertNone();
-		Assert.Same(reason, none);
+		Assert.Same(message, none);
 	}
 
 	public abstract Task Test05_Null_Maybe_Runs_IfNull_Func(Maybe<int> input);
@@ -112,5 +112,5 @@ public abstract class IfNullAsync_Tests
 		await ifNull.Received().Invoke().ConfigureAwait(false);
 	}
 
-	public sealed record class TestReason : IReason;
+	public sealed record class TestMsg : IMsg;
 }

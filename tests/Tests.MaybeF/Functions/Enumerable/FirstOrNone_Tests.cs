@@ -6,13 +6,13 @@ namespace MaybeF.F_Tests.Enumerable;
 public class FirstOrNone_Tests : Abstracts.Enumerable.FirstOrNone_Tests
 {
 	[Fact]
-	public override void Test00_Empty_List_Returns_None_With_ListIsEmptyReason()
+	public override void Test00_Empty_List_Returns_None_With_ListIsEmptyMsg()
 	{
 		Test00(list => F.EnumerableF.FirstOrNone(list, null));
 	}
 
 	[Fact]
-	public override void Test01_No_Matching_Items_Returns_None_With_FirstItemIsNullReason()
+	public override void Test01_No_Matching_Items_Returns_None_With_FirstItemIsNullMsg()
 	{
 		Test01((list, predicate) => F.EnumerableF.FirstOrNone(list, predicate));
 	}

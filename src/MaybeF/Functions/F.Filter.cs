@@ -23,14 +23,14 @@ public static partial class F
 						Some(x),
 
 					false =>
-						None<T, R.FilterPredicateWasFalseReason>()
+						None<T, M.FilterPredicateWasFalseMsg>()
 				}
 		);
 
-	/// <summary>Reasons</summary>
-	public static partial class R
+	/// <summary>Msgs</summary>
+	public static partial class M
 	{
 		/// <summary>Predicate was false</summary>
-		public sealed record class FilterPredicateWasFalseReason : IReason;
+		public sealed record class FilterPredicateWasFalseMsg : IMsg;
 	}
 }

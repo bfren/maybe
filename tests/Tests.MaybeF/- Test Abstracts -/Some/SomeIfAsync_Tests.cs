@@ -2,7 +2,7 @@
 // Copyright (c) bfren - licensed under https://mit.bfren.dev/2019
 
 using MaybeF;
-using static MaybeF.F.R;
+using static MaybeF.F.M;
 
 namespace Abstracts;
 
@@ -89,7 +89,7 @@ public abstract class SomeIfAsync_Tests
 		Assert.Equal(value, some);
 	}
 
-	public abstract Task Test05_Predicate_False_With_Value_Returns_None_With_PredicateWasFalseReason();
+	public abstract Task Test05_Predicate_False_With_Value_Returns_None_With_PredicateWasFalseMsg();
 
 	protected static async Task Test05(Func<Func<bool>, Task<int>, F.Handler, Task<Maybe<int>>> act)
 	{
@@ -101,10 +101,10 @@ public abstract class SomeIfAsync_Tests
 
 		// Assert
 		var none = result.AssertNone();
-		Assert.IsType<PredicateWasFalseReason>(none);
+		Assert.IsType<PredicateWasFalseMsg>(none);
 	}
 
-	public abstract Task Test06_Predicate_False_With_Value_Func_Returns_None_With_PredicateWasFalseReason();
+	public abstract Task Test06_Predicate_False_With_Value_Func_Returns_None_With_PredicateWasFalseMsg();
 
 	protected static async Task Test06(Func<Func<bool>, Func<Task<int>>, F.Handler, Task<Maybe<int>>> act)
 	{
@@ -116,7 +116,7 @@ public abstract class SomeIfAsync_Tests
 
 		// Assert
 		var none = result.AssertNone();
-		Assert.IsType<PredicateWasFalseReason>(none);
+		Assert.IsType<PredicateWasFalseMsg>(none);
 	}
 
 	public abstract Task Test07_Predicate_False_Bypasses_Value_Func();

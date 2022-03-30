@@ -8,8 +8,8 @@ namespace MaybeF;
 
 public static partial class F
 {
-	/// <inheritdoc cref="Audit{T}(Maybe{T}, Action{Maybe{T}}, Action{T}?, Action{IReason}?)"/>
-	public static async Task<Maybe<T>> AuditAsync<T>(Maybe<T> maybe, Func<Maybe<T>, Task>? any, Func<T, Task>? some, Func<IReason, Task>? none)
+	/// <inheritdoc cref="Audit{T}(Maybe{T}, Action{Maybe{T}}, Action{T}?, Action{IMsg}?)"/>
+	public static async Task<Maybe<T>> AuditAsync<T>(Maybe<T> maybe, Func<Maybe<T>, Task>? any, Func<T, Task>? some, Func<IMsg, Task>? none)
 	{
 		// Do nothing if the user gave us nothing to do!
 		if (any is null && some is null && none is null)
@@ -43,15 +43,15 @@ public static partial class F
 		return maybe;
 	}
 
-	/// <inheritdoc cref="Audit{T}(Maybe{T}, Action{Maybe{T}}, Action{T}?, Action{IReason}?)"/>
-	public static async Task<Maybe<T>> AuditAsync<T>(Task<Maybe<T>> maybe, Action<Maybe<T>>? any, Action<T>? some, Action<IReason>? none) =>
+	/// <inheritdoc cref="Audit{T}(Maybe{T}, Action{Maybe{T}}, Action{T}?, Action{IMsg}?)"/>
+	public static async Task<Maybe<T>> AuditAsync<T>(Task<Maybe<T>> maybe, Action<Maybe<T>>? any, Action<T>? some, Action<IMsg>? none) =>
 		await AuditAsync(await maybe.ConfigureAwait(false),
 			x => { any?.Invoke(x); return Task.CompletedTask; },
 			x => { some?.Invoke(x); return Task.CompletedTask; },
 			x => { none?.Invoke(x); return Task.CompletedTask; }
 		).ConfigureAwait(false);
 
-	/// <inheritdoc cref="Audit{T}(Maybe{T}, Action{Maybe{T}}, Action{T}?, Action{IReason}?)"/>
-	public static async Task<Maybe<T>> AuditAsync<T>(Task<Maybe<T>> maybe, Func<Maybe<T>, Task>? any, Func<T, Task>? some, Func<IReason, Task>? none) =>
+	/// <inheritdoc cref="Audit{T}(Maybe{T}, Action{Maybe{T}}, Action{T}?, Action{IMsg}?)"/>
+	public static async Task<Maybe<T>> AuditAsync<T>(Task<Maybe<T>> maybe, Func<Maybe<T>, Task>? any, Func<T, Task>? some, Func<IMsg, Task>? none) =>
 		await AuditAsync(await maybe.ConfigureAwait(false), any, some, none).ConfigureAwait(false);
 }

@@ -16,23 +16,23 @@ public class SwitchAsync_Tests : Abstracts.SwitchAsync_Tests
 		await Test00(mbe => mbe.AsTask.SwitchAsync(Substitute.For<Func<int, Task<string>>>(), Substitute.For<Func<string>>())).ConfigureAwait(false);
 		await Test00(mbe => mbe.AsTask.SwitchAsync(Substitute.For<Func<int, string>>(), Substitute.For<Func<Task<string>>>())).ConfigureAwait(false);
 		await Test00(mbe => mbe.AsTask.SwitchAsync(Substitute.For<Func<int, Task<string>>>(), Substitute.For<Func<Task<string>>>())).ConfigureAwait(false);
-		await Test00(mbe => mbe.AsTask.SwitchAsync(Substitute.For<Func<int, string>>(), Substitute.For<Func<IReason, string>>())).ConfigureAwait(false);
-		await Test00(mbe => mbe.AsTask.SwitchAsync(Substitute.For<Func<int, Task<string>>>(), Substitute.For<Func<IReason, string>>())).ConfigureAwait(false);
-		await Test00(mbe => mbe.AsTask.SwitchAsync(Substitute.For<Func<int, string>>(), Substitute.For<Func<IReason, Task<string>>>())).ConfigureAwait(false);
-		await Test00(mbe => mbe.AsTask.SwitchAsync(Substitute.For<Func<int, Task<string>>>(), Substitute.For<Func<IReason, Task<string>>>())).ConfigureAwait(false);
+		await Test00(mbe => mbe.AsTask.SwitchAsync(Substitute.For<Func<int, string>>(), Substitute.For<Func<IMsg, string>>())).ConfigureAwait(false);
+		await Test00(mbe => mbe.AsTask.SwitchAsync(Substitute.For<Func<int, Task<string>>>(), Substitute.For<Func<IMsg, string>>())).ConfigureAwait(false);
+		await Test00(mbe => mbe.AsTask.SwitchAsync(Substitute.For<Func<int, string>>(), Substitute.For<Func<IMsg, Task<string>>>())).ConfigureAwait(false);
+		await Test00(mbe => mbe.AsTask.SwitchAsync(Substitute.For<Func<int, Task<string>>>(), Substitute.For<Func<IMsg, Task<string>>>())).ConfigureAwait(false);
 	}
 
 	[Fact]
-	public override async Task Test02_If_None_Runs_None_Func_With_Reason()
+	public override async Task Test02_If_None_Runs_None_Func_With_Msg()
 	{
-		await Test02((mbe, none) => mbe.AsTask.SwitchAsync(Substitute.For<Func<int, string>>(), none(new TestReason()).GetAwaiter().GetResult())).ConfigureAwait(false);
-		await Test02((mbe, none) => mbe.AsTask.SwitchAsync(Substitute.For<Func<int, Task<string>>>(), none(new TestReason()).GetAwaiter().GetResult())).ConfigureAwait(false);
-		await Test02((mbe, none) => mbe.AsTask.SwitchAsync(Substitute.For<Func<int, string>>(), none(new TestReason()))).ConfigureAwait(false);
-		await Test02((mbe, none) => mbe.AsTask.SwitchAsync(Substitute.For<Func<int, Task<string>>>(), none(new TestReason()))).ConfigureAwait(false);
-		await Test02((mbe, none) => mbe.AsTask.SwitchAsync(Substitute.For<Func<int, string>>(), () => none(new TestReason()).GetAwaiter().GetResult())).ConfigureAwait(false);
-		await Test02((mbe, none) => mbe.AsTask.SwitchAsync(Substitute.For<Func<int, Task<string>>>(), () => none(new TestReason()).GetAwaiter().GetResult())).ConfigureAwait(false);
-		await Test02((mbe, none) => mbe.AsTask.SwitchAsync(Substitute.For<Func<int, string>>(), () => none(new TestReason()))).ConfigureAwait(false);
-		await Test02((mbe, none) => mbe.AsTask.SwitchAsync(Substitute.For<Func<int, Task<string>>>(), () => none(new TestReason()))).ConfigureAwait(false);
+		await Test02((mbe, none) => mbe.AsTask.SwitchAsync(Substitute.For<Func<int, string>>(), none(new TestMsg()).GetAwaiter().GetResult())).ConfigureAwait(false);
+		await Test02((mbe, none) => mbe.AsTask.SwitchAsync(Substitute.For<Func<int, Task<string>>>(), none(new TestMsg()).GetAwaiter().GetResult())).ConfigureAwait(false);
+		await Test02((mbe, none) => mbe.AsTask.SwitchAsync(Substitute.For<Func<int, string>>(), none(new TestMsg()))).ConfigureAwait(false);
+		await Test02((mbe, none) => mbe.AsTask.SwitchAsync(Substitute.For<Func<int, Task<string>>>(), none(new TestMsg()))).ConfigureAwait(false);
+		await Test02((mbe, none) => mbe.AsTask.SwitchAsync(Substitute.For<Func<int, string>>(), () => none(new TestMsg()).GetAwaiter().GetResult())).ConfigureAwait(false);
+		await Test02((mbe, none) => mbe.AsTask.SwitchAsync(Substitute.For<Func<int, Task<string>>>(), () => none(new TestMsg()).GetAwaiter().GetResult())).ConfigureAwait(false);
+		await Test02((mbe, none) => mbe.AsTask.SwitchAsync(Substitute.For<Func<int, string>>(), () => none(new TestMsg()))).ConfigureAwait(false);
+		await Test02((mbe, none) => mbe.AsTask.SwitchAsync(Substitute.For<Func<int, Task<string>>>(), () => none(new TestMsg()))).ConfigureAwait(false);
 		await Test02((mbe, none) => mbe.AsTask.SwitchAsync(Substitute.For<Func<int, string>>(), x => none(x).GetAwaiter().GetResult())).ConfigureAwait(false);
 		await Test02((mbe, none) => mbe.AsTask.SwitchAsync(Substitute.For<Func<int, Task<string>>>(), x => none(x).GetAwaiter().GetResult())).ConfigureAwait(false);
 		await Test02((mbe, none) => mbe.AsTask.SwitchAsync(Substitute.For<Func<int, string>>(), none)).ConfigureAwait(false);
@@ -50,10 +50,10 @@ public class SwitchAsync_Tests : Abstracts.SwitchAsync_Tests
 		await Test03((mbe, some) => mbe.AsTask.SwitchAsync(some, Substitute.For<Func<string>>())).ConfigureAwait(false);
 		await Test03((mbe, some) => mbe.AsTask.SwitchAsync(x => some(x).GetAwaiter().GetResult(), Substitute.For<Func<Task<string>>>())).ConfigureAwait(false);
 		await Test03((mbe, some) => mbe.AsTask.SwitchAsync(some, Substitute.For<Func<Task<string>>>())).ConfigureAwait(false);
-		await Test03((mbe, some) => mbe.AsTask.SwitchAsync(x => some(x).GetAwaiter().GetResult(), Substitute.For<Func<IReason, string>>())).ConfigureAwait(false);
-		await Test03((mbe, some) => mbe.AsTask.SwitchAsync(some, Substitute.For<Func<IReason, string>>())).ConfigureAwait(false);
-		await Test03((mbe, some) => mbe.AsTask.SwitchAsync(x => some(x).GetAwaiter().GetResult(), Substitute.For<Func<IReason, Task<string>>>())).ConfigureAwait(false);
-		await Test03((mbe, some) => mbe.AsTask.SwitchAsync(some, Substitute.For<Func<IReason, Task<string>>>())).ConfigureAwait(false);
+		await Test03((mbe, some) => mbe.AsTask.SwitchAsync(x => some(x).GetAwaiter().GetResult(), Substitute.For<Func<IMsg, string>>())).ConfigureAwait(false);
+		await Test03((mbe, some) => mbe.AsTask.SwitchAsync(some, Substitute.For<Func<IMsg, string>>())).ConfigureAwait(false);
+		await Test03((mbe, some) => mbe.AsTask.SwitchAsync(x => some(x).GetAwaiter().GetResult(), Substitute.For<Func<IMsg, Task<string>>>())).ConfigureAwait(false);
+		await Test03((mbe, some) => mbe.AsTask.SwitchAsync(some, Substitute.For<Func<IMsg, Task<string>>>())).ConfigureAwait(false);
 	}
 
 	#region Unused

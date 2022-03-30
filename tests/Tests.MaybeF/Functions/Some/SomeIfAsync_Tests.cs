@@ -41,14 +41,14 @@ public class SomeIfAsync_Tests : Abstracts.SomeIfAsync_Tests
 	}
 
 	[Fact]
-	public override async Task Test05_Predicate_False_With_Value_Returns_None_With_PredicateWasFalseReason()
+	public override async Task Test05_Predicate_False_With_Value_Returns_None_With_PredicateWasFalseMsg()
 	{
 		await Test05((predicate, value, handler) => F.SomeIfAsync(predicate, value, handler)).ConfigureAwait(false);
 		await Test05((predicate, value, handler) => F.SomeIfAsync(_ => predicate(), value, handler)).ConfigureAwait(false);
 	}
 
 	[Fact]
-	public override async Task Test06_Predicate_False_With_Value_Func_Returns_None_With_PredicateWasFalseReason()
+	public override async Task Test06_Predicate_False_With_Value_Func_Returns_None_With_PredicateWasFalseMsg()
 	{
 		await Test06((predicate, value, handler) => F.SomeIfAsync(predicate, value, handler)).ConfigureAwait(false);
 		await Test06((predicate, value, handler) => F.SomeIfAsync(_ => predicate(), value, handler)).ConfigureAwait(false);

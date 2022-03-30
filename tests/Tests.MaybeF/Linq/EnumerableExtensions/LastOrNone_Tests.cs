@@ -6,13 +6,13 @@ namespace MaybeF.Linq.EnumerableExtensions_Tests;
 public class LastOrNone_Tests : Abstracts.Enumerable.LastOrNone_Tests
 {
 	[Fact]
-	public override void Test00_Empty_List_Returns_None_With_ListIsEmptyReason()
+	public override void Test00_Empty_List_Returns_None_With_ListIsEmptyMsg()
 	{
 		Test00(list => list.LastOrNone());
 	}
 
 	[Fact]
-	public override void Test01_No_Matching_Items_Returns_None_With_LastItemIsNullReason()
+	public override void Test01_No_Matching_Items_Returns_None_With_LastItemIsNullMsg()
 	{
 		Test01((list, predicate) => list.LastOrNone(predicate));
 	}

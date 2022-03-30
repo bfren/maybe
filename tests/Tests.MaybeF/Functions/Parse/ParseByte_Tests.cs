@@ -39,14 +39,14 @@ public class ParseByte_Tests : Abstracts.Parse_Tests<byte>
 	[Theory]
 	[MemberData(nameof(Invalid_Byte_Input))]
 	[MemberData(nameof(Negative_Byte_Input))]
-	public override void Test01_Invalid_Input_Returns_None_With_UnableToParseValueAsReason(string? input)
+	public override void Test01_Invalid_Input_Returns_None_With_UnableToParseValueAsMsg(string? input)
 	{
 		Test01(input, F.ParseByte, F.ParseByte);
 	}
 
 	[Theory]
 	[InlineData(null)]
-	public override void Test02_Null_Input_Returns_None_With_UnableToParseValueAsReason(string? input)
+	public override void Test02_Null_Input_Returns_None_With_UnableToParseValueAsMsg(string? input)
 	{
 		Test02(input, F.ParseByte, F.ParseByte);
 	}

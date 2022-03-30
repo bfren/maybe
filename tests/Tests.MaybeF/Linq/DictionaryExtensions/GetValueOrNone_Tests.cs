@@ -6,26 +6,26 @@ namespace MaybeF.Linq.DictionaryExtensions_Tests;
 public class GetValueOrNone_Tests : Abstracts.Dictionary.GetValueOrNone_Tests
 {
 	[Fact]
-	public override void Test00_Empty_Dictionary_Returns_None_With_ListIsEmptyReason()
+	public override void Test00_Empty_Dictionary_Returns_None_With_ListIsEmptyMsg()
 	{
 		Test00((dict, key) => dict.GetValueOrNone(key));
 	}
 
 	[Theory]
 	[InlineData(null)]
-	public override void Test01_Null_Key_Returns_None_With_KeyCannotBeNullReason(string input)
+	public override void Test01_Null_Key_Returns_None_With_KeyCannotBeNullMsg(string input)
 	{
 		Test01(dict => dict.GetValueOrNone(input));
 	}
 
 	[Fact]
-	public override void Test02_Key_Does_Not_Exists_Returns_None_With_KeyDoesNotExistReason()
+	public override void Test02_Key_Does_Not_Exists_Returns_None_With_KeyDoesNotExistMsg()
 	{
 		Test02((dict, key) => dict.GetValueOrNone(key));
 	}
 
 	[Fact]
-	public override void Test03_Key_Exists_Null_Item_Returns_None_With_NullValueReason()
+	public override void Test03_Key_Exists_Null_Item_Returns_None_With_NullValueMsg()
 	{
 		Test03((dict, key) => dict.GetValueOrNone(key));
 	}

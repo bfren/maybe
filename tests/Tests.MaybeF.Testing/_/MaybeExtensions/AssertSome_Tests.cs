@@ -33,5 +33,5 @@ public class AssertSome_Tests
 		Assert.Equal(value, some);
 	}
 
-	public sealed record class TestReason : IReason;
+	public sealed record class TestMsg : IMsg;
 }

@@ -8,12 +8,12 @@ namespace Jeebs.Internals.None_Tests;
 public class ToString_Tests
 {
 	[Fact]
-	public void When_Not_ExceptionReason_Returns_Reason_ToString()
+	public void When_Not_ExceptionMsg_Returns_Msg_ToString()
 	{
 		// Arrange
-		var reason = new TestReason();
-		var expected = reason.ToString();
-		var maybe = F.None<int>(reason);
+		var message = new TestMsg();
+		var expected = message.ToString();
+		var maybe = F.None<int>(message);
 
 		// Act
 		var result = maybe.ToString();
@@ -23,21 +23,21 @@ public class ToString_Tests
 	}
 
 	[Fact]
-	public void When_ExceptionReason_Returns_Reason_Type_And_Exception_Message()
+	public void When_ExceptionMsg_Returns_Msg_Type_And_Exception_Message()
 	{
 		// Arrange
 		var value = Rnd.Str;
 		var exception = new Exception(value);
-		var maybe = F.None<int, TestExceptionReason>(exception);
+		var maybe = F.None<int, TestExceptionMsg>(exception);
 
 		// Act
 		var result = maybe.ToString();
 
 		// Assert
-		Assert.Equal($"{typeof(TestExceptionReason)}: {value}", result);
+		Assert.Equal($"{typeof(TestExceptionMsg)}: {value}", result);
 	}
 
-	public record class TestReason : IReason;
+	public record class TestMsg : IMsg;
 
-	public record class TestExceptionReason(Exception Value) : IExceptionReason;
+	public record class TestExceptionMsg(Exception Value) : IExceptionMsg;
 }

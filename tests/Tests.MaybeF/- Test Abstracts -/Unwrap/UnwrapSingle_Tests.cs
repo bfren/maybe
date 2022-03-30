@@ -3,13 +3,13 @@
 
 using MaybeF;
 using MaybeF.Exceptions;
-using static MaybeF.F.R;
+using static MaybeF.F.M;
 
 namespace Abstracts;
 
 public abstract class UnwrapSingle_Tests
 {
-	public abstract void Test00_If_Unknown_Maybe_Returns_None_With_UnhandledExceptionReason();
+	public abstract void Test00_If_Unknown_Maybe_Returns_None_With_UnhandledExceptionMsg();
 
 	protected static void Test00(Func<Maybe<int>, Maybe<int>> act)
 	{
@@ -21,8 +21,8 @@ public abstract class UnwrapSingle_Tests
 
 		// Assert
 		var none = result.AssertNone();
-		var reason = Assert.IsType<UnhandledExceptionReason>(none);
-		Assert.IsType<UnknownMaybeException>(reason.Value);
+		var message = Assert.IsType<UnhandledExceptionMsg>(none);
+		Assert.IsType<UnknownMaybeException>(message.Value);
 	}
 
 	public abstract void Test01_None_Returns_None();
@@ -39,23 +39,23 @@ public abstract class UnwrapSingle_Tests
 		result.AssertNone();
 	}
 
-	public abstract void Test02_None_With_Reason_Returns_None_With_Reason();
+	public abstract void Test02_None_With_Msg_Returns_None_With_Msg();
 
 	protected static void Test02(Func<Maybe<int>, Maybe<int>> act)
 	{
 		// Arrange
-		var reason = new TestReason();
-		var maybe = F.None<int>(reason);
+		var message = new TestMsg();
+		var maybe = F.None<int>(message);
 
 		// Act
 		var result = act(maybe);
 
 		// Assert
 		var none = result.AssertNone();
-		Assert.Same(reason, none);
+		Assert.Same(message, none);
 	}
 
-	public abstract void Test03_No_Items_Returns_None_With_UnwrapSingleNoItemsReason();
+	public abstract void Test03_No_Items_Returns_None_With_UnwrapSingleNoItemsMsg();
 
 	protected static void Test03(Func<Maybe<int[]>, Maybe<int>> act)
 	{
@@ -68,17 +68,17 @@ public abstract class UnwrapSingle_Tests
 
 		// Assert
 		var none = result.AssertNone();
-		Assert.IsType<UnwrapSingleNoItemsReason>(none);
+		Assert.IsType<UnwrapSingleNoItemsMsg>(none);
 	}
 
 	public abstract void Test04_No_Items_Runs_NoItems();
 
-	protected static void Test04(Func<Maybe<int[]>, Func<IReason>?, Maybe<int>> act)
+	protected static void Test04(Func<Maybe<int[]>, Func<IMsg>?, Maybe<int>> act)
 	{
 		// Arrange
 		var empty = Array.Empty<int>();
 		var maybe = F.Some(empty);
-		var noItems = Substitute.For<Func<IReason>>();
+		var noItems = Substitute.For<Func<IMsg>>();
 
 		// Act
 		act(maybe, noItems);
@@ -87,7 +87,7 @@ public abstract class UnwrapSingle_Tests
 		noItems.Received().Invoke();
 	}
 
-	public abstract void Test05_Too_Many_Items_Returns_None_With_UnwrapSingleTooManyItemsErrorReason();
+	public abstract void Test05_Too_Many_Items_Returns_None_With_UnwrapSingleTooManyItemsErrorMsg();
 
 	protected static void Test05(Func<Maybe<int[]>, Maybe<int>> act)
 	{
@@ -100,17 +100,17 @@ public abstract class UnwrapSingle_Tests
 
 		// Assert
 		var none = result.AssertNone();
-		Assert.IsType<UnwrapSingleTooManyItemsErrorReason>(none);
+		Assert.IsType<UnwrapSingleTooManyItemsErrorMsg>(none);
 	}
 
 	public abstract void Test06_Too_Many_Items_Runs_TooMany();
 
-	protected static void Test06(Func<Maybe<int[]>, Func<IReason>?, Maybe<int>> act)
+	protected static void Test06(Func<Maybe<int[]>, Func<IMsg>?, Maybe<int>> act)
 	{
 		// Arrange
 		var list = new[] { Rnd.Int, Rnd.Int };
 		var maybe = F.Some(list);
-		var tooMany = Substitute.For<Func<IReason>>();
+		var tooMany = Substitute.For<Func<IMsg>>();
 
 		// Act
 		act(maybe, tooMany);
@@ -119,7 +119,7 @@ public abstract class UnwrapSingle_Tests
 		tooMany.Received().Invoke();
 	}
 
-	public abstract void Test07_Not_A_List_Returns_None_With_UnwrapSingleNotAListReason();
+	public abstract void Test07_Not_A_List_Returns_None_With_UnwrapSingleNotAListMsg();
 
 	protected static void Test07(Func<Maybe<int>, Maybe<int>> act)
 	{
@@ -132,17 +132,17 @@ public abstract class UnwrapSingle_Tests
 
 		// Assert
 		var none = result.AssertNone();
-		Assert.IsType<UnwrapSingleNotAListReason>(none);
+		Assert.IsType<UnwrapSingleNotAListMsg>(none);
 	}
 
 	public abstract void Test08_Not_A_List_Runs_NotAList();
 
-	protected static void Test08(Func<Maybe<int>, Func<IReason>?, Maybe<int>> act)
+	protected static void Test08(Func<Maybe<int>, Func<IMsg>?, Maybe<int>> act)
 	{
 		// Arrange
 		var value = Rnd.Int;
 		var maybe = F.Some(value);
-		var notAList = Substitute.For<Func<IReason>>();
+		var notAList = Substitute.For<Func<IMsg>>();
 
 		// Act
 		act(maybe, notAList);
@@ -151,7 +151,7 @@ public abstract class UnwrapSingle_Tests
 		notAList.Received().Invoke();
 	}
 
-	public abstract void Test09_Incorrect_Type_Returns_None_With_UnwrapSingleIncorrectTypeErrorReason();
+	public abstract void Test09_Incorrect_Type_Returns_None_With_UnwrapSingleIncorrectTypeErrorMsg();
 
 	protected static void Test09(Func<Maybe<int[]>, Maybe<string>> act)
 	{
@@ -165,7 +165,7 @@ public abstract class UnwrapSingle_Tests
 
 		// Assert
 		var none = result.AssertNone();
-		Assert.IsType<UnwrapSingleIncorrectTypeErrorReason>(none);
+		Assert.IsType<UnwrapSingleIncorrectTypeErrorMsg>(none);
 	}
 
 	public abstract void Test10_List_With_Single_Item_Returns_Single();
@@ -186,5 +186,5 @@ public abstract class UnwrapSingle_Tests
 
 	public record class FakeMaybe : Maybe<int> { }
 
-	public record class TestReason : IReason;
+	public record class TestMsg : IMsg;
 }

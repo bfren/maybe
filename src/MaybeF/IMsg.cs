@@ -6,4 +6,4 @@ namespace MaybeF;
 /// <summary>
 /// Contains information about the reason why a <see cref="Maybe{T}"/> is <see cref="Internals.None{T}"/>
 /// </summary>
-public interface IReason { }
+public interface IMsg { }

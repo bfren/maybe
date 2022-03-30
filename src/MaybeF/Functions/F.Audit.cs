@@ -17,7 +17,7 @@ public static partial class F
 	/// <param name="any">[Optional] Action will run for any <paramref name="maybe"/></param>
 	/// <param name="some">[Optional] Action will run if <paramref name="maybe"/> is <see cref="Internals.Some{T}"/></param>
 	/// <param name="none">[Optional] Action will run if <paramref name="maybe"/> is <see cref="Internals.None{T}"/></param>
-	public static Maybe<T> Audit<T>(Maybe<T> maybe, Action<Maybe<T>>? any, Action<T>? some, Action<IReason>? none)
+	public static Maybe<T> Audit<T>(Maybe<T> maybe, Action<Maybe<T>>? any, Action<T>? some, Action<IMsg>? none)
 	{
 		// Do nothing if the user gave us nothing to do!
 		if (any is null && some is null && none is null)

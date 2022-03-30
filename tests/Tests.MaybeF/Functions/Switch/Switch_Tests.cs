@@ -9,7 +9,7 @@ public class Switch_Tests : Abstracts.Switch_Tests
 	public override void Test00_Return_Void_If_Unknown_Maybe_Throws_UnknownMaybeException()
 	{
 		var some = Substitute.For<Action<int>>();
-		var none = Substitute.For<Action<IReason>>();
+		var none = Substitute.For<Action<IMsg>>();
 		Test00(mbe => F.Switch(mbe, some, none));
 	}
 
@@ -17,7 +17,7 @@ public class Switch_Tests : Abstracts.Switch_Tests
 	public override void Test01_Return_Value_If_Unknown_Maybe_Throws_UnknownMaybeException()
 	{
 		var some = Substitute.For<Func<int, string>>();
-		var none = Substitute.For<Func<IReason, string>>();
+		var none = Substitute.For<Func<IMsg, string>>();
 		Test01(mbe => F.Switch(mbe, some, none));
 	}
 
@@ -26,19 +26,19 @@ public class Switch_Tests : Abstracts.Switch_Tests
 	public override void Test02_If_Null_Throws_MaybeCannotBeNullException(Maybe<int> input)
 	{
 		var some = Substitute.For<Func<int, string>>();
-		var none = Substitute.For<Func<IReason, string>>();
+		var none = Substitute.For<Func<IMsg, string>>();
 		Test02(() => F.Switch(input, some, none));
 	}
 
 	[Fact]
-	public override void Test03_Return_Void_If_None_Runs_None_Action_With_Reason()
+	public override void Test03_Return_Void_If_None_Runs_None_Action_With_Msg()
 	{
 		var some = Substitute.For<Action<int>>();
 		Test03((mbe, none) => F.Switch(mbe, some, none));
 	}
 
 	[Fact]
-	public override void Test04_Return_Value_If_None_Runs_None_Func_With_Reason()
+	public override void Test04_Return_Value_If_None_Runs_None_Func_With_Msg()
 	{
 		var some = Substitute.For<Func<int, string>>();
 		Test04((mbe, none) => F.Switch(mbe, some, none));
@@ -47,14 +47,14 @@ public class Switch_Tests : Abstracts.Switch_Tests
 	[Fact]
 	public override void Test05_Return_Void_If_Some_Runs_Some_Action_With_Value()
 	{
-		var none = Substitute.For<Action<IReason>>();
+		var none = Substitute.For<Action<IMsg>>();
 		Test05((mbe, some) => F.Switch(mbe, some, none));
 	}
 
 	[Fact]
 	public override void Test06_Return_Value_If_Some_Runs_Some_Func_With_Value()
 	{
-		var none = Substitute.For<Func<IReason, string>>();
+		var none = Substitute.For<Func<IMsg, string>>();
 		Test06((mbe, some) => F.Switch(mbe, some, none));
 	}
 }

@@ -18,7 +18,7 @@ public static partial class F
 	/// <param name="none">Action to run if <see cref="Internals.None{T}"/></param>
 	/// <exception cref="MaybeCannotBeNullException"></exception>
 	/// <exception cref="UnknownMaybeException"></exception>
-	public static void Switch<T>(Maybe<T> maybe, Action<T> some, Action<IReason> none)
+	public static void Switch<T>(Maybe<T> maybe, Action<T> some, Action<IMsg> none)
 	{
 		// No return value so unable to use switch statement
 
@@ -28,7 +28,7 @@ public static partial class F
 		}
 		else if (maybe is None<T> y)
 		{
-			none(y.Reason);
+			none(y.Msg);
 		}
 		else if (maybe is not null)
 		{
@@ -50,14 +50,14 @@ public static partial class F
 	/// <param name="none">Function to run if <see cref="Internals.None{T}"/></param>
 	/// <exception cref="UnknownMaybeException"></exception>
 	/// <exception cref="MaybeCannotBeNullException"></exception>
-	public static TReturn Switch<T, TReturn>(Maybe<T> maybe, Func<T, TReturn> some, Func<IReason, TReturn> none) =>
+	public static TReturn Switch<T, TReturn>(Maybe<T> maybe, Func<T, TReturn> some, Func<IMsg, TReturn> none) =>
 		maybe switch
 		{
 			Some<T> x =>
 				some(x.Value),
 
 			None<T> x =>
-				none(x.Reason),
+				none(x.Msg),
 
 			{ } =>
 				throw new UnknownMaybeException(), // as Maybe<T> is internal implementation only this should never happen...

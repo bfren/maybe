@@ -6,13 +6,13 @@ namespace MaybeF.Maybe_Tests;
 public class MapAsync_Tests : Abstracts.MapAsync_Tests
 {
 	[Fact]
-	public override async Task Test00_If_Unknown_Maybe_Returns_None_With_UnhandledExceptionReason()
+	public override async Task Test00_If_Unknown_Maybe_Returns_None_With_UnhandledExceptionMsg()
 	{
 		await Test00((mbe, map, handler) => mbe.MapAsync(map, handler)).ConfigureAwait(false);
 	}
 
 	[Fact]
-	public override async Task Test01_Exception_Thrown_Without_Handler_Returns_None_With_UnhandledExceptionReason()
+	public override async Task Test01_Exception_Thrown_Without_Handler_Returns_None_With_UnhandledExceptionMsg()
 	{
 		await Test01((mbe, map, handler) => mbe.MapAsync(map, handler)).ConfigureAwait(false);
 	}
@@ -30,7 +30,7 @@ public class MapAsync_Tests : Abstracts.MapAsync_Tests
 	}
 
 	[Fact]
-	public override async Task Test04_If_None_With_Reason_Returns_None_With_Same_Reason()
+	public override async Task Test04_If_None_With_Msg_Returns_None_With_Same_Msg()
 	{
 		await Test04((mbe, map, handler) => mbe.MapAsync(map, handler)).ConfigureAwait(false);
 	}

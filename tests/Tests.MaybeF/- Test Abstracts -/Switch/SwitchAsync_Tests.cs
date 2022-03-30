@@ -35,20 +35,20 @@ public abstract class SwitchAsync_Tests
 		await Assert.ThrowsAsync<MaybeCannotBeNullException>(action).ConfigureAwait(false);
 	}
 
-	public abstract Task Test02_If_None_Runs_None_Func_With_Reason();
+	public abstract Task Test02_If_None_Runs_None_Func_With_Msg();
 
-	protected static async Task Test02(Func<Maybe<int>, Func<IReason, Task<string>>, Task<string>> act)
+	protected static async Task Test02(Func<Maybe<int>, Func<IMsg, Task<string>>, Task<string>> act)
 	{
 		// Arrange
-		var reason = new TestReason();
-		var maybe = F.None<int>(reason);
-		var none = Substitute.For<Func<IReason, Task<string>>>();
+		var message = new TestMsg();
+		var maybe = F.None<int>(message);
+		var none = Substitute.For<Func<IMsg, Task<string>>>();
 
 		// Act
 		await act(maybe, none).ConfigureAwait(false);
 
 		// Assert
-		await none.Received().Invoke(reason).ConfigureAwait(false);
+		await none.Received().Invoke(message).ConfigureAwait(false);
 	}
 
 	public abstract Task Test03_If_Some_Runs_Some_Func_With_Value();
@@ -69,5 +69,5 @@ public abstract class SwitchAsync_Tests
 
 	public record class FakeMaybe : Maybe<int> { }
 
-	public record class TestReason : IReason;
+	public record class TestMsg : IMsg;
 }

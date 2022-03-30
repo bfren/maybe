@@ -9,41 +9,41 @@ namespace MaybeF;
 public static partial class F
 {
 	/// <summary>
-	/// Create a <see cref="Internals.None{T}"/> Maybe with a Reason
+	/// Create a <see cref="Internals.None{T}"/> Maybe with a Msg
 	/// </summary>
 	/// <typeparam name="T">Maybe value type</typeparam>
-	/// <param name="reason">Reason</param>
-	public static None<T> None<T>(IReason reason) =>
-		new(reason);
+	/// <param name="message">Msg</param>
+	public static None<T> None<T>(IMsg message) =>
+		new(message);
 
 	/// <summary>
-	/// Create a <see cref="Internals.None{T}"/> Maybe with a Reason by type
+	/// Create a <see cref="Internals.None{T}"/> Maybe with a Msg by type
 	/// </summary>
 	/// <typeparam name="T">Maybe value type</typeparam>
-	/// <typeparam name="TReason">Reason type</typeparam>
-	public static None<T> None<T, TReason>()
-		where TReason : IReason, new() =>
-		new(new TReason());
+	/// <typeparam name="TMsg">Msg type</typeparam>
+	public static None<T> None<T, TMsg>()
+		where TMsg : IMsg, new() =>
+		new(new TMsg());
 
 	/// <summary>
-	/// Create a <see cref="Internals.None{T}"/> Maybe with an exception Reason by type<br/>
-	/// NB: <typeparamref name="TExceptionReason"/> must have a constructor with precisely one argument to
+	/// Create a <see cref="Internals.None{T}"/> Maybe with an exception Msg by type<br/>
+	/// NB: <typeparamref name="TExceptionMsg"/> must have a constructor with precisely one argument to
 	/// receive <paramref name="ex"/> as the value, or creation will fail
 	/// </summary>
 	/// <typeparam name="T">Maybe value type</typeparam>
-	/// <typeparam name="TExceptionReason">Exception Reason type</typeparam>
+	/// <typeparam name="TExceptionMsg">Exception Msg type</typeparam>
 	/// <param name="ex">Exception object</param>
-	public static None<T> None<T, TExceptionReason>(Exception ex)
-		where TExceptionReason : IExceptionReason
+	public static None<T> None<T, TExceptionMsg>(Exception ex)
+		where TExceptionMsg : IExceptionMsg
 	{
-		var none = () => None<T>(new R.GeneralExceptionReason<TExceptionReason>(ex));
+		var none = () => None<T>(new M.GeneralExceptionMsg<TExceptionMsg>(ex));
 
 		try
 		{
-			return Activator.CreateInstance(typeof(TExceptionReason), ex) switch
+			return Activator.CreateInstance(typeof(TExceptionMsg), ex) switch
 			{
-				TExceptionReason reason =>
-					None<T>(reason),
+				TExceptionMsg message =>
+					None<T>(message),
 
 				_ =>
 					none()
@@ -55,12 +55,12 @@ public static partial class F
 		}
 	}
 
-	public static partial class R
+	public static partial class M
 	{
-		/// <summary>Unable to create exception Reason</summary>
-		/// <typeparam name="TExceptionReason">IExceptionReason type</typeparam>
+		/// <summary>Unable to create exception Msg</summary>
+		/// <typeparam name="TExceptionMsg">IExceptionMsg type</typeparam>
 		/// <param name="Value">Exception value</param>
-		public sealed record class GeneralExceptionReason<TExceptionReason>(Exception Value) : IExceptionReason
-			where TExceptionReason : IExceptionReason;
+		public sealed record class GeneralExceptionMsg<TExceptionMsg>(Exception Value) : IExceptionMsg
+			where TExceptionMsg : IExceptionMsg;
 	}
 }

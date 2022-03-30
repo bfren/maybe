@@ -39,10 +39,10 @@ public static partial class F
 			}
 		}
 
-		public static partial class R
+		public static partial class M
 		{
 			/// <summary>Item in an IEnumerable is null</summary>
-			public sealed record class NullEnumerableValueReason : IReason;
+			public sealed record class NullEnumerableValueMsg : IMsg;
 		}
 	}
 }

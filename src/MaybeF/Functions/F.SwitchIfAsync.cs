@@ -12,7 +12,7 @@ public static partial class F
 	public static async Task<Maybe<T>> SwitchIfAsync<T>(Task<Maybe<T>> maybe, Func<T, bool> check, Func<T, Maybe<T>>? ifTrue, Func<T, Maybe<T>>? ifFalse) =>
 		SwitchIf(await maybe.ConfigureAwait(false), check, ifTrue, ifFalse);
 
-	/// <inheritdoc cref="SwitchIf{T}(Maybe{T}, Func{T, bool}, Func{T, IReason})"/>
-	public static async Task<Maybe<T>> SwitchIfAsync<T>(Task<Maybe<T>> maybe, Func<T, bool> check, Func<T, IReason> ifFalse) =>
+	/// <inheritdoc cref="SwitchIf{T}(Maybe{T}, Func{T, bool}, Func{T, IMsg})"/>
+	public static async Task<Maybe<T>> SwitchIfAsync<T>(Task<Maybe<T>> maybe, Func<T, bool> check, Func<T, IMsg> ifFalse) =>
 		SwitchIf(await maybe.ConfigureAwait(false), check, ifFalse);
 }

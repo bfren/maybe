@@ -12,7 +12,7 @@ public class Unwrap_Tests : Abstracts.Unwrap_Tests
 	}
 
 	[Fact]
-	public override void Test01_None_With_Reason_Runs_IfNone_Func_Passes_Reason_Returns_Value()
+	public override void Test01_None_With_Msg_Runs_IfNone_Func_Passes_Msg_Returns_Value()
 	{
 		Test01((mbe, ifNone) => F.Unwrap(mbe, ifNone));
 	}
@@ -21,6 +21,6 @@ public class Unwrap_Tests : Abstracts.Unwrap_Tests
 	public override void Test02_Some_Returns_Value()
 	{
 		Test02(mbe => F.Unwrap(mbe, Substitute.For<Func<int>>()));
-		Test02(mbe => F.Unwrap(mbe, Substitute.For<Func<IReason, int>>()));
+		Test02(mbe => F.Unwrap(mbe, Substitute.For<Func<IMsg, int>>()));
 	}
 }

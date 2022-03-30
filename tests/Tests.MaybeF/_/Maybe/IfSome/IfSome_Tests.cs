@@ -6,7 +6,7 @@ namespace MaybeF.Maybe_Tests;
 public class IfSome_Tests : Abstracts.IfSome_Tests
 {
 	[Fact]
-	public override void Test00_Exception_In_IfSome_Action_Returns_None_With_UnhandledExceptionReason()
+	public override void Test00_Exception_In_IfSome_Action_Returns_None_With_UnhandledExceptionMsg()
 	{
 		Test00((mbe, ifSome) => mbe.IfSome(ifSome));
 	}

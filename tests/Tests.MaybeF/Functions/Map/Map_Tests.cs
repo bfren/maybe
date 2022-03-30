@@ -6,13 +6,13 @@ namespace MaybeF.F_Tests;
 public class Map_Tests : Abstracts.Map_Tests
 {
 	[Fact]
-	public override void Test00_If_Unknown_Maybe_Returns_None_With_UnhandledExceptionReason()
+	public override void Test00_If_Unknown_Maybe_Returns_None_With_UnhandledExceptionMsg()
 	{
 		Test00((mbe, map, handler) => F.Map(mbe, map, handler));
 	}
 
 	[Fact]
-	public override void Test01_Exception_Thrown_Without_Handler_Returns_None_With_UnhandledExceptionReason()
+	public override void Test01_Exception_Thrown_Without_Handler_Returns_None_With_UnhandledExceptionMsg()
 	{
 		Test01((mbe, map, handler) => F.Map(mbe, map, handler));
 	}
@@ -30,7 +30,7 @@ public class Map_Tests : Abstracts.Map_Tests
 	}
 
 	[Fact]
-	public override void Test04_If_None_With_Reason_Returns_None_With_Same_Reason()
+	public override void Test04_If_None_With_Msg_Returns_None_With_Same_Msg()
 	{
 		Test04((mbe, map, handler) => F.Map(mbe, map, handler));
 	}

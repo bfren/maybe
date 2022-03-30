@@ -14,8 +14,8 @@ public class AuditAsync_Tests : Abstracts.AuditAsync_Tests
 		var anyF = Substitute.For<Func<Maybe<int>, Task>>();
 		var someA = Substitute.For<Action<int>>();
 		var someF = Substitute.For<Func<int, Task>>();
-		var noneA = Substitute.For<Action<IReason>>();
-		var noneF = Substitute.For<Func<IReason, Task>>();
+		var noneA = Substitute.For<Action<IMsg>>();
+		var noneF = Substitute.For<Func<IMsg, Task>>();
 
 		await Test01(mbe => mbe.AsTask.AuditAsync(anyA)).ConfigureAwait(false);
 		await Test01(mbe => mbe.AsTask.AuditAsync(anyF)).ConfigureAwait(false);
@@ -85,7 +85,7 @@ public class AuditAsync_Tests : Abstracts.AuditAsync_Tests
 	[Fact]
 	public override async Task Test10_Some_Runs_Some_Action_And_Returns_Original_Maybe()
 	{
-		var none = Substitute.For<Action<IReason>>();
+		var none = Substitute.For<Action<IMsg>>();
 
 		await Test10((mbe, some) => mbe.AsTask.AuditAsync(some)).ConfigureAwait(false);
 		await Test10((mbe, some) => mbe.AsTask.AuditAsync(some, none)).ConfigureAwait(false);
@@ -94,7 +94,7 @@ public class AuditAsync_Tests : Abstracts.AuditAsync_Tests
 	[Fact]
 	public override async Task Test11_Some_Runs_Some_Func_And_Returns_Original_Maybe()
 	{
-		var none = Substitute.For<Func<IReason, Task>>();
+		var none = Substitute.For<Func<IMsg, Task>>();
 
 		await Test11((mbe, some) => mbe.AsTask.AuditAsync(some)).ConfigureAwait(false);
 		await Test11((mbe, some) => mbe.AsTask.AuditAsync(some, none)).ConfigureAwait(false);
@@ -121,7 +121,7 @@ public class AuditAsync_Tests : Abstracts.AuditAsync_Tests
 	[Fact]
 	public override async Task Test14_Some_Runs_Some_Action_Catches_Exception_And_Returns_Original_Maybe()
 	{
-		var none = Substitute.For<Action<IReason>>();
+		var none = Substitute.For<Action<IMsg>>();
 
 		await Test14((mbe, some) => mbe.AsTask.AuditAsync(some)).ConfigureAwait(false);
 		await Test14((mbe, some) => mbe.AsTask.AuditAsync(some, none)).ConfigureAwait(false);
@@ -130,7 +130,7 @@ public class AuditAsync_Tests : Abstracts.AuditAsync_Tests
 	[Fact]
 	public override async Task Test15_Some_Runs_Some_Func_Catches_Exception_And_Returns_Original_Maybe()
 	{
-		var none = Substitute.For<Func<IReason, Task>>();
+		var none = Substitute.For<Func<IMsg, Task>>();
 
 		await Test15((mbe, some) => mbe.AsTask.AuditAsync(some)).ConfigureAwait(false);
 		await Test15((mbe, some) => mbe.AsTask.AuditAsync(some, none)).ConfigureAwait(false);

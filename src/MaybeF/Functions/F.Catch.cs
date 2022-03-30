@@ -17,7 +17,7 @@ public static partial class F
 	{
 		if (f is null)
 		{
-			return None<T, R.MaybeCannotBeNullReason>();
+			return None<T, M.MaybeCannotBeNullMsg>();
 		}
 
 		try
@@ -30,9 +30,9 @@ public static partial class F
 		}
 	}
 
-	public static partial class R
+	public static partial class M
 	{
 		/// <summary>Maybe input cannot be null</summary>
-		public sealed record class MaybeCannotBeNullReason : IReason;
+		public sealed record class MaybeCannotBeNullMsg : IMsg;
 	}
 }

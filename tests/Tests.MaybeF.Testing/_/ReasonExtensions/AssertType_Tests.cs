@@ -1,35 +1,35 @@
 // Maybe: Unit Tests
 // Copyright (c) bfren - licensed under https://mit.bfren.dev/2019
 
-namespace MaybeF.Testing.ReasonExtensions_Tests;
+namespace MaybeF.Testing.MsgExtensions_Tests;
 
 public class AssertType_Tests
 {
 	[Fact]
-	public void Is_Type_Returns_Reason()
+	public void Is_Type_Returns_Msg()
 	{
 		// Arrange
-		var reason = (IReason)new TestReason();
+		var message = (IMsg)new TestMsg();
 
 		// Act
-		var result = reason.AssertType<TestReason>();
+		var result = message.AssertType<TestMsg>();
 
 		// Assert
-		Assert.IsType<TestReason>(result);
+		Assert.IsType<TestMsg>(result);
 	}
 
 	[Fact]
 	public void Is_Not_Type_Throws_IsTypeException()
 	{
 		// Arrange
-		var reason = Substitute.For<IReason>();
+		var message = Substitute.For<IMsg>();
 
 		// Act
-		var action = void () => reason.AssertType<TestReason>();
+		var action = void () => message.AssertType<TestMsg>();
 
 		// Assert
 		Assert.Throws<Xunit.Sdk.IsTypeException>(action);
 	}
 
-	public sealed record class TestReason : IReason;
+	public sealed record class TestMsg : IMsg;
 }

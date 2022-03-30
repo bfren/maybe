@@ -19,7 +19,7 @@ public static partial class F
 						Some(x),
 
 					false =>
-						None<T, R.FilterPredicateWasFalseReason>()
+						None<T, M.FilterPredicateWasFalseMsg>()
 				}
 		);
 

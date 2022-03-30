@@ -42,11 +42,11 @@ public class Equals_Tests
 	}
 
 	[Fact]
-	public void None_Compares_Reasons()
+	public void None_Compares_Msgs()
 	{
 		// Arrange
-		var m0 = new TestReason0();
-		var m1 = new TestReason1();
+		var m0 = new TestMsg0();
+		var m1 = new TestMsg1();
 		var o0 = F.None<int>(m0);
 		var o1 = F.None<int>(m0);
 		var o2 = F.None<int>(m1);
@@ -78,7 +78,7 @@ public class Equals_Tests
 
 	public record class FakeMaybe : Maybe<int> { }
 
-	public record class TestReason0 : IReason;
+	public record class TestMsg0 : IMsg;
 
-	public record class TestReason1 : IReason;
+	public record class TestMsg1 : IMsg;
 }

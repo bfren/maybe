@@ -25,22 +25,22 @@ public abstract class UnwrapAsync_Tests
 		Assert.Equal(value, result);
 	}
 
-	public abstract Task Test01_None_With_Reason_Runs_IfNone_Func_Passes_Reason_Returns_Value();
+	public abstract Task Test01_None_With_Msg_Runs_IfNone_Func_Passes_Msg_Returns_Value();
 
-	protected static async Task Test01(Func<Task<Maybe<int>>, Func<IReason, int>, Task<int>> act)
+	protected static async Task Test01(Func<Task<Maybe<int>>, Func<IMsg, int>, Task<int>> act)
 	{
 		// Arrange
 		var value = Rnd.Int;
-		var reason = Substitute.For<IReason>();
-		var maybe = F.None<int>(reason);
-		var ifNone = Substitute.For<Func<IReason, int>>();
-		ifNone.Invoke(reason).Returns(value);
+		var message = Substitute.For<IMsg>();
+		var maybe = F.None<int>(message);
+		var ifNone = Substitute.For<Func<IMsg, int>>();
+		ifNone.Invoke(message).Returns(value);
 
 		// Act
 		var result = await act(maybe.AsTask, ifNone).ConfigureAwait(false);
 
 		// Assert
-		ifNone.Received().Invoke(reason);
+		ifNone.Received().Invoke(message);
 		Assert.Equal(value, result);
 	}
 

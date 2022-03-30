@@ -3,14 +3,14 @@
 
 namespace MaybeF.Testing;
 
-public static partial class ReasonExtensions
+public static partial class MsgExtensions
 {
 	/// <summary>
-	/// Assert that <paramref name="this"/> is a reason of type <typeparamref name="TReason"/>
+	/// Assert that <paramref name="this"/> is a message of type <typeparamref name="TMsg"/>
 	/// </summary>
-	/// <typeparam name="TReason">Reason type</typeparam>
-	/// <param name="this">Reason</param>
-	public static TReason AssertType<TReason>(this IReason @this)
-		where TReason : IReason =>
-		Assert.IsType<TReason>(@this);
+	/// <typeparam name="TMsg">Msg type</typeparam>
+	/// <param name="this">Msg</param>
+	public static TMsg AssertType<TMsg>(this IMsg @this)
+		where TMsg : IMsg =>
+		Assert.IsType<TMsg>(@this);
 }

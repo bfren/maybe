@@ -19,7 +19,7 @@ public class AuditAsync_Tests : Abstracts.AuditAsync_Tests
 	{
 		var any = Substitute.For<Func<Maybe<int>, Task>>();
 		var some = Substitute.For<Func<int, Task>>();
-		var none = Substitute.For<Func<IReason, Task>>();
+		var none = Substitute.For<Func<IMsg, Task>>();
 
 		await Test01(mbe => F.AuditAsync(mbe, any, null, null)).ConfigureAwait(false);
 		await Test01(mbe => F.AuditAsync(mbe, null, some, null)).ConfigureAwait(false);

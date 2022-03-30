@@ -3,13 +3,13 @@
 
 using MaybeF;
 using MaybeF.Testing.Exceptions;
-using static MaybeF.F.R;
+using static MaybeF.F.M;
 
 namespace Abstracts;
 
 public abstract class IfSomeAsync_Tests
 {
-	public abstract Task Test00_Exception_In_IfSome_Func_Returns_None_With_UnhandledExceptionReason();
+	public abstract Task Test00_Exception_In_IfSome_Func_Returns_None_With_UnhandledExceptionMsg();
 
 	protected static async Task Test00(Func<Maybe<int>, Func<int, Task>, Task<Maybe<int>>> act)
 	{
@@ -22,7 +22,7 @@ public abstract class IfSomeAsync_Tests
 
 		// Assert
 		var none = result.AssertNone();
-		Assert.IsType<UnhandledExceptionReason>(none);
+		Assert.IsType<UnhandledExceptionMsg>(none);
 	}
 
 	public abstract Task Test01_None_Returns_Original_Maybe();
