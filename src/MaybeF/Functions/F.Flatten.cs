@@ -6,7 +6,7 @@ namespace MaybeF;
 public static partial class F
 {
 	/// <summary>
-	/// Return the current type if it is <see cref="Internals.Some{T}"/> and the predicate is true
+	/// Flattens a double-Maybe type
 	/// </summary>
 	/// <typeparam name="T">Maybe value type</typeparam>
 	/// <param name="maybe">Input Maybe</param>
