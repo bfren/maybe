@@ -73,7 +73,6 @@ public static partial class F
 	public static Maybe<T> SwitchIf<T>(Maybe<T> maybe, Func<T, bool> check, Func<T, IMsg> ifFalse) =>
 		SwitchIf(maybe, check, null, x => None<T>(ifFalse(x)));
 
-	/// <summary>Msgs</summary>
 	public static partial class M
 	{
 		/// <summary>An exception was caught while executing one of the SwitchIf functions</summary>

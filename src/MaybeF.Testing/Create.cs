@@ -15,7 +15,7 @@ public static class Create
 	public static Maybe<T> None<T>() =>
 		F.None<T, M.EmptyNoneForTestingMsg>();
 
-	/// <summary>Msgs</summary>
+	/// <summary>Messages</summary>
 	public static class M
 	{
 		/// <summary>Empty None created for testing</summary>

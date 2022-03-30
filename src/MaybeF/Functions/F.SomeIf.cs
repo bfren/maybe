@@ -32,7 +32,6 @@ public static partial class F
 	public static Maybe<T> SomeIf<T>(Func<bool> predicate, T value, Handler handler) =>
 		SomeIf(predicate, () => value, handler);
 
-	/// <summary>Msgs</summary>
 	public static partial class M
 	{
 		/// <summary>Predicate was false</summary>

@@ -19,10 +19,21 @@ public static partial class F
 	/// <summary>
 	/// Functions for interacting with <see cref="IDictionary{TKey, TValue}"/>
 	/// </summary>
-	public static partial class DictionaryF { }
+	public static partial class DictionaryF
+	{
+		/// <summary>Messages</summary>
+		public static partial class M { }
+	}
 
 	/// <summary>
 	/// Functions for interacting with <see cref="IEnumerable{T}"/>
 	/// </summary>
-	public static partial class EnumerableF { }
+	public static partial class EnumerableF
+	{
+		/// <summary>Messages</summary>
+		public static partial class M { }
+	}
+
+	/// <summary>Messages</summary>
+	public static partial class M { }
 }

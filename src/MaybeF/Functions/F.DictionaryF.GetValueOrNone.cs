@@ -44,8 +44,7 @@ public static partial class F
 
 			};
 
-		/// <summary>Msgs</summary>
-		public static class M
+		public static partial class M
 		{
 			/// <summary>The dictionary is empty</summary>
 			public sealed record class DictionaryIsEmptyMsg : IMsg;

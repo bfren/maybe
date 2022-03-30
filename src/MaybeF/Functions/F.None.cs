@@ -12,9 +12,9 @@ public static partial class F
 	/// Create a <see cref="Internals.None{T}"/> Maybe with a Msg
 	/// </summary>
 	/// <typeparam name="T">Maybe value type</typeparam>
-	/// <param name="message">Msg</param>
-	public static None<T> None<T>(IMsg message) =>
-		new(message);
+	/// <param name="reason">Reason</param>
+	public static None<T> None<T>(IMsg reason) =>
+		new(reason);
 
 	/// <summary>
 	/// Create a <see cref="Internals.None{T}"/> Maybe with a Msg by type

@@ -27,7 +27,6 @@ public static partial class F
 				}
 		);
 
-	/// <summary>Msgs</summary>
 	public static partial class M
 	{
 		/// <summary>Predicate was false</summary>

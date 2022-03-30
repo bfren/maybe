@@ -37,7 +37,6 @@ public static partial class F
 				DefaultHandler
 			);
 
-		/// <summary>Msgs</summary>
 		public static partial class M
 		{
 			/// <summary>Null item found when doing LastOrDefault()</summary>

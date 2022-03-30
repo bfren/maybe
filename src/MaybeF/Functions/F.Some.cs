@@ -85,7 +85,6 @@ public static partial class F
 	public static Maybe<T?> Some<T>(T? value, bool allowNull) =>
 		Some(() => value, allowNull, DefaultHandler);
 
-	/// <summary>Msgs</summary>
 	public static partial class M
 	{
 		/// <summary>Value was null when trying to wrap using Some</summary>
