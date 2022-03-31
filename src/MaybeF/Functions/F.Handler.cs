@@ -12,7 +12,7 @@ namespace MaybeF;
 public static partial class F
 {
 	/// <summary>
-	/// Exception handler delegate - takes exception and must return a Msg of type <see cref="IExceptionMsg"/>
+	/// Exception handler delegate - takes exception and must return a message of type <see cref="IExceptionMsg"/>
 	/// </summary>
 	/// <param name="e">Exception</param>
 	public delegate IExceptionMsg Handler(Exception e);

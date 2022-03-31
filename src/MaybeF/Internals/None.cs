@@ -17,7 +17,7 @@ public sealed record class None<T> : Maybe<T>
 	/// <summary>
 	/// Only allow internal creation by None() functions
 	/// </summary>
-	/// <param name="msg">Msg for this <see cref="None{T}"/></param>
-	internal None(IMsg msg) =>
-		Reason = msg;
+	/// <param name="reason">Reason for this <see cref="None{T}"/></param>
+	internal None(IMsg reason) =>
+		Reason = reason;
 }

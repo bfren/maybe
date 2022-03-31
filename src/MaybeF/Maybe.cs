@@ -44,7 +44,7 @@ public abstract record class Maybe<T> : IEquatable<Maybe<T>>
 	/// <summary>
 	/// Return:
 	///    Value (if this is <see cref="Some{T}"/> and Value is not null)
-	///    Msg (if this is <see cref="None{T}"/> and it has a message)
+	///    Reason (if this is <see cref="None{T}"/> and it has a message)
 	///    Type (if this is <see cref="Some{T}"/> with a null value, or <see cref="None{T}"/> with no message)
 	/// </summary>
 	public sealed override string ToString() =>

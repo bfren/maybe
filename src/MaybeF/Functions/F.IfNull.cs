@@ -11,7 +11,7 @@ public static partial class F
 	/// <summary>
 	/// If <paramref name="maybe"/> is <see cref="Internals.None{T}"/> and the message is <see cref="M.NullValueMsg"/>,
 	/// or <paramref name="maybe"/> is <see cref="Internals.Some{T}"/> and <see cref="Some{T}.Value"/> is null,
-	/// runs <paramref name="ifNull"/> - which gives you the opportunity to return a more useful 'Not Found' Msg
+	/// runs <paramref name="ifNull"/> - which gives you the opportunity to return a more useful 'Not Found' message
 	/// </summary>
 	/// <typeparam name="T">Maybe value type</typeparam>
 	/// <param name="maybe">Input Maybe</param>
@@ -37,7 +37,7 @@ public static partial class F
 
 	/// <inheritdoc cref="IfNull{T}(Maybe{T}, Func{Maybe{T}})"/>
 	/// <typeparam name="T">Maybe value type</typeparam>
-	/// <typeparam name="TMsg">Msg type</typeparam>
+	/// <typeparam name="TMsg">Message type</typeparam>
 	public static Maybe<T> IfNull<T, TMsg>(Maybe<T> maybe, Func<TMsg> ifNull)
 		where TMsg : IMsg =>
 		IfNull(maybe, () => None<T>(ifNull()));

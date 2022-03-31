@@ -48,21 +48,21 @@ public static partial class F
 
 	public static partial class M
 	{
-		/// <summary>Base UnwrapSingle error Msg</summary>
+		/// <summary>Base UnwrapSingle error Reason</summary>
 		/// <param name="Error">UnwrapSingleError</param>
 		public abstract record class UnwrapSingleErrorMsg(UnwrapSingleError Error) : IMsg;
 
 		/// <summary>No items in the list</summary>
-		public sealed record class UnwrapSingleNoItemsMsg() : UnwrapSingleErrorMsg(UnwrapSingleError.NoItems) { }
+		public sealed record class UnwrapSingleNoItemsMsg() : UnwrapSingleErrorMsg(UnwrapSingleError.NoItems);
 
 		/// <summary>Too many items in the list</summary>
-		public sealed record class UnwrapSingleTooManyItemsErrorMsg() : UnwrapSingleErrorMsg(UnwrapSingleError.TooManyItems) { }
+		public sealed record class UnwrapSingleTooManyItemsErrorMsg() : UnwrapSingleErrorMsg(UnwrapSingleError.TooManyItems);
 
 		/// <summary>Too many items in the list</summary>
-		public sealed record class UnwrapSingleIncorrectTypeErrorMsg() : UnwrapSingleErrorMsg(UnwrapSingleError.IncorrectType) { }
+		public sealed record class UnwrapSingleIncorrectTypeErrorMsg() : UnwrapSingleErrorMsg(UnwrapSingleError.IncorrectType);
 
 		/// <summary>Not a list</summary>
-		public sealed record class UnwrapSingleNotAListMsg() : UnwrapSingleErrorMsg(UnwrapSingleError.NoItems) { }
+		public sealed record class UnwrapSingleNotAListMsg() : UnwrapSingleErrorMsg(UnwrapSingleError.NoItems);
 
 		/// <summary>
 		/// Possible reasons for
@@ -74,13 +74,13 @@ public static partial class F
 			NoItems = 0,
 
 			/// <inheritdoc cref="UnwrapSingleTooManyItemsErrorMsg"/>
-			TooManyItems = 1,
+			TooManyItems = 1 << 0,
 
 			/// <inheritdoc cref="UnwrapSingleIncorrectTypeErrorMsg"/>
-			IncorrectType = 2,
+			IncorrectType = 1 << 1,
 
 			/// <inheritdoc cref="UnwrapSingleNotAListMsg"/>
-			NotAList = 3
+			NotAList = 1 << 2
 		}
 	}
 }

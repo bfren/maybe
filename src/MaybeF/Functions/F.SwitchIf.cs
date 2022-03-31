@@ -63,7 +63,7 @@ public static partial class F
 
 	/// <summary>
 	/// If the input <paramref name="maybe"/> is <see cref="Internals.Some{T}"/>, runs <paramref name="check"/> function -<br/>
-	/// if it returns false, returns <see cref="Internals.None{T}"/> with the Msg from <paramref name="ifFalse"/>,<br/>
+	/// if it returns false, returns <see cref="Internals.None{T}"/> with the Reason from <paramref name="ifFalse"/>,<br/>
 	/// otherwise, the original <paramref name="maybe"/> is returned.
 	/// </summary>
 	/// <typeparam name="T">Maybe value type</typeparam>
