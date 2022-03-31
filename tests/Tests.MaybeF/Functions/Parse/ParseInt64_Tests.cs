@@ -21,14 +21,14 @@ public class ParseInt64_Tests : Abstracts.Parse_Tests<long>
 
 	[Theory]
 	[MemberData(nameof(ParseInt16_Tests.Invalid_Integer_Input), MemberType = typeof(ParseInt16_Tests))]
-	public override void Test01_Invalid_Input_Returns_None_With_UnableToParseValueAsReason(string? input)
+	public override void Test01_Invalid_Input_Returns_None_With_UnableToParseValueAsMsg(string? input)
 	{
 		Test01(input, F.ParseInt64, F.ParseInt64);
 	}
 
 	[Theory]
 	[InlineData(null)]
-	public override void Test02_Null_Input_Returns_None_With_UnableToParseValueAsReason(string? input)
+	public override void Test02_Null_Input_Returns_None_With_UnableToParseValueAsMsg(string? input)
 	{
 		Test02(input, F.ParseInt64, F.ParseInt64);
 	}

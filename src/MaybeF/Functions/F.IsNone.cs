@@ -16,7 +16,7 @@ public static partial class F
 	/// <typeparam name="T">Maybe value type</typeparam>
 	/// <param name="maybe">Input Maybe</param>
 	/// <param name="reason">Reason (null if <paramref name="maybe"/> is <see cref="Internals.Some{T}"/>)</param>
-	public static bool IsNone<T>(Maybe<T> maybe, out IReason reason)
+	public static bool IsNone<T>(Maybe<T> maybe, out IMsg reason)
 	{
 		if (maybe is Internals.None<T> none)
 		{

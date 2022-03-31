@@ -2,13 +2,13 @@
 // Copyright (c) bfren - licensed under https://mit.bfren.dev/2019
 
 using MaybeF;
-using static MaybeF.F.EnumerableF.R;
+using static MaybeF.F.EnumerableF.M;
 
 namespace Abstracts.Enumerable;
 
 public abstract class SingleOrNone_Tests
 {
-	public abstract void Test00_Empty_List_Returns_None_With_ListIsEmptyReason();
+	public abstract void Test00_Empty_List_Returns_None_With_ListIsEmptyMsg();
 
 	protected static void Test00(Func<IEnumerable<int>, Maybe<int>> act)
 	{
@@ -20,10 +20,10 @@ public abstract class SingleOrNone_Tests
 
 		// Assert
 		var none = result.AssertNone();
-		Assert.IsType<ListIsEmptyReason>(none);
+		Assert.IsType<ListIsEmptyMsg>(none);
 	}
 
-	public abstract void Test01_Multiple_Items_Returns_None_With_MultipleItemsReason();
+	public abstract void Test01_Multiple_Items_Returns_None_With_MultipleItemsMsg();
 
 	protected static void Test01(Func<IEnumerable<int>, Maybe<int>> act)
 	{
@@ -35,10 +35,10 @@ public abstract class SingleOrNone_Tests
 
 		// Assert
 		var none = result.AssertNone();
-		Assert.IsType<MultipleItemsReason>(none);
+		Assert.IsType<MultipleItemsMsg>(none);
 	}
 
-	public abstract void Test02_No_Matching_Items_Returns_None_With_NoMatchingItemsReason();
+	public abstract void Test02_No_Matching_Items_Returns_None_With_NoMatchingItemsMsg();
 
 	protected static void Test02(Func<IEnumerable<int>, Func<int, bool>, Maybe<int>> act)
 	{
@@ -52,10 +52,10 @@ public abstract class SingleOrNone_Tests
 
 		// Assert
 		var none = result.AssertNone();
-		Assert.IsType<NoMatchingItemsReason>(none);
+		Assert.IsType<NoMatchingItemsMsg>(none);
 	}
 
-	public abstract void Test03_Null_Item_Returns_None_With_NullItemReason();
+	public abstract void Test03_Null_Item_Returns_None_With_NullItemMsg();
 
 	protected static void Test03(Func<IEnumerable<int?>, Func<int?, bool>, Maybe<int?>> act)
 	{
@@ -69,7 +69,7 @@ public abstract class SingleOrNone_Tests
 
 		// Assert
 		var none = result.AssertNone();
-		Assert.IsType<NullItemReason>(none);
+		Assert.IsType<NullItemMsg>(none);
 	}
 
 	public abstract void Test04_Returns_Single_Element();

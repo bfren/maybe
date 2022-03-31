@@ -6,13 +6,13 @@ namespace MaybeF.F_Tests;
 public class SomeAsync_Tests : Abstracts.SomeAsync_Tests
 {
 	[Fact]
-	public override async Task Test00_Exception_Thrown_Without_Handler_Returns_None_With_UnhandledExceptionReason()
+	public override async Task Test00_Exception_Thrown_Without_Handler_Returns_None_With_UnhandledExceptionMsg()
 	{
 		await Test00((val, handler) => F.SomeAsync(val, handler)).ConfigureAwait(false);
 	}
 
 	[Fact]
-	public override async Task Test01_Nullable_Exception_Thrown_Without_Handler_Returns_None_With_UnhandledExceptionReason()
+	public override async Task Test01_Nullable_Exception_Thrown_Without_Handler_Returns_None_With_UnhandledExceptionMsg()
 	{
 		await Test01((val, nullable, handler) => F.SomeAsync(val, nullable, handler)).ConfigureAwait(false);
 	}
@@ -36,7 +36,7 @@ public class SomeAsync_Tests : Abstracts.SomeAsync_Tests
 	}
 
 	[Fact]
-	public override async Task Test05_Nullable_Allow_Null_False_Null_Input_Returns_None_With_AllowNullWasFalseReason()
+	public override async Task Test05_Nullable_Allow_Null_False_Null_Input_Returns_None_With_AllowNullWasFalseMsg()
 	{
 		await Test05((val, nullable, handler) => F.SomeAsync(val, nullable, handler)).ConfigureAwait(false);
 	}

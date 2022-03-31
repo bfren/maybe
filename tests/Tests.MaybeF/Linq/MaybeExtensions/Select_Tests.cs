@@ -67,7 +67,7 @@ public class Select_Tests
 	public void Select_With_None_Returns_None()
 	{
 		// Arrange
-		var maybe = F.None<int>(new InvalidIntegerReason());
+		var maybe = F.None<int>(new InvalidIntegerMsg());
 
 		// Act
 		var r0 = maybe.Select(s => s ^ 2);
@@ -76,16 +76,16 @@ public class Select_Tests
 
 		// Assert
 		var n0 = r0.AssertNone();
-		Assert.IsType<InvalidIntegerReason>(n0);
+		Assert.IsType<InvalidIntegerMsg>(n0);
 		var n1 = r1.AssertNone();
-		Assert.IsType<InvalidIntegerReason>(n1);
+		Assert.IsType<InvalidIntegerMsg>(n1);
 	}
 
 	[Fact]
 	public async Task Async_Select_With_None_Returns_None()
 	{
 		// Arrange
-		var maybe = F.None<int>(new InvalidIntegerReason());
+		var maybe = F.None<int>(new InvalidIntegerMsg());
 
 		// Act
 		var r0 = await maybe.AsTask.Select(s => s ^ 2).ConfigureAwait(false);
@@ -106,18 +106,18 @@ public class Select_Tests
 
 		// Assert
 		var n0 = r0.AssertNone();
-		Assert.IsType<InvalidIntegerReason>(n0);
+		Assert.IsType<InvalidIntegerMsg>(n0);
 		var n1 = r1.AssertNone();
-		Assert.IsType<InvalidIntegerReason>(n1);
+		Assert.IsType<InvalidIntegerMsg>(n1);
 		var n2 = r2.AssertNone();
-		Assert.IsType<InvalidIntegerReason>(n2);
+		Assert.IsType<InvalidIntegerMsg>(n2);
 		var n3 = r3.AssertNone();
-		Assert.IsType<InvalidIntegerReason>(n3);
+		Assert.IsType<InvalidIntegerMsg>(n3);
 		var n4 = r4.AssertNone();
-		Assert.IsType<InvalidIntegerReason>(n4);
+		Assert.IsType<InvalidIntegerMsg>(n4);
 		var n5 = r5.AssertNone();
-		Assert.IsType<InvalidIntegerReason>(n5);
+		Assert.IsType<InvalidIntegerMsg>(n5);
 	}
 
-	public record class InvalidIntegerReason : IReason;
+	public record class InvalidIntegerMsg : IMsg;
 }

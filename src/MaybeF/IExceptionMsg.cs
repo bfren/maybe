@@ -9,7 +9,7 @@ namespace MaybeF;
 /// Contains information about the reason why a <see cref="Maybe{T}"/> is <see cref="Internals.None{T}"/>,
 /// usually used when an exception has been caught
 /// </summary>
-public interface IExceptionReason : IReason
+public interface IExceptionMsg : IMsg
 {
 	/// <summary>
 	/// Exception value

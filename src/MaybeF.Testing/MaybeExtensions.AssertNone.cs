@@ -12,6 +12,6 @@ public static partial class MaybeExtensions
 	/// </summary>
 	/// <typeparam name="T">Maybe value type</typeparam>
 	/// <param name="this">Maybe</param>
-	public static IReason AssertNone<T>(this Maybe<T> @this) =>
+	public static IMsg AssertNone<T>(this Maybe<T> @this) =>
 		Assert.IsType<None<T>>(@this).Reason;
 }

@@ -6,7 +6,7 @@ namespace MaybeF.Maybe_Tests;
 public class FilterAsync_Tests : Abstracts.FilterAsync_Tests
 {
 	[Fact]
-	public override async Task Test00_If_Unknown_Maybe_Returns_None_With_UnhandledExceptionReason()
+	public override async Task Test00_If_Unknown_Maybe_Returns_None_With_UnhandledExceptionMsg()
 	{
 		var syncPredicate = Substitute.For<Func<int, bool>>();
 		var asyncPredicate = Substitute.For<Func<int, Task<bool>>>();
@@ -16,7 +16,7 @@ public class FilterAsync_Tests : Abstracts.FilterAsync_Tests
 	}
 
 	[Fact]
-	public override async Task Test01_Exception_Thrown_Returns_None_With_UnhandledExceptionReason()
+	public override async Task Test01_Exception_Thrown_Returns_None_With_UnhandledExceptionMsg()
 	{
 		await Test01((mbe, predicate) => mbe.FilterAsync(x => predicate(x).GetAwaiter().GetResult())).ConfigureAwait(false);
 		await Test01((mbe, predicate) => mbe.FilterAsync(predicate)).ConfigureAwait(false);
@@ -30,14 +30,14 @@ public class FilterAsync_Tests : Abstracts.FilterAsync_Tests
 	}
 
 	[Fact]
-	public override async Task Test03_When_Some_And_Predicate_False_Returns_None_With_PredicateWasFalseReason()
+	public override async Task Test03_When_Some_And_Predicate_False_Returns_None_With_PredicateWasFalseMsg()
 	{
 		await Test03((mbe, predicate) => mbe.FilterAsync(x => predicate(x).GetAwaiter().GetResult())).ConfigureAwait(false);
 		await Test03((mbe, predicate) => mbe.FilterAsync(predicate)).ConfigureAwait(false);
 	}
 
 	[Fact]
-	public override async Task Test04_When_None_Returns_None_With_Original_Reason()
+	public override async Task Test04_When_None_Returns_None_With_Original_Msg()
 	{
 		await Test04((mbe, predicate) => mbe.FilterAsync(x => predicate(x).GetAwaiter().GetResult())).ConfigureAwait(false);
 		await Test04((mbe, predicate) => mbe.FilterAsync(predicate)).ConfigureAwait(false);

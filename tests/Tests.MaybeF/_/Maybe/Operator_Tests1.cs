@@ -38,5 +38,5 @@ public partial class Operator_Tests
 		Assert.False(r1);
 	}
 
-	public record class TestReason : IReason;
+	public record class TestMsg : IMsg;
 }

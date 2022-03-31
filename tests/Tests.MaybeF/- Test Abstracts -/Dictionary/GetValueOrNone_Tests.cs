@@ -2,13 +2,13 @@
 // Copyright (c) bfren - licensed under https://mit.bfren.dev/2019
 
 using MaybeF;
-using static MaybeF.F.DictionaryF.R;
+using static MaybeF.F.DictionaryF.M;
 
 namespace Abstracts.Dictionary;
 
 public abstract class GetValueOrNone_Tests
 {
-	public abstract void Test00_Empty_Dictionary_Returns_None_With_ListIsEmptyReason();
+	public abstract void Test00_Empty_Dictionary_Returns_None_With_ListIsEmptyMsg();
 
 	protected static void Test00(Func<IDictionary<string, int>, string, Maybe<int>> act)
 	{
@@ -20,10 +20,10 @@ public abstract class GetValueOrNone_Tests
 
 		// Assert
 		var none = result.AssertNone();
-		Assert.IsType<DictionaryIsEmptyReason>(none);
+		Assert.IsType<DictionaryIsEmptyMsg>(none);
 	}
 
-	public abstract void Test01_Null_Key_Returns_None_With_KeyCannotBeNullReason(string input);
+	public abstract void Test01_Null_Key_Returns_None_With_KeyCannotBeNullMsg(string input);
 
 	protected static void Test01(Func<IDictionary<string, int>, Maybe<int>> act)
 	{
@@ -38,10 +38,10 @@ public abstract class GetValueOrNone_Tests
 
 		// Assert
 		var none = result.AssertNone();
-		Assert.IsType<KeyCannotBeNullReason>(none);
+		Assert.IsType<KeyCannotBeNullMsg>(none);
 	}
 
-	public abstract void Test02_Key_Does_Not_Exists_Returns_None_With_KeyDoesNotExistReason();
+	public abstract void Test02_Key_Does_Not_Exists_Returns_None_With_KeyDoesNotExistMsg();
 
 	protected static void Test02(Func<IDictionary<string, int>, string, Maybe<int>> act)
 	{
@@ -57,11 +57,11 @@ public abstract class GetValueOrNone_Tests
 
 		// Assert
 		var none = result.AssertNone();
-		var reason = Assert.IsType<KeyDoesNotExistReason<string>>(none);
-		Assert.Equal(key, reason.Key);
+		var message = Assert.IsType<KeyDoesNotExistMsg<string>>(none);
+		Assert.Equal(key, message.Key);
 	}
 
-	public abstract void Test03_Key_Exists_Null_Item_Returns_None_With_NullValueReason();
+	public abstract void Test03_Key_Exists_Null_Item_Returns_None_With_NullValueMsg();
 
 	protected static void Test03(Func<IDictionary<int, string>, int, Maybe<string>> act)
 	{
@@ -77,8 +77,8 @@ public abstract class GetValueOrNone_Tests
 
 		// Assert
 		var none = result.AssertNone();
-		var reason = Assert.IsType<NullValueReason<int>>(none);
-		Assert.Equal(key, reason.Key);
+		var message = Assert.IsType<NullValueMsg<int>>(none);
+		Assert.Equal(key, message.Key);
 	}
 
 	public abstract void Test04_Key_Exists_Valid_Item_Returns_Some_With_Value();

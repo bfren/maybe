@@ -80,7 +80,7 @@ public class SelectMany_Tests
 		var v1 = Rnd.Int;
 		var o0 = F.Some(v0);
 		var o1 = F.Some(v1);
-		var o2 = F.None<int>(new InvalidIntegerReason());
+		var o2 = F.None<int>(new InvalidIntegerMsg());
 
 		// Act
 		var result = from a in o0
@@ -90,7 +90,7 @@ public class SelectMany_Tests
 
 		// Assert
 		var none = result.AssertNone();
-		Assert.IsType<InvalidIntegerReason>(none);
+		Assert.IsType<InvalidIntegerMsg>(none);
 	}
 
 	[Fact]
@@ -101,7 +101,7 @@ public class SelectMany_Tests
 		var v1 = Rnd.Int;
 		var o0 = F.Some(v0).AsTask;
 		var o1 = F.Some(v1).AsTask;
-		var o2 = F.None<int>(new InvalidIntegerReason()).AsTask;
+		var o2 = F.None<int>(new InvalidIntegerMsg()).AsTask;
 
 		// Act
 		var result = await (
@@ -113,7 +113,7 @@ public class SelectMany_Tests
 
 		// Assert
 		var none = result.AssertNone();
-		Assert.IsType<InvalidIntegerReason>(none);
+		Assert.IsType<InvalidIntegerMsg>(none);
 	}
 
 	[Fact]
@@ -124,7 +124,7 @@ public class SelectMany_Tests
 		var v1 = Rnd.Int;
 		var o0 = F.Some(v0).AsTask;
 		var o1 = F.Some(v1).AsTask;
-		var o2 = F.None<int>(new InvalidIntegerReason());
+		var o2 = F.None<int>(new InvalidIntegerMsg());
 
 		// Act
 		var result = await (
@@ -136,8 +136,8 @@ public class SelectMany_Tests
 
 		// Assert
 		var none = result.AssertNone();
-		Assert.IsType<InvalidIntegerReason>(none);
+		Assert.IsType<InvalidIntegerMsg>(none);
 	}
 
-	public record class InvalidIntegerReason : IReason;
+	public record class InvalidIntegerMsg : IMsg;
 }

@@ -1,7 +1,7 @@
 ﻿// Maybe: Unit Tests
 // Copyright (c) bfren - licensed under https://mit.bfren.dev/2019
 
-using static MaybeF.F.R;
+using static MaybeF.F.M;
 
 namespace MaybeF.Maybe_Tests;
 
@@ -33,6 +33,6 @@ public partial class Operator_Tests
 
 		// Assert
 		var none = result.AssertNone();
-		Assert.IsType<NullValueReason>(none);
+		Assert.IsType<NullValueMsg>(none);
 	}
 }

@@ -17,11 +17,11 @@ public static partial class MaybeExtensions
 	) =>
 		F.SwitchIfAsync(@this, check, ifTrue, ifFalse);
 
-	/// <inheritdoc cref="F.SwitchIf{T}(Maybe{T}, Func{T, bool}, Func{T, IReason})"/>
+	/// <inheritdoc cref="F.SwitchIf{T}(Maybe{T}, Func{T, bool}, Func{T, IMsg})"/>
 	public static Task<Maybe<T>> SwitchIfAsync<T>(
 		this Task<Maybe<T>> @this,
 		Func<T, bool> check,
-		Func<T, IReason> ifFalse
+		Func<T, IMsg> ifFalse
 	) =>
 		F.SwitchIfAsync(@this, check, ifFalse);
 }

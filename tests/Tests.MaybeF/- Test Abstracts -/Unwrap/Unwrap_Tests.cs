@@ -25,22 +25,22 @@ public abstract class Unwrap_Tests
 		Assert.Equal(value, result);
 	}
 
-	public abstract void Test01_None_With_Reason_Runs_IfNone_Func_Passes_Reason_Returns_Value();
+	public abstract void Test01_None_With_Msg_Runs_IfNone_Func_Passes_Msg_Returns_Value();
 
-	protected static void Test01(Func<Maybe<int>, Func<IReason, int>, int> act)
+	protected static void Test01(Func<Maybe<int>, Func<IMsg, int>, int> act)
 	{
 		// Arrange
 		var value = Rnd.Int;
-		var reason = Substitute.For<IReason>();
-		var maybe = F.None<int>(reason);
-		var ifNone = Substitute.For<Func<IReason, int>>();
-		ifNone.Invoke(reason).Returns(value);
+		var message = Substitute.For<IMsg>();
+		var maybe = F.None<int>(message);
+		var ifNone = Substitute.For<Func<IMsg, int>>();
+		ifNone.Invoke(message).Returns(value);
 
 		// Act
 		var result = act(maybe, ifNone);
 
 		// Assert
-		ifNone.Received().Invoke(reason);
+		ifNone.Received().Invoke(message);
 		Assert.Equal(value, result);
 	}
 

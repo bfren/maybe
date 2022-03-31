@@ -1,7 +1,7 @@
 ﻿// Maybe: Unit Tests
 // Copyright (c) bfren - licensed under https://mit.bfren.dev/2019
 
-using static MaybeF.F.R;
+using static MaybeF.F.M;
 
 namespace MaybeF.F_Tests;
 
@@ -18,7 +18,7 @@ public class Catch_Tests
 
 		// Assert
 		var none = result.AssertNone();
-		Assert.IsType<MaybeCannotBeNullReason>(none);
+		Assert.IsType<MaybeCannotBeNullMsg>(none);
 	}
 
 	[Fact]
@@ -46,7 +46,7 @@ public class Catch_Tests
 
 		// Assert
 		var none = result.AssertNone();
-		var ex = Assert.IsType<UnhandledExceptionReason>(none);
+		var ex = Assert.IsType<UnhandledExceptionMsg>(none);
 		Assert.Contains(message, ex.ToString());
 	}
 

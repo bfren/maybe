@@ -5,7 +5,7 @@ using MaybeF;
 using MaybeF.Exceptions;
 using MaybeF.Internals;
 using MaybeF.Testing.Exceptions;
-using static MaybeF.F.R;
+using static MaybeF.F.M;
 
 namespace Abstracts;
 
@@ -56,7 +56,7 @@ public abstract class SwitchIf_Tests
 		Assert.Same(maybe, result);
 	}
 
-	public abstract void Test03_Check_Func_Throws_Exception_Returns_None_With_SwitchIfFuncExceptionReason();
+	public abstract void Test03_Check_Func_Throws_Exception_Returns_None_With_SwitchIfFuncExceptionMsg();
 
 	protected static void Test03(Func<Maybe<int>, Func<int, bool>, Maybe<int>> act)
 	{
@@ -69,7 +69,7 @@ public abstract class SwitchIf_Tests
 
 		// Assert
 		var none = result.AssertNone();
-		Assert.IsType<SwitchIfFuncExceptionReason>(none);
+		Assert.IsType<SwitchIfFuncExceptionMsg>(none);
 	}
 
 	public abstract void Test04_Check_Returns_True_And_IfTrue_Is_Null_Returns_Original_Maybe();
@@ -104,7 +104,7 @@ public abstract class SwitchIf_Tests
 		Assert.Same(maybe, result);
 	}
 
-	public abstract void Test06_Check_Returns_True_And_IfTrue_Throws_Exception_Returns_None_With_SwitchIfFuncExceptionReason();
+	public abstract void Test06_Check_Returns_True_And_IfTrue_Throws_Exception_Returns_None_With_SwitchIfFuncExceptionMsg();
 
 	protected static void Test06(Func<Maybe<int>, Func<int, bool>, Func<int, None<int>>, Maybe<int>> act)
 	{
@@ -119,10 +119,10 @@ public abstract class SwitchIf_Tests
 
 		// Assert
 		var none = result.AssertNone();
-		Assert.IsType<SwitchIfFuncExceptionReason>(none);
+		Assert.IsType<SwitchIfFuncExceptionMsg>(none);
 	}
 
-	public abstract void Test07_Check_Returns_False_And_IfFalse_Throws_Exception_Returns_None_With_SwitchIfFuncExceptionReason();
+	public abstract void Test07_Check_Returns_False_And_IfFalse_Throws_Exception_Returns_None_With_SwitchIfFuncExceptionMsg();
 
 	protected static void Test07(Func<Maybe<int>, Func<int, bool>, Func<int, None<int>>, Maybe<int>> act)
 	{
@@ -137,7 +137,7 @@ public abstract class SwitchIf_Tests
 
 		// Assert
 		var none = result.AssertNone();
-		Assert.IsType<SwitchIfFuncExceptionReason>(none);
+		Assert.IsType<SwitchIfFuncExceptionMsg>(none);
 	}
 
 	public abstract void Test08_Check_Returns_True_Runs_IfTrue_Returns_Value();
@@ -172,7 +172,7 @@ public abstract class SwitchIf_Tests
 		var check = Substitute.For<Func<int, bool>>();
 		check.Invoke(value).Returns(false);
 		var ifFalse = Substitute.For<Func<int, None<int>>>();
-		ifFalse.Invoke(value).Returns(F.None<int, TestReason>());
+		ifFalse.Invoke(value).Returns(F.None<int, TestMsg>());
 
 		// Act
 		var result = act(maybe, check, ifFalse);
@@ -180,10 +180,10 @@ public abstract class SwitchIf_Tests
 		// Assert
 		ifFalse.Received().Invoke(value);
 		var none = result.AssertNone();
-		Assert.IsType<TestReason>(none);
+		Assert.IsType<TestMsg>(none);
 	}
 
 	public record class FakeMaybe : Maybe<int> { }
 
-	public sealed record class TestReason : IReason;
+	public sealed record class TestMsg : IMsg;
 }

@@ -13,7 +13,7 @@ public class UnwrapAsync_Tests : Abstracts.UnwrapAsync_Tests
 	}
 
 	[Fact]
-	public override async Task Test01_None_With_Reason_Runs_IfNone_Func_Passes_Reason_Returns_Value()
+	public override async Task Test01_None_With_Msg_Runs_IfNone_Func_Passes_Msg_Returns_Value()
 	{
 		await Test01((mbe, ifNone) => mbe.UnwrapAsync(x => x.Value(ifNone))).ConfigureAwait(false);
 	}
@@ -23,6 +23,6 @@ public class UnwrapAsync_Tests : Abstracts.UnwrapAsync_Tests
 	{
 		await Test02(mbe => mbe.UnwrapAsync(x => x.Value(Rnd.Int))).ConfigureAwait(false);
 		await Test02(mbe => mbe.UnwrapAsync(x => x.Value(Substitute.For<Func<int>>()))).ConfigureAwait(false);
-		await Test02(mbe => mbe.UnwrapAsync(x => x.Value(Substitute.For<Func<IReason, int>>()))).ConfigureAwait(false);
+		await Test02(mbe => mbe.UnwrapAsync(x => x.Value(Substitute.For<Func<IMsg, int>>()))).ConfigureAwait(false);
 	}
 }

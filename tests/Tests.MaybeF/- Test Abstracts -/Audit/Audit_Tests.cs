@@ -128,18 +128,18 @@ public abstract class Audit_Tests
 
 	public abstract void Test07_None_Runs_None_And_Returns_Original_Maybe();
 
-	protected static void Test07(Func<Maybe<int>, Action<IReason>, Maybe<int>> act)
+	protected static void Test07(Func<Maybe<int>, Action<IMsg>, Maybe<int>> act)
 	{
 		// Arrange
-		var reason = new TestReason();
-		var maybe = F.None<int>(reason);
-		var none = Substitute.For<Action<IReason>>();
+		var message = new TestMsg();
+		var maybe = F.None<int>(message);
+		var none = Substitute.For<Action<IMsg>>();
 
 		// Act
 		var result = act(maybe, none);
 
 		// Assert
-		none.Received().Invoke(reason);
+		none.Received().Invoke(message);
 		Assert.Same(maybe, result);
 	}
 
@@ -160,12 +160,12 @@ public abstract class Audit_Tests
 
 	public abstract void Test09_None_Catches_Exception_And_Returns_Original_Maybe();
 
-	protected static void Test09(Func<Maybe<int>, Action<IReason>, Maybe<int>> act)
+	protected static void Test09(Func<Maybe<int>, Action<IMsg>, Maybe<int>> act)
 	{
 		// Arrange
 		var maybe = Create.None<int>();
 		var exception = new Exception();
-		var throwException = void (IReason _) => throw exception;
+		var throwException = void (IMsg _) => throw exception;
 
 		// Act
 		var result = act(maybe, throwException);
@@ -178,5 +178,5 @@ public abstract class Audit_Tests
 
 	public record class FakeMaybe : Maybe<int> { }
 
-	public record class TestReason : IReason;
+	public record class TestMsg : IMsg;
 }

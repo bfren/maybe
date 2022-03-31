@@ -207,35 +207,35 @@ public abstract class AuditAsync_Tests
 
 	public abstract Task Test12_None_Runs_None_Action_And_Returns_Original_Maybe();
 
-	protected static async Task Test12(Func<Maybe<int>, Action<IReason>, Task<Maybe<int>>> act)
+	protected static async Task Test12(Func<Maybe<int>, Action<IMsg>, Task<Maybe<int>>> act)
 	{
 		// Arrange
-		var reason = new TestReason();
-		var maybe = F.None<int>(reason);
-		var none = Substitute.For<Action<IReason>>();
+		var message = new TestMsg();
+		var maybe = F.None<int>(message);
+		var none = Substitute.For<Action<IMsg>>();
 
 		// Act
 		var result = await act(maybe, none).ConfigureAwait(false);
 
 		// Assert
-		none.Received().Invoke(reason);
+		none.Received().Invoke(message);
 		Assert.Same(maybe, result);
 	}
 
 	public abstract Task Test13_None_Runs_None_Func_And_Returns_Original_Maybe();
 
-	protected static async Task Test13(Func<Maybe<int>, Func<IReason, Task>, Task<Maybe<int>>> act)
+	protected static async Task Test13(Func<Maybe<int>, Func<IMsg, Task>, Task<Maybe<int>>> act)
 	{
 		// Arrange
-		var reason = new TestReason();
-		var maybe = F.None<int>(reason);
-		var none = Substitute.For<Func<IReason, Task>>();
+		var message = new TestMsg();
+		var maybe = F.None<int>(message);
+		var none = Substitute.For<Func<IMsg, Task>>();
 
 		// Act
 		var result = await act(maybe, none).ConfigureAwait(false);
 
 		// Assert
-		await none.Received().Invoke(reason).ConfigureAwait(false);
+		await none.Received().Invoke(message).ConfigureAwait(false);
 		Assert.Same(maybe, result);
 	}
 
@@ -273,12 +273,12 @@ public abstract class AuditAsync_Tests
 
 	public abstract Task Test16_None_Runs_None_Action_Catches_Exception_And_Returns_Original_Maybe();
 
-	protected static async Task Test16(Func<Maybe<int>, Action<IReason>, Task<Maybe<int>>> act)
+	protected static async Task Test16(Func<Maybe<int>, Action<IMsg>, Task<Maybe<int>>> act)
 	{
 		// Arrange
 		var maybe = Create.None<int>();
 		var exception = new Exception();
-		var throwException = void (IReason _) => throw exception;
+		var throwException = void (IMsg _) => throw exception;
 
 		// Act
 		var result = await act(maybe, throwException).ConfigureAwait(false);
@@ -289,12 +289,12 @@ public abstract class AuditAsync_Tests
 
 	public abstract Task Test17_None_Runs_None_Func_Catches_Exception_And_Returns_Original_Maybe();
 
-	protected static async Task Test17(Func<Maybe<int>, Func<IReason, Task>, Task<Maybe<int>>> act)
+	protected static async Task Test17(Func<Maybe<int>, Func<IMsg, Task>, Task<Maybe<int>>> act)
 	{
 		// Arrange
 		var maybe = Create.None<int>();
 		var exception = new Exception();
-		var throwException = Task (IReason _) => throw exception;
+		var throwException = Task (IMsg _) => throw exception;
 
 		// Act
 		var result = await act(maybe, throwException).ConfigureAwait(false);
@@ -307,5 +307,5 @@ public abstract class AuditAsync_Tests
 
 	public record class FakeMaybe : Maybe<int> { }
 
-	public record class TestReason : IReason;
+	public record class TestMsg : IMsg;
 }

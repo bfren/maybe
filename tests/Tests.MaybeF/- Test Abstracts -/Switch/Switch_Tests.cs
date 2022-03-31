@@ -49,36 +49,36 @@ public abstract class Switch_Tests
 		Assert.Throws<MaybeCannotBeNullException>(action);
 	}
 
-	public abstract void Test03_Return_Void_If_None_Runs_None_Action_With_Reason();
+	public abstract void Test03_Return_Void_If_None_Runs_None_Action_With_Msg();
 
-	protected static void Test03(Action<Maybe<int>, Action<IReason>> act)
+	protected static void Test03(Action<Maybe<int>, Action<IMsg>> act)
 	{
 		// Arrange
-		var reason = new TestReason();
-		var maybe = F.None<int>(reason);
-		var none = Substitute.For<Action<IReason>>();
+		var message = new TestMsg();
+		var maybe = F.None<int>(message);
+		var none = Substitute.For<Action<IMsg>>();
 
 		// Act
 		act(maybe, none);
 
 		// Assert
-		none.Received().Invoke(reason);
+		none.Received().Invoke(message);
 	}
 
-	public abstract void Test04_Return_Value_If_None_Runs_None_Func_With_Reason();
+	public abstract void Test04_Return_Value_If_None_Runs_None_Func_With_Msg();
 
-	protected static void Test04(Func<Maybe<int>, Func<IReason, string>, string> act)
+	protected static void Test04(Func<Maybe<int>, Func<IMsg, string>, string> act)
 	{
 		// Arrange
-		var reason = new TestReason();
-		var maybe = F.None<int>(reason);
-		var none = Substitute.For<Func<IReason, string>>();
+		var message = new TestMsg();
+		var maybe = F.None<int>(message);
+		var none = Substitute.For<Func<IMsg, string>>();
 
 		// Act
 		act(maybe, none);
 
 		// Assert
-		none.Received().Invoke(reason);
+		none.Received().Invoke(message);
 	}
 
 	public abstract void Test05_Return_Void_If_Some_Runs_Some_Action_With_Value();
@@ -115,5 +115,5 @@ public abstract class Switch_Tests
 
 	public record class FakeMaybe : Maybe<int> { }
 
-	public record class TestReason : IReason;
+	public record class TestMsg : IMsg;
 }

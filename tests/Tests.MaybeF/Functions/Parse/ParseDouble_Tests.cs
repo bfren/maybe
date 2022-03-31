@@ -22,14 +22,14 @@ public class ParseDouble_Tests : Abstracts.Parse_Tests<double>
 
 	[Theory]
 	[MemberData(nameof(ParseSingle_Tests.Invalid_Float_Input), MemberType = typeof(ParseSingle_Tests))]
-	public override void Test01_Invalid_Input_Returns_None_With_UnableToParseValueAsReason(string? input)
+	public override void Test01_Invalid_Input_Returns_None_With_UnableToParseValueAsMsg(string? input)
 	{
 		Test01(input, F.ParseDouble, F.ParseDouble);
 	}
 
 	[Theory]
 	[InlineData(null)]
-	public override void Test02_Null_Input_Returns_None_With_UnableToParseValueAsReason(string? input)
+	public override void Test02_Null_Input_Returns_None_With_UnableToParseValueAsMsg(string? input)
 	{
 		Test02(input, F.ParseDouble, F.ParseDouble);
 	}

@@ -3,13 +3,13 @@
 
 using MaybeF;
 using MaybeF.Exceptions;
-using static MaybeF.F.R;
+using static MaybeF.F.M;
 
 namespace Abstracts;
 
 public abstract class MapAsync_Tests
 {
-	public abstract Task Test00_If_Unknown_Maybe_Returns_None_With_UnhandledExceptionReason();
+	public abstract Task Test00_If_Unknown_Maybe_Returns_None_With_UnhandledExceptionMsg();
 
 	protected static async Task Test00(Func<Maybe<int>, Func<int, Task<string>>, F.Handler, Task<Maybe<string>>> act)
 	{
@@ -22,11 +22,11 @@ public abstract class MapAsync_Tests
 
 		// Assert
 		var none = result.AssertNone();
-		var reason = Assert.IsType<UnhandledExceptionReason>(none);
-		Assert.IsType<UnknownMaybeException>(reason.Value);
+		var message = Assert.IsType<UnhandledExceptionMsg>(none);
+		Assert.IsType<UnknownMaybeException>(message.Value);
 	}
 
-	public abstract Task Test01_Exception_Thrown_Without_Handler_Returns_None_With_UnhandledExceptionReason();
+	public abstract Task Test01_Exception_Thrown_Without_Handler_Returns_None_With_UnhandledExceptionMsg();
 
 	protected static async Task Test01(Func<Maybe<string>, Func<string, Task<int>>, F.Handler, Task<Maybe<int>>> act)
 	{
@@ -40,7 +40,7 @@ public abstract class MapAsync_Tests
 
 		// Assert
 		var none = result.AssertNone();
-		Assert.IsType<UnhandledExceptionReason>(none);
+		Assert.IsType<UnhandledExceptionMsg>(none);
 	}
 
 	public abstract Task Test02_Exception_Thrown_With_Handler_Calls_Handler_Returns_None();
@@ -76,13 +76,13 @@ public abstract class MapAsync_Tests
 		result.AssertNone();
 	}
 
-	public abstract Task Test04_If_None_With_Reason_Returns_None_With_Same_Reason();
+	public abstract Task Test04_If_None_With_Msg_Returns_None_With_Same_Msg();
 
 	protected static async Task Test04(Func<Maybe<int>, Func<int, Task<string>>, F.Handler, Task<Maybe<string>>> act)
 	{
 		// Arrange
-		var reason = new TestReason();
-		var maybe = F.None<int>(reason);
+		var message = new TestMsg();
+		var maybe = F.None<int>(message);
 		var map = Substitute.For<Func<int, Task<string>>>();
 
 		// Act
@@ -90,7 +90,7 @@ public abstract class MapAsync_Tests
 
 		// Assert
 		var none = result.AssertNone();
-		Assert.Same(reason, none);
+		Assert.Same(message, none);
 	}
 
 	public abstract Task Test05_If_Some_Runs_Map_Function();
@@ -111,5 +111,5 @@ public abstract class MapAsync_Tests
 
 	public record class FakeMaybe : Maybe<int> { }
 
-	public record class TestReason : IReason;
+	public record class TestMsg : IMsg;
 }

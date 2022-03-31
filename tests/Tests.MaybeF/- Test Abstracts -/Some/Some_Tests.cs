@@ -3,13 +3,13 @@
 
 using MaybeF;
 using MaybeF.Testing.Exceptions;
-using static MaybeF.F.R;
+using static MaybeF.F.M;
 
 namespace Abstracts;
 
 public abstract class Some_Tests
 {
-	public abstract void Test00_Exception_Thrown_Without_Handler_Returns_None_With_UnhandledExceptionReason();
+	public abstract void Test00_Exception_Thrown_Without_Handler_Returns_None_With_UnhandledExceptionMsg();
 
 	protected static void Test00(Func<Func<int>, F.Handler, Maybe<int>> act)
 	{
@@ -21,10 +21,10 @@ public abstract class Some_Tests
 
 		// Assert
 		var none = result.AssertNone();
-		Assert.IsType<UnhandledExceptionReason>(none);
+		Assert.IsType<UnhandledExceptionMsg>(none);
 	}
 
-	public abstract void Test01_Nullable_Exception_Thrown_Without_Handler_Returns_None_With_UnhandledExceptionReason();
+	public abstract void Test01_Nullable_Exception_Thrown_Without_Handler_Returns_None_With_UnhandledExceptionMsg();
 
 	protected static void Test01(Func<Func<int?>, bool, F.Handler, Maybe<int?>> act)
 	{
@@ -37,9 +37,9 @@ public abstract class Some_Tests
 
 		// Assert
 		var n0 = r0.AssertNone();
-		Assert.IsType<UnhandledExceptionReason>(n0);
+		Assert.IsType<UnhandledExceptionMsg>(n0);
 		var n1 = r1.AssertNone();
-		Assert.IsType<UnhandledExceptionReason>(n1);
+		Assert.IsType<UnhandledExceptionMsg>(n1);
 	}
 
 	public abstract void Test02_Exception_Thrown_With_Handler_Returns_None_Calls_Handler();
@@ -90,7 +90,7 @@ public abstract class Some_Tests
 
 		// Assert
 		var none = result.AssertNone();
-		Assert.IsType<NullValueReason>(none);
+		Assert.IsType<NullValueMsg>(none);
 	}
 
 	public abstract void Test05_Null_Input_Func_Returns_None();
@@ -105,10 +105,10 @@ public abstract class Some_Tests
 
 		// Assert
 		var none = result.AssertNone();
-		Assert.IsType<NullValueReason>(none);
+		Assert.IsType<NullValueMsg>(none);
 	}
 
-	public abstract void Test06_Nullable_Allow_Null_False_Null_Input_Value_Returns_None_With_AllowNullWasFalseReason();
+	public abstract void Test06_Nullable_Allow_Null_False_Null_Input_Value_Returns_None_With_AllowNullWasFalseMsg();
 
 	protected static void Test06(Func<int?, bool, Maybe<int?>> act)
 	{
@@ -120,10 +120,10 @@ public abstract class Some_Tests
 
 		// Assert
 		var none = result.AssertNone();
-		Assert.IsType<AllowNullWasFalseReason>(none);
+		Assert.IsType<AllowNullWasFalseMsg>(none);
 	}
 
-	public abstract void Test07_Nullable_Allow_Null_False_Null_Input_Func_Returns_None_With_AllowNullWasFalseReason();
+	public abstract void Test07_Nullable_Allow_Null_False_Null_Input_Func_Returns_None_With_AllowNullWasFalseMsg();
 
 	protected static void Test07(Func<Func<int?>, bool, F.Handler, Maybe<int?>> act)
 	{
@@ -135,7 +135,7 @@ public abstract class Some_Tests
 
 		// Assert
 		var none = result.AssertNone();
-		Assert.IsType<AllowNullWasFalseReason>(none);
+		Assert.IsType<AllowNullWasFalseMsg>(none);
 	}
 
 	public abstract void Test08_Nullable_Allow_Null_True_Null_Input_Value_Returns_Some_With_Null_Value();

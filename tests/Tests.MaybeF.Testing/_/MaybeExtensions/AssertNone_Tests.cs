@@ -19,19 +19,19 @@ public class AssertNone_Tests
 	}
 
 	[Fact]
-	public void Is_None__Passes_Test__Returns_Reason()
+	public void Is_None__Passes_Test__Returns_Msg()
 	{
 		// Arrange
-		var reason = new TestReason();
-		var maybe = F.None<string>(reason);
+		var message = new TestMsg();
+		var maybe = F.None<string>(message);
 
 		// Act
 		var action = () => maybe.AssertNone();
 
 		// Assert
 		var none = action();
-		Assert.Same(reason, none);
+		Assert.Same(message, none);
 	}
 
-	public sealed record class TestReason : IReason;
+	public sealed record class TestMsg : IMsg;
 }

@@ -27,23 +27,22 @@ public static partial class F
 								x,
 
 							_ =>
-								None<T, R.ElementAtIsNullReason>()
+								None<T, M.ElementAtIsNullMsg>()
 						},
 
 					false =>
-						None<T, R.ListIsEmptyReason>()
+						None<T, M.ListIsEmptyMsg>()
 				},
 				DefaultHandler
 			);
 
-		/// <summary>Reasons</summary>
-		public static partial class R
+		public static partial class M
 		{
 			/// <summary>Null or no item found when doing ElementAtOrDefault()</summary>
-			public sealed record class ElementAtIsNullReason : IReason;
+			public sealed record class ElementAtIsNullMsg : IMsg;
 
 			/// <summary>The list is empty</summary>
-			public sealed record class ListIsEmptyReason : IReason;
+			public sealed record class ListIsEmptyMsg : IMsg;
 		}
 	}
 }

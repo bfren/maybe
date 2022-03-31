@@ -13,12 +13,12 @@ public static class Create
 	/// </summary>
 	/// <typeparam name="T">Maybe value type</typeparam>
 	public static Maybe<T> None<T>() =>
-		F.None<T, R.EmptyNoneForTestingReason>();
+		F.None<T, M.EmptyNoneForTestingMsg>();
 
-	/// <summary>Reasons</summary>
-	public static class R
+	/// <summary>Messages</summary>
+	public static class M
 	{
 		/// <summary>Empty None created for testing</summary>
-		public sealed record class EmptyNoneForTestingReason : IReason;
+		public sealed record class EmptyNoneForTestingMsg : IMsg;
 	}
 }

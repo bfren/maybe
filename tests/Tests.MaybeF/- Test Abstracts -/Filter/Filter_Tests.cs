@@ -3,13 +3,13 @@
 
 using MaybeF;
 using MaybeF.Exceptions;
-using static MaybeF.F.R;
+using static MaybeF.F.M;
 
 namespace Abstracts;
 
 public abstract class Filter_Tests
 {
-	public abstract void Test00_If_Unknown_Maybe_Returns_None_With_UnhandledExceptionReason();
+	public abstract void Test00_If_Unknown_Maybe_Returns_None_With_UnhandledExceptionMsg();
 
 	protected static void Test00(Func<Maybe<int>, Maybe<int>> act)
 	{
@@ -21,11 +21,11 @@ public abstract class Filter_Tests
 
 		// Assert
 		var none = result.AssertNone();
-		var reason = Assert.IsType<UnhandledExceptionReason>(none);
-		Assert.IsType<UnknownMaybeException>(reason.Value);
+		var message = Assert.IsType<UnhandledExceptionMsg>(none);
+		Assert.IsType<UnknownMaybeException>(message.Value);
 	}
 
-	public abstract void Test01_Exception_Thrown_Returns_None_With_UnhandledExceptionReason();
+	public abstract void Test01_Exception_Thrown_Returns_None_With_UnhandledExceptionMsg();
 
 	protected static void Test01(Func<Maybe<string>, Func<string, bool>, Maybe<string>> act)
 	{
@@ -39,7 +39,7 @@ public abstract class Filter_Tests
 
 		// Assert
 		var none = result.AssertNone();
-		Assert.IsType<UnhandledExceptionReason>(none);
+		Assert.IsType<UnhandledExceptionMsg>(none);
 	}
 
 	public abstract void Test02_When_Some_And_Predicate_True_Returns_Value();
@@ -60,7 +60,7 @@ public abstract class Filter_Tests
 		Assert.Equal(value, some);
 	}
 
-	public abstract void Test03_When_Some_And_Predicate_False_Returns_None_With_PredicateWasFalseReason();
+	public abstract void Test03_When_Some_And_Predicate_False_Returns_None_With_PredicateWasFalseMsg();
 
 	protected static void Test03(Func<Maybe<string>, Func<string, bool>, Maybe<string>> act)
 	{
@@ -75,16 +75,16 @@ public abstract class Filter_Tests
 
 		// Assert
 		var none = result.AssertNone();
-		Assert.IsType<FilterPredicateWasFalseReason>(none);
+		Assert.IsType<FilterPredicateWasFalseMsg>(none);
 	}
 
-	public abstract void Test04_When_None_Returns_None_With_Original_Reason();
+	public abstract void Test04_When_None_Returns_None_With_Original_Msg();
 
 	protected static void Test04(Func<Maybe<int>, Func<int, bool>, Maybe<int>> act)
 	{
 		// Arrange
-		var reason = new TestReason();
-		var maybe = F.None<int>(reason);
+		var message = new TestMsg();
+		var maybe = F.None<int>(message);
 		var predicate = Substitute.For<Func<int, bool>>();
 
 		// Act
@@ -92,11 +92,11 @@ public abstract class Filter_Tests
 
 		// Assert
 		var none = result.AssertNone();
-		Assert.Same(reason, none);
+		Assert.Same(message, none);
 		predicate.DidNotReceiveWithAnyArgs().Invoke(Arg.Any<int>());
 	}
 
 	public record class FakeMaybe : Maybe<int> { }
 
-	public record class TestReason : IReason;
+	public record class TestMsg : IMsg;
 }

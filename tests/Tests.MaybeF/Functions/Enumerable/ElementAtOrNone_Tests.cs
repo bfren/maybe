@@ -6,13 +6,13 @@ namespace MaybeF.F_Tests.Enumerable;
 public class ElementAtOrNone_Tests : Abstracts.Enumerable.ElementAtOrNone_Tests
 {
 	[Fact]
-	public override void Test00_Empty_List_Returns_None_With_ListIsEmptyReason()
+	public override void Test00_Empty_List_Returns_None_With_ListIsEmptyMsg()
 	{
 		Test00((list, index) => F.EnumerableF.ElementAtOrNone(list, index));
 	}
 
 	[Fact]
-	public override void Test01_No_Value_At_Index_Returns_None_With_ElementAtIsNullReason()
+	public override void Test01_No_Value_At_Index_Returns_None_With_ElementAtIsNullMsg()
 	{
 		Test01((list, index) => F.EnumerableF.ElementAtOrNone(list, index));
 	}

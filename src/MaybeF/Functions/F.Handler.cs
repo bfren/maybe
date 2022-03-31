@@ -12,17 +12,17 @@ namespace MaybeF;
 public static partial class F
 {
 	/// <summary>
-	/// Exception handler delegate - takes exception and must return a Reason of type <see cref="IExceptionReason"/>
+	/// Exception handler delegate - takes exception and must return a message of type <see cref="IExceptionMsg"/>
 	/// </summary>
 	/// <param name="e">Exception</param>
-	public delegate IExceptionReason Handler(Exception e);
+	public delegate IExceptionMsg Handler(Exception e);
 
 	/// <summary>
 	/// Default exception handler,
-	/// it returns <see cref="R.UnhandledExceptionReason"/>
+	/// it returns <see cref="M.UnhandledExceptionMsg"/>
 	/// </summary>
 	public static Handler DefaultHandler =>
-		e => new R.UnhandledExceptionReason(e);
+		e => new M.UnhandledExceptionMsg(e);
 
 	/// <summary>
 	/// Set to log audit exceptions - otherwise they are sent to the Console
@@ -44,16 +44,15 @@ public static partial class F
 		}
 	}
 
-	/// <summary>Reasons</summary>
-	public static partial class R
+	public static partial class M
 	{
 		/// <summary>Exception while creating a new object</summary>
 		/// <typeparam name="T">The type of the object being created</typeparam>
 		/// <param name="Value">Exception object</param>
-		public sealed record class CreateNewExceptionReason<T>(Exception Value) : IExceptionReason;
+		public sealed record class CreateNewExceptionMsg<T>(Exception Value) : IExceptionMsg;
 
 		/// <summary>Unhandled exception</summary>
 		/// <param name="Value">Exception object</param>
-		public sealed record class UnhandledExceptionReason(Exception Value) : IExceptionReason;
+		public sealed record class UnhandledExceptionMsg(Exception Value) : IExceptionMsg;
 	}
 }

@@ -21,14 +21,14 @@ public class ParseUInt64_Tests : Abstracts.Parse_Tests<ulong>
 
 	[Theory]
 	[MemberData(nameof(ParseUInt16_Tests.Invalid_Unsigned_Integer_Input), MemberType = typeof(ParseUInt16_Tests))]
-	public override void Test01_Invalid_Input_Returns_None_With_UnableToParseValueAsReason(string? input)
+	public override void Test01_Invalid_Input_Returns_None_With_UnableToParseValueAsMsg(string? input)
 	{
 		Test01(input, F.ParseUInt64, F.ParseUInt64);
 	}
 
 	[Theory]
 	[InlineData(null)]
-	public override void Test02_Null_Input_Returns_None_With_UnableToParseValueAsReason(string? input)
+	public override void Test02_Null_Input_Returns_None_With_UnableToParseValueAsMsg(string? input)
 	{
 		Test02(input, F.ParseUInt64, F.ParseUInt64);
 	}

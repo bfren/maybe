@@ -6,13 +6,13 @@ namespace MaybeF.Maybe_Tests;
 public class Bind_Tests : Abstracts.Bind_Tests
 {
 	[Fact]
-	public override void Test00_If_Unknown_Maybe_Returns_None_With_UnhandledExceptionReason()
+	public override void Test00_If_Unknown_Maybe_Returns_None_With_UnhandledExceptionMsg()
 	{
 		Test00((mbe, bind) => mbe.Bind(bind));
 	}
 
 	[Fact]
-	public override void Test01_Exception_Thrown_Returns_None_With_UnhandledExceptionReason()
+	public override void Test01_Exception_Thrown_Returns_None_With_UnhandledExceptionMsg()
 	{
 		Test01((mbe, bind) => mbe.Bind(bind));
 	}
@@ -24,7 +24,7 @@ public class Bind_Tests : Abstracts.Bind_Tests
 	}
 
 	[Fact]
-	public override void Test03_If_None_With_Reason_Gets_None_With_Same_Reason()
+	public override void Test03_If_None_With_Msg_Gets_None_With_Same_Msg()
 	{
 		Test03((mbe, bind) => mbe.Bind(bind));
 	}

@@ -13,7 +13,7 @@ public static partial class F
 	{
 		if (f is null)
 		{
-			return None<T, R.MaybeCannotBeNullReason>();
+			return None<T, M.MaybeCannotBeNullMsg>();
 		}
 
 		try

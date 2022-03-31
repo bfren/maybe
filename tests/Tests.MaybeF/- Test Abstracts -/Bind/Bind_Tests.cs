@@ -3,13 +3,13 @@
 
 using MaybeF;
 using MaybeF.Exceptions;
-using static MaybeF.F.R;
+using static MaybeF.F.M;
 
 namespace Abstracts;
 
 public abstract class Bind_Tests
 {
-	public abstract void Test00_If_Unknown_Maybe_Returns_None_With_UnhandledExceptionReason();
+	public abstract void Test00_If_Unknown_Maybe_Returns_None_With_UnhandledExceptionMsg();
 
 	protected static void Test00(Func<Maybe<int>, Func<int, Maybe<string>>, Maybe<string>> act)
 	{
@@ -22,11 +22,11 @@ public abstract class Bind_Tests
 
 		// Assert
 		var none = result.AssertNone();
-		var reason = Assert.IsType<UnhandledExceptionReason>(none);
-		Assert.IsType<UnknownMaybeException>(reason.Value);
+		var message = Assert.IsType<UnhandledExceptionMsg>(none);
+		Assert.IsType<UnknownMaybeException>(message.Value);
 	}
 
-	public abstract void Test01_Exception_Thrown_Returns_None_With_UnhandledExceptionReason();
+	public abstract void Test01_Exception_Thrown_Returns_None_With_UnhandledExceptionMsg();
 
 	protected static void Test01(Func<Maybe<int>, Func<int, Maybe<string>>, Maybe<string>> act)
 	{
@@ -40,7 +40,7 @@ public abstract class Bind_Tests
 
 		// Assert
 		var none = result.AssertNone();
-		Assert.IsType<UnhandledExceptionReason>(none);
+		Assert.IsType<UnhandledExceptionMsg>(none);
 	}
 
 	public abstract void Test02_If_None_Gets_None();
@@ -58,13 +58,13 @@ public abstract class Bind_Tests
 		result.AssertNone();
 	}
 
-	public abstract void Test03_If_None_With_Reason_Gets_None_With_Same_Reason();
+	public abstract void Test03_If_None_With_Msg_Gets_None_With_Same_Msg();
 
 	protected static void Test03(Func<Maybe<int>, Func<int, Maybe<string>>, Maybe<string>> act)
 	{
 		// Arrange
-		var reason = new TestReason();
-		var maybe = F.None<int>(reason);
+		var message = new TestMsg();
+		var maybe = F.None<int>(message);
 		var bind = Substitute.For<Func<int, Maybe<string>>>();
 
 		// Act
@@ -72,7 +72,7 @@ public abstract class Bind_Tests
 
 		// Assert
 		var none = result.AssertNone();
-		Assert.Same(reason, none);
+		Assert.Same(message, none);
 	}
 
 	public abstract void Test04_If_Some_Runs_Bind_Function();
@@ -93,5 +93,5 @@ public abstract class Bind_Tests
 
 	public record class FakeMaybe : Maybe<int> { }
 
-	public record class TestReason : IReason;
+	public record class TestMsg : IMsg;
 }

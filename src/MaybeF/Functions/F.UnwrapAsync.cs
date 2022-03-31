@@ -32,20 +32,20 @@ public static partial class F
 		internal FluentUnwrapAsync(Maybe<T> maybe) =>
 			this.maybe = maybe;
 
-		/// <inheritdoc cref="Unwrap{T}(Maybe{T}, Func{IReason, T})"/>
+		/// <inheritdoc cref="Unwrap{T}(Maybe{T}, Func{IMsg, T})"/>
 		public T Value(T ifNone) =>
 			Unwrap(maybe, ifNone: _ => ifNone);
 
-		/// <inheritdoc cref="Unwrap{T}(Maybe{T}, Func{IReason, T})"/>
+		/// <inheritdoc cref="Unwrap{T}(Maybe{T}, Func{IMsg, T})"/>
 		public T Value(Func<T> ifNone) =>
 			Unwrap(maybe, ifNone: _ => ifNone());
 
-		/// <inheritdoc cref="Unwrap{T}(Maybe{T}, Func{IReason, T})"/>
-		public T Value(Func<IReason, T> ifNone) =>
+		/// <inheritdoc cref="Unwrap{T}(Maybe{T}, Func{IMsg, T})"/>
+		public T Value(Func<IMsg, T> ifNone) =>
 			Unwrap(maybe, ifNone);
 
-		/// <inheritdoc cref="UnwrapSingle{T, TReturn}(Maybe{T}, Func{IReason}?, Func{IReason}?, Func{IReason}?)"/>
-		public Maybe<TSingle> SingleValue<TSingle>(Func<IReason>? noItems = null, Func<IReason>? tooMany = null, Func<IReason>? notAList = null) =>
+		/// <inheritdoc cref="UnwrapSingle{T, TReturn}(Maybe{T}, Func{IMsg}?, Func{IMsg}?, Func{IMsg}?)"/>
+		public Maybe<TSingle> SingleValue<TSingle>(Func<IMsg>? noItems = null, Func<IMsg>? tooMany = null, Func<IMsg>? notAList = null) =>
 			UnwrapSingle<T, TSingle>(maybe, noItems, tooMany, notAList);
 	}
 }

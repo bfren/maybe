@@ -5,12 +5,12 @@ namespace MaybeF.Maybe_Tests;
 
 public class BindAsync_Tests : Abstracts.BindAsync_Tests
 {
-	public override async Task Test00_If_Unknown_Maybe_Returns_None_With_UnhandledExceptionReason()
+	public override async Task Test00_If_Unknown_Maybe_Returns_None_With_UnhandledExceptionMsg()
 	{
 		await Test00((mbe, bind) => mbe.BindAsync(bind)).ConfigureAwait(false);
 	}
 
-	public override async Task Test01_Exception_Thrown_Returns_None_With_UnhandledExceptionReason()
+	public override async Task Test01_Exception_Thrown_Returns_None_With_UnhandledExceptionMsg()
 	{
 		await Test01((mbe, bind) => mbe.BindAsync(bind)).ConfigureAwait(false);
 	}
@@ -20,7 +20,7 @@ public class BindAsync_Tests : Abstracts.BindAsync_Tests
 		await Test02((mbe, bind) => mbe.BindAsync(bind)).ConfigureAwait(false);
 	}
 
-	public override async Task Test03_If_None_With_Reason_Gets_None_With_Same_Reason()
+	public override async Task Test03_If_None_With_Msg_Gets_None_With_Same_Msg()
 	{
 		await Test03((mbe, bind) => mbe.BindAsync(bind)).ConfigureAwait(false);
 	}

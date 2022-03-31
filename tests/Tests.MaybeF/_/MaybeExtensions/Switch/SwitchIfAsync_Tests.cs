@@ -8,7 +8,7 @@ public class SwitchIfAsync_Tests : Abstracts.SwitchIfAsync_Tests
 	[Fact]
 	public override async Task Test00_Unknown_Maybe_Throws_UnknownMaybeException()
 	{
-		var ifFalse = Substitute.For<Func<int, IReason>>();
+		var ifFalse = Substitute.For<Func<int, IMsg>>();
 		await Test00((mbe, check) => mbe.SwitchIfAsync(check, null, null)).ConfigureAwait(false);
 		await Test00((mbe, check) => mbe.SwitchIfAsync(check, ifFalse)).ConfigureAwait(false);
 	}
@@ -16,15 +16,15 @@ public class SwitchIfAsync_Tests : Abstracts.SwitchIfAsync_Tests
 	[Fact]
 	public override async Task Test02_None_Returns_Original_None()
 	{
-		var ifFalse = Substitute.For<Func<int, IReason>>();
+		var ifFalse = Substitute.For<Func<int, IMsg>>();
 		await Test02((mbe, check) => mbe.SwitchIfAsync(check, null, null)).ConfigureAwait(false);
 		await Test02((mbe, check) => mbe.SwitchIfAsync(check, ifFalse)).ConfigureAwait(false);
 	}
 
 	[Fact]
-	public override async Task Test03_Check_Func_Throws_Exception_Returns_None_With_SwitchIfFuncExceptionReason()
+	public override async Task Test03_Check_Func_Throws_Exception_Returns_None_With_SwitchIfFuncExceptionMsg()
 	{
-		var ifFalse = Substitute.For<Func<int, IReason>>();
+		var ifFalse = Substitute.For<Func<int, IMsg>>();
 		await Test03((mbe, check) => mbe.SwitchIfAsync(check, null, null)).ConfigureAwait(false);
 		await Test03((mbe, check) => mbe.SwitchIfAsync(check, ifFalse)).ConfigureAwait(false);
 	}
@@ -42,13 +42,13 @@ public class SwitchIfAsync_Tests : Abstracts.SwitchIfAsync_Tests
 	}
 
 	[Fact]
-	public override async Task Test06_Check_Returns_True_And_IfTrue_Throws_Exception_Returns_None_With_SwitchIfFuncExceptionReason()
+	public override async Task Test06_Check_Returns_True_And_IfTrue_Throws_Exception_Returns_None_With_SwitchIfFuncExceptionMsg()
 	{
 		await Test06((mbe, check, ifTrue) => mbe.SwitchIfAsync(check, ifTrue, null)).ConfigureAwait(false);
 	}
 
 	[Fact]
-	public override async Task Test07_Check_Returns_False_And_IfFalse_Throws_Exception_Returns_None_With_SwitchIfFuncExceptionReason()
+	public override async Task Test07_Check_Returns_False_And_IfFalse_Throws_Exception_Returns_None_With_SwitchIfFuncExceptionMsg()
 	{
 		await Test07((mbe, check, ifFalse) => mbe.SwitchIfAsync(check, null, ifFalse)).ConfigureAwait(false);
 		await Test07((mbe, check, ifFalse) => mbe.SwitchIfAsync(check, x => ifFalse(x).Reason)).ConfigureAwait(false);

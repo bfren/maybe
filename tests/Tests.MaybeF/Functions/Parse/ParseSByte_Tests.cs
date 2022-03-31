@@ -15,14 +15,14 @@ public class ParseSByte_Tests : Abstracts.Parse_Tests<sbyte>
 
 	[Theory]
 	[MemberData(nameof(ParseByte_Tests.Invalid_Byte_Input), MemberType = typeof(ParseByte_Tests))]
-	public override void Test01_Invalid_Input_Returns_None_With_UnableToParseValueAsReason(string? input)
+	public override void Test01_Invalid_Input_Returns_None_With_UnableToParseValueAsMsg(string? input)
 	{
 		Test01(input, F.ParseSByte, F.ParseSByte);
 	}
 
 	[Theory]
 	[InlineData(null)]
-	public override void Test02_Null_Input_Returns_None_With_UnableToParseValueAsReason(string? input)
+	public override void Test02_Null_Input_Returns_None_With_UnableToParseValueAsMsg(string? input)
 	{
 		Test02(input, F.ParseSByte, F.ParseSByte);
 	}

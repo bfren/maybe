@@ -20,7 +20,7 @@ public static partial class F
 					new Some<T>(x), // Some<T> is only created by Some() functions and implicit operator
 
 				_ =>
-					None<T, R.NullValueReason>()
+					None<T, M.NullValueMsg>()
 
 			};
 		}
@@ -49,7 +49,7 @@ public static partial class F
 							new Some<T?>(v), // Some<T> is only created by Some() functions and implicit operator
 
 						false =>
-							None<T?, R.AllowNullWasFalseReason>()
+							None<T?, M.AllowNullWasFalseMsg>()
 					}
 
 			};

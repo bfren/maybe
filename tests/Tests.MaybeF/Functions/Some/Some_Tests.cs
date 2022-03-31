@@ -6,13 +6,13 @@ namespace MaybeF.F_Tests;
 public class Some_Tests : Abstracts.Some_Tests
 {
 	[Fact]
-	public override void Test00_Exception_Thrown_Without_Handler_Returns_None_With_UnhandledExceptionReason()
+	public override void Test00_Exception_Thrown_Without_Handler_Returns_None_With_UnhandledExceptionMsg()
 	{
 		Test00((val, handler) => F.Some(val, handler));
 	}
 
 	[Fact]
-	public override void Test01_Nullable_Exception_Thrown_Without_Handler_Returns_None_With_UnhandledExceptionReason()
+	public override void Test01_Nullable_Exception_Thrown_Without_Handler_Returns_None_With_UnhandledExceptionMsg()
 	{
 		Test01((val, nullable, handler) => F.Some(val, nullable, handler));
 	}
@@ -42,13 +42,13 @@ public class Some_Tests : Abstracts.Some_Tests
 	}
 
 	[Fact]
-	public override void Test06_Nullable_Allow_Null_False_Null_Input_Value_Returns_None_With_AllowNullWasFalseReason()
+	public override void Test06_Nullable_Allow_Null_False_Null_Input_Value_Returns_None_With_AllowNullWasFalseMsg()
 	{
 		Test06((val, nullable) => F.Some(val, nullable));
 	}
 
 	[Fact]
-	public override void Test07_Nullable_Allow_Null_False_Null_Input_Func_Returns_None_With_AllowNullWasFalseReason()
+	public override void Test07_Nullable_Allow_Null_False_Null_Input_Func_Returns_None_With_AllowNullWasFalseMsg()
 	{
 		Test07((val, nullable, handler) => F.Some(val, nullable, handler));
 	}

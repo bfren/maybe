@@ -12,8 +12,8 @@ public class Audit_Tests : Abstracts.Audit_Tests
 	{
 		Test01(mbe => mbe.Audit(Substitute.For<Action<Maybe<int>>>()));
 		Test01(mbe => mbe.Audit(Substitute.For<Action<int>>()));
-		Test01(mbe => mbe.Audit(Substitute.For<Action<IReason>>()));
-		Test01(mbe => mbe.Audit(Substitute.For<Action<int>>(), Substitute.For<Action<IReason>>()));
+		Test01(mbe => mbe.Audit(Substitute.For<Action<IMsg>>()));
+		Test01(mbe => mbe.Audit(Substitute.For<Action<int>>(), Substitute.For<Action<IMsg>>()));
 	}
 
 	#endregion General
@@ -52,7 +52,7 @@ public class Audit_Tests : Abstracts.Audit_Tests
 	public override void Test06_Some_Runs_Some_And_Returns_Original_Maybe()
 	{
 		Test06((mbe, some) => mbe.Audit(some));
-		Test06((mbe, some) => mbe.Audit(some, Substitute.For<Action<IReason>>()));
+		Test06((mbe, some) => mbe.Audit(some, Substitute.For<Action<IMsg>>()));
 	}
 
 	[Fact]
@@ -67,7 +67,7 @@ public class Audit_Tests : Abstracts.Audit_Tests
 	public override void Test08_Some_Catches_Exception_And_Returns_Original_Maybe()
 	{
 		Test08((mbe, some) => mbe.Audit(some));
-		Test08((mbe, some) => mbe.Audit(some, Substitute.For<Action<IReason>>()));
+		Test08((mbe, some) => mbe.Audit(some, Substitute.For<Action<IMsg>>()));
 	}
 
 	[Fact]

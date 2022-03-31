@@ -6,7 +6,7 @@ namespace MaybeF.MaybeExtensions_Tests;
 public class IfSomeAsync_Tests : Abstracts.IfSomeAsync_Tests
 {
 	[Fact]
-	public override async Task Test00_Exception_In_IfSome_Func_Returns_None_With_UnhandledExceptionReason()
+	public override async Task Test00_Exception_In_IfSome_Func_Returns_None_With_UnhandledExceptionMsg()
 	{
 		await Test00((mbe, ifSome) => mbe.AsTask.IfSomeAsync(x => ifSome(x))).ConfigureAwait(false);
 		await Test00((mbe, ifSome) => mbe.AsTask.IfSomeAsync(ifSome)).ConfigureAwait(false);

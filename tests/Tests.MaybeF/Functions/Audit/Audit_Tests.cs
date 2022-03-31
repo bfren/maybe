@@ -18,7 +18,7 @@ public class Audit_Tests : Abstracts.Audit_Tests
 	{
 		Test01(mbe => F.Audit(mbe, Substitute.For<Action<Maybe<int>>>(), null, null));
 		Test01(mbe => F.Audit(mbe, null, Substitute.For<Action<int>>(), null));
-		Test01(mbe => F.Audit(mbe, null, null, Substitute.For<Action<IReason>>()));
+		Test01(mbe => F.Audit(mbe, null, null, Substitute.For<Action<IMsg>>()));
 	}
 
 	#endregion General

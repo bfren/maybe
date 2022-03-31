@@ -17,7 +17,7 @@ public static partial class F
 				Some<T> x when x.Value is null =>
 					ifNull(),
 
-				None<T> x when x.Reason is R.NullValueReason =>
+				None<T> x when x.Reason is M.NullValueMsg =>
 					ifNull(),
 
 				{ } =>
@@ -33,8 +33,8 @@ public static partial class F
 	public static async Task<Maybe<T>> IfNullAsync<T>(Task<Maybe<T>> maybe, Func<Task<Maybe<T>>> ifNull) =>
 		await IfNullAsync(await maybe.ConfigureAwait(false), ifNull).ConfigureAwait(false);
 
-	/// <inheritdoc cref="IfNull{T, TReason}(Maybe{T}, Func{TReason})"/>
-	public static async Task<Maybe<T>> IfNullAsync<T, TReason>(Task<Maybe<T>> maybe, Func<TReason> ifNull)
-		where TReason : IReason =>
+	/// <inheritdoc cref="IfNull{T, TMsg}(Maybe{T}, Func{TMsg})"/>
+	public static async Task<Maybe<T>> IfNullAsync<T, TMsg>(Task<Maybe<T>> maybe, Func<TMsg> ifNull)
+		where TMsg : IMsg =>
 		await IfNullAsync(await maybe.ConfigureAwait(false), () => None<T>(ifNull()).AsTask).ConfigureAwait(false);
 }

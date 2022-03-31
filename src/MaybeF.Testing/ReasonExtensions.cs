@@ -4,6 +4,6 @@
 namespace MaybeF.Testing;
 
 /// <summary>
-/// <see cref="IReason"/> Extensions
+/// <see cref="IMsg"/> Extensions
 /// </summary>
-public static partial class ReasonExtensions { }
+public static partial class MsgExtensions { }

@@ -2,13 +2,13 @@
 // Copyright (c) bfren - licensed under https://mit.bfren.dev/2019
 
 using MaybeF;
-using static MaybeF.F.EnumerableF.R;
+using static MaybeF.F.EnumerableF.M;
 
 namespace Abstracts.Enumerable;
 
 public abstract class ElementAtOrNone_Tests
 {
-	public abstract void Test00_Empty_List_Returns_None_With_ListIsEmptyReason();
+	public abstract void Test00_Empty_List_Returns_None_With_ListIsEmptyMsg();
 
 	protected static void Test00(Func<IEnumerable<int>, int, Maybe<int>> act)
 	{
@@ -20,10 +20,10 @@ public abstract class ElementAtOrNone_Tests
 
 		// Assert
 		var none = result.AssertNone();
-		Assert.IsType<ListIsEmptyReason>(none);
+		Assert.IsType<ListIsEmptyMsg>(none);
 	}
 
-	public abstract void Test01_No_Value_At_Index_Returns_None_With_ElementAtIsNullReason();
+	public abstract void Test01_No_Value_At_Index_Returns_None_With_ElementAtIsNullMsg();
 
 	protected static void Test01(Func<IEnumerable<int?>, int, Maybe<int?>> act)
 	{
@@ -35,7 +35,7 @@ public abstract class ElementAtOrNone_Tests
 
 		// Assert
 		var none = result.AssertNone();
-		Assert.IsType<ElementAtIsNullReason>(none);
+		Assert.IsType<ElementAtIsNullMsg>(none);
 	}
 
 	public abstract void Test02_Value_At_Index_Returns_Some_With_Value();

@@ -28,20 +28,19 @@ public static partial class F
 								x,
 
 							_ =>
-								None<T, R.LastItemIsNullReason>()
+								None<T, M.LastItemIsNullMsg>()
 						},
 
 					false =>
-						None<T, R.ListIsEmptyReason>()
+						None<T, M.ListIsEmptyMsg>()
 				},
 				DefaultHandler
 			);
 
-		/// <summary>Reasons</summary>
-		public static partial class R
+		public static partial class M
 		{
 			/// <summary>Null item found when doing LastOrDefault()</summary>
-			public sealed record class LastItemIsNullReason : IReason;
+			public sealed record class LastItemIsNullMsg : IMsg;
 		}
 	}
 }

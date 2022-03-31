@@ -6,7 +6,7 @@ namespace MaybeF.Maybe_Tests;
 public class UnwrapSingle_Tests : Abstracts.UnwrapSingle_Tests
 {
 	[Fact]
-	public override void Test00_If_Unknown_Maybe_Returns_None_With_UnhandledExceptionReason()
+	public override void Test00_If_Unknown_Maybe_Returns_None_With_UnhandledExceptionMsg()
 	{
 		Test00(mbe => mbe.UnwrapSingle<int>(null, null, null));
 	}
@@ -18,13 +18,13 @@ public class UnwrapSingle_Tests : Abstracts.UnwrapSingle_Tests
 	}
 
 	[Fact]
-	public override void Test02_None_With_Reason_Returns_None_With_Reason()
+	public override void Test02_None_With_Msg_Returns_None_With_Msg()
 	{
 		Test02(mbe => mbe.UnwrapSingle<int>(null, null, null));
 	}
 
 	[Fact]
-	public override void Test03_No_Items_Returns_None_With_UnwrapSingleNoItemsReason()
+	public override void Test03_No_Items_Returns_None_With_UnwrapSingleNoItemsMsg()
 	{
 		Test03(mbe => mbe.UnwrapSingle<int>(null, null, null));
 	}
@@ -36,7 +36,7 @@ public class UnwrapSingle_Tests : Abstracts.UnwrapSingle_Tests
 	}
 
 	[Fact]
-	public override void Test05_Too_Many_Items_Returns_None_With_UnwrapSingleTooManyItemsErrorReason()
+	public override void Test05_Too_Many_Items_Returns_None_With_UnwrapSingleTooManyItemsErrorMsg()
 	{
 		Test05(mbe => mbe.UnwrapSingle<int>(null, null, null));
 	}
@@ -48,7 +48,7 @@ public class UnwrapSingle_Tests : Abstracts.UnwrapSingle_Tests
 	}
 
 	[Fact]
-	public override void Test07_Not_A_List_Returns_None_With_UnwrapSingleNotAListReason()
+	public override void Test07_Not_A_List_Returns_None_With_UnwrapSingleNotAListMsg()
 	{
 		Test07(mbe => mbe.UnwrapSingle<int>(null, null, null));
 	}
@@ -60,7 +60,7 @@ public class UnwrapSingle_Tests : Abstracts.UnwrapSingle_Tests
 	}
 
 	[Fact]
-	public override void Test09_Incorrect_Type_Returns_None_With_UnwrapSingleIncorrectTypeErrorReason()
+	public override void Test09_Incorrect_Type_Returns_None_With_UnwrapSingleIncorrectTypeErrorMsg()
 	{
 		Test09(mbe => mbe.UnwrapSingle<string>(null, null, null));
 	}

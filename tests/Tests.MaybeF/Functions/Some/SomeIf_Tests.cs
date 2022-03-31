@@ -36,13 +36,13 @@ public class SomeIf_Tests : Abstracts.SomeIf_Tests
 	}
 
 	[Fact]
-	public override void Test05_Predicate_False_With_Value_Returns_None_With_PredicateWasFalseReason()
+	public override void Test05_Predicate_False_With_Value_Returns_None_With_PredicateWasFalseMsg()
 	{
 		Test05((predicate, value, handler) => F.SomeIf(predicate, value, handler));
 	}
 
 	[Fact]
-	public override void Test06_Predicate_False_With_Value_Func_Returns_None_With_PredicateWasFalseReason()
+	public override void Test06_Predicate_False_With_Value_Func_Returns_None_With_PredicateWasFalseMsg()
 	{
 		Test06((predicate, value, handler) => F.SomeIf(predicate, value, handler));
 	}

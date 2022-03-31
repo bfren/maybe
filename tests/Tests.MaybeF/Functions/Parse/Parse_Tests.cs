@@ -59,11 +59,11 @@ public class Parse_Tests
 
 		// Assert
 		var n0 = r0.AssertNone();
-		var m0 = Assert.IsType<F.R.UnableToParseValueAsReason>(n0);
+		var m0 = Assert.IsType<F.M.UnableToParseValueAsMsg>(n0);
 		Assert.Equal(typeof(int), m0.Type);
 		Assert.Equal(valueSpan.ToString(), m0.Value);
 		var n1 = r1.AssertNone();
-		var m1 = Assert.IsType<F.R.UnableToParseValueAsReason>(n1);
+		var m1 = Assert.IsType<F.M.UnableToParseValueAsMsg>(n1);
 		Assert.Equal(typeof(int), m1.Type);
 		Assert.Equal(valueString, m1.Value);
 	}

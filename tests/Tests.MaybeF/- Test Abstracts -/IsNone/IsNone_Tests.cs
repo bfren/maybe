@@ -7,22 +7,22 @@ namespace Abstracts;
 
 public abstract class IsNone_Tests
 {
-	public delegate bool IsNone<T>(Maybe<T> maybe, out IReason reason);
+	public delegate bool IsNone<T>(Maybe<T> maybe, out IMsg message);
 
-	public abstract void Test00_Is_None_Returns_True_Sets_Reason();
+	public abstract void Test00_Is_None_Returns_True_Sets_Msg();
 
 	protected static void Test00(IsNone<int> act)
 	{
 		// Arrange
-		var inReason = Substitute.For<IReason>();
-		var maybe = F.None<int>(inReason);
+		var inMsg = Substitute.For<IMsg>();
+		var maybe = F.None<int>(inMsg);
 
 		// Act
-		var result = act(maybe, out IReason outReason);
+		var result = act(maybe, out IMsg outMsg);
 
 		// Assert
 		Assert.True(result);
-		Assert.Equal(inReason, outReason);
+		Assert.Equal(inMsg, outMsg);
 	}
 
 	public abstract void Test01_Is_Not_None_Returns_False();
@@ -33,10 +33,10 @@ public abstract class IsNone_Tests
 		var maybe = F.Some(Rnd.Str);
 
 		// Act
-		var result = act(maybe, out IReason outReason);
+		var result = act(maybe, out IMsg outMsg);
 
 		// Assert
 		Assert.False(result);
-		Assert.Null(outReason);
+		Assert.Null(outMsg);
 	}
 }

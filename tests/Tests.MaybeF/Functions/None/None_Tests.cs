@@ -6,7 +6,7 @@ namespace MaybeF.F_Tests;
 public class None_Tests
 {
 	[Fact]
-	public void Returns_None_Without_Reason()
+	public void Returns_None_Without_Msg()
 	{
 		// Arrange
 
@@ -18,48 +18,48 @@ public class None_Tests
 	}
 
 	[Fact]
-	public void Returns_None_With_Reason_Object()
+	public void Returns_None_With_Msg_Object()
 	{
 		// Arrange
-		var reason = Substitute.For<IReason>();
+		var message = Substitute.For<IMsg>();
 
 		// Act
-		var result = F.None<int>(reason);
+		var result = F.None<int>(message);
 
 		// Assert
 		var none = result.AssertNone();
-		Assert.Same(reason, none);
+		Assert.Same(message, none);
 	}
 
 	[Fact]
-	public void Returns_None_With_Reason_Type()
+	public void Returns_None_With_Msg_Type()
 	{
 		// Arrange
 
 		// Act
-		var result = F.None<int, TestReason>();
+		var result = F.None<int, TestMsg>();
 
 		// Assert
 		var none = result.AssertNone();
-		Assert.IsType<TestReason>(none);
+		Assert.IsType<TestMsg>(none);
 	}
 
 	[Fact]
-	public void Returns_None_With_Reason_Exception_Type()
+	public void Returns_None_With_Msg_Exception_Type()
 	{
 		// Arrange
 		var exception = new Exception();
 
 		// Act
-		var result = F.None<int, TestExceptionReason>(exception);
+		var result = F.None<int, TestExceptionMsg>(exception);
 
 		// Assert
 		var none = result.AssertNone();
-		var reason = Assert.IsType<TestExceptionReason>(none);
-		Assert.Same(exception, reason.Value);
+		var message = Assert.IsType<TestExceptionMsg>(none);
+		Assert.Same(exception, message.Value);
 	}
 
-	public record class TestReason : IReason;
+	public record class TestMsg : IMsg;
 
-	public record class TestExceptionReason(Exception Value) : IExceptionReason;
+	public record class TestExceptionMsg(Exception Value) : IExceptionMsg;
 }

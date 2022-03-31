@@ -44,7 +44,7 @@ public static partial class F
 			}
 			catch (Exception e)
 			{
-				return None<T>(new R.SwitchIfFuncExceptionReason(e));
+				return None<T>(new M.SwitchIfFuncExceptionMsg(e));
 			}
 		}
 		else if (maybe is None<T> y)
@@ -70,14 +70,13 @@ public static partial class F
 	/// <param name="maybe">Maybe being switched</param>
 	/// <param name="check">Function to run if <paramref name="maybe"/> is <see cref="Internals.Some{T}"/></param>
 	/// <param name="ifFalse">Function to run if <paramref name="check"/> returns false</param>
-	public static Maybe<T> SwitchIf<T>(Maybe<T> maybe, Func<T, bool> check, Func<T, IReason> ifFalse) =>
+	public static Maybe<T> SwitchIf<T>(Maybe<T> maybe, Func<T, bool> check, Func<T, IMsg> ifFalse) =>
 		SwitchIf(maybe, check, null, x => None<T>(ifFalse(x)));
 
-	/// <summary>Reasons</summary>
-	public static partial class R
+	public static partial class M
 	{
 		/// <summary>An exception was caught while executing one of the SwitchIf functions</summary>
 		/// <param name="Value">Exception object</param>
-		public sealed record class SwitchIfFuncExceptionReason(Exception Value) : IExceptionReason;
+		public sealed record class SwitchIfFuncExceptionMsg(Exception Value) : IExceptionMsg;
 	}
 }
