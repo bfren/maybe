@@ -21,5 +21,8 @@ dotnet_diagnostic.IDE0058.severity = silent
 # IDE0130: Namespace does not match folder structure
 dotnet_diagnostic.IDE0130.severity = none
 
+# RCS1090: Add call to 'ConfigureAwait' (or vice versa).
+dotnet_diagnostic.RCS1090.severity = none
+
 # RCS1118: Mark local variable as const.
 dotnet_diagnostic.RCS1118.severity = none
