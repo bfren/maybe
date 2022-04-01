@@ -44,8 +44,8 @@ public static partial class F
 		public T Value(Func<IMsg, T> ifNone) =>
 			Unwrap(maybe, ifNone);
 
-		/// <inheritdoc cref="UnwrapSingle{T, TReturn}(Maybe{T}, Func{IMsg}?, Func{IMsg}?, Func{IMsg}?)"/>
-		public Maybe<TSingle> SingleValue<TSingle>(Func<IMsg>? noItems = null, Func<IMsg>? tooMany = null, Func<IMsg>? notAList = null) =>
-			UnwrapSingle<T, TSingle>(maybe, noItems, tooMany, notAList);
+		/// <inheritdoc cref="UnwrapSingle{T, TReturn}(Maybe{T}, Func{IMsg}?, Func{IMsg}?, Func{IMsg}?, Func{IMsg}?)"/>
+		public Maybe<TSingle> SingleValue<TSingle>(Func<IMsg>? noItems = null, Func<IMsg>? tooMany = null, Func<IMsg>? incorrectType = null, Func<IMsg>? notAList = null) =>
+			UnwrapSingle<T, TSingle>(maybe, noItems, tooMany, incorrectType, notAList);
 	}
 }
