@@ -28,7 +28,7 @@ public class CatchAsync_Tests
 		var value = Rnd.Int;
 
 		// Act
-		var result = await F.CatchAsync(() => F.Some(value).AsTask, F.DefaultHandler).ConfigureAwait(false);
+		var result = await F.CatchAsync(() => F.Some(value).AsTask, F.DefaultHandler);
 
 		// Assert
 		var some = result.AssertSome();
@@ -42,7 +42,7 @@ public class CatchAsync_Tests
 		var message = Rnd.Str;
 
 		// Act
-		var result = await F.CatchAsync<int>(() => throw new Exception(message), F.DefaultHandler).ConfigureAwait(false);
+		var result = await F.CatchAsync<int>(() => throw new Exception(message), F.DefaultHandler);
 
 		// Assert
 		var none = result.AssertNone();
@@ -59,7 +59,7 @@ public class CatchAsync_Tests
 		var handler = Substitute.For<F.Handler>();
 
 		// Act
-		var result = await F.CatchAsync<int>(() => throw exception, handler).ConfigureAwait(false);
+		var result = await F.CatchAsync<int>(() => throw exception, handler);
 
 		// Assert
 		result.AssertNone();

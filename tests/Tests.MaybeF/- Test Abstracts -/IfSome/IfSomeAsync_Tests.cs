@@ -18,7 +18,7 @@ public abstract class IfSomeAsync_Tests
 		var ifSome = Task (int _) => throw new MaybeTestException();
 
 		// Act
-		var result = await act(maybe, ifSome).ConfigureAwait(false);
+		var result = await act(maybe, ifSome);
 
 		// Assert
 		var none = result.AssertNone();
@@ -34,11 +34,11 @@ public abstract class IfSomeAsync_Tests
 		var ifSome = Substitute.For<Func<int, Task>>();
 
 		// Act
-		var result = await act(maybe, ifSome).ConfigureAwait(false);
+		var result = await act(maybe, ifSome);
 
 		// Assert
 		Assert.Same(maybe, result);
-		await ifSome.DidNotReceiveWithAnyArgs().Invoke(default).ConfigureAwait(false);
+		await ifSome.DidNotReceiveWithAnyArgs().Invoke(default);
 	}
 
 	public abstract Task Test02_Some_Runs_IfSome_Func_And_Returns_Original_Maybe();
@@ -51,10 +51,10 @@ public abstract class IfSomeAsync_Tests
 		var ifSome = Substitute.For<Func<int, Task>>();
 
 		// Act
-		var result = await act(maybe, ifSome).ConfigureAwait(false);
+		var result = await act(maybe, ifSome);
 
 		// Assert
 		Assert.Same(maybe, result);
-		await ifSome.Received().Invoke(value).ConfigureAwait(false);
+		await ifSome.Received().Invoke(value);
 	}
 }

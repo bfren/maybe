@@ -19,7 +19,7 @@ public abstract class AuditAsync_Tests
 		var maybe = new FakeMaybe();
 
 		// Act
-		var result = await act(maybe).ConfigureAwait(false);
+		var result = await act(maybe);
 
 		// Assert
 		Assert.Same(maybe, result);
@@ -36,7 +36,7 @@ public abstract class AuditAsync_Tests
 		var action = Task () => act(maybe);
 
 		// Assert
-		await Assert.ThrowsAsync<UnknownMaybeException>(action).ConfigureAwait(false);
+		await Assert.ThrowsAsync<UnknownMaybeException>(action);
 	}
 
 	#endregion General
@@ -52,7 +52,7 @@ public abstract class AuditAsync_Tests
 		var audit = Substitute.For<Action<Maybe<bool>>>();
 
 		// Act
-		var result = await act(maybe, audit).ConfigureAwait(false);
+		var result = await act(maybe, audit);
 
 		// Assert
 		audit.Received().Invoke(maybe);
@@ -68,7 +68,7 @@ public abstract class AuditAsync_Tests
 		var audit = Substitute.For<Action<Maybe<bool>>>();
 
 		// Act
-		var result = await act(maybe, audit).ConfigureAwait(false);
+		var result = await act(maybe, audit);
 
 		// Assert
 		audit.Received().Invoke(maybe);
@@ -84,10 +84,10 @@ public abstract class AuditAsync_Tests
 		var audit = Substitute.For<Func<Maybe<bool>, Task>>();
 
 		// Act
-		var result = await act(maybe, audit).ConfigureAwait(false);
+		var result = await act(maybe, audit);
 
 		// Assert
-		await audit.Received().Invoke(maybe).ConfigureAwait(false);
+		await audit.Received().Invoke(maybe);
 		Assert.Same(maybe, result);
 	}
 
@@ -100,10 +100,10 @@ public abstract class AuditAsync_Tests
 		var audit = Substitute.For<Func<Maybe<bool>, Task>>();
 
 		// Act
-		var result = await act(maybe, audit).ConfigureAwait(false);
+		var result = await act(maybe, audit);
 
 		// Assert
-		await audit.Received().Invoke(maybe).ConfigureAwait(false);
+		await audit.Received().Invoke(maybe);
 		Assert.Same(maybe, result);
 	}
 
@@ -116,7 +116,7 @@ public abstract class AuditAsync_Tests
 		var throwException = void (Maybe<bool> _) => throw new MaybeTestException();
 
 		// Act
-		var result = await act(maybe, throwException).ConfigureAwait(false);
+		var result = await act(maybe, throwException);
 
 		// Assert
 		Assert.Same(maybe, result);
@@ -131,7 +131,7 @@ public abstract class AuditAsync_Tests
 		var throwException = void (Maybe<bool> _) => throw new MaybeTestException();
 
 		// Act
-		var result = await act(maybe, throwException).ConfigureAwait(false);
+		var result = await act(maybe, throwException);
 
 		// Assert
 		Assert.Same(maybe, result);
@@ -146,7 +146,7 @@ public abstract class AuditAsync_Tests
 		var throwException = Task (Maybe<bool> _) => throw new MaybeTestException();
 
 		// Act
-		var result = await act(maybe, throwException).ConfigureAwait(false);
+		var result = await act(maybe, throwException);
 
 		// Assert
 		Assert.Same(maybe, result);
@@ -161,7 +161,7 @@ public abstract class AuditAsync_Tests
 		var throwException = Task (Maybe<bool> _) => throw new MaybeTestException();
 
 		// Act
-		var result = await act(maybe, throwException).ConfigureAwait(false);
+		var result = await act(maybe, throwException);
 
 		// Assert
 		Assert.Same(maybe, result);
@@ -181,7 +181,7 @@ public abstract class AuditAsync_Tests
 		var some = Substitute.For<Action<int>>();
 
 		// Act
-		var result = await act(maybe, some).ConfigureAwait(false);
+		var result = await act(maybe, some);
 
 		// Assert
 		some.Received().Invoke(value);
@@ -198,10 +198,10 @@ public abstract class AuditAsync_Tests
 		var some = Substitute.For<Func<int, Task>>();
 
 		// Act
-		var result = await act(maybe, some).ConfigureAwait(false);
+		var result = await act(maybe, some);
 
 		// Assert
-		await some.Received().Invoke(value).ConfigureAwait(false);
+		await some.Received().Invoke(value);
 		Assert.Same(maybe, result);
 	}
 
@@ -215,7 +215,7 @@ public abstract class AuditAsync_Tests
 		var none = Substitute.For<Action<IMsg>>();
 
 		// Act
-		var result = await act(maybe, none).ConfigureAwait(false);
+		var result = await act(maybe, none);
 
 		// Assert
 		none.Received().Invoke(message);
@@ -232,10 +232,10 @@ public abstract class AuditAsync_Tests
 		var none = Substitute.For<Func<IMsg, Task>>();
 
 		// Act
-		var result = await act(maybe, none).ConfigureAwait(false);
+		var result = await act(maybe, none);
 
 		// Assert
-		await none.Received().Invoke(message).ConfigureAwait(false);
+		await none.Received().Invoke(message);
 		Assert.Same(maybe, result);
 	}
 
@@ -249,7 +249,7 @@ public abstract class AuditAsync_Tests
 		var throwException = void (int _) => throw exception;
 
 		// Act
-		var result = await act(maybe, throwException).ConfigureAwait(false);
+		var result = await act(maybe, throwException);
 
 		// Assert
 		Assert.Same(maybe, result);
@@ -265,7 +265,7 @@ public abstract class AuditAsync_Tests
 		var throwException = Task (int _) => throw exception;
 
 		// Act
-		var result = await act(maybe, throwException).ConfigureAwait(false);
+		var result = await act(maybe, throwException);
 
 		// Assert
 		Assert.Same(maybe, result);
@@ -281,7 +281,7 @@ public abstract class AuditAsync_Tests
 		var throwException = void (IMsg _) => throw exception;
 
 		// Act
-		var result = await act(maybe, throwException).ConfigureAwait(false);
+		var result = await act(maybe, throwException);
 
 		// Assert
 		Assert.Same(maybe, result);
@@ -297,7 +297,7 @@ public abstract class AuditAsync_Tests
 		var throwException = Task (IMsg _) => throw exception;
 
 		// Act
-		var result = await act(maybe, throwException).ConfigureAwait(false);
+		var result = await act(maybe, throwException);
 
 		// Assert
 		Assert.Same(maybe, result);

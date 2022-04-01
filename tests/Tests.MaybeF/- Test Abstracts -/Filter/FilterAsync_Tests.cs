@@ -1,4 +1,4 @@
-﻿// Maybe: Unit Tests
+// Maybe: Unit Tests
 // Copyright (c) bfren - licensed under https://mit.bfren.dev/2019
 
 using MaybeF;
@@ -17,7 +17,7 @@ public abstract class FilterAsync_Tests
 		var maybe = new FakeMaybe();
 
 		// Act
-		var result = await act(maybe).ConfigureAwait(false);
+		var result = await act(maybe);
 
 		// Assert
 		var none = result.AssertNone();
@@ -35,7 +35,7 @@ public abstract class FilterAsync_Tests
 		var throwFunc = Task<bool> (string _) => throw exception;
 
 		// Act
-		var result = await act(maybe, throwFunc).ConfigureAwait(false);
+		var result = await act(maybe, throwFunc);
 
 		// Assert
 		var none = result.AssertNone();
@@ -53,7 +53,7 @@ public abstract class FilterAsync_Tests
 		predicate.Invoke(Arg.Any<int>()).Returns(true);
 
 		// Act
-		var result = await act(maybe, predicate).ConfigureAwait(false);
+		var result = await act(maybe, predicate);
 
 		// Assert
 		var some = result.AssertSome();
@@ -71,7 +71,7 @@ public abstract class FilterAsync_Tests
 		predicate.Invoke(Arg.Any<string>()).Returns(false);
 
 		// Act
-		var result = await act(maybe, predicate).ConfigureAwait(false);
+		var result = await act(maybe, predicate);
 
 		// Assert
 		var none = result.AssertNone();
@@ -88,12 +88,12 @@ public abstract class FilterAsync_Tests
 		var predicate = Substitute.For<Func<int, Task<bool>>>();
 
 		// Act
-		var result = await act(maybe, predicate).ConfigureAwait(false);
+		var result = await act(maybe, predicate);
 
 		// Assert
 		var none = result.AssertNone();
 		Assert.Same(message, none);
-		await predicate.DidNotReceiveWithAnyArgs().Invoke(Arg.Any<int>()).ConfigureAwait(false);
+		await predicate.DidNotReceiveWithAnyArgs().Invoke(Arg.Any<int>());
 	}
 
 	public record class FakeMaybe : Maybe<int> { }
