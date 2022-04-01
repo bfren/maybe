@@ -8,19 +8,19 @@ public class IfNullAsync_Tests : Abstracts.IfNullAsync_Tests
 	[Fact]
 	public override async Task Test00_Exception_In_NullValue_Func_Returns_None_With_UnhandledExceptionMsg()
 	{
-		await Test00((mbe, ifNull) => mbe.IfNullAsync(ifNull)).ConfigureAwait(false);
+		await Test00((mbe, ifNull) => mbe.IfNullAsync(ifNull));
 	}
 
 	[Fact]
 	public override async Task Test01_Some_With_Null_Value_Runs_IfNull_Func()
 	{
-		await Test01((mbe, ifNull) => mbe.IfNullAsync(ifNull)).ConfigureAwait(false);
+		await Test01((mbe, ifNull) => mbe.IfNullAsync(ifNull));
 	}
 
 	[Fact]
 	public override async Task Test02_None_With_NullValueMsg_Runs_IfNull_Func()
 	{
-		await Test02((mbe, ifNull) => mbe.IfNullAsync(ifNull)).ConfigureAwait(false);
+		await Test02((mbe, ifNull) => mbe.IfNullAsync(ifNull));
 	}
 
 	#region Unused

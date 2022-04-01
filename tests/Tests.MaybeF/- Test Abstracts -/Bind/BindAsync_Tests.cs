@@ -18,7 +18,7 @@ public abstract class BindAsync_Tests
 		var bind = Substitute.For<Func<int, Task<Maybe<string>>>>();
 
 		// Act
-		var result = await act(maybe, bind).ConfigureAwait(false);
+		var result = await act(maybe, bind);
 
 		// Assert
 		var none = result.AssertNone();
@@ -36,7 +36,7 @@ public abstract class BindAsync_Tests
 		var throwFunc = Task<Maybe<string>> () => throw exception;
 
 		// Act
-		var result = await act(maybe, _ => throwFunc()).ConfigureAwait(false);
+		var result = await act(maybe, _ => throwFunc());
 
 		// Assert
 		var none = result.AssertNone();
@@ -52,7 +52,7 @@ public abstract class BindAsync_Tests
 		var bind = Substitute.For<Func<int, Task<Maybe<string>>>>();
 
 		// Act
-		var result = await act(maybe, bind).ConfigureAwait(false);
+		var result = await act(maybe, bind);
 
 		// Assert
 		result.AssertNone();
@@ -68,7 +68,7 @@ public abstract class BindAsync_Tests
 		var bind = Substitute.For<Func<int, Task<Maybe<string>>>>();
 
 		// Act
-		var result = await act(maybe, bind).ConfigureAwait(false);
+		var result = await act(maybe, bind);
 
 		// Assert
 		var none = result.AssertNone();
@@ -85,10 +85,10 @@ public abstract class BindAsync_Tests
 		var bind = Substitute.For<Func<int, Task<Maybe<string>>>>();
 
 		// Act
-		await act(maybe, bind).ConfigureAwait(false);
+		await act(maybe, bind);
 
 		// Assert
-		await bind.Received().Invoke(value).ConfigureAwait(false);
+		await bind.Received().Invoke(value);
 	}
 
 	public record class FakeMaybe : Maybe<int> { }

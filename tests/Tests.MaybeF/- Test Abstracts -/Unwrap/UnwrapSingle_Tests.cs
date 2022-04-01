@@ -1,4 +1,4 @@
-﻿// Maybe: Unit Tests
+// Maybe: Unit Tests
 // Copyright (c) bfren - licensed under https://mit.bfren.dev/2019
 
 using MaybeF;
@@ -20,9 +20,8 @@ public abstract class UnwrapSingle_Tests
 		var result = act(maybe);
 
 		// Assert
-		var none = result.AssertNone();
-		var message = Assert.IsType<UnhandledExceptionMsg>(none);
-		Assert.IsType<UnknownMaybeException>(message.Value);
+		var none = result.AssertNone().AssertType<UnhandledExceptionMsg>();
+		Assert.IsType<UnknownMaybeException>(none.Value);
 	}
 
 	public abstract void Test01_None_Returns_None();
@@ -67,8 +66,8 @@ public abstract class UnwrapSingle_Tests
 		var result = act(maybe);
 
 		// Assert
-		var none = result.AssertNone();
-		Assert.IsType<UnwrapSingleNoItemsMsg>(none);
+		var none = result.AssertNone().AssertType<UnwrapSingleErrorMsg>();
+		Assert.Equal(UnwrapSingleError.NoItems, none.Error);
 	}
 
 	public abstract void Test04_No_Items_Runs_NoItems();
@@ -99,8 +98,8 @@ public abstract class UnwrapSingle_Tests
 		var result = act(maybe);
 
 		// Assert
-		var none = result.AssertNone();
-		Assert.IsType<UnwrapSingleTooManyItemsErrorMsg>(none);
+		var none = result.AssertNone().AssertType<UnwrapSingleErrorMsg>();
+		Assert.Equal(UnwrapSingleError.TooManyItems, none.Error);
 	}
 
 	public abstract void Test06_Too_Many_Items_Runs_TooMany();
@@ -131,8 +130,8 @@ public abstract class UnwrapSingle_Tests
 		var result = act(maybe);
 
 		// Assert
-		var none = result.AssertNone();
-		Assert.IsType<UnwrapSingleNotAListMsg>(none);
+		var none = result.AssertNone().AssertType<UnwrapSingleErrorMsg>();
+		Assert.Equal(UnwrapSingleError.NotAList, none.Error);
 	}
 
 	public abstract void Test08_Not_A_List_Runs_NotAList();
@@ -164,13 +163,30 @@ public abstract class UnwrapSingle_Tests
 		var result = act(maybe);
 
 		// Assert
-		var none = result.AssertNone();
-		Assert.IsType<UnwrapSingleIncorrectTypeErrorMsg>(none);
+		var none = result.AssertNone().AssertType<UnwrapSingleErrorMsg>();
+		Assert.Equal(UnwrapSingleError.IncorrectType, none.Error);
 	}
 
-	public abstract void Test10_List_With_Single_Item_Returns_Single();
+	public abstract void Test10_Incorrect_Type_Runs_IncorrectType();
 
-	protected static void Test10(Func<Maybe<int[]>, Maybe<int>> act)
+	protected static void Test10(Func<Maybe<int[]>, Func<IMsg>?, Maybe<string>> act)
+	{
+		// Arrange
+		var value = Rnd.Int;
+		var list = new[] { value };
+		var maybe = F.Some(list);
+		var incorrectType = Substitute.For<Func<IMsg>>();
+
+		// Act
+		act(maybe, incorrectType);
+
+		// Assert
+		incorrectType.Received().Invoke();
+	}
+
+	public abstract void Test11_List_With_Single_Item_Returns_Single();
+
+	protected static void Test11(Func<Maybe<int[]>, Maybe<int>> act)
 	{
 		// Arrange
 		var value = Rnd.Int;

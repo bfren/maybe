@@ -386,9 +386,9 @@ public abstract record class Maybe<T> : IEquatable<Maybe<T>>
 	public T Unwrap(Func<IMsg, T> ifNone) =>
 		F.Unwrap(this, ifNone: ifNone);
 
-	/// <inheritdoc cref="F.UnwrapSingle{T, TReturn}(Maybe{T}, Func{IMsg}?, Func{IMsg}?, Func{IMsg}?)"/>
-	public Maybe<TSingle> UnwrapSingle<TSingle>(Func<IMsg>? noItems = null, Func<IMsg>? tooMany = null, Func<IMsg>? notAList = null) =>
-		F.UnwrapSingle<T, TSingle>(this, noItems, tooMany, notAList);
+	/// <inheritdoc cref="F.UnwrapSingle{T, TReturn}(Maybe{T}, Func{IMsg}?, Func{IMsg}?, Func{IMsg}?, Func{IMsg}?)"/>
+	public Maybe<TSingle> UnwrapSingle<TSingle>(Func<IMsg>? noItems = null, Func<IMsg>? tooMany = null, Func<IMsg>? incorrectType = null, Func<IMsg>? notAList = null) =>
+		F.UnwrapSingle<T, TSingle>(this, noItems, tooMany, incorrectType, notAList);
 
 	#endregion Unwrap
 }
