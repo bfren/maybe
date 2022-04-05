@@ -23,15 +23,6 @@ public static partial class MaybeExtensions
 
 	/// <inheritdoc cref="F.IfNull{T, TReturn}(Maybe{T}, Func{TReturn}, Func{T, TReturn}, F.Handler)"/>
 	public static Task<Maybe<TReturn>> IfNullAsync<T, TReturn>(
-		this Maybe<T> maybe,
-		Func<Task<TReturn>> ifNull,
-		Func<T, Task<TReturn>> ifSome,
-		F.Handler handler
-	) =>
-		F.IfNullAsync(maybe, ifNull, ifSome, handler);
-
-	/// <inheritdoc cref="F.IfNull{T, TReturn}(Maybe{T}, Func{TReturn}, Func{T, TReturn}, F.Handler)"/>
-	public static Task<Maybe<TReturn>> IfNullAsync<T, TReturn>(
 		this Task<Maybe<T>> maybe,
 		Func<TReturn> ifNull,
 		Func<T, TReturn> ifSome,
@@ -47,14 +38,6 @@ public static partial class MaybeExtensions
 		F.Handler handler
 	) =>
 		F.IfNullAsync(maybe, ifNull, ifSome, handler);
-
-	/// <inheritdoc cref="F.IfNull{T, TReturn}(Maybe{T}, Func{TReturn}, Func{T, TReturn}, F.Handler)"/>
-	public static Task<Maybe<TReturn>> IfNullAsync<T, TReturn>(
-		this Maybe<T> maybe,
-		Func<Task<Maybe<TReturn>>> ifNull,
-		Func<T, Task<Maybe<TReturn>>> ifSome
-	) =>
-		F.IfNullAsync(maybe, ifNull, ifSome);
 
 	/// <inheritdoc cref="F.IfNull{T, TReturn}(Maybe{T}, Func{TReturn}, Func{T, TReturn}, F.Handler)"/>
 	public static Task<Maybe<TReturn>> IfNullAsync<T, TReturn>(
