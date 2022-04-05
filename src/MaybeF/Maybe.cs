@@ -258,9 +258,25 @@ public abstract record class Maybe<T> : IEquatable<Maybe<T>>
 		where TMsg : IMsg =>
 		F.IfNull<T, TMsg>(this, ifNull);
 
+	/// <inheritdoc cref="F.IfNull{T, TReturn}(Maybe{T}, Func{TReturn}, Func{T, TReturn}, F.Handler)"/>
+	public Maybe<TReturn> IfNull<TReturn>(Func<TReturn> ifNull, Func<T, TReturn> ifSome, F.Handler handler) =>
+		F.IfNull(this, ifNull, ifSome, handler);
+
+	/// <inheritdoc cref="F.IfNull{T, TReturn}(Maybe{T}, Func{TReturn}, Func{T, TReturn}, F.Handler)"/>
+	public Maybe<TReturn> IfNull<TReturn>(Func<Maybe<TReturn>> ifNull, Func<T, Maybe<TReturn>> ifSome) =>
+		F.IfNull(this, ifNull, ifSome);
+
 	/// <inheritdoc cref="F.IfNull{T}(Maybe{T}, Func{Maybe{T}})"/>
 	public Task<Maybe<T>> IfNullAsync(Func<Task<Maybe<T>>> ifNull) =>
 		F.IfNullAsync(this, ifNull);
+
+	/// <inheritdoc cref="F.IfNull{T, TReturn}(Maybe{T}, Func{TReturn}, Func{T, TReturn}, F.Handler)"/>
+	public Task<Maybe<TReturn>> IfNullAsync<TReturn>(Func<Task<TReturn>> ifNull, Func<T, Task<TReturn>> ifSome, F.Handler handler) =>
+		F.IfNullAsync(this, ifNull, ifSome, handler);
+
+	/// <inheritdoc cref="F.IfNull{T, TReturn}(Maybe{T}, Func{TReturn}, Func{T, TReturn}, F.Handler)"/>
+	public Task<Maybe<TReturn>> IfNullAsync<TReturn>(Func<Task<Maybe<TReturn>>> ifNull, Func<T, Task<Maybe<TReturn>>> ifSome) =>
+		F.IfNullAsync(this, ifNull, ifSome);
 
 	#endregion IfNull
 
