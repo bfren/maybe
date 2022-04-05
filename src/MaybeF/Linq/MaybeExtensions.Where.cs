@@ -18,21 +18,21 @@ public static partial class MaybeExtensions
 	/// <param name="this">Maybe</param>
 	/// <param name="predicate">Select where predicate</param>
 	public static Maybe<T> Where<T>(this Maybe<T> @this, Func<T, bool> predicate) =>
-		F.Filter(@this, predicate);
+		@this.Filter(predicate);
 
 	/// <inheritdoc cref="Where{T}(Maybe{T}, Func{T, bool})"/>
 	public static Task<Maybe<T>> Where<T>(this Maybe<T> @this, Func<T, Task<bool>> predicate) =>
-		F.FilterAsync(@this, predicate);
+		@this.FilterAsync(predicate);
 
 	/// <inheritdoc cref="Where{T}(Maybe{T}, Func{T, bool})"/>
 	/// <param name="this">Maybe (awaitable)</param>
 	/// <param name="predicate">Select where predicate</param>
 	public static Task<Maybe<T>> Where<T>(this Task<Maybe<T>> @this, Func<T, bool> predicate) =>
-		F.FilterAsync(@this, x => Task.FromResult(predicate(x)));
+		@this.FilterAsync(predicate);
 
 	/// <inheritdoc cref="Where{T}(Maybe{T}, Func{T, bool})"/>
 	/// <param name="this">Maybe (awaitable)</param>
 	/// <param name="predicate">Select where predicate</param>
 	public static Task<Maybe<T>> Where<T>(this Task<Maybe<T>> @this, Func<T, Task<bool>> predicate) =>
-		F.FilterAsync(@this, predicate);
+		@this.FilterAsync(predicate);
 }
