@@ -3,7 +3,7 @@
 
 using MaybeF;
 
-namespace Jeebs.Internals.Some_Tests;
+namespace Jeebs.Some_Tests;
 
 public class ToString_Tests
 {

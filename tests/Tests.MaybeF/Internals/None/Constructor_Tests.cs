@@ -2,9 +2,8 @@
 // Copyright (c) bfren - licensed under https://mit.bfren.dev/2019
 
 using MaybeF;
-using MaybeF.Internals;
 
-namespace Jeebs.Internals.None_Tests;
+namespace Jeebs.None_Tests;
 
 public class Constructor_Tests
 {

@@ -11,7 +11,7 @@ public static partial class F
 	public static partial class EnumerableF
 	{
 		/// <summary>
-		/// Filter elements to return only the values of those that are <see cref="Internals.Some{T}"/>
+		/// Filter elements to return only the values of those that are <see cref="Some{T}"/>
 		/// </summary>
 		/// <typeparam name="T">Maybe value type</typeparam>
 		/// <param name="list">List of Maybe values</param>
