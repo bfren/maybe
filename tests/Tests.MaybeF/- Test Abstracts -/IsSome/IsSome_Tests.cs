@@ -18,7 +18,7 @@ public abstract class IsSome_Tests
 		var maybe = F.Some(inValue);
 
 		// Act
-		var result = act(maybe, out int outValue);
+		var result = act(maybe, out var outValue);
 
 		// Assert
 		Assert.True(result);
@@ -33,7 +33,7 @@ public abstract class IsSome_Tests
 		var maybe = Create.None<string>();
 
 		// Act
-		var result = act(maybe, out string outValue);
+		var result = act(maybe, out var outValue);
 
 		// Assert
 		Assert.False(result);

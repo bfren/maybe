@@ -71,7 +71,7 @@ public static partial class F
 
 		/// <summary>
 		/// Possible reasons for
-		/// <see cref="UnwrapSingle{T, TReturn}(Maybe{T}, Func{IMsg}?, Func{IMsg}?, Func{IMsg}?)"/> failing
+		/// <see cref="UnwrapSingle{TList, TSingle}(Maybe{TList}, Func{IMsg}?, Func{IMsg}?, Func{IMsg}?, Func{IMsg}?)"/> failing
 		/// </summary>
 		public enum UnwrapSingleError
 		{
