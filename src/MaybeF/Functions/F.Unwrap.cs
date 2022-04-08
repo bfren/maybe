@@ -8,11 +8,11 @@ namespace MaybeF;
 public static partial class F
 {
 	/// <summary>
-	/// Unwrap the value of <paramref name="maybe"/> - if it is <see cref="Internals.Some{T}"/>
+	/// Unwrap the value of <paramref name="maybe"/> - if it is <see cref="Some{T}"/>
 	/// </summary>
 	/// <typeparam name="T">Maybe value type</typeparam>
 	/// <param name="maybe">Input Maybe</param>
-	/// <param name="ifNone">Value to return if <paramref name="maybe"/> is a <see cref="Internals.None{T}"/></param>
+	/// <param name="ifNone">Value to return if <paramref name="maybe"/> is a <see cref="None{T}"/></param>
 	public static T Unwrap<T>(Maybe<T> maybe, Func<T> ifNone) =>
 		Switch(
 			maybe,
@@ -21,11 +21,11 @@ public static partial class F
 		);
 
 	/// <summary>
-	/// Unwrap the value of <paramref name="maybe"/> - if it is <see cref="Internals.Some{T}"/>
+	/// Unwrap the value of <paramref name="maybe"/> - if it is <see cref="Some{T}"/>
 	/// </summary>
 	/// <typeparam name="T">Maybe value type</typeparam>
 	/// <param name="maybe">Input Maybe</param>
-	/// <param name="ifNone">Value to return if <paramref name="maybe"/> is a <see cref="Internals.None{T}"/></param>
+	/// <param name="ifNone">Value to return if <paramref name="maybe"/> is a <see cref="None{T}"/></param>
 	public static T Unwrap<T>(Maybe<T> maybe, Func<IMsg, T> ifNone) =>
 		Switch(
 			maybe,

@@ -3,7 +3,6 @@
 
 using System.Collections;
 using System.Collections.Generic;
-using MaybeF.Internals;
 
 namespace MaybeF;
 

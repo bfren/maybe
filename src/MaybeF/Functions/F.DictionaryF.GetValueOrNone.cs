@@ -10,7 +10,7 @@ public static partial class F
 	public static partial class DictionaryF
 	{
 		/// <summary>
-		/// Return the value or <see cref="Internals.None{T}"/>
+		/// Return the value or <see cref="None{T}"/>
 		/// </summary>
 		/// <typeparam name="TKey">Key type</typeparam>
 		/// <typeparam name="TValue">Value type</typeparam>

@@ -2,7 +2,6 @@
 // Copyright (c) bfren - licensed under https://mit.bfren.dev/2019
 
 using System;
-using MaybeF.Internals;
 
 namespace MaybeF;
 
@@ -20,8 +19,8 @@ public static partial class F
 		};
 
 	/// <summary>
-	/// Create a <see cref="Internals.Some{T}"/> Maybe, containing <paramref name="value"/><br/>
-	/// If <paramref name="value"/> returns null, <see cref="Internals.None{T}"/> will be returned instead
+	/// Create a <see cref="Some{T}"/> Maybe, containing <paramref name="value"/><br/>
+	/// If <paramref name="value"/> returns null, <see cref="None{T}"/> will be returned instead
 	/// </summary>
 	/// <typeparam name="T">Maybe value type</typeparam>
 	/// <param name="value">Some value</param>
@@ -46,11 +45,11 @@ public static partial class F
 	}
 
 	/// <summary>
-	/// Create a <see cref="Internals.Some{T}"/> Maybe, containing <paramref name="value"/>
+	/// Create a <see cref="Some{T}"/> Maybe, containing <paramref name="value"/>
 	/// </summary>
 	/// <typeparam name="T">Maybe value type</typeparam>
 	/// <param name="value">Some value</param>
-	/// <param name="allowNull">If true, <see cref="Internals.Some{T}"/> will always be returned whatever the value is</param>
+	/// <param name="allowNull">If true, <see cref="Some{T}"/> will always be returned whatever the value is</param>
 	/// <param name="handler">Exception handler</param>
 	public static Maybe<T?> Some<T>(Func<T?> value, bool allowNull, Handler handler)
 	{

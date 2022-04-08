@@ -3,7 +3,7 @@
 
 using MaybeF;
 
-namespace Jeebs.Internals.None_Tests;
+namespace Jeebs.None_Tests;
 
 public class AsTask_Tests
 {

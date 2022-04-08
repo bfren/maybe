@@ -6,7 +6,7 @@ using System;
 namespace MaybeF;
 
 /// <summary>
-/// Contains information about the reason why a <see cref="Maybe{T}"/> is <see cref="Internals.None{T}"/>,
+/// Contains information about the reason why a <see cref="Maybe{T}"/> is <see cref="None{T}"/>,
 /// usually used when an exception has been caught
 /// </summary>
 public interface IExceptionMsg : IMsg

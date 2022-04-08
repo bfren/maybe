@@ -11,7 +11,7 @@ public static partial class F
 	public static partial class EnumerableF
 	{
 		/// <summary>
-		/// Filter elements to return only <see cref="Internals.Some{T}"/> and transform using <paramref name="map"/>
+		/// Filter elements to return only <see cref="Some{T}"/> and transform using <paramref name="map"/>
 		/// </summary>
 		/// <typeparam name="T">Maybe value type</typeparam>
 		/// <typeparam name="TReturn">Next value type</typeparam>

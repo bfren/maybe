@@ -11,7 +11,7 @@ public static partial class F
 	public static partial class EnumerableF
 	{
 		/// <summary>
-		/// Return the element at <paramref name="index"/> or <see cref="Internals.None{T}"/>
+		/// Return the element at <paramref name="index"/> or <see cref="None{T}"/>
 		/// </summary>
 		/// <typeparam name="T">Value type</typeparam>
 		/// <param name="list">List of values</param>

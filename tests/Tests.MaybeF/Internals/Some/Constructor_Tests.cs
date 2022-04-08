@@ -1,9 +1,9 @@
-﻿// Maybe: Unit Tests
+// Maybe: Unit Tests
 // Copyright (c) bfren - licensed under https://mit.bfren.dev/2019
 
-using MaybeF.Internals;
+using MaybeF;
 
-namespace Jeebs.Internals.Some_Tests;
+namespace Jeebs.Some_Tests;
 
 public class Constructor_Tests
 {

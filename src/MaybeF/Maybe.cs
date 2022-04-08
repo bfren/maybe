@@ -6,7 +6,6 @@ using System.Collections.Generic;
 using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 using MaybeF.Exceptions;
-using MaybeF.Internals;
 
 namespace MaybeF;
 

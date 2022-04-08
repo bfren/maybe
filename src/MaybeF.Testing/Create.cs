@@ -9,7 +9,7 @@ namespace MaybeF.Testing;
 public static class Create
 {
 	/// <summary>
-	/// Create an empty <see cref="Internals.None{T}"/>
+	/// Create an empty <see cref="None{T}"/>
 	/// </summary>
 	/// <typeparam name="T">Maybe value type</typeparam>
 	public static Maybe<T> None<T>() =>
