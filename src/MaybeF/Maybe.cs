@@ -295,8 +295,8 @@ public abstract record class Maybe<T> : IEquatable<Maybe<T>>
 	#region IsNone
 
 	/// <inheritdoc cref="F.IsNone{T}(Maybe{T}, out IMsg)"/>
-	public bool IsNone(out IMsg message) =>
-		F.IsNone(this, out message);
+	public bool IsNone(out IMsg reason) =>
+		F.IsNone(this, out reason);
 
 	#endregion IsNone
 

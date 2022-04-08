@@ -1,4 +1,4 @@
-﻿// Maybe: Unit Tests
+// Maybe: Unit Tests
 // Copyright (c) bfren - licensed under https://mit.bfren.dev/2019
 
 using MaybeF;
@@ -7,7 +7,7 @@ namespace Abstracts;
 
 public abstract class IsNone_Tests
 {
-	public delegate bool IsNone<T>(Maybe<T> maybe, out IMsg message);
+	public delegate bool IsNone<T>(Maybe<T> maybe, out IMsg reason);
 
 	public abstract void Test00_Is_None_Returns_True_Sets_Msg();
 
@@ -18,11 +18,11 @@ public abstract class IsNone_Tests
 		var maybe = F.None<int>(inMsg);
 
 		// Act
-		var result = act(maybe, out IMsg outMsg);
+		var result = act(maybe, out var reason);
 
 		// Assert
 		Assert.True(result);
-		Assert.Equal(inMsg, outMsg);
+		Assert.Equal(inMsg, reason);
 	}
 
 	public abstract void Test01_Is_Not_None_Returns_False();
@@ -33,10 +33,10 @@ public abstract class IsNone_Tests
 		var maybe = F.Some(Rnd.Str);
 
 		// Act
-		var result = act(maybe, out IMsg outMsg);
+		var result = act(maybe, out var reason);
 
 		// Assert
 		Assert.False(result);
-		Assert.Null(outMsg);
+		Assert.Null(reason);
 	}
 }
