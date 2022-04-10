@@ -38,7 +38,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Tests.MaybeF.Testing", "tests\Tests.MaybeF.Testing\Tests.MaybeF.Testing.csproj", "{1F844C37-77C3-4704-8629-655EF70915F2}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MaybeF.Caching", "src\MaybeF.Caching\MaybeF.Caching.csproj", "{D3E40773-D895-4762-8D70-638C2C021AF5}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MaybeF.Caching", "src\MaybeF.Caching\MaybeF.Caching.csproj", "{D3E40773-D895-4762-8D70-638C2C021AF5}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tests.MaybeF.Caching", "tests\Tests.MaybeF.Caching\Tests.MaybeF.Caching.csproj", "{9A5E8A66-C3B1-4A81-8BDC-227D1BF5CA03}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -66,6 +68,10 @@ Global
 		{D3E40773-D895-4762-8D70-638C2C021AF5}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D3E40773-D895-4762-8D70-638C2C021AF5}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D3E40773-D895-4762-8D70-638C2C021AF5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9A5E8A66-C3B1-4A81-8BDC-227D1BF5CA03}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9A5E8A66-C3B1-4A81-8BDC-227D1BF5CA03}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9A5E8A66-C3B1-4A81-8BDC-227D1BF5CA03}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9A5E8A66-C3B1-4A81-8BDC-227D1BF5CA03}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -76,6 +82,7 @@ Global
 		{DA96DC9B-2DB9-4561-9AE7-DF4DAE02BE80} = {8C66E4E1-E9BB-4654-A392-256A57F625B9}
 		{1F844C37-77C3-4704-8629-655EF70915F2} = {8C66E4E1-E9BB-4654-A392-256A57F625B9}
 		{D3E40773-D895-4762-8D70-638C2C021AF5} = {D52D67FD-8B6D-4B0B-9F15-E0CECFF4725D}
+		{9A5E8A66-C3B1-4A81-8BDC-227D1BF5CA03} = {8C66E4E1-E9BB-4654-A392-256A57F625B9}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {A3C083B6-ACC8-4FA6-AA43-AC170E28D689}
