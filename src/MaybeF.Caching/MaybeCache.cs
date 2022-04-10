@@ -22,6 +22,9 @@ public abstract class MaybeCache
 		/// <summary>Cache entry does not exist</summary>
 		public sealed record class CacheEntryDoesNotExistMsg : IMsg;
 
+		/// <summary>Cache entry exists but is null</summary>
+		public sealed record class CacheEntryIsNullMsg : IMsg;
+
 		/// <summary>Error creating cache value using factory function</summary>
 		/// <param name="Value">Exception</param>
 		public sealed record class ErrorCreatingCacheValueMsg(Exception Value) : IExceptionMsg;
@@ -46,9 +49,14 @@ public sealed class MaybeCache<TKey> : MaybeCache, IMaybeCache<TKey>
 	/// <inheritdoc/>
 	public Maybe<TValue> GetValue<TValue>(TKey key)
 	{
-		if (Cache.TryGetValue(key, out TValue value))
+		if (Cache.TryGetValue(key, out var value))
 		{
-			return value;
+			if (value is TValue cachedValue)
+			{
+				return cachedValue;
+			}
+
+			return F.None<TValue, M.CacheEntryIsNullMsg>();
 		}
 
 		return F.None<TValue, M.CacheEntryDoesNotExistMsg>();
