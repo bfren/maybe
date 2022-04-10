@@ -30,6 +30,7 @@ public abstract class MaybeCache
 
 /// <inheritdoc cref="IMaybeCache{TKey}"/>
 public sealed class MaybeCache<TKey> : MaybeCache, IMaybeCache<TKey>
+	where TKey : notnull
 {
 	internal IMemoryCache Cache { get; private init; }
 

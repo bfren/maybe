@@ -11,6 +11,7 @@ namespace MaybeF.Caching;
 /// </summary>
 /// <typeparam name="TKey">Key type</typeparam>
 public interface IMaybeCache<TKey>
+	where TKey : notnull
 {
 	/// <summary>
 	/// Retrieve a cache entry if it exists
