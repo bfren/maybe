@@ -16,6 +16,9 @@ public static partial class F
 	/// </summary>
 	public static CultureInfo DefaultCulture { get; set; } = CultureInfo.GetCultureInfo("en-GB");
 
+	/// <summary>Messages</summary>
+	public static partial class M { }
+
 	/// <summary>
 	/// Functions for interacting with <see cref="IDictionary{TKey, TValue}"/>
 	/// </summary>
@@ -33,7 +36,4 @@ public static partial class F
 		/// <summary>Messages</summary>
 		public static partial class M { }
 	}
-
-	/// <summary>Messages</summary>
-	public static partial class M { }
 }
