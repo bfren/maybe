@@ -9,7 +9,7 @@ namespace MaybeF;
 public static partial class F
 {
 	/// <summary>
-	/// Unwrap the value of <paramref name="maybe"/> - if it is a <see cref="Some{T}"/>
+	/// Unwrap the value of <paramref name="maybe"/> - if it is a <see cref="MaybeF.Some{T}"/>
 	/// </summary>
 	/// <typeparam name="T">Maybe value type</typeparam>
 	/// <typeparam name="TSingle">Single value type</typeparam>

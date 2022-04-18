@@ -9,12 +9,12 @@ public static partial class F
 {
 	/// <summary>
 	/// Use <paramref name="bind"/> to convert the value of <paramref name="maybe"/> to type <typeparamref name="TReturn"/>,
-	/// if it is a <see cref="Some{T}"/>
+	/// if it is a <see cref="MaybeF.Some{T}"/>
 	/// </summary>
 	/// <typeparam name="T">Maybe value type</typeparam>
 	/// <typeparam name="TReturn">Next value type</typeparam>
 	/// <param name="maybe">Input Maybe</param>
-	/// <param name="bind">Binding function - will receive <see cref="Some{T}.Value"/> if this is a <see cref="Some{T}"/></param>
+	/// <param name="bind">Binding function - will receive <see cref="Some{T}.Value"/> if this is a <see cref="MaybeF.Some{T}"/></param>
 	public static Maybe<TReturn> Bind<T, TReturn>(Maybe<T> maybe, Func<T, Maybe<TReturn>> bind) =>
 		Catch(() =>
 			Switch(

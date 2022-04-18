@@ -11,7 +11,7 @@ namespace MaybeF;
 public static partial class F
 {
 	/// <summary>
-	/// Unwrap the value of <paramref name="maybe"/> - if it is <see cref="Some{T}"/>
+	/// Unwrap the value of <paramref name="maybe"/> - if it is <see cref="MaybeF.Some{T}"/>
 	/// and <typeparamref name="TList"/> implements <see cref="IEnumerable{T}"/>
 	/// </summary>
 	/// <typeparam name="TList">List value type</typeparam>

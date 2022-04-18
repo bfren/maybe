@@ -6,16 +6,16 @@ namespace MaybeF;
 public static partial class F
 {
 	/// <summary>
-	/// If <paramref name="maybe"/> is a <see cref="None{T}"/>, set <paramref name="reason"/>
+	/// If <paramref name="maybe"/> is a <see cref="MaybeF.None{T}"/>, set <paramref name="reason"/>
 	/// to be <see cref="None{T}.Reason"/>
 	/// </summary>
 	/// <remarks>
 	/// Warning: <paramref name="reason"/> will be <see langword="null"/> if <paramref name="maybe"/>
-	/// is a <see cref="Some{T}"/>
+	/// is a <see cref="MaybeF.Some{T}"/>
 	/// </remarks>
 	/// <typeparam name="T">Maybe value type</typeparam>
 	/// <param name="maybe">Input Maybe</param>
-	/// <param name="reason">Reason (null if <paramref name="maybe"/> is <see cref="Some{T}"/>)</param>
+	/// <param name="reason">Reason (null if <paramref name="maybe"/> is <see cref="MaybeF.Some{T}"/>)</param>
 	public static bool IsNone<T>(Maybe<T> maybe, out IMsg reason)
 	{
 		if (maybe is None<T> none)

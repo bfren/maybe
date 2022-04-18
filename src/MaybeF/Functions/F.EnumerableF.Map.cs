@@ -11,7 +11,7 @@ public static partial class F
 	public static partial class EnumerableF
 	{
 		/// <summary>
-		/// Lift every non-null value of <paramref name="list"/> to be a <see cref="Some{T}"/>
+		/// Lift every non-null value of <paramref name="list"/> to be a <see cref="MaybeF.Some{T}"/>
 		/// </summary>
 		/// <typeparam name="T">Maybe value type</typeparam>
 		/// <param name="list">List of values</param>

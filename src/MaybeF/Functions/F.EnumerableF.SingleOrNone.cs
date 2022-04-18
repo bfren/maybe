@@ -12,7 +12,7 @@ public static partial class F
 	public static partial class EnumerableF
 	{
 		/// <summary>
-		/// Return the single element or <see cref="None{T}"/>
+		/// Return the single element or <see cref="MaybeF.None{T}"/>
 		/// </summary>
 		/// <typeparam name="T">Value type</typeparam>
 		/// <param name="list">List of values</param>

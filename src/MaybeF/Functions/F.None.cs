@@ -8,7 +8,7 @@ namespace MaybeF;
 public static partial class F
 {
 	/// <summary>
-	/// Create a <see cref="None{T}"/> Maybe with a Reason
+	/// Create a <see cref="MaybeF.None{T}"/> Maybe with a Reason
 	/// </summary>
 	/// <typeparam name="T">Maybe value type</typeparam>
 	/// <param name="reason"><see cref="IMsg"/> reason</param>
@@ -16,7 +16,7 @@ public static partial class F
 		new(reason);
 
 	/// <summary>
-	/// Create a <see cref="None{T}"/> Maybe with a Reason by type
+	/// Create a <see cref="MaybeF.None{T}"/> Maybe with a Reason by type
 	/// </summary>
 	/// <typeparam name="T">Maybe value type</typeparam>
 	/// <typeparam name="TMsg"><see cref="IMsg"/> type</typeparam>
@@ -25,7 +25,7 @@ public static partial class F
 		new(new TMsg());
 
 	/// <summary>
-	/// Create a <see cref="None{T}"/> Maybe with an exception Reason by type<br/>
+	/// Create a <see cref="MaybeF.None{T}"/> Maybe with an exception Reason by type<br/>
 	/// NB: <typeparamref name="TExceptionMsg"/> must have a constructor with precisely one argument to
 	/// receive <paramref name="ex"/> as the value, or creation will fail
 	/// </summary>
