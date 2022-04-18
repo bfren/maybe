@@ -88,11 +88,15 @@ public sealed class MaybeCache<TKey> : MaybeCache, IMaybeCache<TKey>
 		try
 		{
 			// Create value and cache entry
-			var createdValue = valueFactory();
-			_ = Cache.CreateEntry(key).Value = createdValue;
-
-			// Return value
-			return createdValue;
+			return valueFactory()
+				.Map(
+					x =>
+					{
+						_ = Cache.CreateEntry(key).Value = x;
+						return x;
+					},
+					e => new M.ErrorCreatingCacheValueMsg(e)
+				);
 		}
 		catch (Exception e)
 		{
