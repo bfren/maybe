@@ -128,11 +128,15 @@ public sealed class MaybeCache<TKey> : MaybeCache, IMaybeCache<TKey>
 		try
 		{
 			// Create value and cache entry
-			var createdValue = await valueFactory();
-			_ = Cache.CreateEntry(key).Value = createdValue;
-
-			// Return value
-			return createdValue;
+			return await valueFactory()
+				.MapAsync(
+					x =>
+					{
+						_ = Cache.CreateEntry(key).Value = x;
+						return x;
+					},
+					e => new M.ErrorCreatingCacheValueMsg(e)
+				);
 		}
 		catch (Exception e)
 		{
