@@ -31,8 +31,8 @@ public abstract class MaybeCache
 	}
 }
 
-/// <inheritdoc cref="IMaybeCache{TKey}"/>
-public sealed class MaybeCache<TKey> : MaybeCache, IMaybeCache<TKey>
+/// <inheritdoc cref="IMaybeCache{TKey, TValue}"/>
+public sealed class MaybeCache<TKey, TValue> : MaybeCache, IMaybeCache<TKey, TValue>
 	where TKey : notnull
 {
 	internal IMemoryCache Cache { get; private init; }
@@ -47,7 +47,7 @@ public sealed class MaybeCache<TKey> : MaybeCache, IMaybeCache<TKey>
 		Cache = cache;
 
 	/// <inheritdoc/>
-	public Maybe<TValue> GetValue<TValue>(TKey key)
+	public Maybe<TValue> GetValue(TKey key)
 	{
 		if (Cache.TryGetValue(key, out var value))
 		{
@@ -63,19 +63,19 @@ public sealed class MaybeCache<TKey> : MaybeCache, IMaybeCache<TKey>
 	}
 
 	/// <inheritdoc/>
-	public void SetValue<TValue>(TKey key, TValue value) =>
+	public void SetValue(TKey key, TValue value) =>
 		Cache.Set(key, value);
 
 	/// <inheritdoc/>
-	public async Task SetValueAsync<TValue>(TKey key, Func<Task<TValue>> valueFactory) =>
+	public async Task SetValueAsync(TKey key, Func<Task<TValue>> valueFactory) =>
 		Cache.Set(key, await valueFactory());
 
 	/// <inheritdoc/>
-	public Maybe<TValue> GetOrCreate<TValue>(TKey key, Func<TValue> valueFactory) =>
+	public Maybe<TValue> GetOrCreate(TKey key, Func<TValue> valueFactory) =>
 		GetOrCreate(key, () => F.Some(valueFactory()));
 
 	/// <inheritdoc/>
-	public Maybe<TValue> GetOrCreate<TValue>(TKey key, Func<Maybe<TValue>> valueFactory)
+	public Maybe<TValue> GetOrCreate(TKey key, Func<Maybe<TValue>> valueFactory)
 	{
 		// Check the entry already exists
 		if (Cache.TryGetValue(key, out var value) && value is TValue cachedValue)
@@ -111,11 +111,11 @@ public sealed class MaybeCache<TKey> : MaybeCache, IMaybeCache<TKey>
 	}
 
 	/// <inheritdoc/>
-	public Task<Maybe<TValue>> GetOrCreateAsync<TValue>(TKey key, Func<Task<TValue>> valueFactory) =>
+	public Task<Maybe<TValue>> GetOrCreateAsync(TKey key, Func<Task<TValue>> valueFactory) =>
 		GetOrCreateAsync(key, async () => F.Some(await valueFactory()));
 
 	/// <inheritdoc/>
-	public async Task<Maybe<TValue>> GetOrCreateAsync<TValue>(TKey key, Func<Task<Maybe<TValue>>> valueFactory)
+	public async Task<Maybe<TValue>> GetOrCreateAsync(TKey key, Func<Task<Maybe<TValue>>> valueFactory)
 	{
 		// Check the entry already exists
 		if (Cache.TryGetValue(key, out var value) && value is TValue cachedValue)
