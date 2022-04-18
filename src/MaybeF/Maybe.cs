@@ -30,6 +30,11 @@ public abstract record class Maybe<T> : IEquatable<Maybe<T>>
 		ValueTask.FromResult(this);
 
 	/// <summary>
+	/// Don't allow types to be created outside this assembly
+	/// </summary>
+	private protected Maybe() { }
+
+	/// <summary>
 	/// Returns an enumerator to enable use in foreach blocks
 	/// </summary>
 	public IEnumerator<T> GetEnumerator()
