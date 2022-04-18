@@ -14,7 +14,7 @@ public class SetValue_Tests
 		var key = Rnd.Str;
 		var value = Rnd.Lng;
 		var mc = Substitute.For<IMemoryCache>();
-		var cache = new MaybeCache<string>(mc);
+		var cache = new MaybeCache<string, long>(mc);
 
 		// Act
 		cache.SetValue(key, value);

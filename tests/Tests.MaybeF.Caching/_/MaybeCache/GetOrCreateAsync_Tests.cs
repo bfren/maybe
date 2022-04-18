@@ -21,7 +21,7 @@ public class GetOrCreateAsync_Tests
 				x[1] = value;
 				return true;
 			});
-		var cache = new MaybeCache<string>(mc);
+		var cache = new MaybeCache<string, long>(mc);
 
 		// Act
 		var r0 = await cache.GetOrCreateAsync(key, () => Task.FromResult(Rnd.Lng));
@@ -53,7 +53,7 @@ public class GetOrCreateAsync_Tests
 				x[1] = null;
 				return false;
 			});
-		var cache = new MaybeCache<string>(mc);
+		var cache = new MaybeCache<string, long>(mc);
 
 		// Act
 		var r0 = await cache.GetOrCreateAsync(key, f0);
@@ -83,7 +83,7 @@ public class GetOrCreateAsync_Tests
 				x[1] = null;
 				return false;
 			});
-		var cache = new MaybeCache<string>(mc);
+		var cache = new MaybeCache<string, long>(mc);
 
 		// Act
 		var r0 = await cache.GetOrCreateAsync(key, f0);

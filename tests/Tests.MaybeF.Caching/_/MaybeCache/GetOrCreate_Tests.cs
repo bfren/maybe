@@ -21,7 +21,7 @@ public class GetOrCreate_Tests
 				x[1] = value;
 				return true;
 			});
-		var cache = new MaybeCache<string>(mc);
+		var cache = new MaybeCache<string, long>(mc);
 
 		// Act
 		var r0 = cache.GetOrCreate(key, () => Rnd.Lng);
@@ -53,7 +53,7 @@ public class GetOrCreate_Tests
 				x[1] = null;
 				return false;
 			});
-		var cache = new MaybeCache<string>(mc);
+		var cache = new MaybeCache<string, long>(mc);
 
 		// Act
 		var r0 = cache.GetOrCreate(key, f0);
@@ -83,7 +83,7 @@ public class GetOrCreate_Tests
 				x[1] = null;
 				return false;
 			});
-		var cache = new MaybeCache<string>(mc);
+		var cache = new MaybeCache<string, long>(mc);
 
 		// Act
 		var r0 = cache.GetOrCreate(key, f0);

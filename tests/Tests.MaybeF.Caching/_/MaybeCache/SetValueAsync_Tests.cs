@@ -14,7 +14,7 @@ public class SetValueAsync_Tests
 		var key = Rnd.Str;
 		var value = Rnd.Lng;
 		var mc = Substitute.For<IMemoryCache>();
-		var cache = new MaybeCache<string>(mc);
+		var cache = new MaybeCache<string, long>(mc);
 
 		// Act
 		await cache.SetValueAsync(key, () => Task.FromResult(value));

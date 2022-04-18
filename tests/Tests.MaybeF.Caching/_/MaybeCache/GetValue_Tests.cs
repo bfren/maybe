@@ -20,10 +20,10 @@ public class GetValue_Tests
 				x[1] = value;
 				return true;
 			});
-		var cache = new MaybeCache<string>(mc);
+		var cache = new MaybeCache<string, Guid>(mc);
 
 		// Act
-		var result = cache.GetValue<object>(Rnd.Str);
+		var result = cache.GetValue(Rnd.Str);
 
 		// Assert
 		var some = result.AssertSome();
@@ -41,10 +41,10 @@ public class GetValue_Tests
 				x[1] = null;
 				return true;
 			});
-		var cache = new MaybeCache<string>(mc);
+		var cache = new MaybeCache<string, long>(mc);
 
 		// Act
-		var result = cache.GetValue<object>(Rnd.Str);
+		var result = cache.GetValue(Rnd.Str);
 
 		// Assert
 		result.AssertNone().AssertType<CacheEntryIsNullMsg>();
@@ -55,10 +55,10 @@ public class GetValue_Tests
 	{
 		// Arrange
 		var mc = Substitute.For<IMemoryCache>();
-		var cache = new MaybeCache<string>(mc);
+		var cache = new MaybeCache<string, long>(mc);
 
 		// Act
-		var result = cache.GetValue<object>(Rnd.Str);
+		var result = cache.GetValue(Rnd.Str);
 
 		// Assert
 		result.AssertNone().AssertType<CacheEntryDoesNotExistMsg>();
