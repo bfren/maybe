@@ -8,7 +8,7 @@ namespace MaybeF.Exceptions;
 /// <summary>
 /// Thrown when a <see cref="Maybe{T}"/> argument is null
 /// </summary>
-public class MaybeCannotBeNullException : Exception
+public sealed class MaybeCannotBeNullException : Exception
 {
 	/// <summary>
 	/// Create exception
