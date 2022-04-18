@@ -11,9 +11,10 @@ public static partial class MaybeExtensions
 	/// <inheritdoc cref="Maybe{T}.GetEnumerator"/>
 	public static async IAsyncEnumerator<T> GetAsyncEnumerator<T>(this Task<Maybe<T>> @this)
 	{
-		if (await @this.ConfigureAwait(false) is Some<T> some)
+		var maybe = await @this.ConfigureAwait(false);
+		if (maybe.IsSome(out var value))
 		{
-			yield return some.Value;
+			yield return value;
 		}
 	}
 }

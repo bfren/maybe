@@ -39,9 +39,9 @@ public abstract record class Maybe<T> : IEquatable<Maybe<T>>
 	/// </summary>
 	public IEnumerator<T> GetEnumerator()
 	{
-		if (this is Some<T> some)
+		if (IsSome(out var value))
 		{
-			yield return some.Value;
+			yield return value;
 		}
 	}
 
