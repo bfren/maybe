@@ -88,7 +88,7 @@ public abstract record class Maybe<T> : IEquatable<Maybe<T>>
 		value switch
 		{
 			T =>
-				new Some<T>(value), // Some<T> is only created by Some() functions and implicit operator
+				F.Some(value), // Some<T> is only created by Some() functions and implicit operator
 
 			_ =>
 				F.None<T, F.M.NullValueMsg>()
