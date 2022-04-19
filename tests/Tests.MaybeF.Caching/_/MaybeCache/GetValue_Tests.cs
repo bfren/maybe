@@ -14,7 +14,7 @@ public class GetValue_Tests
 		// Arrange
 		var mc = Substitute.For<IMemoryCache>();
 		var value = Rnd.Guid;
-		mc.TryGetValue(Arg.Any<string>(), out Arg.Any<object>())
+		mc.TryGetValue(Arg.Any<string>(), out Arg.Any<object>()!)
 			.Returns(x =>
 			{
 				x[1] = value;
@@ -35,7 +35,7 @@ public class GetValue_Tests
 	{
 		// Arrange
 		var mc = Substitute.For<IMemoryCache>();
-		mc.TryGetValue(Arg.Any<string>(), out Arg.Any<object>())
+		mc.TryGetValue(Arg.Any<string>(), out Arg.Any<object>()!)
 			.Returns(x =>
 			{
 				x[1] = null;

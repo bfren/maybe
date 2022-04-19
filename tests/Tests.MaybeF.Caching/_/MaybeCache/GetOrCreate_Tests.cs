@@ -15,7 +15,7 @@ public class GetOrCreate_Tests
 		var key = Rnd.Str;
 		var value = Rnd.Lng;
 		var mc = Substitute.For<IMemoryCache>();
-		mc.TryGetValue(key, out Arg.Any<object>())
+		mc.TryGetValue(key, out Arg.Any<object>()!)
 			.Returns(x =>
 			{
 				x[1] = value;
@@ -47,7 +47,7 @@ public class GetOrCreate_Tests
 		f1.Invoke()
 			.Returns(value);
 		var mc = Substitute.For<IMemoryCache>();
-		mc.TryGetValue(Arg.Any<string>(), out Arg.Any<object>())
+		mc.TryGetValue(Arg.Any<string>(), out Arg.Any<object>()!)
 			.Returns(x =>
 			{
 				x[1] = null;
@@ -77,7 +77,7 @@ public class GetOrCreate_Tests
 		long f0() => throw ex;
 		Maybe<long> f1() => throw ex;
 		var mc = Substitute.For<IMemoryCache>();
-		mc.TryGetValue(Arg.Any<string>(), out Arg.Any<object>())
+		mc.TryGetValue(Arg.Any<string>(), out Arg.Any<object>()!)
 			.Returns(x =>
 			{
 				x[1] = null;
