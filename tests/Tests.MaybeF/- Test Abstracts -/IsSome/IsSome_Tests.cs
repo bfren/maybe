@@ -1,4 +1,4 @@
-﻿// Maybe: Unit Tests
+// Maybe: Unit Tests
 // Copyright (c) bfren - licensed under https://mit.bfren.dev/2019
 
 using MaybeF;
@@ -38,5 +38,19 @@ public abstract class IsSome_Tests
 		// Assert
 		Assert.False(result);
 		Assert.Null(outValue);
+	}
+
+	public abstract void Test02_Is_Null_Returns_False();
+
+	protected static void Test02(IsSome<Guid> act)
+	{
+		// Arrange
+
+		// Act
+		var result = act(null!, out var outValue);
+
+		// Assert
+		Assert.False(result);
+		Assert.Equal(default, outValue);
 	}
 }

@@ -39,4 +39,18 @@ public abstract class IsNone_Tests
 		Assert.False(result);
 		Assert.Null(reason);
 	}
+
+	public abstract void Test02_Is_Null_Returns_False();
+
+	protected static void Test02(IsNone<Guid> act)
+	{
+		// Arrange
+
+		// Act
+		var result = act(null!, out var reason);
+
+		// Assert
+		Assert.False(result);
+		Assert.Null(reason);
+	}
 }
