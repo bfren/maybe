@@ -1,4 +1,4 @@
-﻿// Maybe: Unit Tests
+// Maybe: Unit Tests
 // Copyright (c) bfren - licensed under https://mit.bfren.dev/2019
 
 using static MaybeF.F.M;
@@ -42,7 +42,7 @@ public class Catch_Tests
 		var message = Rnd.Str;
 
 		// Act
-		var result = F.Catch<int>(() => throw new Exception(message), F.DefaultHandler);
+		var result = F.Catch<int>(() => throw new Exception(message), null!);
 
 		// Assert
 		var none = result.AssertNone();

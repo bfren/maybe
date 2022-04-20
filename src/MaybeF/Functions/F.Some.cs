@@ -38,9 +38,13 @@ public static partial class F
 					None<T, M.NullValueMsg>()
 			};
 		}
-		catch (Exception e)
+		catch (Exception e) when (handler is not null)
 		{
 			return None<T>(handler(e));
+		}
+		catch (Exception e)
+		{
+			return None<T>(DefaultHandler(e));
 		}
 	}
 
@@ -74,9 +78,13 @@ public static partial class F
 
 			};
 		}
-		catch (Exception e)
+		catch (Exception e) when (handler is not null)
 		{
 			return None<T?>(handler(e));
+		}
+		catch (Exception e)
+		{
+			return None<T?>(DefaultHandler(e));
 		}
 	}
 
