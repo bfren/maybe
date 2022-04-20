@@ -17,17 +17,33 @@ public static partial class F
 	/// <param name="none">Action to run if <see cref="MaybeF.None{T}"/></param>
 	/// <exception cref="MaybeCannotBeNullException"></exception>
 	/// <exception cref="UnknownMaybeException"></exception>
+	/// <exception cref="SomeCannotBeNullException"></exception>
+	/// <exception cref="NoneCannotBeNullException"></exception>
 	public static void Switch<T>(Maybe<T> maybe, Action<T> some, Action<IMsg> none)
 	{
 		// No return value so unable to use switch statement
 
 		if (maybe is Some<T> x)
 		{
-			some(x.Value);
+			try
+			{
+				some(x.Value);
+			}
+			catch (NullReferenceException)
+			{
+				throw new SomeCannotBeNullException();
+			}
 		}
 		else if (maybe is None<T> y)
 		{
-			none(y.Reason);
+			try
+			{
+				none(y.Reason);
+			}
+			catch (NullReferenceException)
+			{
+				throw new NoneCannotBeNullException();
+			}
 		}
 		else if (maybe is not null)
 		{
@@ -47,21 +63,55 @@ public static partial class F
 	/// <param name="maybe">Maybe being switched</param>
 	/// <param name="some">Function to run if <see cref="MaybeF.Some{T}"/> - receives value <typeparamref name="T"/> as input</param>
 	/// <param name="none">Function to run if <see cref="MaybeF.None{T}"/></param>
+	/// <exception cref="SomeCannotBeNullException"></exception>
+	/// <exception cref="NoneCannotBeNullException"></exception>
 	/// <exception cref="UnknownMaybeException"></exception>
 	/// <exception cref="MaybeCannotBeNullException"></exception>
-	public static TReturn Switch<T, TReturn>(Maybe<T> maybe, Func<T, TReturn> some, Func<IMsg, TReturn> none) =>
-		maybe switch
+	public static TReturn Switch<T, TReturn>(Maybe<T> maybe, Func<T, TReturn> some, Func<IMsg, TReturn> none)
+	{
+		if (maybe is Some<T> x)
 		{
-			Some<T> x =>
-				some(x.Value),
+			try
+			{
+				return some(x.Value) switch
+				{
+					TReturn value =>
+						value,
 
-			None<T> x =>
-				none(x.Reason),
+					_ =>
+						throw new SomeCannotBeNullException()
+				};
+			}
+			catch (NullReferenceException)
+			{
+				throw new SomeCannotBeNullException();
+			}
+		}
+		else if (maybe is None<T> y)
+		{
+			try
+			{
+				return none(y.Reason) switch
+				{
+					TReturn value =>
+						value,
 
-			{ } =>
-				throw new UnknownMaybeException(), // as Maybe<T> is internal implementation only this should never happen...
-
-			_ =>
-				throw new MaybeCannotBeNullException()
-		};
+					_ =>
+						throw new NoneCannotBeNullException()
+				};
+			}
+			catch (NullReferenceException)
+			{
+				throw new NoneCannotBeNullException();
+			}
+		}
+		else if (maybe is not null)
+		{
+			throw new UnknownMaybeException(); // as Maybe<T> is internal implementation only this should never happen...
+		}
+		else
+		{
+			throw new MaybeCannotBeNullException();
+		}
+	}
 }

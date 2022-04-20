@@ -1,4 +1,4 @@
-﻿// Maybe: Unit Tests
+// Maybe: Unit Tests
 // Copyright (c) bfren - licensed under https://mit.bfren.dev/2019
 
 namespace MaybeF.F_Tests;
@@ -31,30 +31,58 @@ public class Switch_Tests : Abstracts.Switch_Tests
 	}
 
 	[Fact]
-	public override void Test03_Return_Void_If_None_Runs_None_Action_With_Msg()
+	public override void Test03_Return_Void_If_None_And_None_Func_Is_Null_Throws_NoneCannotBeNullException()
 	{
 		var some = Substitute.For<Action<int>>();
-		Test03((mbe, none) => F.Switch(mbe, some, none));
+		Test03((mbe, _, n1) => F.Switch(mbe, some, n1));
 	}
 
 	[Fact]
-	public override void Test04_Return_Value_If_None_Runs_None_Func_With_Msg()
+	public override void Test04_Return_Void_If_None_Runs_None_Action_With_Msg()
 	{
-		var some = Substitute.For<Func<int, string>>();
+		var some = Substitute.For<Action<int>>();
 		Test04((mbe, none) => F.Switch(mbe, some, none));
 	}
 
 	[Fact]
-	public override void Test05_Return_Void_If_Some_Runs_Some_Action_With_Value()
+	public override void Test05_Return_Value_If_None_And_None_Func_Is_Null_Throws_NoneCannotBeNullException()
 	{
-		var none = Substitute.For<Action<IMsg>>();
-		Test05((mbe, some) => F.Switch(mbe, some, none));
+		var some = Substitute.For<Func<int, string>>();
+		Test05((mbe, _, _, n2) => F.Switch(mbe, some, n2));
 	}
 
 	[Fact]
-	public override void Test06_Return_Value_If_Some_Runs_Some_Func_With_Value()
+	public override void Test06_Return_Value_If_None_Runs_None_Func_With_Msg()
+	{
+		var some = Substitute.For<Func<int, string>>();
+		Test06((mbe, none) => F.Switch(mbe, some, none));
+	}
+
+	[Fact]
+	public override void Test07_Return_Void_If_Some_And_Some_Func_Is_Null_Throws_SomeCannotBeNullException()
+	{
+		var none = Substitute.For<Action<IMsg>>();
+		Test07((mbe, some) => F.Switch(mbe, some, none));
+	}
+
+	[Fact]
+	public override void Test08_Return_Void_If_Some_Runs_Some_Action_With_Value()
+	{
+		var none = Substitute.For<Action<IMsg>>();
+		Test08((mbe, some) => F.Switch(mbe, some, none));
+	}
+
+	[Fact]
+	public override void Test09_Return_Value_If_Some_And_Some_Func_Is_Null_Throws_SomeCannotBeNullException()
 	{
 		var none = Substitute.For<Func<IMsg, string>>();
-		Test06((mbe, some) => F.Switch(mbe, some, none));
+		Test09((mbe, some) => F.Switch(mbe, some, none));
+	}
+
+	[Fact]
+	public override void Test10_Return_Value_If_Some_Runs_Some_Func_With_Value()
+	{
+		var none = Substitute.For<Func<IMsg, string>>();
+		Test10((mbe, some) => F.Switch(mbe, some, none));
 	}
 }
