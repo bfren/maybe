@@ -19,5 +19,5 @@ public static partial class F
 		Func<TInput, Maybe<TInner>> f,
 		Func<TInner, Maybe<TReturn>> g
 	) =>
-		x => f(x).Bind(g);
+		x => Bind(f(x), g);
 }
