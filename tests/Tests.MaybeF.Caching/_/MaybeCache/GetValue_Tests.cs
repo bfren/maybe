@@ -9,6 +9,20 @@ namespace MaybeF.Caching.MaybeCache_Tests;
 public class GetValue_Tests
 {
 	[Fact]
+	public void Key_Null__Returns_None_With_KeyIsNullMsg()
+	{
+		// Arrange
+		var mc = Substitute.For<IMemoryCache>();
+		var cache = new MaybeCache<string, DateTime>(mc);
+
+		// Act
+		var result = cache.GetValue(null!);
+
+		// Assert
+		result.AssertNone().AssertType<KeyIsNullMsg>();
+	}
+
+	[Fact]
 	public void Value_Exists__Returns_Value()
 	{
 		// Arrange
