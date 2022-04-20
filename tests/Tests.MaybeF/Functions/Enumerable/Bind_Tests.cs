@@ -22,4 +22,16 @@ public class Bind_Tests : Abstracts.Enumerable.Bind_Tests
 	{
 		Test02(F.EnumerableF.Bind);
 	}
+
+	[Fact]
+	public override void Test03_List_Null_Returns_Empty_List()
+	{
+		Test03(F.EnumerableF.Bind);
+	}
+
+	[Fact]
+	public override void Test04_Map_Null_Returns_Empty_List()
+	{
+		Test04(F.EnumerableF.Bind);
+	}
 }

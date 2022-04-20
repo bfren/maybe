@@ -19,7 +19,7 @@ public static partial class F
 		/// <param name="predicate">[Optional] Predicate to filter items</param>
 		public static Maybe<T> FirstOrNone<T>(IEnumerable<T> list, Func<T, bool>? predicate) =>
 			Catch<T>(() =>
-				list.Any() switch
+				list?.Any() switch
 				{
 					true =>
 						list.FirstOrDefault(x => predicate is null || predicate(x)) switch
@@ -31,7 +31,7 @@ public static partial class F
 								None<T, M.FirstItemIsNullMsg>()
 						},
 
-					false =>
+					_ =>
 						None<T, M.ListIsEmptyMsg>()
 				},
 				DefaultHandler

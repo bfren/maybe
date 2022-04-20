@@ -1,4 +1,4 @@
-﻿// Maybe: Unit Tests
+// Maybe: Unit Tests
 // Copyright (c) bfren - licensed under https://mit.bfren.dev/2019
 
 using MaybeF;
@@ -52,5 +52,23 @@ public abstract class Filter_Tests
 		Assert.Collection(result,
 			x => Assert.Equal(v1, x)
 		);
+	}
+
+	public abstract void Test02_Null_Input_Returns_Empty_List();
+
+	protected static void Test02(Func<IEnumerable<Maybe<int>>, Func<int, bool>, IEnumerable<int>> act)
+	{
+		// Arrange
+		var predicate = Substitute.For<Func<int, bool>>();
+
+		// Act
+		var r0 = act(null!, null!);
+		var r1 = act(null!, predicate);
+
+		// Assert
+		Assert.NotNull(r0);
+		Assert.Empty(r0);
+		Assert.NotNull(r1);
+		Assert.Empty(r1);
 	}
 }

@@ -1,4 +1,4 @@
-﻿// Maybe: Unit Tests
+// Maybe: Unit Tests
 // Copyright (c) bfren - licensed under https://mit.bfren.dev/2019
 
 using MaybeF;
@@ -16,11 +16,12 @@ public abstract class LastOrNone_Tests
 		var list = Array.Empty<int>();
 
 		// Act
-		var result = act(list);
+		var r0 = act(null!);
+		var r1 = act(list);
 
 		// Assert
-		var none = result.AssertNone();
-		Assert.IsType<ListIsEmptyMsg>(none);
+		r0.AssertNone().AssertType<ListIsEmptyMsg>();
+		r1.AssertNone().AssertType<ListIsEmptyMsg>();
 	}
 
 	public abstract void Test01_No_Matching_Items_Returns_None_With_LastItemIsNullMsg();

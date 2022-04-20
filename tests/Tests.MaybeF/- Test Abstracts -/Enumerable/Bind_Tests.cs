@@ -80,4 +80,34 @@ public abstract class Bind_Tests
 			x => Assert.Equal(i2.ToString(), x.AssertSome())
 		);
 	}
+
+	public abstract void Test03_List_Null_Returns_Empty_List();
+
+	protected static void Test03(Func<IEnumerable<Maybe<int>>, Func<int, Maybe<string>>, IEnumerable<Maybe<string>>> act)
+	{
+		// Arrange
+		var bind = Substitute.For<Func<int, Maybe<string>>>();
+
+		// Act
+		var result = act(null!, bind);
+
+		// Assert
+		Assert.NotNull(result);
+		Assert.Empty(result);
+	}
+
+	public abstract void Test04_Map_Null_Returns_Empty_List();
+
+	protected static void Test04(Func<IEnumerable<Maybe<int>>, Func<int, Maybe<string>>, IEnumerable<Maybe<string>>> act)
+	{
+		// Arrange
+		var list = new[] { F.Some(Rnd.Int), F.Some(Rnd.Int), F.Some(Rnd.Int) };
+
+		// Act
+		var result = act(list, null!);
+
+		// Assert
+		Assert.NotNull(result);
+		Assert.Empty(result);
+	}
 }

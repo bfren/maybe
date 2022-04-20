@@ -34,4 +34,16 @@ public class Map_Tests : Abstracts.Enumerable.Map_Tests
 	{
 		Test04(F.EnumerableF.Map);
 	}
+
+	[Fact]
+	public override void Test05_List_Null_Returns_Empty_List()
+	{
+		Test05(F.EnumerableF.Map);
+	}
+
+	[Fact]
+	public override void Test06_Map_Null_Returns_Empty_List()
+	{
+		Test06(F.EnumerableF.Map);
+	}
 }

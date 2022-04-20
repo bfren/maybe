@@ -18,6 +18,11 @@ public static partial class F
 		/// <param name="predicate">[Optional] Predicate to use with filter</param>
 		public static IEnumerable<T> Filter<T>(IEnumerable<Maybe<T>> list, Func<T, bool>? predicate)
 		{
+			if (list is null)
+			{
+				yield break;
+			}
+
 			foreach (var maybe in list)
 			{
 				foreach (var some in maybe)
