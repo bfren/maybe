@@ -1,4 +1,4 @@
-﻿// Maybe: Unit Tests
+// Maybe: Unit Tests
 // Copyright (c) bfren - licensed under https://mit.bfren.dev/2019
 
 namespace MaybeF.Linq.DictionaryExtensions_Tests;
@@ -6,7 +6,7 @@ namespace MaybeF.Linq.DictionaryExtensions_Tests;
 public class GetValueOrNone_Tests : Abstracts.Dictionary.GetValueOrNone_Tests
 {
 	[Fact]
-	public override void Test00_Empty_Dictionary_Returns_None_With_ListIsEmptyMsg()
+	public override void Test00_Empty_Dictionary_Returns_None_With_DictionaryIsEmptyMsg()
 	{
 		Test00((dict, key) => dict.GetValueOrNone(key));
 	}
@@ -34,5 +34,11 @@ public class GetValueOrNone_Tests : Abstracts.Dictionary.GetValueOrNone_Tests
 	public override void Test04_Key_Exists_Valid_Item_Returns_Some_With_Value()
 	{
 		Test04((dict, key) => dict.GetValueOrNone(key));
+	}
+
+	[Fact]
+	public override void Test05_Null_Dictionary_Returns_None_With_DictionaryIsEmptyMsg()
+	{
+		Test05((dict, key) => dict.GetValueOrNone(key));
 	}
 }

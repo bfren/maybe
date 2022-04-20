@@ -1,4 +1,4 @@
-﻿// Maybe: Unit Tests
+// Maybe: Unit Tests
 // Copyright (c) bfren - licensed under https://mit.bfren.dev/2019
 
 using MaybeF;
@@ -8,7 +8,7 @@ namespace Abstracts.Dictionary;
 
 public abstract class GetValueOrNone_Tests
 {
-	public abstract void Test00_Empty_Dictionary_Returns_None_With_ListIsEmptyMsg();
+	public abstract void Test00_Empty_Dictionary_Returns_None_With_DictionaryIsEmptyMsg();
 
 	protected static void Test00(Func<IDictionary<string, int>, string, Maybe<int>> act)
 	{
@@ -99,5 +99,18 @@ public abstract class GetValueOrNone_Tests
 		// Assert
 		var some = result.AssertSome();
 		Assert.Equal(value, some);
+	}
+
+	public abstract void Test05_Null_Dictionary_Returns_None_With_DictionaryIsEmptyMsg();
+
+	protected static void Test05(Func<IDictionary<string, int>, string, Maybe<int>> act)
+	{
+		// Arrange
+
+		// Act
+		var result = act(null!, Rnd.Str);
+
+		// Assert
+		result.AssertNone().AssertType<DictionaryIsEmptyMsg>();
 	}
 }
