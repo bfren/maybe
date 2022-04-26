@@ -36,7 +36,7 @@ public static partial class F
 		}
 		catch (Exception e)
 		{
-			HandleAuditException(e);
+			LogException(e);
 		}
 
 		// Return the original object
