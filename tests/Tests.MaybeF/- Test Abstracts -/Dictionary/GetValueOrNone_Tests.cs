@@ -19,8 +19,7 @@ public abstract class GetValueOrNone_Tests
 		var result = act(dictionary, Rnd.Str);
 
 		// Assert
-		var none = result.AssertNone();
-		Assert.IsType<DictionaryIsEmptyMsg>(none);
+		result.AssertNone().AssertType<DictionaryIsEmptyMsg>();
 	}
 
 	public abstract void Test01_Null_Key_Returns_None_With_KeyCannotBeNullMsg(string input);
@@ -37,8 +36,7 @@ public abstract class GetValueOrNone_Tests
 		var result = act(dictionary);
 
 		// Assert
-		var none = result.AssertNone();
-		Assert.IsType<KeyCannotBeNullMsg>(none);
+		result.AssertNone().AssertType<KeyCannotBeNullMsg>();
 	}
 
 	public abstract void Test02_Key_Does_Not_Exists_Returns_None_With_KeyDoesNotExistMsg();
@@ -56,9 +54,8 @@ public abstract class GetValueOrNone_Tests
 		var result = act(dictionary, key);
 
 		// Assert
-		var none = result.AssertNone();
-		var message = Assert.IsType<KeyDoesNotExistMsg<string>>(none);
-		Assert.Equal(key, message.Key);
+		var msg = result.AssertNone().AssertType<KeyDoesNotExistMsg<string>>();
+		Assert.Equal(key, msg.Key);
 	}
 
 	public abstract void Test03_Key_Exists_Null_Item_Returns_None_With_NullValueMsg();
@@ -76,9 +73,8 @@ public abstract class GetValueOrNone_Tests
 		var result = act(dictionary, key);
 
 		// Assert
-		var none = result.AssertNone();
-		var message = Assert.IsType<NullValueMsg<int>>(none);
-		Assert.Equal(key, message.Key);
+		var msg = result.AssertNone().AssertType<NullValueMsg<int>>();
+		Assert.Equal(key, msg.Key);
 	}
 
 	public abstract void Test04_Key_Exists_Valid_Item_Returns_Some_With_Value();

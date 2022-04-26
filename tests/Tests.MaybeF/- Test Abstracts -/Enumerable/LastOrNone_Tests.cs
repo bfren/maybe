@@ -37,8 +37,7 @@ public abstract class LastOrNone_Tests
 		var result = act(list, predicate);
 
 		// Assert
-		var none = result.AssertNone();
-		Assert.IsType<LastItemIsNullMsg>(none);
+		result.AssertNone().AssertType<LastItemIsNullMsg>();
 	}
 
 	public abstract void Test02_Returns_Last_Element();

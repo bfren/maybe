@@ -40,8 +40,7 @@ public class None_Tests
 		var result = F.None<int, TestMsg>();
 
 		// Assert
-		var none = result.AssertNone();
-		Assert.IsType<TestMsg>(none);
+		result.AssertNone().AssertType<TestMsg>();
 	}
 
 	[Fact]

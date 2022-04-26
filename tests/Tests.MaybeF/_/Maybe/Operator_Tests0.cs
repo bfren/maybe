@@ -32,7 +32,6 @@ public partial class Operator_Tests
 		Maybe<object> result = input;
 
 		// Assert
-		var none = result.AssertNone();
-		Assert.IsType<NullValueMsg>(none);
+		result.AssertNone().AssertType<NullValueMsg>();
 	}
 }

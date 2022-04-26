@@ -20,8 +20,7 @@ public abstract class SomeAsync_Tests
 		var result = await act(throwFunc, null!);
 
 		// Assert
-		var none = result.AssertNone();
-		Assert.IsType<UnhandledExceptionMsg>(none);
+		result.AssertNone().AssertType<UnhandledExceptionMsg>();
 	}
 
 	public abstract Task Test01_Nullable_Exception_Thrown_Without_Handler_Returns_None_With_UnhandledExceptionMsg();
@@ -89,8 +88,7 @@ public abstract class SomeAsync_Tests
 		var result = await act(value, F.DefaultHandler);
 
 		// Assert
-		var none = result.AssertNone();
-		Assert.IsType<NullValueMsg>(none);
+		result.AssertNone().AssertType<NullValueMsg>();
 	}
 
 	public abstract Task Test05_Nullable_Allow_Null_False_Null_Input_Returns_None_With_AllowNullWasFalseMsg();
@@ -104,8 +102,7 @@ public abstract class SomeAsync_Tests
 		var result = await act(value, false, F.DefaultHandler);
 
 		// Assert
-		var none = result.AssertNone();
-		Assert.IsType<AllowNullWasFalseMsg>(none);
+		result.AssertNone().AssertType<AllowNullWasFalseMsg>();
 	}
 
 	public abstract Task Test06_Nullable_Allow_Null_True_Null_Input_Returns_Some_With_Null_Value();

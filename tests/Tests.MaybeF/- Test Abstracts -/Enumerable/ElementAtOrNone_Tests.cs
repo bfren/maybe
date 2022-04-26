@@ -35,8 +35,7 @@ public abstract class ElementAtOrNone_Tests
 		var result = act(list, 4);
 
 		// Assert
-		var none = result.AssertNone();
-		Assert.IsType<ElementAtIsNullMsg>(none);
+		result.AssertNone().AssertType<ElementAtIsNullMsg>();
 	}
 
 	public abstract void Test02_Value_At_Index_Returns_Some_With_Value();

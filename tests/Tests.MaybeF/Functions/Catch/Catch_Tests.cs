@@ -17,8 +17,7 @@ public class Catch_Tests
 		var result = F.Catch(input, F.DefaultHandler);
 
 		// Assert
-		var none = result.AssertNone();
-		Assert.IsType<MaybeCannotBeNullMsg>(none);
+		result.AssertNone().AssertType<MaybeCannotBeNullMsg>();
 	}
 
 	[Fact]

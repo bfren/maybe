@@ -21,9 +21,8 @@ public abstract class BindAsync_Tests
 		var result = await act(maybe, bind);
 
 		// Assert
-		var none = result.AssertNone();
-		var message = Assert.IsType<UnhandledExceptionMsg>(none);
-		Assert.IsType<UnknownMaybeException>(message.Value);
+		var msg = result.AssertNone().AssertType<UnhandledExceptionMsg>();
+		Assert.IsType<UnknownMaybeException>(msg.Value);
 	}
 
 	public abstract Task Test01_Exception_Thrown_Returns_None_With_UnhandledExceptionMsg();
@@ -39,8 +38,7 @@ public abstract class BindAsync_Tests
 		var result = await act(maybe, _ => throwFunc());
 
 		// Assert
-		var none = result.AssertNone();
-		Assert.IsType<UnhandledExceptionMsg>(none);
+		result.AssertNone().AssertType<UnhandledExceptionMsg>();
 	}
 
 	public abstract Task Test02_If_None_Gets_None();
