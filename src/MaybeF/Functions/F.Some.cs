@@ -27,6 +27,11 @@ public static partial class F
 	/// <param name="handler">Exception handler</param>
 	public static Maybe<T> Some<T>(Func<T> value, Handler handler)
 	{
+		if (value is null)
+		{
+			return None<T, M.NullValueFunctionMsg>();
+		}
+
 		try
 		{
 			return value() switch
@@ -57,6 +62,11 @@ public static partial class F
 	/// <param name="handler">Exception handler</param>
 	public static Maybe<T?> Some<T>(Func<T?> value, bool allowNull, Handler handler)
 	{
+		if (value is null)
+		{
+			return None<T?, M.NullValueFunctionMsg>();
+		}
+
 		try
 		{
 			var v = value();
@@ -96,6 +106,9 @@ public static partial class F
 	{
 		/// <summary>Value was null when trying to wrap using Some</summary>
 		public sealed record class NullValueMsg : IMsg;
+
+		/// <summary>Value function was null when trying to wrap using Some</summary>
+		public sealed record class NullValueFunctionMsg : IMsg;
 
 		/// <summary>Allow null was set to false when trying to return null value</summary>
 		public sealed record class AllowNullWasFalseMsg : IMsg;
