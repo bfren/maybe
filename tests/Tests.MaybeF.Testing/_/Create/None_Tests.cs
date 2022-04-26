@@ -16,7 +16,6 @@ public class None_Tests
 		var result = Create.None<int>();
 
 		// Assert
-		var none = result.AssertNone();
-		Assert.IsType<EmptyNoneForTestingMsg>(none);
+		result.AssertNone().AssertType<EmptyNoneForTestingMsg>();
 	}
 }

@@ -35,8 +35,7 @@ public abstract class SingleOrNone_Tests
 		var result = act(list);
 
 		// Assert
-		var none = result.AssertNone();
-		Assert.IsType<MultipleItemsMsg>(none);
+		result.AssertNone().AssertType<MultipleItemsMsg>();
 	}
 
 	public abstract void Test02_No_Matching_Items_Returns_None_With_NoMatchingItemsMsg();
@@ -52,8 +51,7 @@ public abstract class SingleOrNone_Tests
 		var result = act(list, predicate);
 
 		// Assert
-		var none = result.AssertNone();
-		Assert.IsType<NoMatchingItemsMsg>(none);
+		result.AssertNone().AssertType<NoMatchingItemsMsg>();
 	}
 
 	public abstract void Test03_Null_Item_Returns_None_With_NullItemMsg();
@@ -69,8 +67,7 @@ public abstract class SingleOrNone_Tests
 		var result = act(list, predicate);
 
 		// Assert
-		var none = result.AssertNone();
-		Assert.IsType<NullItemMsg>(none);
+		result.AssertNone().AssertType<NullItemMsg>();
 	}
 
 	public abstract void Test04_Returns_Single_Element();

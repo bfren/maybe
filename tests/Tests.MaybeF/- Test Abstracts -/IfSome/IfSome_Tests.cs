@@ -21,8 +21,7 @@ public abstract class IfSome_Tests
 		var result = act(maybe, ifSome);
 
 		// Assert
-		var none = result.AssertNone();
-		Assert.IsType<UnhandledExceptionMsg>(none);
+		result.AssertNone().AssertType<UnhandledExceptionMsg>();
 	}
 
 	public abstract void Test01_None_Returns_Original_Maybe();

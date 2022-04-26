@@ -20,8 +20,7 @@ public abstract class Some_Tests
 		var result = act(throwFunc, null!);
 
 		// Assert
-		var none = result.AssertNone();
-		Assert.IsType<UnhandledExceptionMsg>(none);
+		result.AssertNone().AssertType<UnhandledExceptionMsg>();
 	}
 
 	public abstract void Test01_Nullable_Exception_Thrown_Without_Handler_Returns_None_With_UnhandledExceptionMsg();
@@ -89,8 +88,7 @@ public abstract class Some_Tests
 		var result = act(value);
 
 		// Assert
-		var none = result.AssertNone();
-		Assert.IsType<NullValueMsg>(none);
+		result.AssertNone().AssertType<NullValueMsg>();
 	}
 
 	public abstract void Test05_Null_Input_Func_Returns_None();
@@ -104,8 +102,7 @@ public abstract class Some_Tests
 		var result = act(value, F.DefaultHandler);
 
 		// Assert
-		var none = result.AssertNone();
-		Assert.IsType<NullValueMsg>(none);
+		result.AssertNone().AssertType<NullValueMsg>();
 	}
 
 	public abstract void Test06_Nullable_Allow_Null_False_Null_Input_Value_Returns_None_With_AllowNullWasFalseMsg();
@@ -119,8 +116,7 @@ public abstract class Some_Tests
 		var result = act(value, false);
 
 		// Assert
-		var none = result.AssertNone();
-		Assert.IsType<AllowNullWasFalseMsg>(none);
+		result.AssertNone().AssertType<AllowNullWasFalseMsg>();
 	}
 
 	public abstract void Test07_Nullable_Allow_Null_False_Null_Input_Func_Returns_None_With_AllowNullWasFalseMsg();
@@ -134,8 +130,7 @@ public abstract class Some_Tests
 		var result = act(value, false, F.DefaultHandler);
 
 		// Assert
-		var none = result.AssertNone();
-		Assert.IsType<AllowNullWasFalseMsg>(none);
+		result.AssertNone().AssertType<AllowNullWasFalseMsg>();
 	}
 
 	public abstract void Test08_Nullable_Allow_Null_True_Null_Input_Value_Returns_Some_With_Null_Value();

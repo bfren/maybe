@@ -20,9 +20,8 @@ public abstract class FilterAsync_Tests
 		var result = await act(maybe);
 
 		// Assert
-		var none = result.AssertNone();
-		var message = Assert.IsType<UnhandledExceptionMsg>(none);
-		Assert.IsType<UnknownMaybeException>(message.Value);
+		var msg = result.AssertNone().AssertType<UnhandledExceptionMsg>();
+		Assert.IsType<UnknownMaybeException>(msg.Value);
 	}
 
 	public abstract Task Test01_Exception_Thrown_Returns_None_With_UnhandledExceptionMsg();
@@ -38,8 +37,7 @@ public abstract class FilterAsync_Tests
 		var result = await act(maybe, throwFunc);
 
 		// Assert
-		var none = result.AssertNone();
-		Assert.IsType<UnhandledExceptionMsg>(none);
+		result.AssertNone().AssertType<UnhandledExceptionMsg>();
 	}
 
 	public abstract Task Test02_When_Some_And_Predicate_True_Returns_Value();
@@ -74,8 +72,7 @@ public abstract class FilterAsync_Tests
 		var result = await act(maybe, predicate);
 
 		// Assert
-		var none = result.AssertNone();
-		Assert.IsType<FilterPredicateWasFalseMsg>(none);
+		result.AssertNone().AssertType<FilterPredicateWasFalseMsg>();
 	}
 
 	public abstract Task Test04_When_None_Returns_None_With_Original_Msg();

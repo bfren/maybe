@@ -81,8 +81,7 @@ public abstract class SwitchIfAsync_Tests
 		var result = await act(maybe.AsTask, check);
 
 		// Assert
-		var none = result.AssertNone();
-		Assert.IsType<SwitchIfFuncExceptionMsg>(none);
+		result.AssertNone().AssertType<SwitchIfFuncExceptionMsg>();
 	}
 
 	public abstract Task Test05_Check_Returns_True_And_IfTrue_Is_Null_Returns_Original_Maybe();
@@ -131,8 +130,7 @@ public abstract class SwitchIfAsync_Tests
 		var result = await act(maybe.AsTask, check, ifTrue);
 
 		// Assert
-		var none = result.AssertNone();
-		Assert.IsType<SwitchIfFuncExceptionMsg>(none);
+		result.AssertNone().AssertType<SwitchIfFuncExceptionMsg>();
 	}
 
 	public abstract Task Test08_Check_Returns_False_And_IfFalse_Throws_Exception_Returns_None_With_SwitchIfFuncExceptionMsg();
@@ -149,8 +147,7 @@ public abstract class SwitchIfAsync_Tests
 		var result = await act(maybe.AsTask, check, ifFalse);
 
 		// Assert
-		var none = result.AssertNone();
-		Assert.IsType<SwitchIfFuncExceptionMsg>(none);
+		result.AssertNone().AssertType<SwitchIfFuncExceptionMsg>();
 	}
 
 	public abstract Task Test09_Check_Returns_True_Runs_IfTrue_Returns_Value();
@@ -192,8 +189,7 @@ public abstract class SwitchIfAsync_Tests
 
 		// Assert
 		ifFalse.Received().Invoke(value);
-		var none = result.AssertNone();
-		Assert.IsType<TestMsg>(none);
+		result.AssertNone().AssertType<TestMsg>();
 	}
 
 	public record class FakeMaybe : Maybe<int> { }

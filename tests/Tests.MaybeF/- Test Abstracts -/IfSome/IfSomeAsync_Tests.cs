@@ -21,8 +21,7 @@ public abstract class IfSomeAsync_Tests
 		var result = await act(maybe, ifSome);
 
 		// Assert
-		var none = result.AssertNone();
-		Assert.IsType<UnhandledExceptionMsg>(none);
+		result.AssertNone().AssertType<UnhandledExceptionMsg>();
 	}
 
 	public abstract Task Test01_None_Returns_Original_Maybe();

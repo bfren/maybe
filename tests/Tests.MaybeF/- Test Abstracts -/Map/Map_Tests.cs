@@ -1,4 +1,4 @@
-﻿// Maybe: Unit Tests
+// Maybe: Unit Tests
 // Copyright (c) bfren - licensed under https://mit.bfren.dev/2019
 
 using MaybeF;
@@ -21,9 +21,8 @@ public abstract class Map_Tests
 		var result = act(maybe, map, F.DefaultHandler);
 
 		// Assert
-		var none = result.AssertNone();
-		var message = Assert.IsType<UnhandledExceptionMsg>(none);
-		Assert.IsType<UnknownMaybeException>(message.Value);
+		var msg = result.AssertNone().AssertType<UnhandledExceptionMsg>();
+		Assert.IsType<UnknownMaybeException>(msg.Value);
 	}
 
 	public abstract void Test01_Exception_Thrown_Without_Handler_Returns_None_With_UnhandledExceptionMsg();
@@ -39,8 +38,7 @@ public abstract class Map_Tests
 		var result = act(maybe, throwFunc, F.DefaultHandler);
 
 		// Assert
-		var none = result.AssertNone();
-		Assert.IsType<UnhandledExceptionMsg>(none);
+		result.AssertNone().AssertType<UnhandledExceptionMsg>();
 	}
 
 	public abstract void Test02_Exception_Thrown_With_Handler_Calls_Handler_Returns_None();

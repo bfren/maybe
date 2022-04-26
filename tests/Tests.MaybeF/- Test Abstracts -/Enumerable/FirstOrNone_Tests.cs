@@ -37,8 +37,7 @@ public abstract class FirstOrNone_Tests
 		var result = act(list, predicate);
 
 		// Assert
-		var none = result.AssertNone();
-		Assert.IsType<FirstItemIsNullMsg>(none);
+		result.AssertNone().AssertType<FirstItemIsNullMsg>();
 	}
 
 	public abstract void Test02_Returns_First_Element();

@@ -17,8 +17,7 @@ public class CatchAsync_Tests
 		var result = await F.CatchAsync(input, F.DefaultHandler);
 
 		// Assert
-		var none = result.AssertNone();
-		Assert.IsType<MaybeCannotBeNullMsg>(none);
+		result.AssertNone().AssertType<MaybeCannotBeNullMsg>();
 	}
 
 	[Fact]

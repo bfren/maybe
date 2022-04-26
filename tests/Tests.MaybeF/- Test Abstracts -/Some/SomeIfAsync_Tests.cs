@@ -100,8 +100,7 @@ public abstract class SomeIfAsync_Tests
 		var result = await act(() => false, Task.FromResult(value), F.DefaultHandler);
 
 		// Assert
-		var none = result.AssertNone();
-		Assert.IsType<PredicateWasFalseMsg>(none);
+		result.AssertNone().AssertType<PredicateWasFalseMsg>();
 	}
 
 	public abstract Task Test06_Predicate_False_With_Value_Func_Returns_None_With_PredicateWasFalseMsg();
@@ -115,8 +114,7 @@ public abstract class SomeIfAsync_Tests
 		var result = await act(() => false, () => Task.FromResult(value), F.DefaultHandler);
 
 		// Assert
-		var none = result.AssertNone();
-		Assert.IsType<PredicateWasFalseMsg>(none);
+		result.AssertNone().AssertType<PredicateWasFalseMsg>();
 	}
 
 	public abstract Task Test07_Predicate_False_Bypasses_Value_Func();
