@@ -73,12 +73,22 @@ public sealed class MaybeCache<TKey, TValue> : MaybeCache, IMaybeCache<TKey, TVa
 	}
 
 	/// <inheritdoc/>
-	public void SetValue(TKey key, TValue value) =>
-		Cache.Set(key, value);
+	public void SetValue(TKey key, TValue value)
+	{
+		ArgumentNullException.ThrowIfNull(key);
+		ArgumentNullException.ThrowIfNull(value);
+
+		_ = Cache.Set(key, value);
+	}
 
 	/// <inheritdoc/>
-	public async Task SetValueAsync(TKey key, Func<Task<TValue>> valueFactory) =>
-		Cache.Set(key, await valueFactory());
+	public async Task SetValueAsync(TKey key, Func<Task<TValue>> valueFactory)
+	{
+		ArgumentNullException.ThrowIfNull(key);
+		ArgumentNullException.ThrowIfNull(valueFactory);
+
+		_ = Cache.Set(key, await valueFactory());
+	}
 
 	/// <inheritdoc/>
 	public Maybe<TValue> GetOrCreate(TKey key, Func<TValue> valueFactory) =>
@@ -173,6 +183,10 @@ public sealed class MaybeCache<TKey, TValue> : MaybeCache, IMaybeCache<TKey, TVa
 	}
 
 	/// <inheritdoc/>
-	public void RemoveValue(TKey key) =>
+	public void RemoveValue(TKey key)
+	{
+		ArgumentNullException.ThrowIfNull(key);
+
 		Cache.Remove(key);
+	}
 }
