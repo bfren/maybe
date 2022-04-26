@@ -11,9 +11,12 @@ public static partial class F
 	/// <typeparam name="T">Maybe value type</typeparam>
 	/// <param name="maybe">Input Maybe</param>
 	public static Maybe<T> Flatten<T>(Maybe<Maybe<T>> maybe) =>
-		Switch(
-			maybe,
-			some: x => x,
-			none: r => None<T>(r)
+		Catch(() =>
+			Switch(
+				maybe,
+				some: x => x,
+				none: r => None<T>(r)
+			),
+			DefaultHandler
 		);
 }

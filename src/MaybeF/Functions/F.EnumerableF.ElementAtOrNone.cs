@@ -18,7 +18,7 @@ public static partial class F
 		/// <param name="index">Index</param>
 		public static Maybe<T> ElementAtOrNone<T>(IEnumerable<T> list, int index) =>
 			Catch<T>(() =>
-				list.Any() switch
+				list?.Any() switch
 				{
 					true =>
 						list.ElementAtOrDefault(index) switch
@@ -30,7 +30,7 @@ public static partial class F
 								None<T, M.ElementAtIsNullMsg>()
 						},
 
-					false =>
+					_ =>
 						None<T, M.ListIsEmptyMsg>()
 				},
 				DefaultHandler

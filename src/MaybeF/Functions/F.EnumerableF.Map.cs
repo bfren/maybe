@@ -27,6 +27,11 @@ public static partial class F
 		/// <param name="map">Mapping function</param>
 		public static IEnumerable<Maybe<TReturn>> Map<T, TReturn>(IEnumerable<T> list, Func<T, Maybe<TReturn>> map)
 		{
+			if (list is null || map is null)
+			{
+				yield break;
+			}
+
 			foreach (var item in list)
 			{
 				if (item is not null)

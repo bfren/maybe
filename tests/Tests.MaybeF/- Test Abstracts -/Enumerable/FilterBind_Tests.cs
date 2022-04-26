@@ -69,4 +69,36 @@ public abstract class FilterBind_Tests
 		);
 		bind.ReceivedWithAnyArgs(1).Invoke(Arg.Any<int>());
 	}
+
+	public abstract void Test02_List_Null_Returns_Empty_List();
+
+	protected static void Test02(Func<IEnumerable<Maybe<int>>, Func<int, Maybe<string>>, Func<int, bool>, IEnumerable<Maybe<string>>> act)
+	{
+		// Arrange
+		var bind = Substitute.For<Func<int, Maybe<string>>>();
+		var predicate = Substitute.For<Func<int, bool>>();
+
+		// Act
+		var result = act(null!, bind, predicate);
+
+		// Assert
+		Assert.NotNull(result);
+		Assert.Empty(result);
+	}
+
+	public abstract void Test03_Bind_Null_Returns_Empty_List();
+
+	protected static void Test03(Func<IEnumerable<Maybe<int>>, Func<int, Maybe<string>>, Func<int, bool>, IEnumerable<Maybe<string>>> act)
+	{
+		// Arrange
+		var list = new[] { F.Some(Rnd.Int), F.Some(Rnd.Int) };
+		var predicate = Substitute.For<Func<int, bool>>();
+
+		// Act
+		var result = act(list, null!, predicate);
+
+		// Assert
+		Assert.NotNull(result);
+		Assert.Empty(result);
+	}
 }

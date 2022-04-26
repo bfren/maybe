@@ -18,8 +18,17 @@ public static partial class F
 		/// <param name="list">Maybe list</param>
 		/// <param name="bind">Binding function</param>
 		/// <param name="predicate">[Optional] Predicate to use with filter</param>
-		public static IEnumerable<Maybe<TReturn>> FilterBind<T, TReturn>(IEnumerable<Maybe<T>> list, Func<T, Maybe<TReturn>> bind, Func<T, bool>? predicate)
+		public static IEnumerable<Maybe<TReturn>> FilterBind<T, TReturn>(
+			IEnumerable<Maybe<T>> list,
+			Func<T, Maybe<TReturn>> bind,
+			Func<T, bool>? predicate
+		)
 		{
+			if (list is null || bind is null)
+			{
+				yield break;
+			}
+
 			foreach (var some in Filter(list, predicate))
 			{
 				yield return bind(some);

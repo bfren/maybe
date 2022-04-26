@@ -327,20 +327,29 @@ public abstract record class Maybe<T> : IEquatable<Maybe<T>>
 	#region Switch
 
 	/// <inheritdoc cref="F.Switch{T}(Maybe{T}, Action{T}, Action{IMsg})"/>
-	public void Switch(Action<T> some, Action none) =>
+	public void Switch(Action<T> some, Action none)
+	{
+		ArgumentNullException.ThrowIfNull(none);
 		F.Switch(this, some: some, none: _ => none());
+	}
 
 	/// <inheritdoc cref="F.Switch{T}(Maybe{T}, Action{T}, Action{IMsg})"/>
 	public void Switch(Action<T> some, Action<IMsg> none) =>
 		F.Switch(this, some: some, none: none);
 
 	/// <inheritdoc cref="F.Switch{T, TReturn}(Maybe{T}, Func{T, TReturn}, Func{IMsg, TReturn})"/>
-	public TReturn Switch<TReturn>(Func<T, TReturn> some, TReturn none) =>
-		F.Switch(this, some: some, none: _ => none);
+	public TReturn Switch<TReturn>(Func<T, TReturn> some, TReturn none)
+	{
+		ArgumentNullException.ThrowIfNull(none);
+		return F.Switch(this, some: some, none: _ => none);
+	}
 
 	/// <inheritdoc cref="F.Switch{T, TReturn}(Maybe{T}, Func{T, TReturn}, Func{IMsg, TReturn})"/>
-	public TReturn Switch<TReturn>(Func<T, TReturn> some, Func<TReturn> none) =>
-		F.Switch(this, some: some, none: _ => none());
+	public TReturn Switch<TReturn>(Func<T, TReturn> some, Func<TReturn> none)
+	{
+		ArgumentNullException.ThrowIfNull(none);
+		return F.Switch(this, some: some, none: _ => none());
+	}
 
 	/// <inheritdoc cref="F.Switch{T, TReturn}(Maybe{T}, Func{T, TReturn}, Func{IMsg, TReturn})"/>
 	public TReturn Switch<TReturn>(Func<T, TReturn> some, Func<IMsg, TReturn> none) =>

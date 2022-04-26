@@ -9,6 +9,20 @@ namespace MaybeF.Caching.MaybeCache_Tests;
 public class GetOrCreateAsync_Tests
 {
 	[Fact]
+	public async Task Key_Null__Returns_None_With_KeyIsNullMsg()
+	{
+		// Arrange
+		var mc = Substitute.For<IMemoryCache>();
+		var cache = new MaybeCache<string, DateTime>(mc);
+
+		// Act
+		var result = await cache.GetOrCreateAsync(null!, () => Task.FromResult(Rnd.DateTime));
+
+		// Assert
+		result.AssertNone().AssertType<KeyIsNullMsg>();
+	}
+
+	[Fact]
 	public async Task Value_Exists__Returns_Value()
 	{
 		// Arrange

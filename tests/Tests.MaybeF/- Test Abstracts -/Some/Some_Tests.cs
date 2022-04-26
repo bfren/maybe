@@ -1,4 +1,4 @@
-﻿// Maybe: Unit Tests
+// Maybe: Unit Tests
 // Copyright (c) bfren - licensed under https://mit.bfren.dev/2019
 
 using MaybeF;
@@ -17,7 +17,7 @@ public abstract class Some_Tests
 		var throwFunc = int () => throw new MaybeTestException();
 
 		// Act
-		var result = act(throwFunc, F.DefaultHandler);
+		var result = act(throwFunc, null!);
 
 		// Assert
 		var none = result.AssertNone();
@@ -32,8 +32,8 @@ public abstract class Some_Tests
 		var throwFunc = int? () => throw new MaybeTestException();
 
 		// Act
-		var r0 = act(throwFunc, true, F.DefaultHandler);
-		var r1 = act(throwFunc, false, F.DefaultHandler);
+		var r0 = act(throwFunc, true, null!);
+		var r1 = act(throwFunc, false, null!);
 
 		// Assert
 		var n0 = r0.AssertNone();

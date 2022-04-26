@@ -11,6 +11,11 @@ public static partial class F
 	/// <inheritdoc cref="Some{T}(Func{T}, Handler?)"/>
 	public static async Task<Maybe<T>> SomeAsync<T>(Func<Task<T>> value, Handler handler)
 	{
+		if (value is null)
+		{
+			return None<T, M.NullValueFunctionMsg>();
+		}
+
 		try
 		{
 			return await value().ConfigureAwait(false) switch
@@ -23,15 +28,24 @@ public static partial class F
 
 			};
 		}
-		catch (Exception e)
+		catch (Exception e) when (handler is not null)
 		{
 			return None<T>(handler(e));
+		}
+		catch (Exception e)
+		{
+			return None<T>(DefaultHandler(e));
 		}
 	}
 
 	/// <inheritdoc cref="Some{T}(Func{T}, bool, Handler)"/>
 	public static async Task<Maybe<T?>> SomeAsync<T>(Func<Task<T?>> value, bool allowNull, Handler handler)
 	{
+		if (value is null)
+		{
+			return None<T?, M.NullValueFunctionMsg>();
+		}
+
 		try
 		{
 			var v = await value().ConfigureAwait(false);
@@ -53,9 +67,13 @@ public static partial class F
 
 			};
 		}
-		catch (Exception e)
+		catch (Exception e) when (handler is not null)
 		{
 			return None<T?>(handler(e));
+		}
+		catch (Exception e)
+		{
+			return None<T?>(DefaultHandler(e));
 		}
 	}
 }

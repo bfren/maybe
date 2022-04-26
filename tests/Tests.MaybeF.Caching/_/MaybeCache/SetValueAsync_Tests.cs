@@ -8,6 +8,34 @@ namespace MaybeF.Caching.MaybeCache_Tests;
 public class SetValueAsync_Tests
 {
 	[Fact]
+	public async Task Null_Key__Throws_ArgumentNullException()
+	{
+		// Arrange
+		var mc = Substitute.For<IMemoryCache>();
+		var cache = new MaybeCache<string, long>(mc);
+
+		// Act
+		var action = Task () => cache.SetValueAsync(null!, () => Task.FromResult(Rnd.Lng));
+
+		// Assert
+		await Assert.ThrowsAsync<ArgumentNullException>(action);
+	}
+
+	[Fact]
+	public async Task Null_Value__Throws_ArgumentNullException()
+	{
+		// Arrange
+		var mc = Substitute.For<IMemoryCache>();
+		var cache = new MaybeCache<long, string>(mc);
+
+		// Act
+		var action = Task () => cache.SetValueAsync(Rnd.Lng, null!);
+
+		// Assert
+		await Assert.ThrowsAsync<ArgumentNullException>(action);
+	}
+
+	[Fact]
 	public async Task Calls_Cache_CreateEntry__Sets_Value()
 	{
 		// Arrange

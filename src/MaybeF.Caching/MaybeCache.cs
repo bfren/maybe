@@ -28,6 +28,9 @@ public abstract class MaybeCache
 		/// <summary>Error creating cache value using factory function</summary>
 		/// <param name="Value">Exception</param>
 		public sealed record class ErrorCreatingCacheValueMsg(Exception Value) : IExceptionMsg;
+
+		/// <summary>Cache key is null</summary>
+		public sealed record class KeyIsNullMsg : IMsg;
 	}
 }
 
@@ -49,6 +52,13 @@ public sealed class MaybeCache<TKey, TValue> : MaybeCache, IMaybeCache<TKey, TVa
 	/// <inheritdoc/>
 	public Maybe<TValue> GetValue(TKey key)
 	{
+		// Key cannot be null
+		if (key is null)
+		{
+			return F.None<TValue, M.KeyIsNullMsg>();
+		}
+
+		// Attempt to get the value
 		if (Cache.TryGetValue(key, out var value))
 		{
 			if (value is TValue cachedValue)
@@ -63,12 +73,22 @@ public sealed class MaybeCache<TKey, TValue> : MaybeCache, IMaybeCache<TKey, TVa
 	}
 
 	/// <inheritdoc/>
-	public void SetValue(TKey key, TValue value) =>
-		Cache.Set(key, value);
+	public void SetValue(TKey key, TValue value)
+	{
+		ArgumentNullException.ThrowIfNull(key);
+		ArgumentNullException.ThrowIfNull(value);
+
+		_ = Cache.Set(key, value);
+	}
 
 	/// <inheritdoc/>
-	public async Task SetValueAsync(TKey key, Func<Task<TValue>> valueFactory) =>
-		Cache.Set(key, await valueFactory());
+	public async Task SetValueAsync(TKey key, Func<Task<TValue>> valueFactory)
+	{
+		ArgumentNullException.ThrowIfNull(key);
+		ArgumentNullException.ThrowIfNull(valueFactory);
+
+		_ = Cache.Set(key, await valueFactory());
+	}
 
 	/// <inheritdoc/>
 	public Maybe<TValue> GetOrCreate(TKey key, Func<TValue> valueFactory) =>
@@ -77,6 +97,12 @@ public sealed class MaybeCache<TKey, TValue> : MaybeCache, IMaybeCache<TKey, TVa
 	/// <inheritdoc/>
 	public Maybe<TValue> GetOrCreate(TKey key, Func<Maybe<TValue>> valueFactory)
 	{
+		// Key cannot be null
+		if (key is null)
+		{
+			return F.None<TValue, M.KeyIsNullMsg>();
+		}
+
 		// Check the entry already exists
 		if (Cache.TryGetValue(key, out var value) && value is TValue cachedValue)
 		{
@@ -117,6 +143,12 @@ public sealed class MaybeCache<TKey, TValue> : MaybeCache, IMaybeCache<TKey, TVa
 	/// <inheritdoc/>
 	public async Task<Maybe<TValue>> GetOrCreateAsync(TKey key, Func<Task<Maybe<TValue>>> valueFactory)
 	{
+		// Key cannot be null
+		if (key is null)
+		{
+			return F.None<TValue, M.KeyIsNullMsg>();
+		}
+
 		// Check the entry already exists
 		if (Cache.TryGetValue(key, out var value) && value is TValue cachedValue)
 		{
@@ -151,6 +183,10 @@ public sealed class MaybeCache<TKey, TValue> : MaybeCache, IMaybeCache<TKey, TVa
 	}
 
 	/// <inheritdoc/>
-	public void RemoveValue(TKey key) =>
+	public void RemoveValue(TKey key)
+	{
+		ArgumentNullException.ThrowIfNull(key);
+
 		Cache.Remove(key);
+	}
 }

@@ -61,4 +61,36 @@ public abstract class FilterMap_Tests
 		);
 		map.ReceivedWithAnyArgs(1).Invoke(Arg.Any<int>());
 	}
+
+	public abstract void Test02_List_Null_Returns_Empty_List();
+
+	protected static void Test02(Func<IEnumerable<Maybe<int>>, Func<int, string>, Func<int, bool>, IEnumerable<Maybe<string>>> act)
+	{
+		// Arrange
+		var map = Substitute.For<Func<int, string>>();
+		var predicate = Substitute.For<Func<int, bool>>();
+
+		// Act
+		var result = act(null!, map, predicate);
+
+		// Assert
+		Assert.NotNull(result);
+		Assert.Empty(result);
+	}
+
+	public abstract void Test03_Map_Null_Returns_Empty_List();
+
+	protected static void Test03(Func<IEnumerable<Maybe<int>>, Func<int, string>, Func<int, bool>, IEnumerable<Maybe<string>>> act)
+	{
+		// Arrange
+		var list = new[] { F.Some(Rnd.Int), F.Some(Rnd.Int) };
+		var predicate = Substitute.For<Func<int, bool>>();
+
+		// Act
+		var result = act(list, null!, predicate);
+
+		// Assert
+		Assert.NotNull(result);
+		Assert.Empty(result);
+	}
 }

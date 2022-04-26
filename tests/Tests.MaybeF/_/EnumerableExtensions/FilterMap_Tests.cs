@@ -16,4 +16,16 @@ public class FilterMap_Tests : Abstracts.Enumerable.FilterMap_Tests
 	{
 		Test01((list, map, predicate) => list.FilterMap(map, predicate));
 	}
+
+	[Fact]
+	public override void Test02_List_Null_Returns_Empty_List()
+	{
+		Test02((list, map, predicate) => list.FilterMap(map, predicate));
+	}
+
+	[Fact]
+	public override void Test03_Map_Null_Returns_Empty_List()
+	{
+		Test03((list, map, predicate) => list.FilterMap(map, predicate));
+	}
 }

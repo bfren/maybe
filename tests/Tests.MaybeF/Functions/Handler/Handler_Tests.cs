@@ -1,4 +1,4 @@
-﻿// Maybe: Unit Tests
+// Maybe: Unit Tests
 // Copyright (c) bfren - licensed under https://mit.bfren.dev/2019
 
 namespace MaybeF.F_Tests;
@@ -9,11 +9,11 @@ public class Handler_Tests
 	public void If_LogAuditExceptions_Is_Not_Null_Calls_With_Exception()
 	{
 		// Arrange
-		var log = Substitute.For<Action<Exception>>();
+		var log = Substitute.For<F.Logger>();
 		var exception = new Exception();
 
 		// Act
-		F.HandleAuditException(exception, log, Console.Out);
+		F.HandleException(exception, log, Console.Out);
 
 		// Assert
 		log.Received().Invoke(exception);
@@ -28,27 +28,27 @@ public class Handler_Tests
 		var writer = Substitute.For<TextWriter>();
 
 		// Act
-		F.HandleAuditException(exception, null, writer);
+		F.HandleException(exception, null, writer);
 
 		// Assert
-		writer.Received().WriteLine("Audit Error: {0}", exception);
+		writer.Received().WriteLine("Error: {0}", exception);
 	}
 
 	[Fact]
 	public void Writes_To_LogAuditExceptions()
 	{
 		// Arrange
-		var handler = Substitute.For<Action<Exception>>();
-		F.LogAuditExceptions = handler;
+		var handler = Substitute.For<F.Logger>();
+		F.DefaultLogger = handler;
 		var exception = new Exception();
 
 		// Act
-		F.HandleAuditException(exception);
+		F.LogException(exception);
 
 		// Assert
 		handler.Received().Invoke(exception);
 
 		// Reset
-		F.LogAuditExceptions = null;
+		F.DefaultLogger = null;
 	}
 }

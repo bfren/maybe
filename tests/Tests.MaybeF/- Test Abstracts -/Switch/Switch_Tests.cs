@@ -1,4 +1,4 @@
-﻿// Maybe: Unit Tests
+// Maybe: Unit Tests
 // Copyright (c) bfren - licensed under https://mit.bfren.dev/2019
 
 using MaybeF;
@@ -49,9 +49,24 @@ public abstract class Switch_Tests
 		Assert.Throws<MaybeCannotBeNullException>(action);
 	}
 
-	public abstract void Test03_Return_Void_If_None_Runs_None_Action_With_Msg();
+	public abstract void Test03_Return_Void_If_None_And_None_Func_Is_Null_Throws_ArgumentNullException();
 
-	protected static void Test03(Action<Maybe<int>, Action<IMsg>> act)
+	protected static void Test03(Action<Maybe<int>, Action, Action<IMsg>> act)
+	{
+		// Arrange
+		var message = new TestMsg();
+		var maybe = F.None<int>(message);
+
+		// Act
+		var action = () => act(maybe, null!, null!);
+
+		// Assert
+		Assert.Throws<ArgumentNullException>(action);
+	}
+
+	public abstract void Test04_Return_Void_If_None_Runs_None_Action_With_Msg();
+
+	protected static void Test04(Action<Maybe<int>, Action<IMsg>> act)
 	{
 		// Arrange
 		var message = new TestMsg();
@@ -65,9 +80,24 @@ public abstract class Switch_Tests
 		none.Received().Invoke(message);
 	}
 
-	public abstract void Test04_Return_Value_If_None_Runs_None_Func_With_Msg();
+	public abstract void Test05_Return_Value_If_None_And_None_Func_Is_Null_Throws_ArgumentNullException();
 
-	protected static void Test04(Func<Maybe<int>, Func<IMsg, string>, string> act)
+	protected static void Test05(Func<Maybe<int>, string, Func<string>, Func<IMsg, string>, string> act)
+	{
+		// Arrange
+		var message = new TestMsg();
+		var maybe = F.None<int>(message);
+
+		// Act
+		var action = () => act(maybe, null!, null!, null!);
+
+		// Assert
+		Assert.Throws<ArgumentNullException>(action);
+	}
+
+	public abstract void Test06_Return_Value_If_None_Runs_None_Func_With_Msg();
+
+	protected static void Test06(Func<Maybe<int>, Func<IMsg, string>, string> act)
 	{
 		// Arrange
 		var message = new TestMsg();
@@ -81,9 +111,24 @@ public abstract class Switch_Tests
 		none.Received().Invoke(message);
 	}
 
-	public abstract void Test05_Return_Void_If_Some_Runs_Some_Action_With_Value();
+	public abstract void Test07_Return_Void_If_Some_And_Some_Func_Is_Null_Throws_ArgumentNullException();
 
-	protected static void Test05(Action<Maybe<int>, Action<int>> act)
+	protected static void Test07(Action<Maybe<int>, Action<int>> act)
+	{
+		// Arrange
+		var value = Rnd.Int;
+		var maybe = F.Some(value);
+
+		// Act
+		var action = () => act(maybe, null!);
+
+		// Assert
+		Assert.Throws<ArgumentNullException>(action);
+	}
+
+	public abstract void Test08_Return_Void_If_Some_Runs_Some_Action_With_Value();
+
+	protected static void Test08(Action<Maybe<int>, Action<int>> act)
 	{
 		// Arrange
 		var value = Rnd.Int;
@@ -97,9 +142,24 @@ public abstract class Switch_Tests
 		some.Received().Invoke(value);
 	}
 
-	public abstract void Test06_Return_Value_If_Some_Runs_Some_Func_With_Value();
+	public abstract void Test09_Return_Value_If_Some_And_Some_Func_Is_Null_Throws_ArgumentNullException();
 
-	protected static void Test06(Func<Maybe<int>, Func<int, string>, string> act)
+	protected static void Test09(Func<Maybe<int>, Func<int, string>, string> act)
+	{
+		// Arrange
+		var value = Rnd.Int;
+		var maybe = F.Some(value);
+
+		// Act
+		var action = () => act(maybe, null!);
+
+		// Assert
+		Assert.Throws<ArgumentNullException>(action);
+	}
+
+	public abstract void Test10_Return_Value_If_Some_Runs_Some_Func_With_Value();
+
+	protected static void Test10(Func<Maybe<int>, Func<int, string>, string> act)
 	{
 		// Arrange
 		var value = Rnd.Int;

@@ -10,7 +10,7 @@ public static partial class F
 	/// <summary>
 	/// Audit the Maybe and return unmodified<br/>
 	/// Errors will not be returned as they affect the state of the object, but will be written to the console,
-	/// or <see cref="LogAuditExceptions"/> if set
+	/// or <see cref="DefaultLogger"/> if set
 	/// </summary>
 	/// <typeparam name="T">Maybe value type</typeparam>
 	/// <param name="maybe">Maybe being audited</param>
@@ -40,7 +40,7 @@ public static partial class F
 		}
 		catch (Exception e)
 		{
-			HandleAuditException(e);
+			LogException(e);
 		}
 
 		// Return the original object
