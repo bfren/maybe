@@ -1,4 +1,4 @@
-﻿// Maybe: Unit Tests
+// Maybe: Unit Tests
 // Copyright (c) bfren - licensed under https://mit.bfren.dev/2019
 
 namespace MaybeF.F_Tests;
@@ -23,15 +23,14 @@ public class SwitchIf_Tests : Abstracts.SwitchIf_Tests
 	}
 
 	[Fact]
-	public override void Test02_None_Returns_Original_None()
+	public override void Test02_Predicate_Null_Returns_None_With_SwitchIfPredicateCannotBeNullMsg()
 	{
-		var ifFalse = Substitute.For<Func<int, IMsg>>();
 		Test02((mbe, check) => F.SwitchIf(mbe, check, null, null));
-		Test02((mbe, check) => F.SwitchIf(mbe, check, ifFalse));
+		Test02((mbe, check) => F.SwitchIf(mbe, check, null, null));
 	}
 
 	[Fact]
-	public override void Test03_Check_Func_Throws_Exception_Returns_None_With_SwitchIfFuncExceptionMsg()
+	public override void Test03_None_Returns_Original_None()
 	{
 		var ifFalse = Substitute.For<Func<int, IMsg>>();
 		Test03((mbe, check) => F.SwitchIf(mbe, check, null, null));
@@ -39,40 +38,48 @@ public class SwitchIf_Tests : Abstracts.SwitchIf_Tests
 	}
 
 	[Fact]
-	public override void Test04_Check_Returns_True_And_IfTrue_Is_Null_Returns_Original_Maybe()
+	public override void Test04_Check_Func_Throws_Exception_Returns_None_With_SwitchIfFuncExceptionMsg()
 	{
+		var ifFalse = Substitute.For<Func<int, IMsg>>();
 		Test04((mbe, check) => F.SwitchIf(mbe, check, null, null));
+		Test04((mbe, check) => F.SwitchIf(mbe, check, ifFalse));
 	}
 
 	[Fact]
-	public override void Test05_Check_Returns_False_And_IfFalse_Is_Null_Returns_Original_Maybe()
+	public override void Test05_Check_Returns_True_And_IfTrue_Is_Null_Returns_Original_Maybe()
 	{
 		Test05((mbe, check) => F.SwitchIf(mbe, check, null, null));
 	}
 
 	[Fact]
-	public override void Test06_Check_Returns_True_And_IfTrue_Throws_Exception_Returns_None_With_SwitchIfFuncExceptionMsg()
+	public override void Test06_Check_Returns_False_And_IfFalse_Is_Null_Returns_Original_Maybe()
 	{
-		Test06((mbe, check, ifTrue) => F.SwitchIf(mbe, check, ifTrue, null));
+		Test06((mbe, check) => F.SwitchIf(mbe, check, null, null));
 	}
 
 	[Fact]
-	public override void Test07_Check_Returns_False_And_IfFalse_Throws_Exception_Returns_None_With_SwitchIfFuncExceptionMsg()
+	public override void Test07_Check_Returns_True_And_IfTrue_Throws_Exception_Returns_None_With_SwitchIfFuncExceptionMsg()
 	{
-		Test07((mbe, check, ifFalse) => F.SwitchIf(mbe, check, null, ifFalse));
-		Test07((mbe, check, ifFalse) => F.SwitchIf(mbe, check, x => ifFalse(x).Reason));
+		Test07((mbe, check, ifTrue) => F.SwitchIf(mbe, check, ifTrue, null));
 	}
 
 	[Fact]
-	public override void Test08_Check_Returns_True_Runs_IfTrue_Returns_Value()
+	public override void Test08_Check_Returns_False_And_IfFalse_Throws_Exception_Returns_None_With_SwitchIfFuncExceptionMsg()
 	{
-		Test08((mbe, check, ifTrue) => F.SwitchIf(mbe, check, ifTrue, null));
+		Test08((mbe, check, ifFalse) => F.SwitchIf(mbe, check, null, ifFalse));
+		Test08((mbe, check, ifFalse) => F.SwitchIf(mbe, check, x => ifFalse(x).Reason));
 	}
 
 	[Fact]
-	public override void Test09_Check_Returns_False_Runs_IfFalse_Returns_Value()
+	public override void Test09_Check_Returns_True_Runs_IfTrue_Returns_Value()
 	{
-		Test09((mbe, check, ifFalse) => F.SwitchIf(mbe, check, null, ifFalse));
-		Test09((mbe, check, ifFalse) => F.SwitchIf(mbe, check, x => ifFalse(x).Reason));
+		Test09((mbe, check, ifTrue) => F.SwitchIf(mbe, check, ifTrue, null));
+	}
+
+	[Fact]
+	public override void Test10_Check_Returns_False_Runs_IfFalse_Returns_Value()
+	{
+		Test10((mbe, check, ifFalse) => F.SwitchIf(mbe, check, null, ifFalse));
+		Test10((mbe, check, ifFalse) => F.SwitchIf(mbe, check, x => ifFalse(x).Reason));
 	}
 }

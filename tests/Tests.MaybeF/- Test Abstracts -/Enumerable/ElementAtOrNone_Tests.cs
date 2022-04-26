@@ -16,11 +16,12 @@ public abstract class ElementAtOrNone_Tests
 		var list = Array.Empty<int>();
 
 		// Act
-		var result = act(list, 0);
+		var r0 = act(null!, 0);
+		var r1 = act(list, 0);
 
 		// Assert
-		var none = result.AssertNone();
-		Assert.IsType<ListIsEmptyMsg>(none);
+		r0.AssertNone().AssertType<ListIsEmptyMsg>();
+		r1.AssertNone().AssertType<ListIsEmptyMsg>();
 	}
 
 	public abstract void Test01_No_Value_At_Index_Returns_None_With_ElementAtIsNullMsg();
@@ -34,8 +35,7 @@ public abstract class ElementAtOrNone_Tests
 		var result = act(list, 4);
 
 		// Assert
-		var none = result.AssertNone();
-		Assert.IsType<ElementAtIsNullMsg>(none);
+		result.AssertNone().AssertType<ElementAtIsNullMsg>();
 	}
 
 	public abstract void Test02_Value_At_Index_Returns_Some_With_Value();

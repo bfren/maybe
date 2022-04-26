@@ -20,9 +20,13 @@ public static partial class F
 		{
 			return await f().ConfigureAwait(false);
 		}
-		catch (Exception e)
+		catch (Exception e) when (handler is not null)
 		{
 			return None<T>(handler(e));
+		}
+		catch (Exception e)
+		{
+			return None<T>(DefaultHandler(e));
 		}
 	}
 }

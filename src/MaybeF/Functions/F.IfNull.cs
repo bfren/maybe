@@ -2,15 +2,14 @@
 // Copyright (c) bfren - licensed under https://mit.bfren.dev/2019
 
 using System;
-using MaybeF.Internals;
 
 namespace MaybeF;
 
 public static partial class F
 {
 	/// <summary>
-	/// If <paramref name="maybe"/> is <see cref="Internals.None{T}"/> and the message is <see cref="M.NullValueMsg"/>,
-	/// or <paramref name="maybe"/> is <see cref="Internals.Some{T}"/> and <see cref="Some{T}.Value"/> is null,
+	/// If <paramref name="maybe"/> is <see cref="MaybeF.None{T}"/> and the message is <see cref="M.NullValueMsg"/>,
+	/// or <paramref name="maybe"/> is <see cref="MaybeF.Some{T}"/> and <see cref="Some{T}.Value"/> is null,
 	/// runs <paramref name="ifNull"/> - which gives you the opportunity to return a more useful 'Not Found' message
 	/// </summary>
 	/// <typeparam name="T">Maybe value type</typeparam>
@@ -43,10 +42,10 @@ public static partial class F
 		IfNull(maybe, () => None<T>(ifNull()));
 
 	/// <summary>
-	/// If <paramref name="maybe"/> is <see cref="Internals.None{T}"/>:<br/>
+	/// If <paramref name="maybe"/> is <see cref="MaybeF.None{T}"/>:<br/>
 	///  .. if the message is <see cref="M.NullValueMsg"/>, runs <paramref name="ifNull"/>,<br/>
-	///  .. otherwise returns <see cref="Internals.None{TReturn}"/><br/>
-	/// If <paramref name="maybe"/> is <see cref="Internals.Some{T}"/>:<br/>
+	///  .. otherwise returns <see cref="None{TReturn}"/><br/>
+	/// If <paramref name="maybe"/> is <see cref="MaybeF.Some{T}"/>:<br/>
 	///  .. if <see cref="Some{T}.Value"/> is null, runs <paramref name="ifNull"/>,<br/>
 	///  .. otherwise runs <paramref name="ifSome"/>
 	/// </summary>

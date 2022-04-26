@@ -1,4 +1,4 @@
-﻿// Maybe: Unit Tests
+// Maybe: Unit Tests
 // Copyright (c) bfren - licensed under https://mit.bfren.dev/2019
 
 namespace MaybeF.Maybe_Tests;
@@ -16,4 +16,11 @@ public class IsSome_Tests : Abstracts.IsSome_Tests
 	{
 		Test01((Maybe<string> mbe, out string val) => mbe.IsSome(out val));
 	}
+
+	#region Unused
+
+	[Fact]
+	public override void Test02_Is_Null_Returns_False() { }
+
+	#endregion Unused
 }

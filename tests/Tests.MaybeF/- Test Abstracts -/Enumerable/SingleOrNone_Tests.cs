@@ -1,4 +1,4 @@
-﻿// Maybe: Unit Tests
+// Maybe: Unit Tests
 // Copyright (c) bfren - licensed under https://mit.bfren.dev/2019
 
 using MaybeF;
@@ -16,11 +16,12 @@ public abstract class SingleOrNone_Tests
 		var list = Array.Empty<int>();
 
 		// Act
-		var result = act(list);
+		var r0 = act(null!);
+		var r1 = act(list);
 
 		// Assert
-		var none = result.AssertNone();
-		Assert.IsType<ListIsEmptyMsg>(none);
+		r0.AssertNone().AssertType<ListIsEmptyMsg>();
+		r1.AssertNone().AssertType<ListIsEmptyMsg>();
 	}
 
 	public abstract void Test01_Multiple_Items_Returns_None_With_MultipleItemsMsg();
@@ -34,8 +35,7 @@ public abstract class SingleOrNone_Tests
 		var result = act(list);
 
 		// Assert
-		var none = result.AssertNone();
-		Assert.IsType<MultipleItemsMsg>(none);
+		result.AssertNone().AssertType<MultipleItemsMsg>();
 	}
 
 	public abstract void Test02_No_Matching_Items_Returns_None_With_NoMatchingItemsMsg();
@@ -51,8 +51,7 @@ public abstract class SingleOrNone_Tests
 		var result = act(list, predicate);
 
 		// Assert
-		var none = result.AssertNone();
-		Assert.IsType<NoMatchingItemsMsg>(none);
+		result.AssertNone().AssertType<NoMatchingItemsMsg>();
 	}
 
 	public abstract void Test03_Null_Item_Returns_None_With_NullItemMsg();
@@ -68,8 +67,7 @@ public abstract class SingleOrNone_Tests
 		var result = act(list, predicate);
 
 		// Assert
-		var none = result.AssertNone();
-		Assert.IsType<NullItemMsg>(none);
+		result.AssertNone().AssertType<NullItemMsg>();
 	}
 
 	public abstract void Test04_Returns_Single_Element();

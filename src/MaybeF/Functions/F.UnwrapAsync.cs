@@ -9,7 +9,7 @@ namespace MaybeF;
 public static partial class F
 {
 	/// <summary>
-	/// Unwrap the value of <paramref name="maybe"/> - if it is a <see cref="Internals.Some{T}"/>
+	/// Unwrap the value of <paramref name="maybe"/> - if it is a <see cref="MaybeF.Some{T}"/>
 	/// </summary>
 	/// <typeparam name="T">Maybe value type</typeparam>
 	/// <typeparam name="TSingle">Single value type</typeparam>
@@ -18,8 +18,13 @@ public static partial class F
 	public static async Task<TSingle> UnwrapAsync<T, TSingle>(
 		Task<Maybe<T>> maybe,
 		Func<FluentUnwrapAsync<T>, TSingle> unwrap
-	) =>
-		unwrap(new FluentUnwrapAsync<T>(await maybe.ConfigureAwait(false)));
+	)
+	{
+		ArgumentNullException.ThrowIfNull(maybe);
+		ArgumentNullException.ThrowIfNull(unwrap);
+
+		return unwrap(new FluentUnwrapAsync<T>(await maybe.ConfigureAwait(false)));
+	}
 
 	/// <summary>
 	/// Fluent unwrapper

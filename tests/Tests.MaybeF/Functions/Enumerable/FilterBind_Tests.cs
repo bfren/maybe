@@ -16,4 +16,16 @@ public class FilterBind_Tests : Abstracts.Enumerable.FilterBind_Tests
 	{
 		Test01((list, map, predicate) => F.EnumerableF.FilterBind(list, map, predicate));
 	}
+
+	[Fact]
+	public override void Test02_List_Null_Returns_Empty_List()
+	{
+		Test02((list, map, predicate) => F.EnumerableF.FilterBind(list, map, predicate));
+	}
+
+	[Fact]
+	public override void Test03_Bind_Null_Returns_Empty_List()
+	{
+		Test03((list, map, predicate) => F.EnumerableF.FilterBind(list, map, predicate));
+	}
 }

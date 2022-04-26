@@ -11,7 +11,7 @@ public static partial class F
 	public static partial class EnumerableF
 	{
 		/// <summary>
-		/// Lift every non-null value of <paramref name="list"/> to be a <see cref="Internals.Some{T}"/>
+		/// Lift every non-null value of <paramref name="list"/> to be a <see cref="MaybeF.Some{T}"/>
 		/// </summary>
 		/// <typeparam name="T">Maybe value type</typeparam>
 		/// <param name="list">List of values</param>
@@ -27,6 +27,11 @@ public static partial class F
 		/// <param name="map">Mapping function</param>
 		public static IEnumerable<Maybe<TReturn>> Map<T, TReturn>(IEnumerable<T> list, Func<T, Maybe<TReturn>> map)
 		{
+			if (list is null || map is null)
+			{
+				yield break;
+			}
+
 			foreach (var item in list)
 			{
 				if (item is not null)

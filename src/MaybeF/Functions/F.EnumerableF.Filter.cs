@@ -11,13 +11,18 @@ public static partial class F
 	public static partial class EnumerableF
 	{
 		/// <summary>
-		/// Filter elements to return only the values of those that are <see cref="Internals.Some{T}"/>
+		/// Filter elements to return only the values of those that are <see cref="MaybeF.Some{T}"/>
 		/// </summary>
 		/// <typeparam name="T">Maybe value type</typeparam>
 		/// <param name="list">List of Maybe values</param>
 		/// <param name="predicate">[Optional] Predicate to use with filter</param>
 		public static IEnumerable<T> Filter<T>(IEnumerable<Maybe<T>> list, Func<T, bool>? predicate)
 		{
+			if (list is null)
+			{
+				yield break;
+			}
+
 			foreach (var maybe in list)
 			{
 				foreach (var some in maybe)

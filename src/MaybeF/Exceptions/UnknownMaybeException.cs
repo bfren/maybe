@@ -9,7 +9,7 @@ namespace MaybeF.Exceptions;
 /// Thrown when an unknown <see cref="Maybe{T}"/> type is matched -
 /// as <see cref="Maybe{T}"/> only allows internal implementation this should never happen...
 /// </summary>
-public class UnknownMaybeException : Exception
+public sealed class UnknownMaybeException : Exception
 {
 	/// <summary>
 	/// Create exception

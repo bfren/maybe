@@ -8,7 +8,7 @@ namespace MaybeF.Testing.Exceptions;
 /// <summary>
 /// Thrown when <see cref="MaybeExtensions.UnsafeUnwrap{T}(Maybe{T})"/> fails
 /// </summary>
-public class UnsafeUnwrapException : Exception
+public sealed class UnsafeUnwrapException : Exception
 {
 	/// <summary>Create exception</summary>
 	public UnsafeUnwrapException() { }

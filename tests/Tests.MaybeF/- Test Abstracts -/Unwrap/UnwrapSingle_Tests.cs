@@ -20,8 +20,8 @@ public abstract class UnwrapSingle_Tests
 		var result = act(maybe);
 
 		// Assert
-		var none = result.AssertNone().AssertType<UnhandledExceptionMsg>();
-		Assert.IsType<UnknownMaybeException>(none.Value);
+		var msg = result.AssertNone().AssertType<UnhandledExceptionMsg>();
+		Assert.IsType<UnknownMaybeException>(msg.Value);
 	}
 
 	public abstract void Test01_None_Returns_None();
@@ -66,8 +66,8 @@ public abstract class UnwrapSingle_Tests
 		var result = act(maybe);
 
 		// Assert
-		var none = result.AssertNone().AssertType<UnwrapSingleErrorMsg>();
-		Assert.Equal(UnwrapSingleError.NoItems, none.Error);
+		var msg = result.AssertNone().AssertType<UnwrapSingleErrorMsg>();
+		Assert.Equal(UnwrapSingleError.NoItems, msg.Error);
 	}
 
 	public abstract void Test04_No_Items_Runs_NoItems();
@@ -98,8 +98,8 @@ public abstract class UnwrapSingle_Tests
 		var result = act(maybe);
 
 		// Assert
-		var none = result.AssertNone().AssertType<UnwrapSingleErrorMsg>();
-		Assert.Equal(UnwrapSingleError.TooManyItems, none.Error);
+		var msg = result.AssertNone().AssertType<UnwrapSingleErrorMsg>();
+		Assert.Equal(UnwrapSingleError.TooManyItems, msg.Error);
 	}
 
 	public abstract void Test06_Too_Many_Items_Runs_TooMany();
@@ -130,8 +130,8 @@ public abstract class UnwrapSingle_Tests
 		var result = act(maybe);
 
 		// Assert
-		var none = result.AssertNone().AssertType<UnwrapSingleErrorMsg>();
-		Assert.Equal(UnwrapSingleError.NotAList, none.Error);
+		var msg = result.AssertNone().AssertType<UnwrapSingleErrorMsg>();
+		Assert.Equal(UnwrapSingleError.NotAList, msg.Error);
 	}
 
 	public abstract void Test08_Not_A_List_Runs_NotAList();
@@ -163,8 +163,8 @@ public abstract class UnwrapSingle_Tests
 		var result = act(maybe);
 
 		// Assert
-		var none = result.AssertNone().AssertType<UnwrapSingleErrorMsg>();
-		Assert.Equal(UnwrapSingleError.IncorrectType, none.Error);
+		var msg = result.AssertNone().AssertType<UnwrapSingleErrorMsg>();
+		Assert.Equal(UnwrapSingleError.IncorrectType, msg.Error);
 	}
 
 	public abstract void Test10_Incorrect_Type_Runs_IncorrectType();

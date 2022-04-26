@@ -19,6 +19,11 @@ public static partial class F
 		/// <param name="bind">Binding function</param>
 		public static IEnumerable<Maybe<TReturn>> Bind<T, TReturn>(IEnumerable<Maybe<T>> list, Func<T, Maybe<TReturn>> bind)
 		{
+			if (list is null || bind is null)
+			{
+				yield break;
+			}
+
 			foreach (var item in list)
 			{
 				foreach (var value in F.Bind(item, bind))

@@ -1,4 +1,4 @@
-﻿// Maybe: Unit Tests
+// Maybe: Unit Tests
 // Copyright (c) bfren - licensed under https://mit.bfren.dev/2019
 
 using MaybeF;
@@ -20,9 +20,8 @@ public abstract class Filter_Tests
 		var result = act(maybe);
 
 		// Assert
-		var none = result.AssertNone();
-		var message = Assert.IsType<UnhandledExceptionMsg>(none);
-		Assert.IsType<UnknownMaybeException>(message.Value);
+		var msg = result.AssertNone().AssertType<UnhandledExceptionMsg>();
+		Assert.IsType<UnknownMaybeException>(msg.Value);
 	}
 
 	public abstract void Test01_Exception_Thrown_Returns_None_With_UnhandledExceptionMsg();
@@ -38,8 +37,7 @@ public abstract class Filter_Tests
 		var result = act(maybe, throwFunc);
 
 		// Assert
-		var none = result.AssertNone();
-		Assert.IsType<UnhandledExceptionMsg>(none);
+		result.AssertNone().AssertType<UnhandledExceptionMsg>();
 	}
 
 	public abstract void Test02_When_Some_And_Predicate_True_Returns_Value();
@@ -74,8 +72,7 @@ public abstract class Filter_Tests
 		var result = act(maybe, predicate);
 
 		// Assert
-		var none = result.AssertNone();
-		Assert.IsType<FilterPredicateWasFalseMsg>(none);
+		result.AssertNone().AssertType<FilterPredicateWasFalseMsg>();
 	}
 
 	public abstract void Test04_When_None_Returns_None_With_Original_Msg();

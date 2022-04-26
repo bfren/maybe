@@ -1,7 +1,7 @@
 // Maybe: .NET Monad.
 // Copyright (c) bfren - licensed under https://mit.bfren.dev/2019
 
-namespace MaybeF.Internals;
+namespace MaybeF;
 
 /// <summary>
 /// 'None' Maybe - used to replace null returns (see <seealso cref="Some{T}"/>)

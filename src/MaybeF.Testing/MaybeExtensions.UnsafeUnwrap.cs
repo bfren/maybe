@@ -6,7 +6,7 @@ namespace MaybeF.Testing;
 public static partial class MaybeExtensions
 {
 	/// <summary>
-	/// Assume <paramref name="this"/> is a <see cref="Internals.Some{T}"/> and get the value -
+	/// Assume <paramref name="this"/> is a <see cref="Some{T}"/> and get the value -
 	/// useful to get values during the Arrange section of a unit test
 	/// </summary>
 	/// <typeparam name="T">Maybe value type</typeparam>

@@ -11,14 +11,14 @@ public static partial class F
 	public static partial class EnumerableF
 	{
 		/// <summary>
-		/// Return the element at <paramref name="index"/> or <see cref="Internals.None{T}"/>
+		/// Return the element at <paramref name="index"/> or <see cref="MaybeF.None{T}"/>
 		/// </summary>
 		/// <typeparam name="T">Value type</typeparam>
 		/// <param name="list">List of values</param>
 		/// <param name="index">Index</param>
 		public static Maybe<T> ElementAtOrNone<T>(IEnumerable<T> list, int index) =>
 			Catch<T>(() =>
-				list.Any() switch
+				list?.Any() switch
 				{
 					true =>
 						list.ElementAtOrDefault(index) switch
@@ -30,7 +30,7 @@ public static partial class F
 								None<T, M.ElementAtIsNullMsg>()
 						},
 
-					false =>
+					_ =>
 						None<T, M.ListIsEmptyMsg>()
 				},
 				DefaultHandler

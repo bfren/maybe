@@ -6,7 +6,6 @@ using System.Collections.Generic;
 using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 using MaybeF.Exceptions;
-using MaybeF.Internals;
 
 namespace MaybeF;
 
@@ -31,13 +30,18 @@ public abstract record class Maybe<T> : IEquatable<Maybe<T>>
 		ValueTask.FromResult(this);
 
 	/// <summary>
+	/// Don't allow types to be created outside this assembly
+	/// </summary>
+	private protected Maybe() { }
+
+	/// <summary>
 	/// Returns an enumerator to enable use in foreach blocks
 	/// </summary>
 	public IEnumerator<T> GetEnumerator()
 	{
-		if (this is Some<T> some)
+		if (IsSome(out var value))
 		{
-			yield return some.Value;
+			yield return value;
 		}
 	}
 
@@ -84,7 +88,7 @@ public abstract record class Maybe<T> : IEquatable<Maybe<T>>
 		value switch
 		{
 			T =>
-				new Some<T>(value), // Some<T> is only created by Some() functions and implicit operator
+				F.Some(value), // Some<T> is only created by Some() functions and implicit operator
 
 			_ =>
 				F.None<T, F.M.NullValueMsg>()
@@ -323,20 +327,29 @@ public abstract record class Maybe<T> : IEquatable<Maybe<T>>
 	#region Switch
 
 	/// <inheritdoc cref="F.Switch{T}(Maybe{T}, Action{T}, Action{IMsg})"/>
-	public void Switch(Action<T> some, Action none) =>
+	public void Switch(Action<T> some, Action none)
+	{
+		ArgumentNullException.ThrowIfNull(none);
 		F.Switch(this, some: some, none: _ => none());
+	}
 
 	/// <inheritdoc cref="F.Switch{T}(Maybe{T}, Action{T}, Action{IMsg})"/>
 	public void Switch(Action<T> some, Action<IMsg> none) =>
 		F.Switch(this, some: some, none: none);
 
 	/// <inheritdoc cref="F.Switch{T, TReturn}(Maybe{T}, Func{T, TReturn}, Func{IMsg, TReturn})"/>
-	public TReturn Switch<TReturn>(Func<T, TReturn> some, TReturn none) =>
-		F.Switch(this, some: some, none: _ => none);
+	public TReturn Switch<TReturn>(Func<T, TReturn> some, TReturn none)
+	{
+		ArgumentNullException.ThrowIfNull(none);
+		return F.Switch(this, some: some, none: _ => none);
+	}
 
 	/// <inheritdoc cref="F.Switch{T, TReturn}(Maybe{T}, Func{T, TReturn}, Func{IMsg, TReturn})"/>
-	public TReturn Switch<TReturn>(Func<T, TReturn> some, Func<TReturn> none) =>
-		F.Switch(this, some: some, none: _ => none());
+	public TReturn Switch<TReturn>(Func<T, TReturn> some, Func<TReturn> none)
+	{
+		ArgumentNullException.ThrowIfNull(none);
+		return F.Switch(this, some: some, none: _ => none());
+	}
 
 	/// <inheritdoc cref="F.Switch{T, TReturn}(Maybe{T}, Func{T, TReturn}, Func{IMsg, TReturn})"/>
 	public TReturn Switch<TReturn>(Func<T, TReturn> some, Func<IMsg, TReturn> none) =>

@@ -8,7 +8,7 @@ namespace MaybeF.Testing.Exceptions;
 /// <summary>
 /// Used during test so System Exceptions don't need to be thrown
 /// </summary>
-public class MaybeTestException : Exception
+public sealed class MaybeTestException : Exception
 {
 	/// <summary>
 	/// Create object

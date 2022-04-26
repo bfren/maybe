@@ -8,8 +8,8 @@ namespace MaybeF;
 public static partial class F
 {
 	/// <summary>
-	/// Create <see cref="Internals.Some{T}"/> with <paramref name="value"/> if <paramref name="predicate"/> is true
-	/// <para>Otherwise, will return <see cref="Internals.None{T}"/></para>
+	/// Create <see cref="MaybeF.Some{T}"/> with <paramref name="value"/> if <paramref name="predicate"/> is true
+	/// <para>Otherwise, will return <see cref="MaybeF.None{T}"/></para>
 	/// </summary>
 	/// <typeparam name="T">Maybe value type</typeparam>
 	/// <param name="predicate">Predicate to evaluate</param>

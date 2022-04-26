@@ -10,13 +10,13 @@ public static partial class F
 	/// <summary>
 	/// Audit the Maybe and return unmodified<br/>
 	/// Errors will not be returned as they affect the state of the object, but will be written to the console,
-	/// or <see cref="LogAuditExceptions"/> if set
+	/// or <see cref="DefaultLogger"/> if set
 	/// </summary>
 	/// <typeparam name="T">Maybe value type</typeparam>
 	/// <param name="maybe">Maybe being audited</param>
 	/// <param name="any">[Optional] Action will run for any <paramref name="maybe"/></param>
-	/// <param name="some">[Optional] Action will run if <paramref name="maybe"/> is <see cref="Internals.Some{T}"/></param>
-	/// <param name="none">[Optional] Action will run if <paramref name="maybe"/> is <see cref="Internals.None{T}"/></param>
+	/// <param name="some">[Optional] Action will run if <paramref name="maybe"/> is <see cref="MaybeF.Some{T}"/></param>
+	/// <param name="none">[Optional] Action will run if <paramref name="maybe"/> is <see cref="MaybeF.None{T}"/></param>
 	public static Maybe<T> Audit<T>(Maybe<T> maybe, Action<Maybe<T>>? any, Action<T>? some, Action<IMsg>? none)
 	{
 		// Do nothing if the user gave us nothing to do!
@@ -40,7 +40,7 @@ public static partial class F
 		}
 		catch (Exception e)
 		{
-			HandleAuditException(e);
+			LogException(e);
 		}
 
 		// Return the original object

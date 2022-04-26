@@ -123,4 +123,34 @@ public abstract class Map_Tests
 			x => Assert.Equal(i1.ToString(), x.AssertSome())
 		);
 	}
+
+	public abstract void Test05_List_Null_Returns_Empty_List();
+
+	protected static void Test05(Func<IEnumerable<int>, Func<int, Maybe<string>>, IEnumerable<Maybe<string>>> act)
+	{
+		// Arrange
+		var map = Substitute.For<Func<int, Maybe<string>>>();
+
+		// Act
+		var result = act(null!, map);
+
+		// Assert
+		Assert.NotNull(result);
+		Assert.Empty(result);
+	}
+
+	public abstract void Test06_Map_Null_Returns_Empty_List();
+
+	protected static void Test06(Func<IEnumerable<int>, Func<int, Maybe<string>>, IEnumerable<Maybe<string>>> act)
+	{
+		// Arrange
+		var list = new[] { Rnd.Int, Rnd.Int, Rnd.Int };
+
+		// Act
+		var result = act(list, null!);
+
+		// Assert
+		Assert.NotNull(result);
+		Assert.Empty(result);
+	}
 }

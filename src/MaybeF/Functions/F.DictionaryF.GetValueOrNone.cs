@@ -10,16 +10,16 @@ public static partial class F
 	public static partial class DictionaryF
 	{
 		/// <summary>
-		/// Return the value or <see cref="Internals.None{T}"/>
+		/// Return the value or <see cref="MaybeF.None{T}"/>
 		/// </summary>
 		/// <typeparam name="TKey">Key type</typeparam>
 		/// <typeparam name="TValue">Value type</typeparam>
 		/// <param name="dictionary">Dictionary object</param>
 		/// <param name="key">Key value</param>
 		public static Maybe<TValue> GetValueOrNone<TKey, TValue>(IDictionary<TKey, TValue> dictionary, TKey key) =>
-			(dictionary.Count > 0) switch
+			dictionary?.Count switch
 			{
-				true =>
+				> 0 =>
 					key switch
 					{
 						TKey =>
@@ -39,7 +39,7 @@ public static partial class F
 							None<TValue, M.KeyCannotBeNullMsg>()
 					},
 
-				false =>
+				_ =>
 					None<TValue, M.DictionaryIsEmptyMsg>()
 
 			};

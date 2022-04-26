@@ -6,19 +6,19 @@ namespace MaybeF;
 public static partial class F
 {
 	/// <summary>
-	/// If <paramref name="maybe"/> is a <see cref="Internals.Some{T}"/>, set <paramref name="value"/>
-	/// to be <see cref="Internals.Some{T}.Value"/>
+	/// If <paramref name="maybe"/> is a <see cref="MaybeF.Some{T}"/>, set <paramref name="value"/>
+	/// to be <see cref="Some{T}.Value"/>
 	/// </summary>
 	/// <remarks>
 	/// Warning: <paramref name="value"/> will be <see langword="null"/> if <paramref name="maybe"/>
-	/// is a <see cref="Internals.None{T}"/>
+	/// is a <see cref="MaybeF.None{T}"/>
 	/// </remarks>
 	/// <typeparam name="T">Maybe value type</typeparam>
 	/// <param name="maybe">Input Maybe</param>
-	/// <param name="value">Value (null if <paramref name="maybe"/> is <see cref="Internals.None{T}"/>)</param>
+	/// <param name="value">Value (null if <paramref name="maybe"/> is <see cref="MaybeF.None{T}"/>)</param>
 	public static bool IsSome<T>(Maybe<T> maybe, out T value)
 	{
-		if (maybe is Internals.Some<T> some)
+		if (maybe is Some<T> some)
 		{
 			value = some.Value;
 			return true;

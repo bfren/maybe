@@ -1,0 +1,8 @@
+<Project Sdk="Microsoft.NET.Sdk">
+	<PropertyGroup>
+		<RootNamespace>MaybeF.Caching</RootNamespace>
+	</PropertyGroup>
+	<ItemGroup>
+		<ProjectReference Include="..\..\src\MaybeF.Caching\MaybeF.Caching.csproj" />
+	</ItemGroup>
+</Project>

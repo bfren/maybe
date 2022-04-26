@@ -12,14 +12,14 @@ public static partial class F
 	public static partial class EnumerableF
 	{
 		/// <summary>
-		/// Return the last element or <see cref="Internals.None{T}"/>
+		/// Return the last element or <see cref="MaybeF.None{T}"/>
 		/// </summary>
 		/// <typeparam name="T">Value type</typeparam>
 		/// <param name="list">List of values</param>
 		/// <param name="predicate">[Optional] Predicate to filter items</param>
 		public static Maybe<T> LastOrNone<T>(IEnumerable<T> list, Func<T, bool>? predicate) =>
 			Catch<T>(() =>
-				list.Any() switch
+				list?.Any() switch
 				{
 					true =>
 						list.LastOrDefault(x => predicate is null || predicate(x)) switch
@@ -31,7 +31,7 @@ public static partial class F
 								None<T, M.LastItemIsNullMsg>()
 						},
 
-					false =>
+					_ =>
 						None<T, M.ListIsEmptyMsg>()
 				},
 				DefaultHandler
