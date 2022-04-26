@@ -1,4 +1,4 @@
-﻿// Maybe: Unit Tests
+// Maybe: Unit Tests
 // Copyright (c) bfren - licensed under https://mit.bfren.dev/2019
 
 using MaybeF;
@@ -39,9 +39,23 @@ public abstract class SwitchIf_Tests
 		Assert.Throws<MaybeCannotBeNullException>(action);
 	}
 
-	public abstract void Test02_None_Returns_Original_None();
+	public abstract void Test02_Predicate_Null_Returns_None_With_SwitchIfPredicateCannotBeNullMsg();
 
 	protected static void Test02(Func<Maybe<int>, Func<int, bool>, Maybe<int>> act)
+	{
+		// Arrange
+		var maybe = Create.None<int>();
+
+		// Act
+		var result = act(maybe, null!);
+
+		// Assert
+		result.AssertNone().AssertType<SwitchIfPredicateCannotBeNullMsg>();
+	}
+
+	public abstract void Test03_None_Returns_Original_None();
+
+	protected static void Test03(Func<Maybe<int>, Func<int, bool>, Maybe<int>> act)
 	{
 		// Arrange
 		var maybe = Create.None<int>();
@@ -55,9 +69,9 @@ public abstract class SwitchIf_Tests
 		Assert.Same(maybe, result);
 	}
 
-	public abstract void Test03_Check_Func_Throws_Exception_Returns_None_With_SwitchIfFuncExceptionMsg();
+	public abstract void Test04_Check_Func_Throws_Exception_Returns_None_With_SwitchIfFuncExceptionMsg();
 
-	protected static void Test03(Func<Maybe<int>, Func<int, bool>, Maybe<int>> act)
+	protected static void Test04(Func<Maybe<int>, Func<int, bool>, Maybe<int>> act)
 	{
 		// Arrange
 		var maybe = F.Some(Rnd.Int);
@@ -71,9 +85,9 @@ public abstract class SwitchIf_Tests
 		Assert.IsType<SwitchIfFuncExceptionMsg>(none);
 	}
 
-	public abstract void Test04_Check_Returns_True_And_IfTrue_Is_Null_Returns_Original_Maybe();
+	public abstract void Test05_Check_Returns_True_And_IfTrue_Is_Null_Returns_Original_Maybe();
 
-	protected static void Test04(Func<Maybe<int>, Func<int, bool>, Maybe<int>> act)
+	protected static void Test05(Func<Maybe<int>, Func<int, bool>, Maybe<int>> act)
 	{
 		// Arrange
 		var maybe = F.Some(Rnd.Int);
@@ -87,9 +101,9 @@ public abstract class SwitchIf_Tests
 		Assert.Same(maybe, result);
 	}
 
-	public abstract void Test05_Check_Returns_False_And_IfFalse_Is_Null_Returns_Original_Maybe();
+	public abstract void Test06_Check_Returns_False_And_IfFalse_Is_Null_Returns_Original_Maybe();
 
-	protected static void Test05(Func<Maybe<int>, Func<int, bool>, Maybe<int>> act)
+	protected static void Test06(Func<Maybe<int>, Func<int, bool>, Maybe<int>> act)
 	{
 		// Arrange
 		var maybe = F.Some(Rnd.Int);
@@ -103,9 +117,9 @@ public abstract class SwitchIf_Tests
 		Assert.Same(maybe, result);
 	}
 
-	public abstract void Test06_Check_Returns_True_And_IfTrue_Throws_Exception_Returns_None_With_SwitchIfFuncExceptionMsg();
+	public abstract void Test07_Check_Returns_True_And_IfTrue_Throws_Exception_Returns_None_With_SwitchIfFuncExceptionMsg();
 
-	protected static void Test06(Func<Maybe<int>, Func<int, bool>, Func<int, None<int>>, Maybe<int>> act)
+	protected static void Test07(Func<Maybe<int>, Func<int, bool>, Func<int, None<int>>, Maybe<int>> act)
 	{
 		// Arrange
 		var maybe = F.Some(Rnd.Int);
@@ -121,9 +135,9 @@ public abstract class SwitchIf_Tests
 		Assert.IsType<SwitchIfFuncExceptionMsg>(none);
 	}
 
-	public abstract void Test07_Check_Returns_False_And_IfFalse_Throws_Exception_Returns_None_With_SwitchIfFuncExceptionMsg();
+	public abstract void Test08_Check_Returns_False_And_IfFalse_Throws_Exception_Returns_None_With_SwitchIfFuncExceptionMsg();
 
-	protected static void Test07(Func<Maybe<int>, Func<int, bool>, Func<int, None<int>>, Maybe<int>> act)
+	protected static void Test08(Func<Maybe<int>, Func<int, bool>, Func<int, None<int>>, Maybe<int>> act)
 	{
 		// Arrange
 		var maybe = F.Some(Rnd.Int);
@@ -139,9 +153,9 @@ public abstract class SwitchIf_Tests
 		Assert.IsType<SwitchIfFuncExceptionMsg>(none);
 	}
 
-	public abstract void Test08_Check_Returns_True_Runs_IfTrue_Returns_Value();
+	public abstract void Test09_Check_Returns_True_Runs_IfTrue_Returns_Value();
 
-	protected static void Test08(Func<Maybe<int>, Func<int, bool>, Func<int, Maybe<int>>, Maybe<int>> act)
+	protected static void Test09(Func<Maybe<int>, Func<int, bool>, Func<int, Maybe<int>>, Maybe<int>> act)
 	{
 		// Arrange
 		var v0 = Rnd.Int;
@@ -161,9 +175,9 @@ public abstract class SwitchIf_Tests
 		Assert.Equal(v0 + v1, some);
 	}
 
-	public abstract void Test09_Check_Returns_False_Runs_IfFalse_Returns_Value();
+	public abstract void Test10_Check_Returns_False_Runs_IfFalse_Returns_Value();
 
-	protected static void Test09(Func<Maybe<int>, Func<int, bool>, Func<int, None<int>>, Maybe<int>> act)
+	protected static void Test10(Func<Maybe<int>, Func<int, bool>, Func<int, None<int>>, Maybe<int>> act)
 	{
 		// Arrange
 		var value = Rnd.Int;

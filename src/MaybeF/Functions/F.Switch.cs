@@ -15,35 +15,23 @@ public static partial class F
 	/// <param name="maybe">Maybe being switched</param>
 	/// <param name="some">Action to run if <see cref="MaybeF.Some{T}"/> - receives value <typeparamref name="T"/> as input</param>
 	/// <param name="none">Action to run if <see cref="MaybeF.None{T}"/></param>
+	/// <exception cref="ArgumentNullException"></exception>
 	/// <exception cref="MaybeCannotBeNullException"></exception>
 	/// <exception cref="UnknownMaybeException"></exception>
-	/// <exception cref="SomeCannotBeNullException"></exception>
-	/// <exception cref="NoneCannotBeNullException"></exception>
 	public static void Switch<T>(Maybe<T> maybe, Action<T> some, Action<IMsg> none)
 	{
+		ArgumentNullException.ThrowIfNull(some);
+		ArgumentNullException.ThrowIfNull(none);
+
 		// No return value so unable to use switch statement
 
 		if (maybe is Some<T> x)
 		{
-			try
-			{
-				some(x.Value);
-			}
-			catch (NullReferenceException)
-			{
-				throw new SomeCannotBeNullException();
-			}
+			some(x.Value);
 		}
 		else if (maybe is None<T> y)
 		{
-			try
-			{
-				none(y.Reason);
-			}
-			catch (NullReferenceException)
-			{
-				throw new NoneCannotBeNullException();
-			}
+			none(y.Reason);
 		}
 		else if (maybe is not null)
 		{
@@ -63,47 +51,21 @@ public static partial class F
 	/// <param name="maybe">Maybe being switched</param>
 	/// <param name="some">Function to run if <see cref="MaybeF.Some{T}"/> - receives value <typeparamref name="T"/> as input</param>
 	/// <param name="none">Function to run if <see cref="MaybeF.None{T}"/></param>
-	/// <exception cref="SomeCannotBeNullException"></exception>
-	/// <exception cref="NoneCannotBeNullException"></exception>
-	/// <exception cref="UnknownMaybeException"></exception>
+	/// <exception cref="ArgumentNullException"></exception>
 	/// <exception cref="MaybeCannotBeNullException"></exception>
+	/// <exception cref="UnknownMaybeException"></exception>
 	public static TReturn Switch<T, TReturn>(Maybe<T> maybe, Func<T, TReturn> some, Func<IMsg, TReturn> none)
 	{
+		ArgumentNullException.ThrowIfNull(some);
+		ArgumentNullException.ThrowIfNull(none);
+
 		if (maybe is Some<T> x)
 		{
-			try
-			{
-				return some(x.Value) switch
-				{
-					TReturn value =>
-						value,
-
-					_ =>
-						throw new SomeCannotBeNullException()
-				};
-			}
-			catch (NullReferenceException)
-			{
-				throw new SomeCannotBeNullException();
-			}
+			return some(x.Value);
 		}
 		else if (maybe is None<T> y)
 		{
-			try
-			{
-				return none(y.Reason) switch
-				{
-					TReturn value =>
-						value,
-
-					_ =>
-						throw new NoneCannotBeNullException()
-				};
-			}
-			catch (NullReferenceException)
-			{
-				throw new NoneCannotBeNullException();
-			}
+			return none(y.Reason);
 		}
 		else if (maybe is not null)
 		{

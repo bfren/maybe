@@ -49,7 +49,7 @@ public abstract class Switch_Tests
 		Assert.Throws<MaybeCannotBeNullException>(action);
 	}
 
-	public abstract void Test03_Return_Void_If_None_And_None_Func_Is_Null_Throws_NoneCannotBeNullException();
+	public abstract void Test03_Return_Void_If_None_And_None_Func_Is_Null_Throws_ArgumentNullException();
 
 	protected static void Test03(Action<Maybe<int>, Action, Action<IMsg>> act)
 	{
@@ -61,7 +61,7 @@ public abstract class Switch_Tests
 		var action = () => act(maybe, null!, null!);
 
 		// Assert
-		Assert.Throws<NoneCannotBeNullException>(action);
+		Assert.Throws<ArgumentNullException>(action);
 	}
 
 	public abstract void Test04_Return_Void_If_None_Runs_None_Action_With_Msg();
@@ -80,7 +80,7 @@ public abstract class Switch_Tests
 		none.Received().Invoke(message);
 	}
 
-	public abstract void Test05_Return_Value_If_None_And_None_Func_Is_Null_Throws_NoneCannotBeNullException();
+	public abstract void Test05_Return_Value_If_None_And_None_Func_Is_Null_Throws_ArgumentNullException();
 
 	protected static void Test05(Func<Maybe<int>, string, Func<string>, Func<IMsg, string>, string> act)
 	{
@@ -92,7 +92,7 @@ public abstract class Switch_Tests
 		var action = () => act(maybe, null!, null!, null!);
 
 		// Assert
-		Assert.Throws<NoneCannotBeNullException>(action);
+		Assert.Throws<ArgumentNullException>(action);
 	}
 
 	public abstract void Test06_Return_Value_If_None_Runs_None_Func_With_Msg();
@@ -111,7 +111,7 @@ public abstract class Switch_Tests
 		none.Received().Invoke(message);
 	}
 
-	public abstract void Test07_Return_Void_If_Some_And_Some_Func_Is_Null_Throws_SomeCannotBeNullException();
+	public abstract void Test07_Return_Void_If_Some_And_Some_Func_Is_Null_Throws_ArgumentNullException();
 
 	protected static void Test07(Action<Maybe<int>, Action<int>> act)
 	{
@@ -123,7 +123,7 @@ public abstract class Switch_Tests
 		var action = () => act(maybe, null!);
 
 		// Assert
-		Assert.Throws<SomeCannotBeNullException>(action);
+		Assert.Throws<ArgumentNullException>(action);
 	}
 
 	public abstract void Test08_Return_Void_If_Some_Runs_Some_Action_With_Value();
@@ -142,7 +142,7 @@ public abstract class Switch_Tests
 		some.Received().Invoke(value);
 	}
 
-	public abstract void Test09_Return_Value_If_Some_And_Some_Func_Is_Null_Throws_SomeCannotBeNullException();
+	public abstract void Test09_Return_Value_If_Some_And_Some_Func_Is_Null_Throws_ArgumentNullException();
 
 	protected static void Test09(Func<Maybe<int>, Func<int, string>, string> act)
 	{
@@ -154,7 +154,7 @@ public abstract class Switch_Tests
 		var action = () => act(maybe, null!);
 
 		// Assert
-		Assert.Throws<SomeCannotBeNullException>(action);
+		Assert.Throws<ArgumentNullException>(action);
 	}
 
 	public abstract void Test10_Return_Value_If_Some_Runs_Some_Func_With_Value();

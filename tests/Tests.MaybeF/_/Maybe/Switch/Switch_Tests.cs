@@ -25,7 +25,7 @@ public class Switch_Tests : Abstracts.Switch_Tests
 	}
 
 	[Fact]
-	public override void Test03_Return_Void_If_None_And_None_Func_Is_Null_Throws_NoneCannotBeNullException()
+	public override void Test03_Return_Void_If_None_And_None_Func_Is_Null_Throws_ArgumentNullException()
 	{
 		var some = Substitute.For<Action<int>>();
 		Test03((mbe, n0, _) => mbe.Switch(some, n0));
@@ -41,7 +41,7 @@ public class Switch_Tests : Abstracts.Switch_Tests
 	}
 
 	[Fact]
-	public override void Test05_Return_Value_If_None_And_None_Func_Is_Null_Throws_NoneCannotBeNullException()
+	public override void Test05_Return_Value_If_None_And_None_Func_Is_Null_Throws_ArgumentNullException()
 	{
 		var some = Substitute.For<Func<int, string>>();
 		Test05((mbe, n0, _, _) => mbe.Switch(some, n0));
@@ -59,7 +59,7 @@ public class Switch_Tests : Abstracts.Switch_Tests
 	}
 
 	[Fact]
-	public override void Test07_Return_Void_If_Some_And_Some_Func_Is_Null_Throws_SomeCannotBeNullException()
+	public override void Test07_Return_Void_If_Some_And_Some_Func_Is_Null_Throws_ArgumentNullException()
 	{
 		Test07((mbe, some) => mbe.Switch(some, Substitute.For<Action>()));
 		Test07((mbe, some) => mbe.Switch(some, Substitute.For<Action<IMsg>>()));
@@ -73,7 +73,7 @@ public class Switch_Tests : Abstracts.Switch_Tests
 	}
 
 	[Fact]
-	public override void Test09_Return_Value_If_Some_And_Some_Func_Is_Null_Throws_SomeCannotBeNullException()
+	public override void Test09_Return_Value_If_Some_And_Some_Func_Is_Null_Throws_ArgumentNullException()
 	{
 		Test09((mbe, some) => mbe.Switch(some, Rnd.Str));
 		Test09((mbe, some) => mbe.Switch(some, Substitute.For<Func<string>>()));
