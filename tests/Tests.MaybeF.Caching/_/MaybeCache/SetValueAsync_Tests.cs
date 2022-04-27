@@ -12,7 +12,7 @@ public class SetValueAsync_Tests
 	{
 		// Arrange
 		var mc = Substitute.For<IMemoryCache>();
-		var cache = new MaybeCache<string, long>(mc);
+		var cache = new MaybeCache<string>(mc);
 
 		// Act
 		var action = Task () => cache.SetValueAsync(null!, () => Task.FromResult(Rnd.Lng));
@@ -26,10 +26,10 @@ public class SetValueAsync_Tests
 	{
 		// Arrange
 		var mc = Substitute.For<IMemoryCache>();
-		var cache = new MaybeCache<long, string>(mc);
+		var cache = new MaybeCache<long>(mc);
 
 		// Act
-		var action = Task () => cache.SetValueAsync(Rnd.Lng, null!);
+		var action = Task () => cache.SetValueAsync<string>(Rnd.Lng, null!);
 
 		// Assert
 		await Assert.ThrowsAsync<ArgumentNullException>(action);
@@ -42,7 +42,7 @@ public class SetValueAsync_Tests
 		var key = Rnd.Str;
 		var value = Rnd.Lng;
 		var mc = Substitute.For<IMemoryCache>();
-		var cache = new MaybeCache<string, long>(mc);
+		var cache = new MaybeCache<string>(mc);
 
 		// Act
 		await cache.SetValueAsync(key, () => Task.FromResult(value));
