@@ -12,7 +12,7 @@ public class RemoveValue_Tests
 	{
 		// Arrange
 		var mc = Substitute.For<IMemoryCache>();
-		var cache = new MaybeCache<string, long>(mc);
+		var cache = new MaybeCache<string>(mc);
 
 		// Act
 		var action = void () => cache.RemoveValue(null!);
@@ -26,7 +26,7 @@ public class RemoveValue_Tests
 	{
 		// Arrange
 		var mc = Substitute.For<IMemoryCache>();
-		var cache = new MaybeCache<string, long>(mc);
+		var cache = new MaybeCache<string>(mc);
 		var key = Rnd.Str;
 
 		// Act

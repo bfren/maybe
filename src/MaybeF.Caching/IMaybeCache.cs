@@ -10,41 +10,43 @@ namespace MaybeF.Caching;
 /// Asynchronous and null-safe cache implementation
 /// </summary>
 /// <typeparam name="TKey">Key type</typeparam>
-/// <typeparam name="TValue">Value type</typeparam>
-public interface IMaybeCache<TKey, TValue>
+public interface IMaybeCache<TKey>
 	where TKey : notnull
 {
 	/// <summary>
 	/// Retrieve a cache entry if it exists
 	/// </summary>
+	/// <typeparam name="TValue">Value Type</typeparam>
 	/// <param name="key">Entry key</param>
-	Maybe<TValue> GetValue(TKey key);
+	Maybe<TValue> GetValue<TValue>(TKey key);
 
 	/// <summary>
 	/// Create a cache entry with specified values
 	/// </summary>
+	/// <typeparam name="TValue">Value Type</typeparam>
 	/// <param name="key">Entry key</param>
 	/// <param name="value">Entry value</param>
-	void SetValue(TKey key, TValue value);
+	void SetValue<TValue>(TKey key, TValue value);
 
-	/// <inheritdoc cref="SetValue(TKey, TValue)"/>
-	Task SetValueAsync(TKey key, Func<Task<TValue>> valueFactory);
+	/// <inheritdoc cref="SetValue{TValue}(TKey, TValue)"/>
+	Task SetValueAsync<TValue>(TKey key, Func<Task<TValue>> valueFactory);
 
 	/// <summary>
 	/// Get a value from the cache or create it if it doesn't exist
 	/// </summary>
+	/// <typeparam name="TValue">Value Type</typeparam>
 	/// <param name="key">Entry key</param>
 	/// <param name="valueFactory">Entry value factory</param>
-	Maybe<TValue> GetOrCreate(TKey key, Func<TValue> valueFactory);
+	Maybe<TValue> GetOrCreate<TValue>(TKey key, Func<TValue> valueFactory);
 
-	/// <inheritdoc cref="GetOrCreate(TKey, Func{TValue})"/>
-	Maybe<TValue> GetOrCreate(TKey key, Func<Maybe<TValue>> valueFactory);
+	/// <inheritdoc cref="GetOrCreate{TValue}(TKey, Func{TValue})"/>
+	Maybe<TValue> GetOrCreate<TValue>(TKey key, Func<Maybe<TValue>> valueFactory);
 
-	/// <inheritdoc cref="GetOrCreate(TKey, Func{TValue})"/>
-	Task<Maybe<TValue>> GetOrCreateAsync(TKey key, Func<Task<TValue>> valueFactory);
+	/// <inheritdoc cref="GetOrCreate{TValue}(TKey, Func{TValue})"/>
+	Task<Maybe<TValue>> GetOrCreateAsync<TValue>(TKey key, Func<Task<TValue>> valueFactory);
 
-	/// <inheritdoc cref="GetOrCreate(TKey, Func{TValue})"/>
-	Task<Maybe<TValue>> GetOrCreateAsync(TKey key, Func<Task<Maybe<TValue>>> valueFactory);
+	/// <inheritdoc cref="GetOrCreate{TValue}(TKey, Func{TValue})"/>
+	Task<Maybe<TValue>> GetOrCreateAsync<TValue>(TKey key, Func<Task<Maybe<TValue>>> valueFactory);
 
 	/// <summary>
 	/// Remove a value from the cache

@@ -12,7 +12,7 @@ public class SetValue_Tests
 	{
 		// Arrange
 		var mc = Substitute.For<IMemoryCache>();
-		var cache = new MaybeCache<string, long>(mc);
+		var cache = new MaybeCache<string>(mc);
 
 		// Act
 		var action = void () => cache.SetValue(null!, Rnd.Lng);
@@ -26,10 +26,10 @@ public class SetValue_Tests
 	{
 		// Arrange
 		var mc = Substitute.For<IMemoryCache>();
-		var cache = new MaybeCache<long, string>(mc);
+		var cache = new MaybeCache<long>(mc);
 
 		// Act
-		var action = void () => cache.SetValue(Rnd.Lng, null!);
+		var action = void () => cache.SetValue<string>(Rnd.Lng, null!);
 
 		// Assert
 		Assert.Throws<ArgumentNullException>(action);
@@ -42,7 +42,7 @@ public class SetValue_Tests
 		var key = Rnd.Str;
 		var value = Rnd.Lng;
 		var mc = Substitute.For<IMemoryCache>();
-		var cache = new MaybeCache<string, long>(mc);
+		var cache = new MaybeCache<string>(mc);
 
 		// Act
 		cache.SetValue(key, value);

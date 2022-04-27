@@ -8,7 +8,7 @@ using Microsoft.Extensions.Caching.Memory;
 
 namespace MaybeF.Caching;
 
-/// <inheritdoc cref="MaybeCache{TKey, TValue}"/>
+/// <inheritdoc cref="MaybeCache{TKey}"/>
 public abstract class MaybeCache
 {
 	/// <summary>
@@ -22,6 +22,9 @@ public abstract class MaybeCache
 		/// <summary>Cache entry does not exist</summary>
 		public sealed record class CacheEntryDoesNotExistMsg : IMsg;
 
+		/// <summary>Cache entry exists but is not of the type requested</summary>
+		public sealed record class CacheEntryIsIncorrectTypeMsg : IMsg;
+
 		/// <summary>Cache entry exists but is null</summary>
 		public sealed record class CacheEntryIsNullMsg : IMsg;
 
@@ -34,8 +37,8 @@ public abstract class MaybeCache
 	}
 }
 
-/// <inheritdoc cref="IMaybeCache{TKey, TValue}"/>
-public sealed class MaybeCache<TKey, TValue> : MaybeCache, IMaybeCache<TKey, TValue>
+/// <inheritdoc cref="IMaybeCache{TKey}"/>
+public sealed class MaybeCache<TKey> : MaybeCache, IMaybeCache<TKey>
 	where TKey : notnull
 {
 	internal IMemoryCache Cache { get; private init; }
@@ -50,7 +53,7 @@ public sealed class MaybeCache<TKey, TValue> : MaybeCache, IMaybeCache<TKey, TVa
 		Cache = cache;
 
 	/// <inheritdoc/>
-	public Maybe<TValue> GetValue(TKey key)
+	public Maybe<TValue> GetValue<TValue>(TKey key)
 	{
 		// Key cannot be null
 		if (key is null)
@@ -61,19 +64,24 @@ public sealed class MaybeCache<TKey, TValue> : MaybeCache, IMaybeCache<TKey, TVa
 		// Attempt to get the value
 		if (Cache.TryGetValue(key, out var value))
 		{
-			if (value is TValue cachedValue)
+			return value switch
 			{
-				return cachedValue;
-			}
+				TValue correctType =>
+					correctType,
 
-			return F.None<TValue, M.CacheEntryIsNullMsg>();
+				{ } =>
+					F.None<TValue, M.CacheEntryIsIncorrectTypeMsg>(),
+
+				_ =>
+					F.None<TValue, M.CacheEntryIsNullMsg>()
+			};
 		}
 
 		return F.None<TValue, M.CacheEntryDoesNotExistMsg>();
 	}
 
 	/// <inheritdoc/>
-	public void SetValue(TKey key, TValue value)
+	public void SetValue<TValue>(TKey key, TValue value)
 	{
 		ArgumentNullException.ThrowIfNull(key);
 		ArgumentNullException.ThrowIfNull(value);
@@ -82,7 +90,7 @@ public sealed class MaybeCache<TKey, TValue> : MaybeCache, IMaybeCache<TKey, TVa
 	}
 
 	/// <inheritdoc/>
-	public async Task SetValueAsync(TKey key, Func<Task<TValue>> valueFactory)
+	public async Task SetValueAsync<TValue>(TKey key, Func<Task<TValue>> valueFactory)
 	{
 		ArgumentNullException.ThrowIfNull(key);
 		ArgumentNullException.ThrowIfNull(valueFactory);
@@ -91,57 +99,19 @@ public sealed class MaybeCache<TKey, TValue> : MaybeCache, IMaybeCache<TKey, TVa
 	}
 
 	/// <inheritdoc/>
-	public Maybe<TValue> GetOrCreate(TKey key, Func<TValue> valueFactory) =>
+	public Maybe<TValue> GetOrCreate<TValue>(TKey key, Func<TValue> valueFactory) =>
 		GetOrCreate(key, () => F.Some(valueFactory()));
 
 	/// <inheritdoc/>
-	public Maybe<TValue> GetOrCreate(TKey key, Func<Maybe<TValue>> valueFactory)
-	{
-		// Key cannot be null
-		if (key is null)
-		{
-			return F.None<TValue, M.KeyIsNullMsg>();
-		}
-
-		// Check the entry already exists
-		if (Cache.TryGetValue(key, out var value) && value is TValue cachedValue)
-		{
-			return cachedValue;
-		}
-
-		// Lock all threads
-		CacheLock.Wait();
-		try
-		{
-			// Create value and cache entry
-			return valueFactory()
-				.Map(
-					x =>
-					{
-						_ = Cache.CreateEntry(key).Value = x;
-						return x;
-					},
-					e => new M.ErrorCreatingCacheValueMsg(e)
-				);
-		}
-		catch (Exception e)
-		{
-			// Return none on failure
-			return F.None<TValue, M.ErrorCreatingCacheValueMsg>(e);
-		}
-		finally
-		{
-			// Release other threads
-			_ = CacheLock.Release();
-		}
-	}
+	public Maybe<TValue> GetOrCreate<TValue>(TKey key, Func<Maybe<TValue>> valueFactory) =>
+		GetOrCreateAsync(key, () => Task.FromResult(valueFactory())).Result;
 
 	/// <inheritdoc/>
-	public Task<Maybe<TValue>> GetOrCreateAsync(TKey key, Func<Task<TValue>> valueFactory) =>
+	public Task<Maybe<TValue>> GetOrCreateAsync<TValue>(TKey key, Func<Task<TValue>> valueFactory) =>
 		GetOrCreateAsync(key, async () => F.Some(await valueFactory()));
 
 	/// <inheritdoc/>
-	public async Task<Maybe<TValue>> GetOrCreateAsync(TKey key, Func<Task<Maybe<TValue>>> valueFactory)
+	public async Task<Maybe<TValue>> GetOrCreateAsync<TValue>(TKey key, Func<Task<Maybe<TValue>>> valueFactory)
 	{
 		// Key cannot be null
 		if (key is null)
@@ -150,21 +120,30 @@ public sealed class MaybeCache<TKey, TValue> : MaybeCache, IMaybeCache<TKey, TVa
 		}
 
 		// Check the entry already exists
-		if (Cache.TryGetValue(key, out var value) && value is TValue cachedValue)
+		if (Cache.TryGetValue(key, out var value))
 		{
-			return cachedValue;
+			return value switch
+			{
+				TValue correctType =>
+					correctType,
+
+				{ } =>
+					F.None<TValue, M.CacheEntryIsIncorrectTypeMsg>(),
+
+				_ =>
+					F.None<TValue, M.CacheEntryIsNullMsg>()
+			};
 		}
 
 		// Lock all threads
 		await CacheLock.WaitAsync();
 		try
 		{
-			// Create value and cache entry
 			return await valueFactory()
 				.MapAsync(
 					x =>
 					{
-						_ = Cache.CreateEntry(key).Value = x;
+						_ = Cache.GetOrCreate(key, _ => x);
 						return x;
 					},
 					e => new M.ErrorCreatingCacheValueMsg(e)
