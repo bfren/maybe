@@ -8,7 +8,7 @@ using Microsoft.Extensions.Caching.Memory;
 
 namespace MaybeF.Caching;
 
-/// <inheritdoc cref="MaybeCache{TKey, TValue}"/>
+/// <inheritdoc cref="MaybeCache{TKey}"/>
 public abstract class MaybeCache
 {
 	/// <summary>
@@ -38,7 +38,7 @@ public abstract class MaybeCache
 }
 
 /// <inheritdoc cref="IMaybeCache{TKey}"/>
-public class MaybeCache<TKey> : MaybeCache, IMaybeCache<TKey>
+public sealed class MaybeCache<TKey> : MaybeCache, IMaybeCache<TKey>
 	where TKey : notnull
 {
 	internal IMemoryCache Cache { get; private init; }

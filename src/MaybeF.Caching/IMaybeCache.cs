@@ -28,7 +28,7 @@ public interface IMaybeCache<TKey>
 	/// <param name="value">Entry value</param>
 	void SetValue<TValue>(TKey key, TValue value);
 
-	/// <inheritdoc cref="SetValue(TKey, TValue)"/>
+	/// <inheritdoc cref="SetValue{TValue}(TKey, TValue)"/>
 	Task SetValueAsync<TValue>(TKey key, Func<Task<TValue>> valueFactory);
 
 	/// <summary>
@@ -39,13 +39,13 @@ public interface IMaybeCache<TKey>
 	/// <param name="valueFactory">Entry value factory</param>
 	Maybe<TValue> GetOrCreate<TValue>(TKey key, Func<TValue> valueFactory);
 
-	/// <inheritdoc cref="GetOrCreate(TKey, Func{TValue})"/>
+	/// <inheritdoc cref="GetOrCreate{TValue}(TKey, Func{TValue})"/>
 	Maybe<TValue> GetOrCreate<TValue>(TKey key, Func<Maybe<TValue>> valueFactory);
 
-	/// <inheritdoc cref="GetOrCreate(TKey, Func{TValue})"/>
+	/// <inheritdoc cref="GetOrCreate{TValue}(TKey, Func{TValue})"/>
 	Task<Maybe<TValue>> GetOrCreateAsync<TValue>(TKey key, Func<Task<TValue>> valueFactory);
 
-	/// <inheritdoc cref="GetOrCreate(TKey, Func{TValue})"/>
+	/// <inheritdoc cref="GetOrCreate{TValue}(TKey, Func{TValue})"/>
 	Task<Maybe<TValue>> GetOrCreateAsync<TValue>(TKey key, Func<Task<Maybe<TValue>>> valueFactory);
 
 	/// <summary>
