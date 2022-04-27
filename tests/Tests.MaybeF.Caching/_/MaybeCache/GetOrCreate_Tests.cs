@@ -13,17 +13,65 @@ public class GetOrCreate_Tests
 	{
 		// Arrange
 		var mc = Substitute.For<IMemoryCache>();
-		var cache = new MaybeCache<string, DateTime>(mc);
+		var cache = new MaybeCache<string>(mc);
 
 		// Act
-		var result = cache.GetOrCreate(null!, () => Rnd.DateTime);
+		var r0 = cache.GetOrCreate(null!, () => Rnd.DateTime);
+		var r1 = cache.GetOrCreate(null!, () => F.Some(Rnd.DateTime));
 
 		// Assert
-		result.AssertNone().AssertType<KeyIsNullMsg>();
+		r0.AssertNone().AssertType<KeyIsNullMsg>();
+		r1.AssertNone().AssertType<KeyIsNullMsg>();
 	}
 
 	[Fact]
-	public void Value_Exists__Returns_Value()
+	public void Value_Exists__Incorrect_Type__Returns_None_With_CacheEntryIsIncorrectTypeMsg()
+	{
+		// Arrange
+		var key = Rnd.Str;
+		var mc = Substitute.For<IMemoryCache>();
+		var cache = new MaybeCache<string>(mc);
+		mc.TryGetValue(key, out Arg.Any<object>()!)
+			.Returns(x =>
+			{
+				x[1] = Rnd.Lng;
+				return true;
+			});
+
+		// Act
+		var r0 = cache.GetOrCreate(key, () => Rnd.DateTime);
+		var r1 = cache.GetOrCreate(key, () => F.Some(Rnd.DateTime));
+
+		// Assert
+		r0.AssertNone().AssertType<CacheEntryIsIncorrectTypeMsg>();
+		r1.AssertNone().AssertType<CacheEntryIsIncorrectTypeMsg>();
+	}
+
+	[Fact]
+	public void Value_Exists__Is_Null__Returns_None_With_CacheEntryIsNullMsg()
+	{
+		// Arrange
+		var key = Rnd.Str;
+		var mc = Substitute.For<IMemoryCache>();
+		var cache = new MaybeCache<string>(mc);
+		mc.TryGetValue(key, out Arg.Any<object>()!)
+			.Returns(x =>
+			{
+				x[1] = null;
+				return true;
+			});
+
+		// Act
+		var r0 = cache.GetOrCreate(key, () => Rnd.DateTime);
+		var r1 = cache.GetOrCreate(key, () => F.Some(Rnd.DateTime));
+
+		// Assert
+		r0.AssertNone().AssertType<CacheEntryIsNullMsg>();
+		r1.AssertNone().AssertType<CacheEntryIsNullMsg>();
+	}
+
+	[Fact]
+	public void Value_Exists__Correct_Type__Returns_Value()
 	{
 		// Arrange
 		var key = Rnd.Str;
@@ -35,7 +83,7 @@ public class GetOrCreate_Tests
 				x[1] = value;
 				return true;
 			});
-		var cache = new MaybeCache<string, long>(mc);
+		var cache = new MaybeCache<string>(mc);
 
 		// Act
 		var r0 = cache.GetOrCreate(key, () => Rnd.Lng);
@@ -67,7 +115,7 @@ public class GetOrCreate_Tests
 				x[1] = null;
 				return false;
 			});
-		var cache = new MaybeCache<string, long>(mc);
+		var cache = new MaybeCache<string>(mc);
 
 		// Act
 		var r0 = cache.GetOrCreate(key, f0);
@@ -97,7 +145,7 @@ public class GetOrCreate_Tests
 				x[1] = null;
 				return false;
 			});
-		var cache = new MaybeCache<string, long>(mc);
+		var cache = new MaybeCache<string>(mc);
 
 		// Act
 		var r0 = cache.GetOrCreate(key, f0);
@@ -108,5 +156,34 @@ public class GetOrCreate_Tests
 		Assert.Equal(ex, n0.Value);
 		var n1 = r1.AssertNone().AssertType<ErrorCreatingCacheValueMsg>();
 		Assert.Equal(ex, n1.Value);
+	}
+
+	[Fact]
+	public void Multiple_Threads__Calls_CreateEntry__Once()
+	{
+		// Arrange
+		var key = Rnd.Str;
+		var created = false;
+		var f = Substitute.For<Func<Task<long>>>();
+		var mc = Substitute.For<IMemoryCache>();
+		mc.TryGetValue(key, out Arg.Any<object>()!)
+			.Returns(x =>
+			{
+				x[1] = Rnd.Lng;
+				return created;
+			});
+		mc.When(x => x.CreateEntry(key))
+			.Do(Callback.First(_ => created = true));
+		var cache = new MaybeCache<string>(mc);
+
+		// Act
+		Parallel.ForEach(
+			source: Enumerable.Range(0, 30),
+			parallelOptions: new() { MaxDegreeOfParallelism = 10 },
+			body: _ => cache.GetOrCreate(key, f)
+		);
+
+		// Assert
+		mc.Received(1).CreateEntry(key);
 	}
 }
