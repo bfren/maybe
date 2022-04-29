@@ -192,6 +192,40 @@ public abstract class SwitchIfAsync_Tests
 		result.AssertNone().AssertType<TestMsg>();
 	}
 
+	public abstract Task Test11_Is_Some__Returns_Result_Of_Check();
+
+	protected static async Task Test11(Func<Task<Maybe<int>>, Func<int, bool>, Task<bool>> act)
+	{
+		// Arrange
+		var maybe = F.Some(Rnd.Int).AsTask;
+		var value = Rnd.Flip;
+		var check = Substitute.For<Func<int, bool>>();
+		check.Invoke(default)
+			.ReturnsForAnyArgs(value);
+
+		// Act
+		var result = await act(maybe, check);
+
+		// Assert
+		Assert.Equal(value, result);
+	}
+
+	public abstract Task Test12_Is_None__Returns_False();
+
+	protected static async Task Test12(Func<Task<Maybe<int>>, Func<int, bool>, Task<bool>> act)
+	{
+		// Arrange
+		var maybe = Create.None<int>().AsTask;
+		var check = Substitute.For<Func<int, bool>>();
+
+		// Act
+		var result = await act(maybe, check);
+
+		// Assert
+		Assert.False(result);
+		check.DidNotReceiveWithAnyArgs().Invoke(default);
+	}
+
 	public record class FakeMaybe : Maybe<int> { }
 
 	public sealed record class TestMsg : IMsg;

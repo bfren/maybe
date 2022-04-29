@@ -74,6 +74,18 @@ public class SwitchIfAsync_Tests : Abstracts.SwitchIfAsync_Tests
 		await Test10((mbe, check, ifFalse) => mbe.SwitchIfAsync(check, x => ifFalse(x).Reason));
 	}
 
+	[Fact]
+	public override async Task Test11_Is_Some__Returns_Result_Of_Check()
+	{
+		await Test11((mbe, check) => mbe.SwitchIfAsync(check));
+	}
+
+	[Fact]
+	public override async Task Test12_Is_None__Returns_False()
+	{
+		await Test12((mbe, check) => mbe.SwitchIfAsync(check));
+	}
+
 	#region Unused
 
 	public override Task Test01_If_Null_Throws_MaybeCannotBeNullException(Maybe<int> input) =>

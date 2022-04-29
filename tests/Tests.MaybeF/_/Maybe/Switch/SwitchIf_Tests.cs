@@ -74,6 +74,18 @@ public class SwitchIf_Tests : Abstracts.SwitchIf_Tests
 		Test10((mbe, check, ifFalse) => mbe.SwitchIf(check, x => ifFalse(x).Reason));
 	}
 
+	[Fact]
+	public override void Test11_Is_Some__Returns_Result_Of_Check()
+	{
+		Test11((mbe, check) => mbe.SwitchIf(check));
+	}
+
+	[Fact]
+	public override void Test12_Is_None__Returns_False()
+	{
+		Test12((mbe, check) => mbe.SwitchIf(check));
+	}
+
 	#region Unused
 
 	[Theory]
