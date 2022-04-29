@@ -9,6 +9,13 @@ namespace MaybeF;
 public static partial class MaybeExtensions
 {
 	/// <inheritdoc cref="F.SwitchIf{T}(Maybe{T}, Func{T, bool}, Func{T, Maybe{T}}?, Func{T, Maybe{T}}?)"/>
+	public static Task<bool> SwitchIfAsync<T>(
+		this Task<Maybe<T>> @this,
+		Func<T, bool> check
+	) =>
+		F.SwitchIfAsync(@this, check);
+
+	/// <inheritdoc cref="F.SwitchIf{T}(Maybe{T}, Func{T, bool}, Func{T, Maybe{T}}?, Func{T, Maybe{T}}?)"/>
 	public static Task<Maybe<T>> SwitchIfAsync<T>(
 		this Task<Maybe<T>> @this,
 		Func<T, bool> check,
