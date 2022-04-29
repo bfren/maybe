@@ -82,4 +82,16 @@ public class SwitchIf_Tests : Abstracts.SwitchIf_Tests
 		Test10((mbe, check, ifFalse) => F.SwitchIf(mbe, check, null, ifFalse));
 		Test10((mbe, check, ifFalse) => F.SwitchIf(mbe, check, x => ifFalse(x).Reason));
 	}
+
+	[Fact]
+	public override void Test11_Is_Some__Returns_Result_Of_Check()
+	{
+		Test11((mbe, check) => F.SwitchIf(mbe, check));
+	}
+
+	[Fact]
+	public override void Test12_Is_None__Returns_False()
+	{
+		Test12((mbe, check) => F.SwitchIf(mbe, check));
+	}
 }

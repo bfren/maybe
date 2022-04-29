@@ -77,6 +77,16 @@ public static partial class F
 	public static Maybe<T> SwitchIf<T>(Maybe<T> maybe, Func<T, bool> check, Func<T, IMsg> ifFalse) =>
 		SwitchIf(maybe, check, null, x => None<T>(ifFalse(x)));
 
+	/// <summary>
+	/// If the input <paramref name="maybe"/> is <see cref="MaybeF.Some{T}"/>, runs <paramref name="check"/> function
+	/// and returns its result - otherwise returns false.
+	/// </summary>
+	/// <typeparam name="T">Maybe value type</typeparam>
+	/// <param name="maybe">Maybe being switched</param>
+	/// <param name="check">Function to run if <paramref name="maybe"/> is <see cref="MaybeF.Some{T}"/></param>
+	public static bool SwitchIf<T>(Maybe<T> maybe, Func<T, bool> check) =>
+		Switch(maybe, some: x => check(x), none: _ => false);
+
 	public static partial class M
 	{
 		/// <summary>Predicate in SwitchIf cannot be null</summary>

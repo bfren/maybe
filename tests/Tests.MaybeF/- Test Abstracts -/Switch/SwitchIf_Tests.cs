@@ -192,6 +192,40 @@ public abstract class SwitchIf_Tests
 		result.AssertNone().AssertType<TestMsg>();
 	}
 
+	public abstract void Test11_Is_Some__Returns_Result_Of_Check();
+
+	protected static void Test11(Func<Maybe<int>, Func<int, bool>, bool> act)
+	{
+		// Arrange
+		var maybe = F.Some(Rnd.Int);
+		var value = Rnd.Flip;
+		var check = Substitute.For<Func<int, bool>>();
+		check.Invoke(default)
+			.ReturnsForAnyArgs(value);
+
+		// Act
+		var result = act(maybe, check);
+
+		// Assert
+		Assert.Equal(value, result);
+	}
+
+	public abstract void Test12_Is_None__Returns_False();
+
+	protected static void Test12(Func<Maybe<int>, Func<int, bool>, bool> act)
+	{
+		// Arrange
+		var maybe = Create.None<int>();
+		var check = Substitute.For<Func<int, bool>>();
+
+		// Act
+		var result = act(maybe, check);
+
+		// Assert
+		Assert.False(result);
+		check.DidNotReceiveWithAnyArgs().Invoke(default);
+	}
+
 	public record class FakeMaybe : Maybe<int> { }
 
 	public sealed record class TestMsg : IMsg;

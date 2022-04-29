@@ -399,6 +399,10 @@ public abstract record class Maybe<T> : IEquatable<Maybe<T>>
 	public Maybe<T> SwitchIf(Func<T, bool> check, Func<T, IMsg> ifFalse) =>
 		F.SwitchIf(this, check, ifFalse);
 
+	/// <inheritdoc cref="F.SwitchIf{T}(Maybe{T}, Func{T, bool})"/>
+	public bool SwitchIf(Func<T, bool> check) =>
+		F.SwitchIf(this, check);
+
 	#endregion Switch
 
 	#region Unwrap
