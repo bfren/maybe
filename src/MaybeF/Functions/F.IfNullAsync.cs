@@ -20,7 +20,7 @@ public static partial class F
 					ifNull(),
 
 				{ } =>
-					maybe.AsTask,
+					maybe.AsTask(),
 
 				_ =>
 					ifNull()
@@ -35,7 +35,7 @@ public static partial class F
 	/// <inheritdoc cref="IfNull{T, TMsg}(Maybe{T}, Func{TMsg})"/>
 	public static async Task<Maybe<T>> IfNullAsync<T, TMsg>(Task<Maybe<T>> maybe, Func<TMsg> ifNull)
 		where TMsg : IMsg =>
-		await IfNullAsync(await maybe.ConfigureAwait(false), () => None<T>(ifNull()).AsTask).ConfigureAwait(false);
+		await IfNullAsync(await maybe.ConfigureAwait(false), () => None<T>(ifNull()).AsTask()).ConfigureAwait(false);
 
 	/// <inheritdoc cref="IfNull{T, TReturn}(Maybe{T}, Func{TReturn}, Func{T, TReturn}, Handler)"/>
 	public static Task<Maybe<TReturn>> IfNullAsync<T, TReturn>(
