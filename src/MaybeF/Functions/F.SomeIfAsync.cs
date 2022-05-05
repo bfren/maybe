@@ -17,7 +17,7 @@ public static partial class F
 					SomeAsync(value, handler),
 
 				false =>
-					None<T, M.PredicateWasFalseMsg>().AsTask
+					None<T, M.PredicateWasFalseMsg>().AsTask()
 			},
 			handler
 		);

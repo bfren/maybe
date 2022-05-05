@@ -14,7 +14,7 @@ public static partial class F
 			Switch(
 				maybe,
 				some: v => bind(v),
-				none: r => None<TReturn>(r).AsTask
+				none: r => None<TReturn>(r).AsTask()
 			),
 			DefaultHandler
 		);

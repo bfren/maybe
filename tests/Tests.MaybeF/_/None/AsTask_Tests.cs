@@ -14,7 +14,7 @@ public class AsTask_Tests
 		var none = Create.None<int>();
 
 		// Act
-		var result = none.AsTask;
+		var result = none.AsTask();
 
 		// Assert
 		Assert.IsType<Task<Maybe<int>>>(result);

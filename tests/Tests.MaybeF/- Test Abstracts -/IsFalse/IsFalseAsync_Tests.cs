@@ -15,7 +15,7 @@ public abstract class IsFalseAsync_Tests
 	{
 		// Arrange
 		var value = Rnd.Flip;
-		var maybe = F.Some(value).AsTask;
+		var maybe = F.Some(value).AsTask();
 
 		// Act
 		var result = await act(maybe);
@@ -29,7 +29,7 @@ public abstract class IsFalseAsync_Tests
 	protected static async Task Test01(IsFalse act)
 	{
 		// Arrange
-		var maybe = Create.None<bool>().AsTask;
+		var maybe = Create.None<bool>().AsTask();
 
 		// Act
 		var result = await act(maybe);

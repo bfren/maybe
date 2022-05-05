@@ -11,7 +11,7 @@ public class SwitchAsync_Tests : Abstracts.SwitchAsync_Tests
 		var some = Substitute.For<Func<int, Task<string>>>();
 		var none = Substitute.For<Func<IMsg, Task<string>>>();
 		await Test00(mbe => F.SwitchAsync(mbe, some, none));
-		await Test00(mbe => F.SwitchAsync(mbe.AsTask, some, none));
+		await Test00(mbe => F.SwitchAsync(mbe.AsTask(), some, none));
 	}
 
 	[Theory]
@@ -29,7 +29,7 @@ public class SwitchAsync_Tests : Abstracts.SwitchAsync_Tests
 	{
 		var some = Substitute.For<Func<int, Task<string>>>();
 		await Test02((mbe, none) => F.SwitchAsync(mbe, some, none));
-		await Test02((mbe, none) => F.SwitchAsync(mbe.AsTask, some, none));
+		await Test02((mbe, none) => F.SwitchAsync(mbe.AsTask(), some, none));
 	}
 
 	[Fact]
@@ -37,6 +37,6 @@ public class SwitchAsync_Tests : Abstracts.SwitchAsync_Tests
 	{
 		var none = Substitute.For<Func<IMsg, Task<string>>>();
 		await Test03((mbe, some) => F.SwitchAsync(mbe, some, none));
-		await Test03((mbe, some) => F.SwitchAsync(mbe.AsTask, some, none));
+		await Test03((mbe, some) => F.SwitchAsync(mbe.AsTask(), some, none));
 	}
 }

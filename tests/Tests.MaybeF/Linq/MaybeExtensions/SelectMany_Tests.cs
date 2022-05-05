@@ -30,8 +30,8 @@ public class SelectMany_Tests
 		// Arrange
 		var v0 = Rnd.Int;
 		var v1 = Rnd.Int;
-		var o0 = F.Some(v0).AsTask;
-		var o1 = F.Some(v1).AsTask;
+		var o0 = F.Some(v0).AsTask();
+		var o1 = F.Some(v1).AsTask();
 
 		// Act
 		var result = await (
@@ -53,9 +53,9 @@ public class SelectMany_Tests
 		var v1 = Rnd.Int;
 		var v2 = Rnd.Int;
 		var v3 = Rnd.Int;
-		var o0 = F.Some(v0).AsTask;
+		var o0 = F.Some(v0).AsTask();
 		var o1 = F.Some(v1);
-		var o2 = F.Some(v2).AsTask;
+		var o2 = F.Some(v2).AsTask();
 		var o3 = F.Some(v3);
 
 		// Act
@@ -98,9 +98,9 @@ public class SelectMany_Tests
 		// Arrange
 		var v0 = Rnd.Int;
 		var v1 = Rnd.Int;
-		var o0 = F.Some(v0).AsTask;
-		var o1 = F.Some(v1).AsTask;
-		var o2 = F.None<int>(new InvalidIntegerMsg()).AsTask;
+		var o0 = F.Some(v0).AsTask();
+		var o1 = F.Some(v1).AsTask();
+		var o2 = F.None<int>(new InvalidIntegerMsg()).AsTask();
 
 		// Act
 		var result = await (
@@ -120,8 +120,8 @@ public class SelectMany_Tests
 		// Arrange
 		var v0 = Rnd.Int;
 		var v1 = Rnd.Int;
-		var o0 = F.Some(v0).AsTask;
-		var o1 = F.Some(v1).AsTask;
+		var o0 = F.Some(v0).AsTask();
+		var o1 = F.Some(v1).AsTask();
 		var o2 = F.None<int>(new InvalidIntegerMsg());
 
 		// Act

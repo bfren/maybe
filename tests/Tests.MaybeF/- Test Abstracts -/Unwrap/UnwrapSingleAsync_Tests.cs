@@ -17,7 +17,7 @@ public abstract class UnwrapSingleAsync_Tests
 		var maybe = new FakeMaybe();
 
 		// Act
-		var result = await act(maybe.AsTask);
+		var result = await act(maybe.AsTask());
 
 		// Assert
 		var msg = result.AssertNone().AssertType<UnhandledExceptionMsg>();
@@ -32,7 +32,7 @@ public abstract class UnwrapSingleAsync_Tests
 		var maybe = Create.None<int>();
 
 		// Act
-		var result = await act(maybe.AsTask);
+		var result = await act(maybe.AsTask());
 
 		// Assert
 		result.AssertNone();
@@ -47,7 +47,7 @@ public abstract class UnwrapSingleAsync_Tests
 		var maybe = F.None<int>(message);
 
 		// Act
-		var result = await act(maybe.AsTask);
+		var result = await act(maybe.AsTask());
 
 		// Assert
 		var none = result.AssertNone();
@@ -63,7 +63,7 @@ public abstract class UnwrapSingleAsync_Tests
 		var maybe = F.Some(empty);
 
 		// Act
-		var result = await act(maybe.AsTask);
+		var result = await act(maybe.AsTask());
 
 		// Assert
 		var msg = result.AssertNone().AssertType<UnwrapSingleErrorMsg>();
@@ -80,7 +80,7 @@ public abstract class UnwrapSingleAsync_Tests
 		var noItems = Substitute.For<Func<IMsg>>();
 
 		// Act
-		await act(maybe.AsTask, noItems);
+		await act(maybe.AsTask(), noItems);
 
 		// Assert
 		noItems.Received().Invoke();
@@ -95,7 +95,7 @@ public abstract class UnwrapSingleAsync_Tests
 		var maybe = F.Some(list);
 
 		// Act
-		var result = await act(maybe.AsTask);
+		var result = await act(maybe.AsTask());
 
 		// Assert
 		var msg = result.AssertNone().AssertType<UnwrapSingleErrorMsg>();
@@ -112,7 +112,7 @@ public abstract class UnwrapSingleAsync_Tests
 		var tooMany = Substitute.For<Func<IMsg>>();
 
 		// Act
-		await act(maybe.AsTask, tooMany);
+		await act(maybe.AsTask(), tooMany);
 
 		// Assert
 		tooMany.Received().Invoke();
@@ -127,7 +127,7 @@ public abstract class UnwrapSingleAsync_Tests
 		var maybe = F.Some(value);
 
 		// Act
-		var result = await act(maybe.AsTask);
+		var result = await act(maybe.AsTask());
 
 		// Assert
 		var msg = result.AssertNone().AssertType<UnwrapSingleErrorMsg>();
@@ -144,7 +144,7 @@ public abstract class UnwrapSingleAsync_Tests
 		var notAList = Substitute.For<Func<IMsg>>();
 
 		// Act
-		await act(maybe.AsTask, notAList);
+		await act(maybe.AsTask(), notAList);
 
 		// Assert
 		notAList.Received().Invoke();
@@ -160,7 +160,7 @@ public abstract class UnwrapSingleAsync_Tests
 		var maybe = F.Some(list);
 
 		// Act
-		var result = await act(maybe.AsTask);
+		var result = await act(maybe.AsTask());
 
 		// Assert
 		var msg = result.AssertNone().AssertType<UnwrapSingleErrorMsg>();
@@ -178,7 +178,7 @@ public abstract class UnwrapSingleAsync_Tests
 		var incorrectType = Substitute.For<Func<IMsg>>();
 
 		// Act
-		await act(maybe.AsTask, incorrectType);
+		await act(maybe.AsTask(), incorrectType);
 
 		// Assert
 		incorrectType.Received().Invoke();
@@ -194,7 +194,7 @@ public abstract class UnwrapSingleAsync_Tests
 		var maybe = F.Some(list);
 
 		// Act
-		var result = await act(maybe.AsTask);
+		var result = await act(maybe.AsTask());
 
 		// Assert
 		Assert.Equal(value, result);

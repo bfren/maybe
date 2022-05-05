@@ -14,7 +14,7 @@ public static partial class F
 			Switch(
 				maybe,
 				some: async v => { var x = await map(v).ConfigureAwait(false); return Some(x); },
-				none: r => None<TReturn>(r).AsTask
+				none: r => None<TReturn>(r).AsTask()
 			),
 			handler
 		);
