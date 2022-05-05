@@ -27,7 +27,7 @@ public class CatchAsync_Tests
 		var value = Rnd.Int;
 
 		// Act
-		var result = await F.CatchAsync(() => F.Some(value).AsTask, F.DefaultHandler);
+		var result = await F.CatchAsync(() => F.Some(value).AsTask(), F.DefaultHandler);
 
 		// Assert
 		var some = result.AssertSome();

@@ -32,11 +32,11 @@ public class Select_Tests
 		var maybe = F.Some(value);
 
 		// Act
-		var r0 = await maybe.AsTask.Select(s => s ^ 2);
+		var r0 = await maybe.AsTask().Select(s => s ^ 2);
 		var r1 = await maybe.Select(s => Task.FromResult(s ^ 2));
-		var r2 = await maybe.AsTask.Select(s => Task.FromResult(s ^ 2));
+		var r2 = await maybe.AsTask().Select(s => Task.FromResult(s ^ 2));
 		var r3 = await (
-			from a in maybe.AsTask
+			from a in maybe.AsTask()
 			select a ^ 2
 		);
 		var r4 = await (
@@ -44,7 +44,7 @@ public class Select_Tests
 			select Task.FromResult(a ^ 2)
 		);
 		var r5 = await (
-			from a in maybe.AsTask
+			from a in maybe.AsTask()
 			select Task.FromResult(a ^ 2)
 		);
 
@@ -88,11 +88,11 @@ public class Select_Tests
 		var maybe = F.None<int>(new InvalidIntegerMsg());
 
 		// Act
-		var r0 = await maybe.AsTask.Select(s => s ^ 2);
+		var r0 = await maybe.AsTask().Select(s => s ^ 2);
 		var r1 = await maybe.Select(s => Task.FromResult(s ^ 2));
-		var r2 = await maybe.AsTask.Select(s => Task.FromResult(s ^ 2));
+		var r2 = await maybe.AsTask().Select(s => Task.FromResult(s ^ 2));
 		var r3 = await (
-			from a in maybe.AsTask
+			from a in maybe.AsTask()
 			select a ^ 2
 		);
 		var r4 = await (
@@ -100,7 +100,7 @@ public class Select_Tests
 			select Task.FromResult(a ^ 2)
 		);
 		var r5 = await (
-			from a in maybe.AsTask
+			from a in maybe.AsTask()
 			select Task.FromResult(a ^ 2)
 		);
 

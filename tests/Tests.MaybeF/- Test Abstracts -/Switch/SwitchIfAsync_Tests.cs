@@ -19,7 +19,7 @@ public abstract class SwitchIfAsync_Tests
 		var check = Substitute.For<Func<int, bool>>();
 
 		// Act
-		var action = Task () => act(maybe.AsTask, check);
+		var action = Task () => act(maybe.AsTask(), check);
 
 		// Assert
 		await Assert.ThrowsAsync<UnknownMaybeException>(action);
@@ -47,7 +47,7 @@ public abstract class SwitchIfAsync_Tests
 		var maybe = Create.None<int>();
 
 		// Act
-		var result = await act(maybe.AsTask, null!);
+		var result = await act(maybe.AsTask(), null!);
 
 		// Assert
 		result.AssertNone().AssertType<SwitchIfPredicateCannotBeNullMsg>();
@@ -62,7 +62,7 @@ public abstract class SwitchIfAsync_Tests
 		var check = Substitute.For<Func<int, bool>>();
 
 		// Act
-		var result = await act(maybe.AsTask, check);
+		var result = await act(maybe.AsTask(), check);
 
 		// Assert
 		result.AssertNone();
@@ -78,7 +78,7 @@ public abstract class SwitchIfAsync_Tests
 		var check = bool (int _) => throw new MaybeTestException();
 
 		// Act
-		var result = await act(maybe.AsTask, check);
+		var result = await act(maybe.AsTask(), check);
 
 		// Assert
 		result.AssertNone().AssertType<SwitchIfFuncExceptionMsg>();
@@ -94,7 +94,7 @@ public abstract class SwitchIfAsync_Tests
 		check.Invoke(Arg.Any<int>()).Returns(true);
 
 		// Act
-		var result = await act(maybe.AsTask, check);
+		var result = await act(maybe.AsTask(), check);
 
 		// Assert
 		Assert.Same(maybe, result);
@@ -110,7 +110,7 @@ public abstract class SwitchIfAsync_Tests
 		check.Invoke(Arg.Any<int>()).Returns(false);
 
 		// Act
-		var result = await act(maybe.AsTask, check);
+		var result = await act(maybe.AsTask(), check);
 
 		// Assert
 		Assert.Same(maybe, result);
@@ -127,7 +127,7 @@ public abstract class SwitchIfAsync_Tests
 		var ifTrue = None<int> (int _) => throw new MaybeTestException();
 
 		// Act
-		var result = await act(maybe.AsTask, check, ifTrue);
+		var result = await act(maybe.AsTask(), check, ifTrue);
 
 		// Assert
 		result.AssertNone().AssertType<SwitchIfFuncExceptionMsg>();
@@ -144,7 +144,7 @@ public abstract class SwitchIfAsync_Tests
 		var ifFalse = None<int> (int _) => throw new MaybeTestException();
 
 		// Act
-		var result = await act(maybe.AsTask, check, ifFalse);
+		var result = await act(maybe.AsTask(), check, ifFalse);
 
 		// Assert
 		result.AssertNone().AssertType<SwitchIfFuncExceptionMsg>();
@@ -164,7 +164,7 @@ public abstract class SwitchIfAsync_Tests
 		ifTrue.Invoke(v0).Returns(F.Some(v0 + v1));
 
 		// Act
-		var result = await act(maybe.AsTask, check, ifTrue);
+		var result = await act(maybe.AsTask(), check, ifTrue);
 
 		// Assert
 		ifTrue.Received().Invoke(v0);
@@ -185,7 +185,7 @@ public abstract class SwitchIfAsync_Tests
 		ifFalse.Invoke(value).Returns(F.None<int, TestMsg>());
 
 		// Act
-		var result = await act(maybe.AsTask, check, ifFalse);
+		var result = await act(maybe.AsTask(), check, ifFalse);
 
 		// Assert
 		ifFalse.Received().Invoke(value);
@@ -197,7 +197,7 @@ public abstract class SwitchIfAsync_Tests
 	protected static async Task Test11(Func<Task<Maybe<int>>, Func<int, bool>, Task<bool>> act)
 	{
 		// Arrange
-		var maybe = F.Some(Rnd.Int).AsTask;
+		var maybe = F.Some(Rnd.Int).AsTask();
 		var value = Rnd.Flip;
 		var check = Substitute.For<Func<int, bool>>();
 		check.Invoke(default)
@@ -215,7 +215,7 @@ public abstract class SwitchIfAsync_Tests
 	protected static async Task Test12(Func<Task<Maybe<int>>, Func<int, bool>, Task<bool>> act)
 	{
 		// Arrange
-		var maybe = Create.None<int>().AsTask;
+		var maybe = Create.None<int>().AsTask();
 		var check = Substitute.For<Func<int, bool>>();
 
 		// Act

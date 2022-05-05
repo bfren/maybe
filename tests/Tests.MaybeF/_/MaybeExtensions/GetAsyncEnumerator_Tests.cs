@@ -10,7 +10,7 @@ public class GetAsyncEnumerator_Tests
 	{
 		// Arrange
 		var value = Rnd.Int;
-		var maybe = F.Some(value).AsTask;
+		var maybe = F.Some(value).AsTask();
 
 		// Act
 		var result = 0;
@@ -28,7 +28,7 @@ public class GetAsyncEnumerator_Tests
 	{
 		// Arrange
 		var value = Rnd.Int;
-		var maybe = Create.None<int>().AsTask;
+		var maybe = Create.None<int>().AsTask();
 
 		// Act
 		var result = value;

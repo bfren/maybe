@@ -33,11 +33,11 @@ public class Where_Tests
 		var maybe = F.Some(value);
 
 		// Act
-		var r0 = await maybe.AsTask.Where(s => s == value).Select(s => s ^ 2);
+		var r0 = await maybe.AsTask().Where(s => s == value).Select(s => s ^ 2);
 		var r1 = await maybe.Where(s => Task.FromResult(s == value)).Select(s => s ^ 2);
-		var r2 = await maybe.AsTask.Where(s => Task.FromResult(s == value)).Select(s => s ^ 2);
+		var r2 = await maybe.AsTask().Where(s => Task.FromResult(s == value)).Select(s => s ^ 2);
 		var r3 = await (
-			from a in maybe.AsTask
+			from a in maybe.AsTask()
 			where a == value
 			select a ^ 2
 		);
@@ -47,7 +47,7 @@ public class Where_Tests
 			select a ^ 2
 		);
 		var r5 = await (
-			from a in maybe.AsTask
+			from a in maybe.AsTask()
 			where Task.FromResult(a == value)
 			select a ^ 2
 		);
@@ -93,11 +93,11 @@ public class Where_Tests
 		var maybe = F.Some(value);
 
 		// Act
-		var r0 = await maybe.AsTask.Where(s => s != value).Select(s => s ^ 2);
+		var r0 = await maybe.AsTask().Where(s => s != value).Select(s => s ^ 2);
 		var r1 = await maybe.Where(s => Task.FromResult(s != value)).Select(s => s ^ 2);
-		var r2 = await maybe.AsTask.Where(s => Task.FromResult(s != value)).Select(s => s ^ 2);
+		var r2 = await maybe.AsTask().Where(s => Task.FromResult(s != value)).Select(s => s ^ 2);
 		var r3 = await (
-			from a in maybe.AsTask
+			from a in maybe.AsTask()
 			where a != value
 			select a ^ 2
 		);
@@ -107,7 +107,7 @@ public class Where_Tests
 			select a ^ 2
 		);
 		var r5 = await (
-			from a in maybe.AsTask
+			from a in maybe.AsTask()
 			where Task.FromResult(a != value)
 			select a ^ 2
 		);
@@ -147,11 +147,11 @@ public class Where_Tests
 		var maybe = F.None<int>(new InvalidIntegerMsg());
 
 		// Act
-		var r0 = await maybe.AsTask.Where(s => s != 0).Select(s => s ^ 2);
+		var r0 = await maybe.AsTask().Where(s => s != 0).Select(s => s ^ 2);
 		var r1 = await maybe.Where(s => Task.FromResult(s != 0)).Select(s => s ^ 2);
-		var r2 = await maybe.AsTask.Where(s => Task.FromResult(s != 0)).Select(s => s ^ 2);
+		var r2 = await maybe.AsTask().Where(s => Task.FromResult(s != 0)).Select(s => s ^ 2);
 		var r3 = await (
-			from a in maybe.AsTask
+			from a in maybe.AsTask()
 			where a != 0
 			select a ^ 2
 		);
@@ -161,7 +161,7 @@ public class Where_Tests
 			select a ^ 2
 		);
 		var r5 = await (
-			from a in maybe.AsTask
+			from a in maybe.AsTask()
 			where Task.FromResult(a != 0)
 			select a ^ 2
 		);
