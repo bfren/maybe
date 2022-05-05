@@ -3,7 +3,6 @@
 
 using System;
 using System.Collections.Generic;
-using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 using MaybeF.Exceptions;
 
@@ -18,15 +17,13 @@ public abstract record class Maybe<T> : IEquatable<Maybe<T>>
 	/// <summary>
 	/// Return as <see cref="Maybe{T}"/> wrapped in <see cref="Task{TResult}"/>
 	/// </summary>
-	[JsonIgnore]
-	public Task<Maybe<T>> AsTask =>
+	public Task<Maybe<T>> AsTask() =>
 		Task.FromResult(this);
 
 	/// <summary>
 	/// Return as <see cref="Maybe{T}"/> wrapped in <see cref="ValueTask{TResult}"/>
 	/// </summary>
-	[JsonIgnore]
-	public ValueTask<Maybe<T>> AsValueTask =>
+	public ValueTask<Maybe<T>> AsValueTask() =>
 		ValueTask.FromResult(this);
 
 	/// <summary>
