@@ -81,37 +81,61 @@ public sealed class MaybeCache<TKey> : MaybeCache, IMaybeCache<TKey>
 	}
 
 	/// <inheritdoc/>
-	public void SetValue<TValue>(TKey key, TValue value)
+	public void SetValue<TValue>(TKey key, TValue value) =>
+		SetValue(key, value, new());
+
+	/// <inheritdoc/>
+	public void SetValue<TValue>(TKey key, TValue value, MemoryCacheEntryOptions opt)
 	{
 		ArgumentNullException.ThrowIfNull(key);
 		ArgumentNullException.ThrowIfNull(value);
 
-		_ = Cache.Set(key, value);
+		_ = Cache.Set(key, value, opt);
 	}
 
 	/// <inheritdoc/>
-	public async Task SetValueAsync<TValue>(TKey key, Func<Task<TValue>> valueFactory)
+	public Task SetValueAsync<TValue>(TKey key, Func<Task<TValue>> valueFactory) =>
+		SetValueAsync(key, valueFactory, new());
+
+	/// <inheritdoc/>
+	public async Task SetValueAsync<TValue>(TKey key, Func<Task<TValue>> valueFactory, MemoryCacheEntryOptions opt)
 	{
 		ArgumentNullException.ThrowIfNull(key);
 		ArgumentNullException.ThrowIfNull(valueFactory);
 
-		_ = Cache.Set(key, await valueFactory());
+		_ = Cache.Set(key, await valueFactory(), opt);
 	}
 
 	/// <inheritdoc/>
 	public Maybe<TValue> GetOrCreate<TValue>(TKey key, Func<TValue> valueFactory) =>
-		GetOrCreate(key, () => F.Some(valueFactory()));
+		GetOrCreate(key, valueFactory, new());
+
+	/// <inheritdoc/>
+	public Maybe<TValue> GetOrCreate<TValue>(TKey key, Func<TValue> valueFactory, MemoryCacheEntryOptions opt) =>
+		GetOrCreate(key, () => F.Some(valueFactory()), opt);
 
 	/// <inheritdoc/>
 	public Maybe<TValue> GetOrCreate<TValue>(TKey key, Func<Maybe<TValue>> valueFactory) =>
-		GetOrCreateAsync(key, () => Task.FromResult(valueFactory())).Result;
+		GetOrCreate(key, valueFactory, new());
+
+	/// <inheritdoc/>
+	public Maybe<TValue> GetOrCreate<TValue>(TKey key, Func<Maybe<TValue>> valueFactory, MemoryCacheEntryOptions opt) =>
+		GetOrCreateAsync(key, () => Task.FromResult(valueFactory()), opt).Result;
 
 	/// <inheritdoc/>
 	public Task<Maybe<TValue>> GetOrCreateAsync<TValue>(TKey key, Func<Task<TValue>> valueFactory) =>
-		GetOrCreateAsync(key, async () => F.Some(await valueFactory()));
+		GetOrCreateAsync(key, valueFactory, new());
 
 	/// <inheritdoc/>
-	public async Task<Maybe<TValue>> GetOrCreateAsync<TValue>(TKey key, Func<Task<Maybe<TValue>>> valueFactory)
+	public Task<Maybe<TValue>> GetOrCreateAsync<TValue>(TKey key, Func<Task<TValue>> valueFactory, MemoryCacheEntryOptions opt) =>
+		GetOrCreateAsync(key, async () => F.Some(await valueFactory()), opt);
+
+	/// <inheritdoc/>
+	public Task<Maybe<TValue>> GetOrCreateAsync<TValue>(TKey key, Func<Task<Maybe<TValue>>> valueFactory) =>
+		GetOrCreateAsync(key, valueFactory, new());
+
+	/// <inheritdoc/>
+	public async Task<Maybe<TValue>> GetOrCreateAsync<TValue>(TKey key, Func<Task<Maybe<TValue>>> valueFactory, MemoryCacheEntryOptions opt)
 	{
 		// Key cannot be null
 		if (key is null)
@@ -141,11 +165,7 @@ public sealed class MaybeCache<TKey> : MaybeCache, IMaybeCache<TKey>
 		{
 			return await valueFactory()
 				.MapAsync(
-					x =>
-					{
-						_ = Cache.GetOrCreate(key, _ => x);
-						return x;
-					},
+					x => Cache.GetOrCreate(key, e => { _ = e.SetOptions(opt).SetValue(x); return x; }),
 					e => new M.ErrorCreatingCacheValueMsg(e)
 				);
 		}

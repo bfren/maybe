@@ -15,10 +15,12 @@ public class SetValueAsync_Tests
 		var cache = new MaybeCache<string>(mc);
 
 		// Act
-		var action = Task () => cache.SetValueAsync(null!, () => Task.FromResult(Rnd.Lng));
+		var a0 = Task () => cache.SetValueAsync(null!, () => Task.FromResult(Rnd.Lng));
+		var a1 = Task () => cache.SetValueAsync(null!, () => Task.FromResult(Rnd.Lng), new());
 
 		// Assert
-		await Assert.ThrowsAsync<ArgumentNullException>(action);
+		await Assert.ThrowsAsync<ArgumentNullException>(a0);
+		await Assert.ThrowsAsync<ArgumentNullException>(a1);
 	}
 
 	[Fact]
@@ -29,10 +31,12 @@ public class SetValueAsync_Tests
 		var cache = new MaybeCache<long>(mc);
 
 		// Act
-		var action = Task () => cache.SetValueAsync<string>(Rnd.Lng, null!);
+		var a0 = Task () => cache.SetValueAsync<string>(Rnd.Lng, null!);
+		var a1 = Task () => cache.SetValueAsync<string>(Rnd.Lng, null!, new());
 
 		// Assert
-		await Assert.ThrowsAsync<ArgumentNullException>(action);
+		await Assert.ThrowsAsync<ArgumentNullException>(a0);
+		await Assert.ThrowsAsync<ArgumentNullException>(a1);
 	}
 
 	[Fact]
@@ -46,9 +50,10 @@ public class SetValueAsync_Tests
 
 		// Act
 		await cache.SetValueAsync(key, () => Task.FromResult(value));
+		await cache.SetValueAsync(key, () => Task.FromResult(value), new());
 
 		// Assert
-		var entry = mc.Received().CreateEntry(key);
+		var entry = mc.Received(2).CreateEntry(key);
 		Assert.Equal(value, entry.Value);
 	}
 }

@@ -15,10 +15,12 @@ public class SetValue_Tests
 		var cache = new MaybeCache<string>(mc);
 
 		// Act
-		var action = void () => cache.SetValue(null!, Rnd.Lng);
+		var a0 = void () => cache.SetValue(null!, Rnd.Lng);
+		var a1 = void () => cache.SetValue(null!, Rnd.Lng, new());
 
 		// Assert
-		Assert.Throws<ArgumentNullException>(action);
+		Assert.Throws<ArgumentNullException>(a0);
+		Assert.Throws<ArgumentNullException>(a1);
 	}
 
 	[Fact]
@@ -29,10 +31,12 @@ public class SetValue_Tests
 		var cache = new MaybeCache<long>(mc);
 
 		// Act
-		var action = void () => cache.SetValue<string>(Rnd.Lng, null!);
+		var a0 = void () => cache.SetValue<string>(Rnd.Lng, null!);
+		var a1 = void () => cache.SetValue<string>(Rnd.Lng, null!, new());
 
 		// Assert
-		Assert.Throws<ArgumentNullException>(action);
+		Assert.Throws<ArgumentNullException>(a0);
+		Assert.Throws<ArgumentNullException>(a1);
 	}
 
 	[Fact]
@@ -46,9 +50,10 @@ public class SetValue_Tests
 
 		// Act
 		cache.SetValue(key, value);
+		cache.SetValue(key, value, new());
 
 		// Assert
-		var entry = mc.Received().CreateEntry(key);
+		var entry = mc.Received(2).CreateEntry(key);
 		Assert.Equal(value, entry.Value);
 	}
 }

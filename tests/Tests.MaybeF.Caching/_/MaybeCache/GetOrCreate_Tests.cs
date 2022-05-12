@@ -41,10 +41,14 @@ public class GetOrCreate_Tests
 		// Act
 		var r0 = cache.GetOrCreate(key, () => Rnd.DateTime);
 		var r1 = cache.GetOrCreate(key, () => F.Some(Rnd.DateTime));
+		var r2 = cache.GetOrCreate(key, () => Rnd.DateTime, new());
+		var r3 = cache.GetOrCreate(key, () => F.Some(Rnd.DateTime), new());
 
 		// Assert
 		r0.AssertNone().AssertType<CacheEntryIsIncorrectTypeMsg>();
 		r1.AssertNone().AssertType<CacheEntryIsIncorrectTypeMsg>();
+		r2.AssertNone().AssertType<CacheEntryIsIncorrectTypeMsg>();
+		r3.AssertNone().AssertType<CacheEntryIsIncorrectTypeMsg>();
 	}
 
 	[Fact]
@@ -64,10 +68,14 @@ public class GetOrCreate_Tests
 		// Act
 		var r0 = cache.GetOrCreate(key, () => Rnd.DateTime);
 		var r1 = cache.GetOrCreate(key, () => F.Some(Rnd.DateTime));
+		var r2 = cache.GetOrCreate(key, () => Rnd.DateTime, new());
+		var r3 = cache.GetOrCreate(key, () => F.Some(Rnd.DateTime), new());
 
 		// Assert
 		r0.AssertNone().AssertType<CacheEntryIsNullMsg>();
 		r1.AssertNone().AssertType<CacheEntryIsNullMsg>();
+		r2.AssertNone().AssertType<CacheEntryIsNullMsg>();
+		r3.AssertNone().AssertType<CacheEntryIsNullMsg>();
 	}
 
 	[Fact]
@@ -88,12 +96,18 @@ public class GetOrCreate_Tests
 		// Act
 		var r0 = cache.GetOrCreate(key, () => Rnd.Lng);
 		var r1 = cache.GetOrCreate(key, () => F.Some(Rnd.Lng));
+		var r2 = cache.GetOrCreate(key, () => Rnd.Lng, new());
+		var r3 = cache.GetOrCreate(key, () => F.Some(Rnd.Lng), new());
 
 		// Assert
 		var s0 = r0.AssertSome();
 		Assert.Equal(value, s0);
 		var s1 = r1.AssertSome();
 		Assert.Equal(value, s1);
+		var s2 = r2.AssertSome();
+		Assert.Equal(value, s2);
+		var s3 = r3.AssertSome();
+		Assert.Equal(value, s3);
 	}
 
 	[Fact]
@@ -120,13 +134,19 @@ public class GetOrCreate_Tests
 		// Act
 		var r0 = cache.GetOrCreate(key, f0);
 		var r1 = cache.GetOrCreate(key, f1);
+		var r2 = cache.GetOrCreate(key, f0, new());
+		var r3 = cache.GetOrCreate(key, f1, new());
 
 		// Assert
 		var s0 = r0.AssertSome();
 		Assert.Equal(value, s0);
 		var s1 = r1.AssertSome();
 		Assert.Equal(value, s1);
-		var entry = mc.Received(2).CreateEntry(key);
+		var s2 = r2.AssertSome();
+		Assert.Equal(value, s2);
+		var s3 = r3.AssertSome();
+		Assert.Equal(value, s3);
+		var entry = mc.Received(4).CreateEntry(key);
 		Assert.Equal(value, entry.Value);
 	}
 
@@ -150,12 +170,18 @@ public class GetOrCreate_Tests
 		// Act
 		var r0 = cache.GetOrCreate(key, f0);
 		var r1 = cache.GetOrCreate(key, f1);
+		var r2 = cache.GetOrCreate(key, f0, new());
+		var r3 = cache.GetOrCreate(key, f1, new());
 
 		// Assert
 		var n0 = r0.AssertNone().AssertType<ErrorCreatingCacheValueMsg>();
 		Assert.Equal(ex, n0.Value);
 		var n1 = r1.AssertNone().AssertType<ErrorCreatingCacheValueMsg>();
 		Assert.Equal(ex, n1.Value);
+		var n2 = r2.AssertNone().AssertType<ErrorCreatingCacheValueMsg>();
+		Assert.Equal(ex, n2.Value);
+		var n3 = r3.AssertNone().AssertType<ErrorCreatingCacheValueMsg>();
+		Assert.Equal(ex, n3.Value);
 	}
 
 	[Fact]
@@ -185,5 +211,31 @@ public class GetOrCreate_Tests
 
 		// Assert
 		mc.Received(1).CreateEntry(key);
+	}
+
+	[Fact]
+	public void Creates_Entry__Waits_For_Expiry__Creates_Again()
+	{
+		// Arrange
+		var key = Rnd.Str;
+		var v0 = Rnd.Lng;
+		var v1 = Rnd.Lng;
+		var mc = new MemoryCache(new MemoryCacheOptions());
+		var ms = 200;
+		var cache = new MaybeCache<string>(mc);
+
+		// Act
+		var r0 = cache.GetOrCreate(key, () => v0, new() { AbsoluteExpirationRelativeToNow = TimeSpan.FromMilliseconds(ms) });
+		var r1 = cache.GetOrCreate(key, () => v1);
+		Thread.Sleep(TimeSpan.FromMilliseconds(ms * 2));
+		var r2 = cache.GetOrCreate(key, () => v1);
+
+		// Assert
+		var s0 = r0.AssertSome();
+		Assert.Equal(v0, s0);
+		var s1 = r1.AssertSome();
+		Assert.Equal(v0, s1);
+		var s2 = r2.AssertSome();
+		Assert.Equal(v1, s2);
 	}
 }
