@@ -1,4 +1,4 @@
-﻿// Maybe: .NET Monad.
+// Maybe: .NET Monad.
 // Copyright (c) bfren - licensed under https://mit.bfren.dev/2019
 
 using System;
@@ -165,11 +165,7 @@ public sealed class MaybeCache<TKey> : MaybeCache, IMaybeCache<TKey>
 		{
 			return await valueFactory()
 				.MapAsync(
-					x =>
-					{
-						_ = Cache.GetOrCreate(key, e => e.SetOptions(opt).SetValue(x));
-						return x;
-					},
+					x => Cache.GetOrCreate(key, e => { _ = e.SetOptions(opt).SetValue(x); return x; }),
 					e => new M.ErrorCreatingCacheValueMsg(e)
 				);
 		}
