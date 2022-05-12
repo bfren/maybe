@@ -212,4 +212,30 @@ public class GetOrCreate_Tests
 		// Assert
 		mc.Received(1).CreateEntry(key);
 	}
+
+	[Fact]
+	public void Creates_Entry__Waits_For_Expiry__Creates_Again()
+	{
+		// Arrange
+		var key = Rnd.Str;
+		var v0 = Rnd.Lng;
+		var v1 = Rnd.Lng;
+		var mc = new MemoryCache(new MemoryCacheOptions());
+		var ms = 200;
+		var cache = new MaybeCache<string>(mc);
+
+		// Act
+		var r0 = cache.GetOrCreate(key, () => v0, new() { AbsoluteExpirationRelativeToNow = TimeSpan.FromMilliseconds(ms) });
+		var r1 = cache.GetOrCreate(key, () => v1);
+		Thread.Sleep(TimeSpan.FromMilliseconds(ms * 2));
+		var r2 = cache.GetOrCreate(key, () => v1);
+
+		// Assert
+		var s0 = r0.AssertSome();
+		Assert.Equal(v0, s0);
+		var s1 = r1.AssertSome();
+		Assert.Equal(v0, s1);
+		var s2 = r2.AssertSome();
+		Assert.Equal(v1, s2);
+	}
 }
