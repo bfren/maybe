@@ -206,16 +206,32 @@ public abstract record class Maybe<T> : IEquatable<Maybe<T>>
 	public Task<Maybe<T>> AuditAsync(Func<Maybe<T>, Task> any) =>
 		F.AuditAsync(this, any, null, null);
 
+	/// <inheritdoc cref="F.AuditAsync{T}(Maybe{T}, Func{Maybe{T}, ValueTask}, Func{T, ValueTask}?, Func{IMsg, ValueTask}?)"/>
+	public ValueTask<Maybe<T>> AuditAsync(Func<Maybe<T>, ValueTask> any) =>
+		F.AuditAsync(this, any, null, null);
+
 	/// <inheritdoc cref="F.AuditAsync{T}(Maybe{T}, Func{Maybe{T}, Task}, Func{T, Task}?, Func{IMsg, Task}?)"/>
 	public Task<Maybe<T>> AuditAsync(Func<T, Task> some) =>
+		F.AuditAsync(this, null, some, null);
+
+	/// <inheritdoc cref="F.AuditAsync{T}(Maybe{T}, Func{Maybe{T}, ValueTask}, Func{T, ValueTask}?, Func{IMsg, ValueTask}?)"/>
+	public ValueTask<Maybe<T>> AuditAsync(Func<T, ValueTask> some) =>
 		F.AuditAsync(this, null, some, null);
 
 	/// <inheritdoc cref="F.AuditAsync{T}(Maybe{T}, Func{Maybe{T}, Task}, Func{T, Task}?, Func{IMsg, Task}?)"/>
 	public Task<Maybe<T>> AuditAsync(Func<IMsg, Task> none) =>
 		F.AuditAsync<T>(this, null, null, none);
 
+	/// <inheritdoc cref="F.AuditAsync{T}(Maybe{T}, Func{Maybe{T}, ValueTask}, Func{T, ValueTask}?, Func{IMsg, ValueTask}?)"/>
+	public ValueTask<Maybe<T>> AuditAsync(Func<IMsg, ValueTask> none) =>
+		F.AuditAsync<T>(this, null, null, none);
+
 	/// <inheritdoc cref="F.AuditAsync{T}(Maybe{T}, Func{Maybe{T}, Task}, Func{T, Task}?, Func{IMsg, Task}?)"/>
 	public Task<Maybe<T>> AuditAsync(Func<T, Task> some, Func<IMsg, Task> none) =>
+		F.AuditAsync(this, null, some, none);
+
+	/// <inheritdoc cref="F.AuditAsync{T}(Maybe{T}, Func{Maybe{T}, ValueTask}, Func{T, ValueTask}?, Func{IMsg, ValueTask}?)"/>
+	public ValueTask<Maybe<T>> AuditAsync(Func<T, ValueTask> some, Func<IMsg, ValueTask> none) =>
 		F.AuditAsync(this, null, some, none);
 
 	#endregion Audit

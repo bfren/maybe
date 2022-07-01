@@ -18,7 +18,25 @@ public static partial class MaybeExtensions
 		);
 
 	/// <inheritdoc cref="F.Audit{T}(Maybe{T}, Action{Maybe{T}}, Action{T}?, Action{IMsg}?)"/>
+	public static ValueTask<Maybe<T>> AuditAsync<T>(this ValueTask<Maybe<T>> @this, Action<Maybe<T>> any) =>
+		F.AuditAsync(
+			@this,
+			any: x => { any(x); return ValueTask.CompletedTask; },
+			some: null,
+			none: null
+		);
+
+	/// <inheritdoc cref="F.Audit{T}(Maybe{T}, Action{Maybe{T}}, Action{T}?, Action{IMsg}?)"/>
 	public static Task<Maybe<T>> AuditAsync<T>(this Task<Maybe<T>> @this, Func<Maybe<T>, Task> any) =>
+		F.AuditAsync(
+			@this,
+			any: any,
+			some: null,
+			none: null
+		);
+
+	/// <inheritdoc cref="F.Audit{T}(Maybe{T}, Action{Maybe{T}}, Action{T}?, Action{IMsg}?)"/>
+	public static ValueTask<Maybe<T>> AuditAsync<T>(this ValueTask<Maybe<T>> @this, Func<Maybe<T>, ValueTask> any) =>
 		F.AuditAsync(
 			@this,
 			any: any,
@@ -36,7 +54,25 @@ public static partial class MaybeExtensions
 		);
 
 	/// <inheritdoc cref="F.Audit{T}(Maybe{T}, Action{Maybe{T}}, Action{T}?, Action{IMsg}?)"/>
+	public static ValueTask<Maybe<T>> AuditAsync<T>(this ValueTask<Maybe<T>> @this, Action<T> some) =>
+		F.AuditAsync(
+			@this,
+			any: null,
+			some: v => { some?.Invoke(v); return ValueTask.CompletedTask; },
+			none: null
+		);
+
+	/// <inheritdoc cref="F.Audit{T}(Maybe{T}, Action{Maybe{T}}, Action{T}?, Action{IMsg}?)"/>
 	public static Task<Maybe<T>> AuditAsync<T>(this Task<Maybe<T>> @this, Func<T, Task> some) =>
+		F.AuditAsync(
+			@this,
+			any: null,
+			some: some,
+			none: null
+		);
+
+	/// <inheritdoc cref="F.Audit{T}(Maybe{T}, Action{Maybe{T}}, Action{T}?, Action{IMsg}?)"/>
+	public static ValueTask<Maybe<T>> AuditAsync<T>(this ValueTask<Maybe<T>> @this, Func<T, ValueTask> some) =>
 		F.AuditAsync(
 			@this,
 			any: null,
@@ -54,7 +90,25 @@ public static partial class MaybeExtensions
 		);
 
 	/// <inheritdoc cref="F.Audit{T}(Maybe{T}, Action{Maybe{T}}, Action{T}?, Action{IMsg}?)"/>
+	public static ValueTask<Maybe<T>> AuditAsync<T>(this ValueTask<Maybe<T>> @this, Action<IMsg> none) =>
+		F.AuditAsync(
+			@this,
+			any: null,
+			some: null,
+			none: r => { none?.Invoke(r); return ValueTask.CompletedTask; }
+		);
+
+	/// <inheritdoc cref="F.Audit{T}(Maybe{T}, Action{Maybe{T}}, Action{T}?, Action{IMsg}?)"/>
 	public static Task<Maybe<T>> AuditAsync<T>(this Task<Maybe<T>> @this, Func<IMsg, Task> none) =>
+		F.AuditAsync(
+			@this,
+			any: null,
+			some: null,
+			none: none
+		);
+
+	/// <inheritdoc cref="F.Audit{T}(Maybe{T}, Action{Maybe{T}}, Action{T}?, Action{IMsg}?)"/>
+	public static ValueTask<Maybe<T>> AuditAsync<T>(this ValueTask<Maybe<T>> @this, Func<IMsg, ValueTask> none) =>
 		F.AuditAsync(
 			@this,
 			any: null,
@@ -72,7 +126,25 @@ public static partial class MaybeExtensions
 		);
 
 	/// <inheritdoc cref="F.Audit{T}(Maybe{T}, Action{Maybe{T}}, Action{T}?, Action{IMsg}?)"/>
+	public static ValueTask<Maybe<T>> AuditAsync<T>(this ValueTask<Maybe<T>> @this, Action<T> some, Action<IMsg> none) =>
+		F.AuditAsync(
+			@this,
+			any: null,
+			some: v => { some?.Invoke(v); return ValueTask.CompletedTask; },
+			none: r => { none?.Invoke(r); return ValueTask.CompletedTask; }
+		);
+
+	/// <inheritdoc cref="F.Audit{T}(Maybe{T}, Action{Maybe{T}}, Action{T}?, Action{IMsg}?)"/>
 	public static Task<Maybe<T>> AuditAsync<T>(this Task<Maybe<T>> @this, Func<T, Task> some, Func<IMsg, Task> none) =>
+		F.AuditAsync(
+			@this,
+			any: null,
+			some: some,
+			none: none
+		);
+
+	/// <inheritdoc cref="F.Audit{T}(Maybe{T}, Action{Maybe{T}}, Action{T}?, Action{IMsg}?)"/>
+	public static ValueTask<Maybe<T>> AuditAsync<T>(this ValueTask<Maybe<T>> @this, Func<T, ValueTask> some, Func<IMsg, ValueTask> none) =>
 		F.AuditAsync(
 			@this,
 			any: null,

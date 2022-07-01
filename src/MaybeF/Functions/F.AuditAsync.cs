@@ -54,4 +54,51 @@ public static partial class F
 	/// <inheritdoc cref="Audit{T}(Maybe{T}, Action{Maybe{T}}, Action{T}?, Action{IMsg}?)"/>
 	public static async Task<Maybe<T>> AuditAsync<T>(Task<Maybe<T>> maybe, Func<Maybe<T>, Task>? any, Func<T, Task>? some, Func<IMsg, Task>? none) =>
 		await AuditAsync(await maybe.ConfigureAwait(false), any, some, none).ConfigureAwait(false);
+
+	/// <inheritdoc cref="Audit{T}(Maybe{T}, Action{Maybe{T}}, Action{T}?, Action{IMsg}?)"/>
+	public static async ValueTask<Maybe<T>> AuditAsync<T>(Maybe<T> maybe, Func<Maybe<T>, ValueTask>? any, Func<T, ValueTask>? some, Func<IMsg, ValueTask>? none)
+	{
+		// Do nothing if the user gave us nothing to do!
+		if (any is null && some is null && none is null)
+		{
+			return maybe;
+		}
+
+		// Work out which audit function to use
+		var audit = Switch<T, Func<ValueTask>>(
+			maybe,
+			some: v => () => some?.Invoke(v) ?? ValueTask.CompletedTask,
+			none: r => () => none?.Invoke(r) ?? ValueTask.CompletedTask
+		);
+
+		// Perform the audit
+		try
+		{
+			if (any != null)
+			{
+				await any(maybe).ConfigureAwait(false);
+			}
+
+			await audit().ConfigureAwait(false);
+		}
+		catch (Exception e)
+		{
+			LogException(e);
+		}
+
+		// Return the original object
+		return maybe;
+	}
+
+	/// <inheritdoc cref="Audit{T}(Maybe{T}, Action{Maybe{T}}, Action{T}?, Action{IMsg}?)"/>
+	public static async ValueTask<Maybe<T>> AuditAsync<T>(ValueTask<Maybe<T>> maybe, Action<Maybe<T>>? any, Action<T>? some, Action<IMsg>? none) =>
+		await AuditAsync(await maybe.ConfigureAwait(false),
+			x => { any?.Invoke(x); return Task.CompletedTask; },
+			x => { some?.Invoke(x); return Task.CompletedTask; },
+			x => { none?.Invoke(x); return Task.CompletedTask; }
+		).ConfigureAwait(false);
+
+	/// <inheritdoc cref="Audit{T}(Maybe{T}, Action{Maybe{T}}, Action{T}?, Action{IMsg}?)"/>
+	public static async ValueTask<Maybe<T>> AuditAsync<T>(ValueTask<Maybe<T>> maybe, Func<Maybe<T>, ValueTask>? any, Func<T, ValueTask>? some, Func<IMsg, ValueTask>? none) =>
+		await AuditAsync(await maybe.ConfigureAwait(false), any, some, none).ConfigureAwait(false);
 }
