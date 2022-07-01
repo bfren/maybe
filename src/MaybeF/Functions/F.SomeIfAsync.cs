@@ -25,7 +25,7 @@ public static partial class F
 	/// <inheritdoc cref="SomeIf{T}(Func{bool}, Func{T}, Handler)"/>
 	public static Task<Maybe<T>> SomeIfAsync<T>(Func<T, bool> predicate, Func<Task<T>> value, Handler handler) =>
 		CatchAsync(
-			async () =>
+			async Task<Maybe<T>> () =>
 			{
 				var v = await value().ConfigureAwait(false);
 				return predicate(v) switch

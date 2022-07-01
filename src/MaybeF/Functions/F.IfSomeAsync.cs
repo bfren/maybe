@@ -10,7 +10,7 @@ public static partial class F
 {
 	/// <inheritdoc cref="IfSome{T}(Maybe{T}, Action{T})"/>
 	public static Task<Maybe<T>> IfSomeAsync<T>(Maybe<T> maybe, Func<T, Task> ifSome) =>
-		CatchAsync(async () =>
+		CatchAsync(async Task<Maybe<T>> () =>
 			{
 				if (maybe is Some<T> some)
 				{

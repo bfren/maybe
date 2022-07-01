@@ -29,4 +29,26 @@ public static partial class F
 			return None<T>(DefaultHandler(e));
 		}
 	}
+
+	/// <inheritdoc cref="Catch{T}(Func{Maybe{T}}, Handler?)"/>
+	internal static async ValueTask<Maybe<T>> CatchAsync<T>(Func<ValueTask<Maybe<T>>> f, Handler handler)
+	{
+		if (f is null)
+		{
+			return None<T, M.MaybeCannotBeNullMsg>();
+		}
+
+		try
+		{
+			return await f().ConfigureAwait(false);
+		}
+		catch (Exception e) when (handler is not null)
+		{
+			return None<T>(handler(e));
+		}
+		catch (Exception e)
+		{
+			return None<T>(DefaultHandler(e));
+		}
+	}
 }

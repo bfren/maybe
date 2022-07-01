@@ -8,16 +8,18 @@ namespace MaybeF.F_Tests;
 public class CatchAsync_Tests
 {
 	[Theory]
-	[InlineData(null)]
-	public async Task Catches_Null_Maybe(Func<Task<Maybe<int>>> input)
+	[InlineData(null, null)]
+	public async Task Catches_Null_Maybe(Func<Task<Maybe<int>>> taskInput, Func<ValueTask<Maybe<int>>> valueTaskInput)
 	{
 		// Arrange
 
 		// Act
-		var result = await F.CatchAsync(input, F.DefaultHandler);
+		var r0 = await F.CatchAsync(taskInput, F.DefaultHandler);
+		var r1 = await F.CatchAsync(valueTaskInput, F.DefaultHandler);
 
 		// Assert
-		result.AssertNone().AssertType<MaybeCannotBeNullMsg>();
+		r0.AssertNone().AssertType<MaybeCannotBeNullMsg>();
+		r1.AssertNone().AssertType<MaybeCannotBeNullMsg>();
 	}
 
 	[Fact]
@@ -27,11 +29,14 @@ public class CatchAsync_Tests
 		var value = Rnd.Int;
 
 		// Act
-		var result = await F.CatchAsync(() => F.Some(value).AsTask(), F.DefaultHandler);
+		var r0 = await F.CatchAsync(() => F.Some(value).AsTask(), F.DefaultHandler);
+		var r1 = await F.CatchAsync(() => F.Some(value).AsValueTask(), F.DefaultHandler);
 
 		// Assert
-		var some = result.AssertSome();
-		Assert.Equal(value, some);
+		var s0 = r0.AssertSome();
+		Assert.Equal(value, s0);
+		var s1 = r1.AssertSome();
+		Assert.Equal(value, s1);
 	}
 
 	[Fact]
@@ -41,12 +46,14 @@ public class CatchAsync_Tests
 		var message = Rnd.Str;
 
 		// Act
-		var result = await F.CatchAsync<int>(() => throw new Exception(message), null!);
+		var r0 = await F.CatchAsync(Task<Maybe<int>> () => throw new Exception(message), null!);
+		var r1 = await F.CatchAsync(ValueTask<Maybe<int>> () => throw new Exception(message), null!);
 
 		// Assert
-		var none = result.AssertNone();
-		var ex = Assert.IsType<UnhandledExceptionMsg>(none);
-		Assert.Contains(message, ex.ToString());
+		var e0 = r0.AssertNone().AssertType<UnhandledExceptionMsg>();
+		Assert.Contains(message, e0.ToString());
+		var e1 = r1.AssertNone().AssertType<UnhandledExceptionMsg>();
+		Assert.Contains(message, e1.ToString());
 	}
 
 	[Fact]
@@ -58,10 +65,12 @@ public class CatchAsync_Tests
 		var handler = Substitute.For<F.Handler>();
 
 		// Act
-		var result = await F.CatchAsync<int>(() => throw exception, handler);
+		var r0 = await F.CatchAsync(Task<Maybe<int>> () => throw exception, handler);
+		var r1 = await F.CatchAsync(ValueTask<Maybe<int>> () => throw exception, handler);
 
 		// Assert
-		result.AssertNone();
-		handler.Received().Invoke(exception);
+		r0.AssertNone();
+		r1.AssertNone();
+		handler.Received(2).Invoke(exception);
 	}
 }
