@@ -1,4 +1,4 @@
-﻿// Maybe: Unit Tests
+// Maybe: Unit Tests
 // Copyright (c) bfren - licensed under https://mit.bfren.dev/2019
 
 namespace MaybeF.Maybe_Tests;
@@ -22,13 +22,13 @@ public class SwitchAsync_Tests : Abstracts.SwitchAsync_Tests
 	[Fact]
 	public override async Task Test02_If_None_Runs_None_Func_With_Msg()
 	{
-		await Test02((mbe, none) => mbe.SwitchAsync(Substitute.For<Func<int, Task<string>>>(), none(new TestMsg()).GetAwaiter().GetResult()));
+		await Test02((mbe, none) => mbe.SwitchAsync(Substitute.For<Func<int, Task<string>>>(), H.GetResult(none(new TestMsg()))));
 		await Test02((mbe, none) => mbe.SwitchAsync(Substitute.For<Func<int, string>>(), none(new TestMsg())));
 		await Test02((mbe, none) => mbe.SwitchAsync(Substitute.For<Func<int, Task<string>>>(), none(new TestMsg())));
-		await Test02((mbe, none) => mbe.SwitchAsync(Substitute.For<Func<int, Task<string>>>(), () => none(new TestMsg()).GetAwaiter().GetResult()));
+		await Test02((mbe, none) => mbe.SwitchAsync(Substitute.For<Func<int, Task<string>>>(), () => H.GetResult(none(new TestMsg()))));
 		await Test02((mbe, none) => mbe.SwitchAsync(Substitute.For<Func<int, string>>(), () => none(new TestMsg())));
 		await Test02((mbe, none) => mbe.SwitchAsync(Substitute.For<Func<int, Task<string>>>(), () => none(new TestMsg())));
-		await Test02((mbe, none) => mbe.SwitchAsync(Substitute.For<Func<int, Task<string>>>(), x => none(x).GetAwaiter().GetResult()));
+		await Test02((mbe, none) => mbe.SwitchAsync(Substitute.For<Func<int, Task<string>>>(), x => H.GetResult(none(x))));
 		await Test02((mbe, none) => mbe.SwitchAsync(Substitute.For<Func<int, string>>(), none));
 		await Test02((mbe, none) => mbe.SwitchAsync(Substitute.For<Func<int, Task<string>>>(), none));
 	}
@@ -37,13 +37,13 @@ public class SwitchAsync_Tests : Abstracts.SwitchAsync_Tests
 	public override async Task Test03_If_Some_Runs_Some_Func_With_Value()
 	{
 		await Test03((mbe, some) => mbe.SwitchAsync(some, Rnd.Str));
-		await Test03((mbe, some) => mbe.SwitchAsync(x => some(x).GetAwaiter().GetResult(), Task.FromResult(Rnd.Str)));
+		await Test03((mbe, some) => mbe.SwitchAsync(x => H.GetResult(some(x)), Task.FromResult(Rnd.Str)));
 		await Test03((mbe, some) => mbe.SwitchAsync(some, Task.FromResult(Rnd.Str)));
 		await Test03((mbe, some) => mbe.SwitchAsync(some, Substitute.For<Func<string>>()));
-		await Test03((mbe, some) => mbe.SwitchAsync(x => some(x).GetAwaiter().GetResult(), Substitute.For<Func<Task<string>>>()));
+		await Test03((mbe, some) => mbe.SwitchAsync(x => H.GetResult(some(x)), Substitute.For<Func<Task<string>>>()));
 		await Test03((mbe, some) => mbe.SwitchAsync(some, Substitute.For<Func<Task<string>>>()));
 		await Test03((mbe, some) => mbe.SwitchAsync(some, Substitute.For<Func<IMsg, string>>()));
-		await Test03((mbe, some) => mbe.SwitchAsync(x => some(x).GetAwaiter().GetResult(), Substitute.For<Func<IMsg, Task<string>>>()));
+		await Test03((mbe, some) => mbe.SwitchAsync(x => H.GetResult(some(x)), Substitute.For<Func<IMsg, Task<string>>>()));
 		await Test03((mbe, some) => mbe.SwitchAsync(some, Substitute.For<Func<IMsg, Task<string>>>()));
 	}
 
