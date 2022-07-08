@@ -15,4 +15,12 @@ public static partial class MaybeExtensions
 	/// <inheritdoc cref="F.BindAsync{T, TReturn}(Maybe{T}, Func{T, Task{Maybe{TReturn}}})"/>
 	public static Task<Maybe<TReturn>> BindAsync<T, TReturn>(this Task<Maybe<T>> @this, Func<T, Task<Maybe<TReturn>>> bind) =>
 		F.BindAsync(@this, bind);
+
+	/// <inheritdoc cref="F.BindAsync{T, TReturn}(Maybe{T}, Func{T, ValueTask{Maybe{TReturn}}})"/>
+	public static ValueTask<Maybe<TReturn>> BindAsync<T, TReturn>(this ValueTask<Maybe<T>> @this, Func<T, Maybe<TReturn>> bind) =>
+		F.BindAsync(@this, x => ValueTask.FromResult(bind(x)));
+
+	/// <inheritdoc cref="F.BindAsync{T, TReturn}(Maybe{T}, Func{T, ValueTask{Maybe{TReturn}}})"/>
+	public static ValueTask<Maybe<TReturn>> BindAsync<T, TReturn>(this ValueTask<Maybe<T>> @this, Func<T, ValueTask<Maybe<TReturn>>> bind) =>
+		F.BindAsync(@this, bind);
 }

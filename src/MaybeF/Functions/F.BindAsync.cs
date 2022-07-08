@@ -22,4 +22,19 @@ public static partial class F
 	/// <inheritdoc cref="Bind{T, TReturn}(Maybe{T}, Func{T, Maybe{TReturn}})"/>
 	public static async Task<Maybe<TReturn>> BindAsync<T, TReturn>(Task<Maybe<T>> maybe, Func<T, Task<Maybe<TReturn>>> bind) =>
 		await BindAsync(await maybe.ConfigureAwait(false), bind).ConfigureAwait(false);
+
+	/// <inheritdoc cref="Bind{T, TReturn}(Maybe{T}, Func{T, Maybe{TReturn}})"/>
+	public static ValueTask<Maybe<TReturn>> BindAsync<T, TReturn>(Maybe<T> maybe, Func<T, ValueTask<Maybe<TReturn>>> bind) =>
+		CatchAsync(() =>
+			Switch(
+				maybe,
+				some: v => bind(v),
+				none: r => None<TReturn>(r).AsValueTask()
+			),
+			DefaultHandler
+		);
+
+	/// <inheritdoc cref="Bind{T, TReturn}(Maybe{T}, Func{T, Maybe{TReturn}})"/>
+	public static async ValueTask<Maybe<TReturn>> BindAsync<T, TReturn>(ValueTask<Maybe<T>> maybe, Func<T, ValueTask<Maybe<TReturn>>> bind) =>
+		await BindAsync(await maybe.ConfigureAwait(false), bind).ConfigureAwait(false);
 }

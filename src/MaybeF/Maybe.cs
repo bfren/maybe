@@ -246,6 +246,10 @@ public abstract record class Maybe<T> : IEquatable<Maybe<T>>
 	public Task<Maybe<TReturn>> BindAsync<TReturn>(Func<T, Task<Maybe<TReturn>>> bind) =>
 		F.BindAsync(this, bind);
 
+	/// <inheritdoc cref="F.BindAsync{T, TReturn}(Maybe{T}, Func{T, ValueTask{Maybe{TReturn}}})"/>
+	public ValueTask<Maybe<TReturn>> BindAsync<TReturn>(Func<T, ValueTask<Maybe<TReturn>>> bind) =>
+		F.BindAsync(this, bind);
+
 	#endregion Bind
 
 	#region Filter
