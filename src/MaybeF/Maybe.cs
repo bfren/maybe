@@ -266,6 +266,10 @@ public abstract record class Maybe<T> : IEquatable<Maybe<T>>
 	public Task<Maybe<T>> FilterAsync(Func<T, Task<bool>> predicate) =>
 		F.FilterAsync(this, predicate);
 
+	/// <inheritdoc cref="F.FilterAsync{T}(Maybe{T}, Func{T, ValueTask{bool}})"/>
+	public ValueTask<Maybe<T>> FilterAsync(Func<T, ValueTask<bool>> predicate) =>
+		F.FilterAsync(this, predicate);
+
 	#endregion Filter
 
 	#region IfNull
