@@ -88,8 +88,10 @@ public class SwitchIfAsync_Tests : Abstracts.SwitchIfAsync_Tests
 
 	#region Unused
 
+	[Theory]
+	[InlineData(null)]
 	public override Task Test01_If_Null_Throws_MaybeCannotBeNullException(Maybe<int> input) =>
-		Task.CompletedTask;
+		Task.FromResult(input);
 
 	#endregion Unused
 }
