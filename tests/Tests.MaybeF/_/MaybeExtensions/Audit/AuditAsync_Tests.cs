@@ -1,4 +1,4 @@
-﻿// Maybe: Unit Tests
+// Maybe: Unit Tests
 // Copyright (c) bfren - licensed under https://mit.bfren.dev/2019
 
 namespace MaybeF.MaybeExtensions_Tests;
@@ -158,6 +158,7 @@ public class AuditAsync_Tests : Abstracts.AuditAsync_Tests
 
 	#region Unused
 
+	[Fact]
 	public override Task Test00_Null_Args_Returns_Original_Maybe() =>
 		Task.CompletedTask;
 
