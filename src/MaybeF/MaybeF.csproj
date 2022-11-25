@@ -1,7 +1,6 @@
 <Project Sdk="Microsoft.NET.Sdk">
 	<PropertyGroup>
 		<Description>Maybe monad for C# - to handle null values and exceptions better - including Linq support, chaining, and asynchronous programming.</Description>
-		<PackageTags>async c# either linq maybe monad none null option some</PackageTags>
 	</PropertyGroup>
 	<ItemGroup Label="Test Internals">
 		<AssemblyAttribute Include="System.Runtime.CompilerServices.InternalsVisibleToAttribute">
