@@ -40,7 +40,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Tests.MaybeF.Testing", "tes
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MaybeF.Caching", "src\MaybeF.Caching\MaybeF.Caching.csproj", "{D3E40773-D895-4762-8D70-638C2C021AF5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tests.MaybeF.Caching", "tests\Tests.MaybeF.Caching\Tests.MaybeF.Caching.csproj", "{9A5E8A66-C3B1-4A81-8BDC-227D1BF5CA03}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Tests.MaybeF.Caching", "tests\Tests.MaybeF.Caching\Tests.MaybeF.Caching.csproj", "{9A5E8A66-C3B1-4A81-8BDC-227D1BF5CA03}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
