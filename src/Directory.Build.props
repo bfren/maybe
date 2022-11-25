@@ -78,8 +78,8 @@
 	<Import Project="$(LocalPackPath)" Condition="Exists('$(LocalPackPath)')"/>
 	<Target Name="PackAndPushToLocalNuget" AfterTargets="DispatchToInnerBuilds" Condition="Exists('$(LocalPackPath)') and '$(Configuration)'=='Release'">
 		<Exec Command="dotnet pack &quot;$(ProjectFileName)&quot; -p:PackageVersion=$(MaybeVersion) --no-build --configuration Release"/>
-		<Exec Command="nuget init &quot;$(ProjectDir)bin\Release&quot; &quot;$(LocalNugetRepository)&quot;"/>
-		<Exec Command="del &quot;$(ProjectDir)bin\Release\*.nupkg&quot;"/>
+		<Exec Command="nuget init &quot;$(MSBuildProjectDirectory)\bin\Release&quot; &quot;$(LocalNugetRepository)&quot;"/>
+		<Exec Command="del &quot;$(MSBuildProjectDirectory)\bin\Release\*.nupkg&quot;"/>
 	</Target>
 
 </Project>
