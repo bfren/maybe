@@ -60,8 +60,8 @@
 		<Copyright>Copyright © bfren.dev 2019-$([System.DateTime]::Now.ToString(yyyy))</Copyright>
 		<DebugType>embedded</DebugType>
 		<Description>$(MSBuildProjectName) library</Description>
-		<PackageLicenseFile>$(LicenceFile)</PackageLicenseFile>
 		<PackageIcon>$(LogoFile)</PackageIcon>
+		<PackageLicenseFile>$(LicenceFile)</PackageLicenseFile>
 		<PackageProjectUrl>https://github.com/bfren/maybe/wiki</PackageProjectUrl>
 		<PackageReadmeFile>$(ReadmeFile)</PackageReadmeFile>
 		<PackageTags>async;C#;Either Type;Exception Handling;LINQ;Maybe Type;Monad;None;null;Option Type;Some</PackageTags>
@@ -70,22 +70,21 @@
 		<Version>$(MaybeVersion)</Version>
 	</PropertyGroup>
 
-	<!-- Package Validation -->
-	<PropertyGroup Label="Package Validation" Condition="'$(Configuration)'=='Release'">
-		<EnablePackageValidation>true</EnablePackageValidation>
-		<PackageValidationBaselineVersion>9.2.0</PackageValidationBaselineVersion>
-	</PropertyGroup>
-
 	<!--
 		[Optional]
 		Create Local Packages
 		Use 'DispatchToInnerBuilds' target to run after builds are completed for all frameworks
 			1. Import local repo
-			2. Create package
-			3. Publish package to local repository
-			4. Cleanup
+			2. Enable package validation
+			3. Create package
+			4. Publish package to local repository
+			5. Cleanup
 	-->
-	<Import Project="$(LocalPackPath)" Condition="Exists('$(LocalPackPath)')"/>
+	<Import Project="$(LocalPackPath)" Condition="Exists('$(LocalPackPath)') and '$(Configuration)'=='Release'"/>
+	<PropertyGroup Label="Local Package Validation" Condition="Exists('$(LocalPackPath)') and '$(Configuration)'=='Release'">
+		<EnablePackageValidation>true</EnablePackageValidation>
+		<PackageValidationBaselineVersion>9.2.0</PackageValidationBaselineVersion>
+	</PropertyGroup>
 	<Target Name="PackAndPushToLocalNuget" AfterTargets="DispatchToInnerBuilds" Condition="Exists('$(LocalPackPath)') and '$(Configuration)'=='Release'">
 		<Exec Command="dotnet pack &quot;$(ProjectFileName)&quot; -p:PackageVersion=$(MaybeVersion) --no-build --configuration Release"/>
 		<Exec Command="nuget init &quot;$(MSBuildProjectDirectory)\bin\Release&quot; &quot;$(LocalNugetRepository)&quot;"/>
