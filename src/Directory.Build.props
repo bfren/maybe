@@ -43,8 +43,8 @@
 
 	<!-- Import Files -->
 	<ItemGroup Label="Files" Condition="'$(Configuration)'=='Release'">
-		<None Include="$(LogoPath)" Pack="true" PackagePath="/"/>
 		<None Include="$(LicencePath)" Pack="true" PackagePath="/"/>
+		<None Include="$(LogoPath)" Pack="true" PackagePath="/"/>
 		<None Include="$(ReadmePath)" Pack="true" PackagePath="/"/>
 	</ItemGroup>
 
