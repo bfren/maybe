@@ -165,7 +165,7 @@ public sealed class MaybeCache<TKey> : MaybeCache, IMaybeCache<TKey>
 		{
 			return await valueFactory()
 				.MapAsync(
-					x => Cache.GetOrCreate(key, e => { _ = e.SetOptions(opt).SetValue(x); return x; }),
+					x => Cache.GetOrCreate(key, e => { _ = e.SetOptions(opt).SetValue(x!); return x; })!,
 					e => new M.ErrorCreatingCacheValueMsg(e)
 				);
 		}

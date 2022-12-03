@@ -147,30 +147,39 @@ public class AuditAsync_Tests : Abstracts.AuditAsync_Tests
 
 	#region Unused
 
+	[Fact]
 	public override Task Test00_Null_Args_Returns_Original_Maybe() =>
 		Task.CompletedTask;
 
+	[Fact]
 	public override Task Test02_Some_Runs_Audit_Action_And_Returns_Original_Maybe() =>
 		Task.CompletedTask;
 
+	[Fact]
 	public override Task Test03_None_Runs_Audit_Action_And_Returns_Original_Maybe() =>
 		Task.CompletedTask;
 
+	[Fact]
 	public override Task Test06_Some_Runs_Audit_Action_Catches_Exception_And_Returns_Original_Maybe() =>
 		Task.CompletedTask;
 
+	[Fact]
 	public override Task Test07_None_Runs_Audit_Action_Catches_Exception_And_Returns_Original_Maybe() =>
 		Task.CompletedTask;
 
+	[Fact]
 	public override Task Test10_Some_Runs_Some_Action_And_Returns_Original_Maybe() =>
 		Task.CompletedTask;
 
+	[Fact]
 	public override Task Test12_None_Runs_None_Action_And_Returns_Original_Maybe() =>
 		Task.CompletedTask;
 
+	[Fact]
 	public override Task Test14_Some_Runs_Some_Action_Catches_Exception_And_Returns_Original_Maybe() =>
 		Task.CompletedTask;
 
+	[Fact]
 	public override Task Test16_None_Runs_None_Action_Catches_Exception_And_Returns_Original_Maybe() =>
 		Task.CompletedTask;
 

@@ -261,6 +261,7 @@ public class AuditAsync_Tests : Abstracts.AuditAsync_Tests
 
 	#region Unused
 
+	[Fact]
 	public override Task Test00_Null_Args_Returns_Original_Maybe() =>
 		Task.CompletedTask;
 

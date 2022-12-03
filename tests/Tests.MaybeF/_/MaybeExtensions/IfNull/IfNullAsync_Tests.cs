@@ -105,8 +105,10 @@ public class IfNullAsync_Tests : Abstracts.IfNullAsync_Tests
 
 	#region Unused
 
+	[Theory]
+	[InlineData(null)]
 	public override Task Test05_Null_Maybe_Runs_IfNull_Func(Maybe<int> input) =>
-		Task.CompletedTask;
+		Task.FromResult(input);
 
 	#endregion Unused
 }
