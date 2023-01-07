@@ -2,7 +2,6 @@
 // Copyright (c) bfren - licensed under https://mit.bfren.dev/2019
 
 using MaybeF;
-using MaybeF.Exceptions;
 using MaybeF.Testing.Exceptions;
 using static MaybeF.F.M;
 
@@ -10,7 +9,7 @@ namespace Abstracts;
 
 public abstract class SwitchIf_Tests
 {
-	public abstract void Test00_Unknown_Maybe_Throws_UnknownMaybeException();
+	public abstract void Test00_Unknown_Maybe_Returns_None_With_UnknownMaybeTypeMsg();
 
 	protected static void Test00(Func<Maybe<int>, Func<int, bool>, Maybe<int>> act)
 	{
@@ -19,24 +18,25 @@ public abstract class SwitchIf_Tests
 		var check = Substitute.For<Func<int, bool>>();
 
 		// Act
-		var action = void () => act(maybe, check);
+		var result = act(maybe, check);
 
 		// Assert
-		Assert.Throws<UnknownMaybeException>(action);
+		var msg = result.AssertNone().AssertType<UnknownMaybeTypeMsg>();
+		Assert.Equal(typeof(FakeMaybe), msg.MaybeType);
 	}
 
-	public abstract void Test01_If_Null_Throws_MaybeCannotBeNullException(Maybe<int> input);
+	public abstract void Test01_If_Null_Returns_None_With_MaybeCannotBeNullMsg(Maybe<int> input);
 
-	protected static void Test01(Action<Func<int, bool>> act)
+	protected static void Test01(Func<Func<int, bool>, Maybe<int>> act)
 	{
 		// Arrange
 		var check = Substitute.For<Func<int, bool>>();
 
 		// Act
-		var action = void () => act(check);
+		var result = act(check);
 
 		// Assert
-		Assert.Throws<MaybeCannotBeNullException>(action);
+		result.AssertNone().AssertType<MaybeCannotBeNullMsg>();
 	}
 
 	public abstract void Test02_Predicate_Null_Returns_None_With_SwitchIfPredicateCannotBeNullMsg();

@@ -2,7 +2,6 @@
 // Copyright (c) bfren - licensed under https://mit.bfren.dev/2019
 
 using MaybeF;
-using MaybeF.Exceptions;
 using MaybeF.Testing.Exceptions;
 using static MaybeF.F.M;
 
@@ -10,7 +9,7 @@ namespace Abstracts;
 
 public abstract class SwitchIfAsync_Tests
 {
-	public abstract Task Test00_Unknown_Maybe_Throws_UnknownMaybeException();
+	public abstract Task Test00_Unknown_Maybe_Returns_None_With_UnknownMaybeTypeMsg();
 
 	protected static async Task Test00(Func<Task<Maybe<int>>, Func<int, bool>, Task<Maybe<int>>> act)
 	{
@@ -19,13 +18,14 @@ public abstract class SwitchIfAsync_Tests
 		var check = Substitute.For<Func<int, bool>>();
 
 		// Act
-		var action = Task () => act(maybe.AsTask(), check);
+		var result = await act(maybe.AsTask(), check);
 
 		// Assert
-		await Assert.ThrowsAsync<UnknownMaybeException>(action);
+		var msg = result.AssertNone().AssertType<UnknownMaybeTypeMsg>();
+		Assert.Equal(typeof(FakeMaybe), msg.MaybeType);
 	}
 
-	public abstract Task Test01_If_Null_Throws_MaybeCannotBeNullException(Maybe<int> input);
+	public abstract Task Test01_If_Null_Returns_None_With_MaybeCannotBeNullMsg(Maybe<int> input);
 
 	protected static async Task Test01(Func<Func<int, bool>, Task<Maybe<int>>> act)
 	{
@@ -33,10 +33,10 @@ public abstract class SwitchIfAsync_Tests
 		var check = Substitute.For<Func<int, bool>>();
 
 		// Act
-		var action = Task () => act(check);
+		var result = await act(check);
 
 		// Assert
-		await Assert.ThrowsAsync<MaybeCannotBeNullException>(action);
+		result.AssertNone().AssertType<MaybeCannotBeNullMsg>();
 	}
 
 	public abstract Task Test02_Predicate_Null_Returns_None_With_SwitchIfPredicateCannotBeNullMsg();

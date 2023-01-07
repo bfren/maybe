@@ -6,7 +6,7 @@ namespace MaybeF.F_Tests;
 public class SwitchIf_Tests : Abstracts.SwitchIf_Tests
 {
 	[Fact]
-	public override void Test00_Unknown_Maybe_Throws_UnknownMaybeException()
+	public override void Test00_Unknown_Maybe_Returns_None_With_UnknownMaybeTypeMsg()
 	{
 		var ifFalse = Substitute.For<Func<int, IMsg>>();
 		Test00((mbe, check) => F.SwitchIf(mbe, check, null, null));
@@ -15,7 +15,7 @@ public class SwitchIf_Tests : Abstracts.SwitchIf_Tests
 
 	[Theory]
 	[InlineData(null)]
-	public override void Test01_If_Null_Throws_MaybeCannotBeNullException(Maybe<int> input)
+	public override void Test01_If_Null_Returns_None_With_MaybeCannotBeNullMsg(Maybe<int> input)
 	{
 		var ifFalse = Substitute.For<Func<int, IMsg>>();
 		Test01(check => F.SwitchIf(input, check, null, null));
