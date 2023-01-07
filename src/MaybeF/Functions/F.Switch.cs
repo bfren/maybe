@@ -76,4 +76,39 @@ public static partial class F
 			throw new MaybeCannotBeNullException();
 		}
 	}
+
+	/// <summary>
+	/// Run a function depending on whether <paramref name="maybe"/> is a <see cref="MaybeF.Some{T}"/> or <see cref="MaybeF.None{T}"/>
+	/// </summary>
+	/// <remarks>
+	/// Be VERY careful using this function method because you will lose the original reason <see cref="IMsg"/> - sometimes this is
+	/// desired, but most of the time you want to be using <see cref="Map{T, TReturn}(Maybe{T}, Func{T, TReturn}, Handler)"/> which
+	/// preserves the reason while changing the return value type.
+	/// </remarks>
+	/// <typeparam name="T">Maybe value type</typeparam>
+	/// <typeparam name="TReturn">Next value type</typeparam>
+	/// <param name="maybe">Maybe being switched</param>
+	/// <param name="some">Function to run if <see cref="MaybeF.Some{T}"/> - receives value <typeparamref name="T"/> as input</param>
+	/// <param name="none">Function to run if <see cref="MaybeF.None{T}"/></param>
+	public static Maybe<TReturn> Switch<T, TReturn>(Maybe<T> maybe, Func<T, Maybe<TReturn>> some, Func<Maybe<TReturn>> none) =>
+		maybe switch
+		{
+			Some<T> x when some is not null =>
+				Catch(() => some(x.Value), DefaultHandler),
+
+			None<T> y when none is not null =>
+				Catch(() => none(), DefaultHandler),
+
+			{ } z =>
+				None<TReturn>(new M.UnknownMaybeTypeMsg(maybe.GetType())),
+
+			_ =>
+				None<TReturn, M.MaybeCannotBeNullMsg>()
+		};
+
+	public static partial class M
+	{
+		/// <summary>Unknown Maybe type</summary>
+		public sealed record class UnknownMaybeTypeMsg(Type Type) : IMsg;
+	}
 }
