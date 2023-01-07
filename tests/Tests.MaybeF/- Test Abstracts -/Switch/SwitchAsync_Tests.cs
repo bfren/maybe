@@ -3,6 +3,7 @@
 
 using MaybeF;
 using MaybeF.Exceptions;
+using static MaybeF.F.M;
 
 namespace Abstracts;
 
@@ -67,7 +68,7 @@ public abstract class SwitchAsync_Tests
 		await some.Received().Invoke(value);
 	}
 
-	public abstract Task Test04_If_None_And_None_Func_Is_Null_Returns_None_With_NoneFunctionCannotBeNullMsg();
+	public abstract Task Test04_If_None_And_None_Func_Is_Null_Throws_ArgumentNullException();
 
 	protected static async Task Test04(Func<Maybe<int>, Func<IMsg, Task<string>>, Task<string>> act)
 	{
@@ -97,10 +98,95 @@ public abstract class SwitchAsync_Tests
 		await Assert.ThrowsAsync<ArgumentNullException>(action);
 	}
 
+	public abstract Task Test06_If_Some_Runs_Some_Func_With_Value();
 
-	//public abstract Task Test_If_None_And_None_Func_Is_Null_Returns_None_With_NoneFunctionCannotBeNullMsg();
+	protected static async Task Test06(Func<Maybe<int>, Func<int, Task<Maybe<string>>>, Task<Maybe<string>>> act)
+	{
+		// Arrange
+		var value = Rnd.Int;
+		var maybe = F.Some(value);
+		var some = Substitute.For<Func<int, Task<Maybe<string>>>>();
 
-	//public abstract Task Test_If_Some_And_Some_Func_Is_Null_Returns_None_With_SomeFunctionCannotBeNullMsg();
+		// Act
+		await act(maybe, some);
+
+		// Assert
+		await some.Received().Invoke(value);
+	}
+
+	public abstract Task Test07_If_None_Runs_None_Func();
+
+	protected static async Task Test07(Func<Maybe<int>, Func<Task<Maybe<string>>>, Task<Maybe<string>>> act)
+	{
+		// Arrange
+		var message = new TestMsg();
+		var maybe = F.None<int>(message);
+		var none = Substitute.For<Func<Task<Maybe<string>>>>();
+
+		// Act
+		await act(maybe, none);
+
+		// Assert
+		await none.Received().Invoke();
+	}
+
+	public abstract Task Test08_If_Some_And_Some_Func_Is_Null_Returns_None_With_SomeFunctionCannotBeNullMsg();
+
+	protected static async Task Test08(Func<Maybe<int>, Func<int, Task<Maybe<string>>>, Task<Maybe<string>>> act)
+	{
+		// Arrange
+		var value = Rnd.Int;
+		var maybe = F.Some(value);
+
+		// Act
+		var result = await act(maybe, null!);
+
+		// Assert
+		result.AssertNone().AssertType<SomeFunctionCannotBeNullMsg>();
+	}
+
+	public abstract Task Test09_If_None_And_None_Func_Is_Null_Returns_None_With_NoneFunctionCannotBeNullMsg();
+
+	protected static async Task Test09(Func<Maybe<int>, Func<Task<Maybe<string>>>, Task<Maybe<string>>> act)
+	{
+		// Arrange
+		var message = new TestMsg();
+		var maybe = F.None<int>(message);
+
+		// Act
+		var result = await act(maybe, null!);
+
+		// Assert
+		result.AssertNone().AssertType<NoneFunctionCannotBeNullMsg>();
+	}
+
+	public abstract Task Test10_If_Unknown_Maybe_Returns_UnknownMaybeTypeMsg();
+
+	protected static async Task Test10(Func<Maybe<int>, Task<Maybe<string>>> act)
+	{
+		// Arrange
+		var maybe = new FakeMaybe();
+
+		// Act
+		var result = await act(maybe);
+
+		// Assert
+		var msg = result.AssertNone().AssertType<UnknownMaybeTypeMsg>();
+		Assert.Equal(typeof(FakeMaybe), msg.MaybeType);
+	}
+
+	public abstract Task Test11_If_Null_Returns_None_With_MaybeCannotBeNullMsg(Maybe<int> input);
+
+	protected static async Task Test11(Func<Task<Maybe<string>>> act)
+	{
+		// Arrange
+
+		// Act
+		var result = await act();
+
+		// Assert
+		result.AssertNone().AssertType<MaybeCannotBeNullMsg>();
+	}
 
 	public record class FakeMaybe : Maybe<int> { }
 

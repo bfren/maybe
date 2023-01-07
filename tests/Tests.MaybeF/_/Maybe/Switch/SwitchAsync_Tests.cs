@@ -48,7 +48,7 @@ public class SwitchAsync_Tests : Abstracts.SwitchAsync_Tests
 	}
 
 	[Fact]
-	public override async Task Test04_If_None_And_None_Func_Is_Null_Returns_None_With_NoneFunctionCannotBeNullMsg()
+	public override async Task Test04_If_None_And_None_Func_Is_Null_Throws_ArgumentNullException()
 	{
 		await Test04((mbe, none) => mbe.SwitchAsync(Substitute.For<Func<int, string>>(), none));
 		await Test04((mbe, none) => mbe.SwitchAsync(Substitute.For<Func<int, Task<string>>>(), none));
@@ -65,11 +65,48 @@ public class SwitchAsync_Tests : Abstracts.SwitchAsync_Tests
 		await Test05((mbe, some) => mbe.SwitchAsync(some, Substitute.For<Func<IMsg, Task<string>>>()));
 	}
 
+	[Fact]
+	public override async Task Test06_If_Some_Runs_Some_Func_With_Value()
+	{
+		await Test06((mbe, some) => mbe.SwitchAsync(some, Substitute.For<Func<Task<Maybe<string>>>>()));
+	}
+
+	[Fact]
+	public override async Task Test07_If_None_Runs_None_Func()
+	{
+		await Test07((mbe, none) => mbe.SwitchAsync(Substitute.For<Func<int, Task<Maybe<string>>>>(), none));
+	}
+
+	[Fact]
+	public override async Task Test08_If_Some_And_Some_Func_Is_Null_Returns_None_With_SomeFunctionCannotBeNullMsg()
+	{
+		await Test08((mbe, some) => mbe.SwitchAsync(some, Substitute.For<Func<Task<Maybe<string>>>>()));
+	}
+
+	[Fact]
+	public override async Task Test09_If_None_And_None_Func_Is_Null_Returns_None_With_NoneFunctionCannotBeNullMsg()
+	{
+		await Test09((mbe, none) => mbe.SwitchAsync(Substitute.For<Func<int, Task<Maybe<string>>>>(), none));
+	}
+
+	[Fact]
+	public override async Task Test10_If_Unknown_Maybe_Returns_UnknownMaybeTypeMsg()
+	{
+		var some = Substitute.For<Func<int, Task<Maybe<string>>>>();
+		var none = Substitute.For<Func<Task<Maybe<string>>>>();
+		await Test10(mbe => mbe.SwitchAsync(some, none));
+	}
+
 	#region Unused
 
 	[Theory]
 	[InlineData(null)]
 	public override Task Test01_If_Null_Throws_MaybeCannotBeNullException(Maybe<int> input) =>
+		Task.FromResult(input);
+
+	[Theory]
+	[InlineData(null)]
+	public override Task Test11_If_Null_Returns_None_With_MaybeCannotBeNullMsg(Maybe<int> input) =>
 		Task.FromResult(input);
 
 	#endregion Unused
