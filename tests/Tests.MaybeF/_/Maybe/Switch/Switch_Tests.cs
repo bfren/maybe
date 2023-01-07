@@ -80,7 +80,6 @@ public class Switch_Tests : Abstracts.Switch_Tests
 		Test09((mbe, some) => mbe.Switch(some, Substitute.For<Func<IMsg, string>>()));
 	}
 
-
 	[Fact]
 	public override void Test10_Return_Value_If_Some_Runs_Some_Func_With_Value()
 	{
@@ -89,11 +88,46 @@ public class Switch_Tests : Abstracts.Switch_Tests
 		Test10((mbe, some) => mbe.Switch(some, Substitute.For<Func<IMsg, string>>()));
 	}
 
+	[Fact]
+	public override void Test11_Return_Maybe_If_Some_Runs_Some_Func_With_Value()
+	{
+		Test11((mbe, some) => mbe.Switch(some, Substitute.For<Func<Maybe<string>>>()));
+	}
+
+	[Fact]
+	public override void Test12_Return_Maybe_If_None_Runs_None_Func()
+	{
+		Test12((mbe, none) => mbe.Switch(Substitute.For<Func<int, Maybe<string>>>(), none));
+	}
+
+	[Fact]
+	public override void Test13_Return_Maybe_If_Some_And_Some_Func_Is_Null_Returns_None_With_SomeFunctionCannotBeNullMsg()
+	{
+		Test13((mbe, some) => mbe.Switch(some, Substitute.For<Func<Maybe<string>>>()));
+	}
+
+	[Fact]
+	public override void Test14_Return_Maybe_If_None_And_None_Func_Is_Null_Returns_None_With_NoneFunctionCannotBeNullMsg()
+	{
+		Test14((mbe, none) => mbe.Switch(Substitute.For<Func<int, Maybe<string>>>(), none));
+	}
+
+	[Fact]
+	public override void Test15_Return_Maybe_If_Unknown_Maybe_Returns_UnknownMaybeTypeMsg()
+	{
+		Test15(mbe => mbe.Switch(Substitute.For<Func<int, Maybe<string>>>(), Substitute.For<Func<Maybe<string>>>()));
+	}
+
 	#region Unused
 
 	[Theory]
 	[InlineData(null)]
 	public override void Test02_If_Null_Throws_MaybeCannotBeNullException(Maybe<int> input) =>
+		Assert.Null(input);
+
+	[Theory]
+	[InlineData(null)]
+	public override void Test16_If_Null_Returns_None_With_MaybeCannotBeNullMsg(Maybe<int> input) =>
 		Assert.Null(input);
 
 	#endregion Unused
