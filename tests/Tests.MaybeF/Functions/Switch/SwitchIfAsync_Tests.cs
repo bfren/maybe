@@ -6,7 +6,7 @@ namespace MaybeF.F_Tests;
 public class SwitchIfAsync_Tests : Abstracts.SwitchIfAsync_Tests
 {
 	[Fact]
-	public override async Task Test00_Unknown_Maybe_Throws_UnknownMaybeException()
+	public override async Task Test00_Unknown_Maybe_Returns_None_With_UnknownMaybeTypeMsg()
 	{
 		var ifFalse = Substitute.For<Func<int, IMsg>>();
 		await Test00((mbe, check) => F.SwitchIfAsync(mbe, check, null, null));
@@ -15,7 +15,7 @@ public class SwitchIfAsync_Tests : Abstracts.SwitchIfAsync_Tests
 
 	[Theory]
 	[InlineData(null)]
-	public override async Task Test01_If_Null_Throws_MaybeCannotBeNullException(Maybe<int> input)
+	public override async Task Test01_If_Null_Returns_None_With_MaybeCannotBeNullMsg(Maybe<int> input)
 	{
 		var ifFalse = Substitute.For<Func<int, IMsg>>();
 		await Test01(check => F.SwitchIfAsync(Task.FromResult(input), check, null, null));
