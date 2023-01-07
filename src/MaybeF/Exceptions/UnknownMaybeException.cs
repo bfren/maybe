@@ -12,20 +12,14 @@ namespace MaybeF.Exceptions;
 public sealed class UnknownMaybeException : Exception
 {
 	/// <summary>
-	/// Create exception
+	/// The type of the unknown Maybe object
 	/// </summary>
-	public UnknownMaybeException() { }
+	public Type MaybeType { get; private init; }
 
 	/// <summary>
-	/// Create exception
+	/// Create object
 	/// </summary>
-	/// <param name="message"></param>
-	public UnknownMaybeException(string message) : base(message) { }
-
-	/// <summary>
-	/// Create exception
-	/// </summary>
-	/// <param name="message"></param>
-	/// <param name="inner"></param>
-	public UnknownMaybeException(string message, Exception inner) : base(message, inner) { }
+	/// <param name="maybeType">Unknown Maybe type</param>
+	public UnknownMaybeException(Type maybeType) =>
+		MaybeType = maybeType;
 }

@@ -38,5 +38,9 @@ public static partial class F
 	{
 		/// <summary>Maybe input cannot be null</summary>
 		public sealed record class MaybeCannotBeNullMsg : IMsg;
+
+		/// <summary>Custom Maybe types are not permitted</summary>
+		/// <param name="MaybeType">Unknown Maybe type</param>
+		public sealed record class UnknownMaybeTypeMsg(Type MaybeType) : IMsg;
 	}
 }
