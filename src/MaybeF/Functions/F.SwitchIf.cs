@@ -62,26 +62,26 @@ public static partial class F
 	}
 
 	/// <summary>
-	/// If the input <paramref name="maybe"/> is <see cref="MaybeF.Some{T}"/>, runs <paramref name="check"/> function -<br/>
+	/// If the input <paramref name="maybe"/> is <see cref="MaybeF.Some{T}"/>, runs <paramref name="predicate"/> function -<br/>
 	/// if it returns false, returns <see cref="MaybeF.None{T}"/> with the Reason from <paramref name="ifFalse"/>,<br/>
 	/// otherwise, the original <paramref name="maybe"/> is returned.
 	/// </summary>
 	/// <typeparam name="T">Maybe value type</typeparam>
 	/// <param name="maybe">Maybe being switched</param>
-	/// <param name="check">Function to run if <paramref name="maybe"/> is <see cref="MaybeF.Some{T}"/></param>
-	/// <param name="ifFalse">Function to run if <paramref name="check"/> returns false</param>
-	public static Maybe<T> SwitchIf<T>(Maybe<T> maybe, Func<T, bool> check, Func<T, IMsg> ifFalse) =>
-		SwitchIf(maybe, check, null, x => None<T>(ifFalse(x)));
+	/// <param name="predicate">Function to run if <paramref name="maybe"/> is <see cref="MaybeF.Some{T}"/></param>
+	/// <param name="ifFalse">Function to run if <paramref name="predicate"/> returns false</param>
+	public static Maybe<T> SwitchIf<T>(Maybe<T> maybe, Func<T, bool> predicate, Func<T, IMsg> ifFalse) =>
+		SwitchIf(maybe, predicate, null, x => None<T>(ifFalse(x)));
 
 	/// <summary>
-	/// If the input <paramref name="maybe"/> is <see cref="MaybeF.Some{T}"/>, runs <paramref name="check"/> function
+	/// If the input <paramref name="maybe"/> is <see cref="MaybeF.Some{T}"/>, runs <paramref name="predicate"/> function
 	/// and returns its result - otherwise returns false.
 	/// </summary>
 	/// <typeparam name="T">Maybe value type</typeparam>
 	/// <param name="maybe">Maybe being switched</param>
-	/// <param name="check">Function to run if <paramref name="maybe"/> is <see cref="MaybeF.Some{T}"/></param>
-	public static bool SwitchIf<T>(Maybe<T> maybe, Func<T, bool> check) =>
-		Switch(maybe, some: x => check(x), none: _ => false);
+	/// <param name="predicate">Function to run if <paramref name="maybe"/> is <see cref="MaybeF.Some{T}"/></param>
+	public static bool SwitchIf<T>(Maybe<T> maybe, Func<T, bool> predicate) =>
+		Switch(maybe, some: x => predicate(x), none: _ => false);
 
 	public static partial class M
 	{

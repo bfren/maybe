@@ -68,18 +68,21 @@ public class SwitchAsync_Tests : Abstracts.SwitchAsync_Tests
 	[Fact]
 	public override async Task Test06_If_Some_Runs_Some_Func_With_Value()
 	{
+		await Test06((mbe, some) => mbe.SwitchAsync(some, F.Some(Rnd.Str).AsTask()));
 		await Test06((mbe, some) => mbe.SwitchAsync(some, Substitute.For<Func<Task<Maybe<string>>>>()));
 	}
 
 	[Fact]
 	public override async Task Test07_If_None_Runs_None_Func()
 	{
+		await Test07((mbe, none) => mbe.SwitchAsync(Substitute.For<Func<int, Task<Maybe<string>>>>(), none()));
 		await Test07((mbe, none) => mbe.SwitchAsync(Substitute.For<Func<int, Task<Maybe<string>>>>(), none));
 	}
 
 	[Fact]
 	public override async Task Test08_If_Some_And_Some_Func_Is_Null_Returns_None_With_SomeFunctionCannotBeNullMsg()
 	{
+		await Test08((mbe, some) => mbe.SwitchAsync(some, F.Some(Rnd.Str).AsTask()));
 		await Test08((mbe, some) => mbe.SwitchAsync(some, Substitute.For<Func<Task<Maybe<string>>>>()));
 	}
 
@@ -93,8 +96,8 @@ public class SwitchAsync_Tests : Abstracts.SwitchAsync_Tests
 	public override async Task Test10_If_Unknown_Maybe_Returns_UnknownMaybeTypeMsg()
 	{
 		var some = Substitute.For<Func<int, Task<Maybe<string>>>>();
-		var none = Substitute.For<Func<Task<Maybe<string>>>>();
-		await Test10(mbe => mbe.SwitchAsync(some, none));
+		await Test10(mbe => mbe.SwitchAsync(some, F.Some(Rnd.Str).AsTask()));
+		await Test10(mbe => mbe.SwitchAsync(some, Substitute.For<Func<Task<Maybe<string>>>>()));
 	}
 
 	#region Unused

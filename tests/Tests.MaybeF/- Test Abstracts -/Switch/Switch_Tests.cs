@@ -192,18 +192,18 @@ public abstract class Switch_Tests
 
 	public abstract void Test12_Return_Maybe_If_None_Runs_None_Func();
 
-	protected static void Test12(Func<Maybe<int>, Func<IMsg, Maybe<string>>, Maybe<string>> act)
+	protected static void Test12(Func<Maybe<int>, Func<Maybe<string>>, Maybe<string>> act)
 	{
 		// Arrange
 		var message = new TestMsg();
 		var maybe = F.None<int>(message);
-		var none = Substitute.For<Func<IMsg, Maybe<string>>>();
+		var none = Substitute.For<Func<Maybe<string>>>();
 
 		// Act
 		act(maybe, none);
 
 		// Assert
-		none.Received().Invoke(message);
+		none.Received().Invoke();
 	}
 
 	public abstract void Test13_Return_Maybe_If_Some_And_Some_Func_Is_Null_Returns_None_With_SomeFunctionCannotBeNullMsg();
