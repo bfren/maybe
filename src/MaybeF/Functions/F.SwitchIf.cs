@@ -2,7 +2,6 @@
 // Copyright (c) bfren - licensed under https://mit.bfren.dev/2019
 
 using System;
-using MaybeF.Exceptions;
 
 namespace MaybeF;
 
@@ -19,8 +18,6 @@ public static partial class F
 	/// <param name="predicate">Function to run if <paramref name="maybe"/> is <see cref="MaybeF.Some{T}"/></param>
 	/// <param name="ifTrue">Function to run if <paramref name="predicate"/> returns true</param>
 	/// <param name="ifFalse">Function to run if <paramref name="predicate"/> returns false</param>
-	/// <exception cref="UnknownMaybeException"></exception>
-	/// <exception cref="MaybeCannotBeNullException"></exception>
 	public static Maybe<T> SwitchIf<T>(
 		Maybe<T> maybe,
 		Func<T, bool> predicate,
@@ -32,8 +29,7 @@ public static partial class F
 		{
 			return None<T, M.SwitchIfPredicateCannotBeNullMsg>();
 		}
-
-		if (maybe is Some<T> x)
+		else if (maybe is Some<T> x)
 		{
 			try
 			{
@@ -57,11 +53,11 @@ public static partial class F
 		}
 		else if (maybe is not null)
 		{
-			throw new UnknownMaybeException(); // as Maybe<T> is internal implementation only this should never happen...
+			return None<T>(new M.UnknownMaybeTypeMsg(maybe.GetType())); // as Maybe<T> is internal implementation only this should never happen...
 		}
 		else
 		{
-			throw new MaybeCannotBeNullException();
+			return None<T, M.MaybeCannotBeNullMsg>();
 		}
 	}
 
