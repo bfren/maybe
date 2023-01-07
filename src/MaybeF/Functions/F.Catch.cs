@@ -2,6 +2,7 @@
 // Copyright (c) bfren - licensed under https://mit.bfren.dev/2019
 
 using System;
+using MaybeF.Exceptions;
 
 namespace MaybeF;
 
@@ -24,6 +25,10 @@ public static partial class F
 		{
 			return f();
 		}
+		catch (UnknownMaybeException e)
+		{
+			return None<T>(new M.UnknownMaybeTypeMsg(e.MaybeType));
+		}
 		catch (Exception e) when (handler is not null)
 		{
 			return None<T>(handler(e));
@@ -38,5 +43,8 @@ public static partial class F
 	{
 		/// <summary>Maybe input cannot be null</summary>
 		public sealed record class MaybeCannotBeNullMsg : IMsg;
+
+		/// <summary>Unknown Maybe type</summary>
+		public sealed record class UnknownMaybeTypeMsg(Type MaybeType) : IMsg;
 	}
 }

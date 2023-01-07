@@ -179,7 +179,7 @@ public abstract record class Maybe<T> : IEquatable<Maybe<T>>
 				typeof(None<>).GetHashCode() ^ typeof(T).GetHashCode() ^ x.Reason.GetHashCode(),
 
 			_ =>
-				throw new UnknownMaybeException() // as Maybe<T> is internal implementation only this should never happen...
+				throw new UnknownMaybeException(GetType()) // as Maybe<T> is internal implementation only this should never happen...
 		};
 
 	#endregion Equals

@@ -35,7 +35,7 @@ public static partial class F
 		}
 		else if (maybe is not null)
 		{
-			throw new UnknownMaybeException(); // as Maybe<T> is internal implementation only this should never happen...
+			throw new UnknownMaybeException(maybe.GetType()); // as Maybe<T> is internal implementation only this should never happen...
 		}
 		else
 		{
@@ -69,7 +69,7 @@ public static partial class F
 		}
 		else if (maybe is not null)
 		{
-			throw new UnknownMaybeException(); // as Maybe<T> is internal implementation only this should never happen...
+			throw new UnknownMaybeException(maybe.GetType()); // as Maybe<T> is internal implementation only this should never happen...
 		}
 		else
 		{
@@ -105,10 +105,4 @@ public static partial class F
 			_ =>
 				None<TReturn, M.MaybeCannotBeNullMsg>()
 		};
-
-	public static partial class M
-	{
-		/// <summary>Unknown Maybe type</summary>
-		public sealed record class UnknownMaybeTypeMsg(Type Type) : IMsg;
-	}
 }
