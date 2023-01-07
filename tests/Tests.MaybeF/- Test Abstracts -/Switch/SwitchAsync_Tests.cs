@@ -1,4 +1,4 @@
-﻿// Maybe: Unit Tests
+// Maybe: Unit Tests
 // Copyright (c) bfren - licensed under https://mit.bfren.dev/2019
 
 using MaybeF;
@@ -66,6 +66,41 @@ public abstract class SwitchAsync_Tests
 		// Assert
 		await some.Received().Invoke(value);
 	}
+
+	public abstract Task Test04_If_None_And_None_Func_Is_Null_Returns_None_With_NoneFunctionCannotBeNullMsg();
+
+	protected static async Task Test04(Func<Maybe<int>, Func<IMsg, Task<string>>, Task<string>> act)
+	{
+		// Arrange
+		var message = new TestMsg();
+		var maybe = F.None<int>(message);
+
+		// Act
+		var action = () => act(maybe, null!);
+
+		// Assert
+		await Assert.ThrowsAsync<ArgumentNullException>(action);
+	}
+
+	public abstract Task Test05_If_Some_And_Some_Func_Is_Null_Throws_ArgumentNullException();
+
+	protected static async Task Test05(Func<Maybe<int>, Func<int, Task<string>>, Task<string>> act)
+	{
+		// Arrange
+		var value = Rnd.Int;
+		var maybe = F.Some(value);
+
+		// Act
+		var action = () => act(maybe, null!);
+
+		// Assert
+		await Assert.ThrowsAsync<ArgumentNullException>(action);
+	}
+
+
+	//public abstract Task Test_If_None_And_None_Func_Is_Null_Returns_None_With_NoneFunctionCannotBeNullMsg();
+
+	//public abstract Task Test_If_Some_And_Some_Func_Is_Null_Returns_None_With_SomeFunctionCannotBeNullMsg();
 
 	public record class FakeMaybe : Maybe<int> { }
 

@@ -10,11 +10,7 @@ public static partial class F
 {
 	/// <inheritdoc cref="Switch{T, TReturn}(Maybe{T}, Func{T, TReturn}, Func{IMsg, TReturn})"/>
 	public static Task<TReturn> SwitchAsync<T, TReturn>(Maybe<T> maybe, Func<T, Task<TReturn>> some, Func<IMsg, Task<TReturn>> none) =>
-		Switch(
-			maybe,
-			some: v => some(v),
-			none: r => none(r)
-		);
+		Switch(maybe, some, none);
 
 	/// <inheritdoc cref="Switch{T, TReturn}(Maybe{T}, Func{T, TReturn}, Func{IMsg, TReturn})"/>
 	public static async Task<TReturn> SwitchAsync<T, TReturn>(Task<Maybe<T>> maybe, Func<T, Task<TReturn>> some, Func<IMsg, Task<TReturn>> none) =>

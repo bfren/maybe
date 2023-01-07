@@ -56,6 +56,24 @@ public class SwitchAsync_Tests : Abstracts.SwitchAsync_Tests
 		await Test03((mbe, some) => mbe.AsTask().SwitchAsync(some, Substitute.For<Func<IMsg, Task<string>>>()));
 	}
 
+	[Fact]
+	public override async Task Test04_If_None_And_None_Func_Is_Null_Returns_None_With_NoneFunctionCannotBeNullMsg()
+	{
+		await Test04((mbe, none) => mbe.AsTask().SwitchAsync(Substitute.For<Func<int, string>>(), none));
+		await Test04((mbe, none) => mbe.AsTask().SwitchAsync(Substitute.For<Func<int, Task<string>>>(), none));
+	}
+
+	[Fact]
+	public override async Task Test05_If_Some_And_Some_Func_Is_Null_Throws_ArgumentNullException()
+	{
+		await Test05((mbe, some) => mbe.AsTask().SwitchAsync(some, Rnd.Str));
+		await Test05((mbe, some) => mbe.AsTask().SwitchAsync(some, Task.FromResult(Rnd.Str)));
+		await Test05((mbe, some) => mbe.AsTask().SwitchAsync(some, Substitute.For<Func<string>>()));
+		await Test05((mbe, some) => mbe.AsTask().SwitchAsync(some, Substitute.For<Func<Task<string>>>()));
+		await Test05((mbe, some) => mbe.AsTask().SwitchAsync(some, Substitute.For<Func<IMsg, string>>()));
+		await Test05((mbe, some) => mbe.AsTask().SwitchAsync(some, Substitute.For<Func<IMsg, Task<string>>>()));
+	}
+
 	#region Unused
 
 	[Theory]

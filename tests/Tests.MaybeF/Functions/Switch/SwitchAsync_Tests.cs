@@ -1,4 +1,4 @@
-﻿// Maybe: Unit Tests
+// Maybe: Unit Tests
 // Copyright (c) bfren - licensed under https://mit.bfren.dev/2019
 
 namespace MaybeF.F_Tests;
@@ -38,5 +38,21 @@ public class SwitchAsync_Tests : Abstracts.SwitchAsync_Tests
 		var none = Substitute.For<Func<IMsg, Task<string>>>();
 		await Test03((mbe, some) => F.SwitchAsync(mbe, some, none));
 		await Test03((mbe, some) => F.SwitchAsync(mbe.AsTask(), some, none));
+	}
+
+	[Fact]
+	public override async Task Test04_If_None_And_None_Func_Is_Null_Returns_None_With_NoneFunctionCannotBeNullMsg()
+	{
+		var some = Substitute.For<Func<int, Task<string>>>();
+		await Test04((mbe, none) => F.SwitchAsync(mbe, some, none));
+		await Test04((mbe, none) => F.SwitchAsync(mbe.AsTask(), some, none));
+	}
+
+	[Fact]
+	public override async Task Test05_If_Some_And_Some_Func_Is_Null_Throws_ArgumentNullException()
+	{
+		var none = Substitute.For<Func<IMsg, Task<string>>>();
+		await Test05((mbe, some) => F.SwitchAsync(mbe, some, none));
+		await Test05((mbe, some) => F.SwitchAsync(mbe.AsTask(), some, none));
 	}
 }
