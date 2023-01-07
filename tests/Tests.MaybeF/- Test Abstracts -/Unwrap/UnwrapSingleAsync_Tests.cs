@@ -2,14 +2,13 @@
 // Copyright (c) bfren - licensed under https://mit.bfren.dev/2019
 
 using MaybeF;
-using MaybeF.Exceptions;
 using static MaybeF.F.M;
 
 namespace Abstracts;
 
 public abstract class UnwrapSingleAsync_Tests
 {
-	public abstract Task Test00_If_Unknown_Maybe_Returns_None_With_UnhandledExceptionMsg();
+	public abstract Task Test00_If_Unknown_Maybe_Returns_None_With_UnknownMaybeTypeMsg();
 
 	protected static async Task Test00(Func<Task<Maybe<int>>, Task<Maybe<int>>> act)
 	{
@@ -20,8 +19,8 @@ public abstract class UnwrapSingleAsync_Tests
 		var result = await act(maybe.AsTask());
 
 		// Assert
-		var msg = result.AssertNone().AssertType<UnhandledExceptionMsg>();
-		Assert.IsType<UnknownMaybeException>(msg.Value);
+		var msg = result.AssertNone().AssertType<UnknownMaybeTypeMsg>();
+		Assert.Equal(typeof(FakeMaybe), msg.MaybeType);
 	}
 
 	public abstract Task Test01_None_Returns_None();

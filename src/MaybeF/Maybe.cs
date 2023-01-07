@@ -352,6 +352,10 @@ public abstract record class Maybe<T> : IEquatable<Maybe<T>>
 	public TReturn Switch<TReturn>(Func<T, TReturn> some, Func<IMsg, TReturn> none) =>
 		F.Switch(this, some: some, none: none);
 
+	/// <inheritdoc cref="F.Switch{T, TReturn}(Maybe{T}, Func{T, Maybe{TReturn}}, Func{Maybe{TReturn}})"/>
+	public Maybe<TReturn> Switch<TReturn>(Func<T, Maybe<TReturn>> some, Func<Maybe<TReturn>> none) =>
+		F.Switch(this, some: some, none: none);
+
 	/// <inheritdoc cref="F.SwitchAsync{T, TReturn}(Maybe{T}, Func{T, Task{TReturn}}, Func{IMsg, Task{TReturn}})"/>
 	public Task<TReturn> SwitchAsync<TReturn>(Func<T, Task<TReturn>> some, TReturn none) =>
 		F.SwitchAsync(this, some: some, none: _ => Task.FromResult(none));
@@ -386,7 +390,11 @@ public abstract record class Maybe<T> : IEquatable<Maybe<T>>
 
 	/// <inheritdoc cref="F.SwitchAsync{T, TReturn}(Maybe{T}, Func{T, Task{TReturn}}, Func{IMsg, Task{TReturn}})"/>
 	public Task<TReturn> SwitchAsync<TReturn>(Func<T, Task<TReturn>> some, Func<IMsg, Task<TReturn>> none) =>
-		F.SwitchAsync(this, some: some, none: none);
+		F.SwitchAsync(this, some, none);
+
+	/// <inheritdoc cref="F.SwitchAsync{T, TReturn}(Maybe{T}, Func{T, Task{Maybe{TReturn}}}, Func{Task{Maybe{TReturn}}})"/>
+	public Task<Maybe<TReturn>> SwitchAsync<TReturn>(Func<T, Task<Maybe<TReturn>>> some, Func<Task<Maybe<TReturn>>> none) =>
+		F.SwitchAsync(this, some, none);
 
 	/// <inheritdoc cref="F.SwitchIf{T}(Maybe{T}, Func{T, bool}, Func{T, Maybe{T}}?, Func{T, Maybe{T}}?)"/>
 	public Maybe<T> SwitchIf(Func<T, bool> check, Func<T, Maybe<T>>? ifTrue = null, Func<T, Maybe<T>>? ifFalse = null) =>

@@ -54,5 +54,9 @@ public static partial class MaybeExtensions
 
 	/// <inheritdoc cref="F.SwitchAsync{T, TReturn}(Task{Maybe{T}}, Func{T, Task{TReturn}}, Func{IMsg, Task{TReturn}})"/>
 	public static Task<TReturn> SwitchAsync<T, TReturn>(this Task<Maybe<T>> @this, Func<T, Task<TReturn>> some, Func<IMsg, Task<TReturn>> none) =>
-		F.SwitchAsync(@this, some: some, none: none);
+		F.SwitchAsync(@this, some, none);
+
+	/// <inheritdoc cref="F.SwitchAsync{T, TReturn}(Maybe{T}, Func{T, Task{Maybe{TReturn}}}, Func{Task{Maybe{TReturn}}})"/>
+	public static Task<Maybe<TReturn>> SwitchAsync<T, TReturn>(this Task<Maybe<T>> @this, Func<T, Task<Maybe<TReturn>>> some, Func<Task<Maybe<TReturn>>> none) =>
+		F.SwitchAsync(@this, some, none);
 }

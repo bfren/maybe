@@ -2,6 +2,7 @@
 // Copyright (c) bfren - licensed under https://mit.bfren.dev/2019
 
 using System;
+using MaybeF.Exceptions;
 
 namespace MaybeF;
 
@@ -23,6 +24,10 @@ public static partial class F
 		try
 		{
 			return f();
+		}
+		catch (UnknownMaybeException e)
+		{
+			return None<T>(new M.UnknownMaybeTypeMsg(e.MaybeType));
 		}
 		catch (Exception e) when (handler is not null)
 		{

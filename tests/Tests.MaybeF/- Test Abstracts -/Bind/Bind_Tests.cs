@@ -2,14 +2,13 @@
 // Copyright (c) bfren - licensed under https://mit.bfren.dev/2019
 
 using MaybeF;
-using MaybeF.Exceptions;
 using static MaybeF.F.M;
 
 namespace Abstracts;
 
 public abstract class Bind_Tests
 {
-	public abstract void Test00_If_Unknown_Maybe_Returns_None_With_UnhandledExceptionMsg();
+	public abstract void Test00_If_Unknown_Maybe_Returns_None_With_UnknownMaybeTypeMsg();
 
 	protected static void Test00(Func<Maybe<int>, Func<int, Maybe<string>>, Maybe<string>> act)
 	{
@@ -21,8 +20,8 @@ public abstract class Bind_Tests
 		var result = act(maybe, bind);
 
 		// Assert
-		var msg = result.AssertNone().AssertType<UnhandledExceptionMsg>();
-		Assert.IsType<UnknownMaybeException>(msg.Value);
+		var msg = result.AssertNone().AssertType<UnknownMaybeTypeMsg>();
+		Assert.Equal(typeof(FakeMaybe), msg.MaybeType);
 	}
 
 	public abstract void Test01_Exception_Thrown_Returns_None_With_UnhandledExceptionMsg();

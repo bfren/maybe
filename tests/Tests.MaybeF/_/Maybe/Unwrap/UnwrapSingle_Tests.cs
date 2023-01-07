@@ -6,7 +6,7 @@ namespace MaybeF.Maybe_Tests;
 public class UnwrapSingle_Tests : Abstracts.UnwrapSingle_Tests
 {
 	[Fact]
-	public override void Test00_If_Unknown_Maybe_Returns_None_With_UnhandledExceptionMsg()
+	public override void Test00_If_Unknown_Maybe_Returns_None_With_UnhknownMaybeTypeMsg()
 	{
 		Test00(mbe => mbe.UnwrapSingle<int>(null, null, null, null));
 	}
