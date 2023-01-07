@@ -81,9 +81,9 @@ public static partial class F
 	/// Run a function depending on whether <paramref name="maybe"/> is a <see cref="MaybeF.Some{T}"/> or <see cref="MaybeF.None{T}"/>
 	/// </summary>
 	/// <remarks>
-	/// Be VERY careful using this function method because you will lose the original reason <see cref="IMsg"/> - sometimes this is
-	/// desired, but most of the time you want to be using <see cref="Map{T, TReturn}(Maybe{T}, Func{T, TReturn}, Handler)"/> which
-	/// preserves the reason while changing the return value type.
+	/// Be VERY careful using this function because you will lose the original reason <see cref="IMsg"/> - sometimes this is
+	/// desired, but most of the time you want to be using <see cref="Map{T, TReturn}(Maybe{T}, Func{T, TReturn}, Handler)"/>
+	/// which preserves the reason while changing the return value type.
 	/// </remarks>
 	/// <typeparam name="T">Maybe value type</typeparam>
 	/// <typeparam name="TReturn">Next value type</typeparam>
@@ -99,10 +99,25 @@ public static partial class F
 			None<T> y when none is not null =>
 				Catch(() => none(), DefaultHandler),
 
+			Some<T> =>
+				None<TReturn, M.SomeFunctionCannotBeNullMsg>(),
+
+			None<T> =>
+				None<TReturn, M.NoneFunctionCannotBeNullMsg>(),
+
 			{ } z =>
 				None<TReturn>(new M.UnknownMaybeTypeMsg(maybe.GetType())),
 
 			_ =>
 				None<TReturn, M.MaybeCannotBeNullMsg>()
 		};
+
+	public static partial class M
+	{
+		/// <summary>Some function cannot be null</summary>
+		public sealed record class SomeFunctionCannotBeNullMsg : IMsg;
+
+		/// <summary>None function cannot be null</summary>
+		public sealed record class NoneFunctionCannotBeNullMsg : IMsg;
+	}
 }
