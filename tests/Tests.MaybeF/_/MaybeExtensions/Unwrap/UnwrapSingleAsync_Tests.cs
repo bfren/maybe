@@ -6,7 +6,7 @@ namespace MaybeF.MaybeExtensions_Tests;
 public class UnwrapSingleAsync_Tests : Abstracts.UnwrapSingleAsync_Tests
 {
 	[Fact]
-	public override async Task Test00_If_Unknown_Maybe_Returns_None_With_UnhandledExceptionMsg()
+	public override async Task Test00_If_Unknown_Maybe_Returns_None_With_UnknownMaybeTypeMsg()
 	{
 		await Test00(mbe => mbe.UnwrapAsync(x => x.SingleValue<int>(null, null, null, null)));
 	}

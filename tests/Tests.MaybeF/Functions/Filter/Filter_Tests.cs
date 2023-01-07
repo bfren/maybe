@@ -6,7 +6,7 @@ namespace MaybeF.F_Tests;
 public class Filter_Tests : Abstracts.Filter_Tests
 {
 	[Fact]
-	public override void Test00_If_Unknown_Maybe_Returns_None_With_UnhandledExceptionMsg()
+	public override void Test00_If_Unknown_Maybe_Returns_None_With_UnknownMaybeTypeMsg()
 	{
 		var predicate = Substitute.For<Func<int, bool>>();
 		Test00(mbe => F.Filter(mbe, predicate));

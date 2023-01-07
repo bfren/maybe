@@ -1,4 +1,4 @@
-﻿// Maybe: Unit Tests
+// Maybe: Unit Tests
 // Copyright (c) bfren - licensed under https://mit.bfren.dev/2019
 
 namespace MaybeF.F_Tests;
@@ -6,7 +6,7 @@ namespace MaybeF.F_Tests;
 public class Map_Tests : Abstracts.Map_Tests
 {
 	[Fact]
-	public override void Test00_If_Unknown_Maybe_Returns_None_With_UnhandledExceptionMsg()
+	public override void Test00_If_Unknown_Maybe_Returns_None_With_UnknownMaybeTypeMsg()
 	{
 		Test00((mbe, map, handler) => F.Map(mbe, map, handler));
 	}
