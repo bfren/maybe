@@ -12,4 +12,4 @@ View the [Wiki](https://github.com/bfren/maybe/wiki) for documentation.
 
 ## Copyright
 
-> Copyright (c) 2019-2022 [bfren](https://bfren.dev) (unless otherwise stated)
+> Copyright (c) 2019-2023 [bfren](https://bfren.dev) (unless otherwise stated)
