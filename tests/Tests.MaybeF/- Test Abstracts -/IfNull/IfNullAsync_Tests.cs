@@ -17,7 +17,7 @@ public abstract class IfNullAsync_Tests
 		var some = F.Some<object>(null, true);
 		var none = F.None<object?, NullValueMsg>();
 		var throws = Substitute.For<Func<Task<Maybe<object?>>>>();
-		throws.Invoke().Throws<Exception>();
+		throws.Invoke().ThrowsAsync<Exception>();
 
 		// Act
 		var r0 = await act(some, throws);
@@ -194,8 +194,7 @@ public abstract class IfNullAsync_Tests
 		var ifNull = Substitute.For<Func<Task<string>>>();
 		var message = Rnd.Str;
 		var ex = new Exception(message);
-		ifNull.Invoke()
-			.Throws(ex);
+		ifNull.Invoke().ThrowsAsync(ex);
 		var ifSome = Substitute.For<Func<Guid?, Task<string>>>();
 		var handler = Substitute.For<F.Handler>();
 
@@ -220,8 +219,7 @@ public abstract class IfNullAsync_Tests
 		var ifSome = Substitute.For<Func<Guid?, Task<string>>>();
 		var message = Rnd.Str;
 		var ex = new Exception(message);
-		ifSome.Invoke(value)
-			.Throws(ex);
+		ifSome.Invoke(value).ThrowsAsync(ex);
 		var handler = Substitute.For<F.Handler>();
 
 		// Act
@@ -240,8 +238,7 @@ public abstract class IfNullAsync_Tests
 		var some = F.Some<Guid?>(() => null, true, F.DefaultHandler);
 		var none = F.None<Guid?, NullValueMsg>();
 		var ifNull = Substitute.For<Func<Task<Maybe<string>>>>();
-		ifNull.Invoke()
-			.Throws(new Exception());
+		ifNull.Invoke().ThrowsAsync(new Exception());
 		var ifSome = Substitute.For<Func<Guid?, Task<Maybe<string>>>>();
 
 		// Act
@@ -263,8 +260,7 @@ public abstract class IfNullAsync_Tests
 		var none = F.None<Guid?, NullValueMsg>();
 		var ifNull = Substitute.For<Func<Task<Maybe<string>>>>();
 		var ifSome = Substitute.For<Func<Guid?, Task<Maybe<string>>>>();
-		ifSome.Invoke(value)
-			.Throws(new Exception());
+		ifSome.Invoke(value).ThrowsAsync(new Exception());
 
 		// Act
 		var result = await act(some, ifNull, ifSome);
