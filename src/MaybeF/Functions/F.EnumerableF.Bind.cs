@@ -26,9 +26,12 @@ public static partial class F
 
 			foreach (var item in list)
 			{
-				foreach (var value in F.Bind(item, bind))
+				foreach (var value in item)
 				{
-					yield return value;
+					if (value is not null)
+					{
+						yield return bind(value);
+					}
 				}
 			}
 		}
