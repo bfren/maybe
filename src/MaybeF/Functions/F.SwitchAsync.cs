@@ -8,6 +8,20 @@ namespace MaybeF;
 
 public static partial class F
 {
+	/// <inheritdoc cref="Switch{T, TReturn}(Maybe{T}, Func{T, Maybe{TReturn}}, Func{Maybe{TReturn}})"/>
+	public static Task SwitchAsync<T>(Maybe<T> maybe, Func<T, Task> some, Func<IMsg, Task> none) =>
+		maybe switch
+		{
+			Some<T> x when some is not null =>
+				some(x.Value),
+
+			None<T> y when none is not null =>
+				none(y.Reason),
+
+			_ =>
+				Task.CompletedTask
+		};
+
 	/// <inheritdoc cref="Switch{T, TReturn}(Maybe{T}, Func{T, TReturn}, Func{IMsg, TReturn})"/>
 	public static Task<TReturn> SwitchAsync<T, TReturn>(Maybe<T> maybe, Func<T, Task<TReturn>> some, Func<IMsg, Task<TReturn>> none) =>
 		Switch(maybe, some, none);
