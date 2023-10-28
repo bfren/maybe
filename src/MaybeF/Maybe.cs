@@ -364,6 +364,10 @@ public abstract record class Maybe<T> : IEquatable<Maybe<T>>
 	public Task<TReturn> SwitchAsync<TReturn>(Func<T, Task<TReturn>> some, TReturn none) =>
 		F.SwitchAsync(this, some, none: _ => Task.FromResult(none));
 
+	/// <inheritdoc cref="F.SwitchAsync{T}(Maybe{T}, Func{T, Task}, Func{IMsg, Task})"/>
+	public Task SwitchAsync(Func<T, Task> some, Func<IMsg, Task> none) =>
+		F.SwitchAsync(this, some, none);
+
 	/// <inheritdoc cref="F.SwitchAsync{T, TReturn}(Maybe{T}, Func{T, Task{TReturn}}, Func{IMsg, Task{TReturn}})"/>
 	public Task<TReturn> SwitchAsync<TReturn>(Func<T, TReturn> some, Task<TReturn> none) =>
 		F.SwitchAsync(this, some: (T v) => Task.FromResult(some(v)), none: _ => none);
