@@ -1,5 +1,5 @@
 <Project Sdk="Microsoft.NET.Sdk">
-	<PropertyGroup>
-		<RootNamespace>MaybeF.Testing</RootNamespace>
-	</PropertyGroup>
+  <PropertyGroup>
+    <RootNamespace>MaybeF.Testing</RootNamespace>
+  </PropertyGroup>
 </Project>
