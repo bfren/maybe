@@ -1,8 +1,8 @@
 <Project Sdk="Microsoft.NET.Sdk">
-	<PropertyGroup>
-		<RootNamespace>MaybeF</RootNamespace>
-	</PropertyGroup>
-	<ItemGroup>
-		<ProjectReference Include="..\..\src\MaybeF\MaybeF.csproj" />
-	</ItemGroup>
+  <PropertyGroup>
+    <RootNamespace>MaybeF</RootNamespace>
+  </PropertyGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\src\MaybeF\MaybeF.csproj" />
+  </ItemGroup>
 </Project>
