@@ -11,7 +11,7 @@ jobs:
     steps:
     -
       name: Prepare - Checkout Code
-      uses: actions/checkout@v3
+      uses: actions/checkout@v6
     -
       name: Prepare - Read Version
       uses: bfren/read-file@v2
@@ -20,12 +20,14 @@ jobs:
       id: version
     -
       name: Prepare - Setup .NET
-      uses: actions/setup-dotnet@v3
+      uses: actions/setup-dotnet@v5
       with:
         dotnet-version: |
           6.0.x
           7.0.x
           8.0.x
+          9.0.x
+          10.0.x
     -
       name: A - Restore
       run: |
