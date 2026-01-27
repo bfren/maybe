@@ -11,11 +11,10 @@ public class GetValueOrNone_Tests : Abstracts.Dictionary.GetValueOrNone_Tests
 		Test00((dict, key) => dict.GetValueOrNone(key));
 	}
 
-	[Theory]
-	[InlineData(null)]
-	public override void Test01_Null_Key_Returns_None_With_KeyCannotBeNullMsg(string input)
+	[Fact]
+	public override void Test01_Null_Key_Returns_None_With_KeyCannotBeNullMsg()
 	{
-		Test01(dict => dict.GetValueOrNone(input));
+		Test01(dict => dict.GetValueOrNone(null!));
 	}
 
 	[Fact]

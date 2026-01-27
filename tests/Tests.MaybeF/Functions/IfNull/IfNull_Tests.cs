@@ -36,11 +36,10 @@ public class IfNull_Tests : Abstracts.IfNull_Tests
 		Test04((mbe, ifNull) => F.IfNull(mbe, ifNull));
 	}
 
-	[Theory]
-	[InlineData(null)]
-	public override void Test05_Null_Maybe_Runs_IfNull_Func(Maybe<int> input)
+	[Fact]
+	public override void Test05_Null_Maybe_Runs_IfNull_Func()
 	{
-		Test05(ifNull => F.IfNull(input, ifNull));
+		Test05(ifNull => F.IfNull(null!, ifNull));
 	}
 
 	[Fact]

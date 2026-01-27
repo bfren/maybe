@@ -22,7 +22,7 @@ public abstract class GetValueOrNone_Tests
 		result.AssertNone().AssertType<DictionaryIsEmptyMsg>();
 	}
 
-	public abstract void Test01_Null_Key_Returns_None_With_KeyCannotBeNullMsg(string input);
+	public abstract void Test01_Null_Key_Returns_None_With_KeyCannotBeNullMsg();
 
 	protected static void Test01(Func<IDictionary<string, int>, Maybe<int>> act)
 	{

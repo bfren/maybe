@@ -5,15 +5,15 @@ namespace MaybeF.Functions.Parse_Tests;
 
 public class ParseUInt64_Tests : Abstracts.Parse_Tests<ulong>
 {
-	public static IEnumerable<object[]> Extreme_Int_Input()
-	{
-		yield return new object[] { ulong.MinValue.ToString() };
-		yield return new object[] { ulong.MaxValue.ToString() };
-	}
+	public static TheoryData<string> Extreme_ULong_Input() =>
+		[
+			ulong.MinValue.ToString(),
+			ulong.MaxValue.ToString()
+		];
 
 	[Theory]
 	[MemberData(nameof(ParseUInt16_Tests.Valid_Unsigned_Integer_Input), MemberType = typeof(ParseUInt16_Tests))]
-	[MemberData(nameof(Extreme_Int_Input))]
+	[MemberData(nameof(Extreme_ULong_Input))]
 	public override void Test00_Valid_Input_Returns_Parsed_Result(string? input)
 	{
 		Test00(input, s => ulong.Parse(s, F.DefaultCulture), F.ParseUInt64, F.ParseUInt64);

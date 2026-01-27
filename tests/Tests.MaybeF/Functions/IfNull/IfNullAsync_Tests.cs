@@ -39,11 +39,10 @@ public class IfNullAsync_Tests : Abstracts.IfNullAsync_Tests
 		await Test04((mbe, ifNull) => F.IfNullAsync(mbe.AsTask(), ifNull));
 	}
 
-	[Theory]
-	[InlineData(null)]
-	public override async Task Test05_Null_Maybe_Runs_IfNull_Func(Maybe<int> input)
+	[Fact]
+	public override async Task Test05_Null_Maybe_Runs_IfNull_Func()
 	{
-		await Test05(ifNull => F.IfNullAsync(input, ifNull));
+		await Test05(ifNull => F.IfNullAsync((Maybe<int>)null!, ifNull));
 	}
 
 	[Fact]

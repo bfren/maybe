@@ -5,15 +5,15 @@ namespace MaybeF.Functions.Parse_Tests;
 
 public class ParseUIntPtr_Tests : Abstracts.Parse_Tests<nuint>
 {
-	public static IEnumerable<object[]> Extreme_Int_Input()
-	{
-		yield return new object[] { nuint.MinValue.ToString() };
-		yield return new object[] { nuint.MaxValue.ToString() };
-	}
+	public static TheoryData<string> Extreme_NUInt_Input() =>
+		[
+			nuint.MinValue.ToString(),
+			nuint.MaxValue.ToString()
+		];
 
 	[Theory]
 	[MemberData(nameof(ParseUInt16_Tests.Valid_Unsigned_Integer_Input), MemberType = typeof(ParseUInt16_Tests))]
-	[MemberData(nameof(Extreme_Int_Input))]
+	[MemberData(nameof(Extreme_NUInt_Input))]
 	public override void Test00_Valid_Input_Returns_Parsed_Result(string? input)
 	{
 		Test00(input, s => nuint.Parse(s, F.DefaultCulture), F.ParseUIntPtr, F.ParseUIntPtr);

@@ -5,11 +5,11 @@ namespace MaybeF.Functions.Parse_Tests;
 
 public class ParseDecimal_Tests : Abstracts.Parse_Tests<decimal>
 {
-	public static IEnumerable<object[]> Extreme_Decimal_Input()
-	{
-		yield return new object[] { decimal.MinValue.ToString() };
-		yield return new object[] { decimal.MaxValue.ToString() };
-	}
+	public static TheoryData<string> Extreme_Decimal_Input() =>
+		[
+			decimal.MinValue.ToString(),
+			decimal.MaxValue.ToString()
+		];
 
 	[Theory]
 	[MemberData(nameof(ParseSingle_Tests.Valid_Float_Input), MemberType = typeof(ParseSingle_Tests))]

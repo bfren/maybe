@@ -5,29 +5,28 @@ namespace MaybeF.Functions.Parse_Tests;
 
 public class ParseByte_Tests : Abstracts.Parse_Tests<byte>
 {
-	public static IEnumerable<object[]> Valid_Byte_Input()
-	{
-		yield return new object[] { "101" };
-		yield return new object[] { "  101  " };
-		yield return new object[] { "+101" };
-		yield return new object[] { "00000000101" };
-	}
+	public static TheoryData<string> Valid_Byte_Input() =>
+		[
+			"101",
+			"  101  ",
+			"+101",
+			"00000000101"
+		];
 
-	public static IEnumerable<object[]> Negative_Byte_Input()
-	{
-		yield return new object[] { "-101" };
-		yield return new object[] { "-00000000101" };
+	public static TheoryData<string> Negative_Byte_Input() =>
+		[
+			"-101",
+			"-00000000101"
+		];
 
-	}
-
-	public static IEnumerable<object[]> Invalid_Byte_Input()
-	{
-		yield return new object[] { "" };
-		yield return new object[] { "1024" };
-		yield return new object[] { "100.1" };
-		yield return new object[] { "FF" };
-		yield return new object[] { "0x1F" };
-	}
+	public static TheoryData<string> Invalid_Byte_Input() =>
+		[
+			"",
+			"1024",
+			"100.1",
+			"FF",
+			"0x1F"
+		];
 
 	[Theory]
 	[MemberData(nameof(Valid_Byte_Input))]

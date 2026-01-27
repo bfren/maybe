@@ -37,7 +37,7 @@ public abstract class Switch_Tests
 		Assert.Throws<UnknownMaybeException>(action);
 	}
 
-	public abstract void Test02_If_Null_Throws_MaybeCannotBeNullException(Maybe<int> input);
+	public abstract void Test02_If_Null_Throws_MaybeCannotBeNullException();
 
 	protected static void Test02(Func<string> act)
 	{
@@ -251,7 +251,7 @@ public abstract class Switch_Tests
 		Assert.Equal(typeof(FakeMaybe), msg.MaybeType);
 	}
 
-	public abstract void Test16_If_Null_Returns_None_With_MaybeCannotBeNullMsg(Maybe<int> input);
+	public abstract void Test16_If_Null_Returns_None_With_MaybeCannotBeNullMsg();
 
 	protected static void Test16(Func<Maybe<string>> act)
 	{

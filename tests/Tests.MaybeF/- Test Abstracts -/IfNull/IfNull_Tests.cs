@@ -98,7 +98,7 @@ public abstract class IfNull_Tests
 		Assert.Same(message, none);
 	}
 
-	public abstract void Test05_Null_Maybe_Runs_IfNull_Func(Maybe<int> input);
+	public abstract void Test05_Null_Maybe_Runs_IfNull_Func();
 
 	protected static void Test05(Func<Func<Maybe<int>>, Maybe<int>> act)
 	{

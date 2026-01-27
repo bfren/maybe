@@ -13,13 +13,12 @@ public class SwitchIf_Tests : Abstracts.SwitchIf_Tests
 		Test00((mbe, check) => F.SwitchIf(mbe, check, ifFalse));
 	}
 
-	[Theory]
-	[InlineData(null)]
-	public override void Test01_If_Null_Returns_None_With_MaybeCannotBeNullMsg(Maybe<int> input)
+	[Fact]
+	public override void Test01_If_Null_Returns_None_With_MaybeCannotBeNullMsg()
 	{
 		var ifFalse = Substitute.For<Func<int, IMsg>>();
-		Test01(check => F.SwitchIf(input, check, null, null));
-		Test01(check => F.SwitchIf(input, check, ifFalse));
+		Test01(check => F.SwitchIf(null!, check, null, null));
+		Test01(check => F.SwitchIf(null!, check, ifFalse));
 	}
 
 	[Fact]

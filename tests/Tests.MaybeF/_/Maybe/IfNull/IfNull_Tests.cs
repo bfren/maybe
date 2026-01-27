@@ -90,10 +90,8 @@ public class IfNull_Tests : Abstracts.IfNull_Tests
 
 	#region Unused
 
-	[Theory]
-	[InlineData(null)]
-	public override void Test05_Null_Maybe_Runs_IfNull_Func(Maybe<int> input) =>
-		Assert.Null(input);
+	public override void Test05_Null_Maybe_Runs_IfNull_Func() =>
+		throw new NotImplementedException();
 
 	#endregion Unused
 }

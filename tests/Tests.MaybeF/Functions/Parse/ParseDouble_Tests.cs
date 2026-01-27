@@ -5,11 +5,11 @@ namespace MaybeF.Functions.Parse_Tests;
 
 public class ParseDouble_Tests : Abstracts.Parse_Tests<double>
 {
-	public static IEnumerable<object[]> Extreme_Double_Input()
-	{
-		yield return new object[] { double.MinValue.ToString() };
-		yield return new object[] { double.MaxValue.ToString() };
-	}
+	public static TheoryData<string> Extreme_Double_Input() =>
+		[
+			double.MinValue.ToString(),
+			double.MaxValue.ToString()
+		];
 
 	[Theory]
 	[MemberData(nameof(ParseSingle_Tests.Valid_Float_Input), MemberType = typeof(ParseSingle_Tests))]

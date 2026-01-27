@@ -7,14 +7,13 @@ namespace MaybeF.F_Tests;
 
 public class CatchAsync_Tests
 {
-	[Theory]
-	[InlineData(null)]
-	public async Task Catches_Null_Maybe(Func<Task<Maybe<int>>> input)
+	[Fact]
+	public async Task Catches_Null_Maybe()
 	{
 		// Arrange
 
 		// Act
-		var result = await F.CatchAsync(input, F.DefaultHandler);
+		var result = await F.CatchAsync<int>(null!, F.DefaultHandler);
 
 		// Assert
 		result.AssertNone().AssertType<MaybeCannotBeNullMsg>();

@@ -23,7 +23,7 @@ public abstract class SwitchAsync_Tests
 		await Assert.ThrowsAsync<UnknownMaybeException>(action);
 	}
 
-	public abstract Task Test01_If_Null_Throws_MaybeCannotBeNullException(Maybe<int> input);
+	public abstract Task Test01_If_Null_Throws_MaybeCannotBeNullException();
 
 	protected static async Task Test01(Func<Task<string>> act)
 	{
@@ -175,7 +175,7 @@ public abstract class SwitchAsync_Tests
 		Assert.Equal(typeof(FakeMaybe), msg.MaybeType);
 	}
 
-	public abstract Task Test11_If_Null_Returns_None_With_MaybeCannotBeNullMsg(Maybe<int> input);
+	public abstract Task Test11_If_Null_Returns_None_With_MaybeCannotBeNullMsg();
 
 	protected static async Task Test11(Func<Task<Maybe<string>>> act)
 	{

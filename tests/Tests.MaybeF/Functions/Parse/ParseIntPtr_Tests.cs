@@ -5,15 +5,15 @@ namespace MaybeF.Functions.Parse_Tests;
 
 public class ParseIntPtr_Tests : Abstracts.Parse_Tests<nint>
 {
-	public static IEnumerable<object[]> Extreme_Long_Input()
-	{
-		yield return new object[] { nint.MinValue.ToString() };
-		yield return new object[] { nint.MaxValue.ToString() };
-	}
+	public static TheoryData<string> Extreme_NInt_Input() =>
+		[
+			nint.MinValue.ToString(),
+			nint.MaxValue.ToString()
+		];
 
 	[Theory]
 	[MemberData(nameof(ParseInt16_Tests.Valid_Integer_Input), MemberType = typeof(ParseInt16_Tests))]
-	[MemberData(nameof(Extreme_Long_Input))]
+	[MemberData(nameof(Extreme_NInt_Input))]
 	public override void Test00_Valid_Input_Returns_Parsed_Result(string? input)
 	{
 		Test00(input, s => nint.Parse(s, F.DefaultCulture), F.ParseIntPtr, F.ParseIntPtr);

@@ -124,15 +124,11 @@ public class Switch_Tests : Abstracts.Switch_Tests
 
 	#region Unused
 
-	[Theory]
-	[InlineData(null)]
-	public override void Test02_If_Null_Throws_MaybeCannotBeNullException(Maybe<int> input) =>
-		Assert.Null(input);
+	public override void Test02_If_Null_Throws_MaybeCannotBeNullException() =>
+		throw new NotImplementedException();
 
-	[Theory]
-	[InlineData(null)]
-	public override void Test16_If_Null_Returns_None_With_MaybeCannotBeNullMsg(Maybe<int> input) =>
-		Assert.Null(input);
+	public override void Test16_If_Null_Returns_None_With_MaybeCannotBeNullMsg() =>
+		throw new NotImplementedException();
 
 	#endregion Unused
 }
