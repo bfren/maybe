@@ -5,44 +5,45 @@ namespace MaybeF.Functions.Parse_Tests;
 
 public class ParseSingle_Tests : Abstracts.Parse_Tests<float>
 {
-	public static IEnumerable<object[]> Valid_Float_Input()
-	{
-		yield return new object[] { "1" };
-		yield return new object[] { "  1  " };
-		yield return new object[] { "-1" };
-		yield return new object[] { "1.01" };
-		yield return new object[] { "-1.01" };
-		yield return new object[] { "1,01" };
-		yield return new object[] { "-1,01" };
-		yield return new object[] { "1,000" };
-		yield return new object[] { "-1,000" };
-		yield return new object[] { "1,000.01" };
-		yield return new object[] { "-1,000.01" };
-	}
-	public static IEnumerable<object[]> Valid_Float_Exponential_Input()
-	{
-		yield return new object[] { "1e10" };
-		yield return new object[] { "-1e10" };
-		yield return new object[] { "1e-10" };
-		yield return new object[] { "-1e-10" };
-	}
+	public static TheoryData<string> Valid_Float_Input() =>
+		[
+			"1",
+			"  1  ",
+			"-1",
+			"1.01",
+			"-1.01",
+			"1,01",
+			"-1,01",
+			"1,000",
+			"-1,000",
+			"1,000.01",
+			"-1,000.01"
+		];
 
-	public static IEnumerable<object[]> Invalid_Float_Input()
-	{
-		yield return new object[] { "" };
-		yield return new object[] { "Invalid" };
-		yield return new object[] { "1-" };
-		yield return new object[] { "(1)" };
-		yield return new object[] { "1.00.1" };
-		yield return new object[] { "£1" };
-		yield return new object[] { "£1.10" };
-	}
+	public static TheoryData<string> Valid_Float_Exponential_Input() =>
+		[
+			"1e10",
+			"-1e10",
+			"1e-10",
+			"-1e-10"
+		];
 
-	public static IEnumerable<object[]> Extreme_Single_Input()
-	{
-		yield return new object[] { float.MinValue.ToString() };
-		yield return new object[] { float.MaxValue.ToString() };
-	}
+	public static TheoryData<string> Invalid_Float_Input() =>
+		[
+			"",
+			"Invalid",
+			"1-",
+			"(1)",
+			"1.00.1",
+			"£1",
+			"£1.10"
+		];
+
+	public static TheoryData<string> Extreme_Single_Input() =>
+		[
+			float.MinValue.ToString(),
+			float.MaxValue.ToString()
+		];
 
 	[Theory]
 	[MemberData(nameof(Valid_Float_Input))]

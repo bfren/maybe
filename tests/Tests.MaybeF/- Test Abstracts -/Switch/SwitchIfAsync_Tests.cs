@@ -25,7 +25,7 @@ public abstract class SwitchIfAsync_Tests
 		Assert.Equal(typeof(FakeMaybe), msg.MaybeType);
 	}
 
-	public abstract Task Test01_If_Null_Returns_None_With_MaybeCannotBeNullMsg(Maybe<int> input);
+	public abstract Task Test01_If_Null_Returns_None_With_MaybeCannotBeNullMsg();
 
 	protected static async Task Test01(Func<Func<int, bool>, Task<Maybe<int>>> act)
 	{

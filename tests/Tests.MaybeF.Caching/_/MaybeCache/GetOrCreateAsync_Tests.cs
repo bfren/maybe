@@ -226,7 +226,7 @@ public class GetOrCreateAsync_Tests
 		// Act
 		var r0 = await cache.GetOrCreateAsync(key, () => Task.FromResult(v0), new() { AbsoluteExpirationRelativeToNow = TimeSpan.FromMilliseconds(ms) });
 		var r1 = await cache.GetOrCreateAsync(key, () => Task.FromResult(v1));
-		await semaphore.WaitAsync();
+		await semaphore.WaitAsync(TestContext.Current.CancellationToken);
 		Thread.Sleep(TimeSpan.FromMilliseconds(ms * 2));
 		var r2 = await cache.GetOrCreateAsync(key, () => Task.FromResult(v1));
 		semaphore.Release();

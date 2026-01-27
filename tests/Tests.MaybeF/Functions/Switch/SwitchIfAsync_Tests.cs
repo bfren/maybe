@@ -13,13 +13,12 @@ public class SwitchIfAsync_Tests : Abstracts.SwitchIfAsync_Tests
 		await Test00((mbe, check) => F.SwitchIfAsync(mbe, check, ifFalse));
 	}
 
-	[Theory]
-	[InlineData(null)]
-	public override async Task Test01_If_Null_Returns_None_With_MaybeCannotBeNullMsg(Maybe<int> input)
+	[Fact]
+	public override async Task Test01_If_Null_Returns_None_With_MaybeCannotBeNullMsg()
 	{
 		var ifFalse = Substitute.For<Func<int, IMsg>>();
-		await Test01(check => F.SwitchIfAsync(Task.FromResult(input), check, null, null));
-		await Test01(check => F.SwitchIfAsync(Task.FromResult(input), check, ifFalse));
+		await Test01(check => F.SwitchIfAsync(Task.FromResult((Maybe<int>)null!), check, null, null));
+		await Test01(check => F.SwitchIfAsync(Task.FromResult((Maybe<int>)null!), check, ifFalse));
 	}
 
 	[Fact]

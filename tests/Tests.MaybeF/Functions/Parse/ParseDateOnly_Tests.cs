@@ -5,28 +5,28 @@ namespace MaybeF.Functions.Parse_Tests;
 
 public class ParseDateOnly_Tests : Abstracts.Parse_Tests<DateOnly>
 {
-	public static IEnumerable<object[]> Valid_DateOnly_Input()
-	{
-		yield return new object[] { "16/5/2009" };
-		yield return new object[] { "2009-05-16" };
-		yield return new object[] { "16 May 2009" };
-		yield return new object[] { "Sat, 16 May 2009" };
-	}
+	public static TheoryData<string> Valid_DateOnly_Input() =>
+		[
+			"16/5/2009",
+			"2009-05-16",
+			"16 May 2009",
+			"Sat, 16 May 2009"
+		];
 
-	public static IEnumerable<object[]> Invalid_DateOnly_Input()
-	{
-		yield return new object[] { "Invalid" };
-		yield return new object[] { "5/16/2009" };
-		yield return new object[] { "2009-16-5" };
-		yield return new object[] { "32/5/2009" };
-		yield return new object[] { "2009-5-32" };
-		yield return new object[] { "16/13/2009" };
-		yield return new object[] { "2009-13-16" };
-		yield return new object[] { "16/5/10000" };
-		yield return new object[] { "10000-5-16" };
-		yield return new object[] { "32 May 2009" };
-		yield return new object[] { "Fri, 16 May 2009" };
-	}
+	public static TheoryData<string> Invalid_DateOnly_Input() =>
+		[
+			"Invalid",
+			"5/16/2009",
+			"2009-16-5",
+			"32/5/2009",
+			"2009-5-32",
+			"16/13/2009",
+			"2009-13-16",
+			"16/5/10000",
+			"10000-5-16",
+			"32 May 2009",
+			"Fri, 16 May 2009"
+		];
 
 	[Theory]
 	[MemberData(nameof(Valid_DateOnly_Input))]

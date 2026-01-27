@@ -21,13 +21,12 @@ public class Switch_Tests : Abstracts.Switch_Tests
 		Test01(mbe => F.Switch(mbe, some, none));
 	}
 
-	[Theory]
-	[InlineData(null)]
-	public override void Test02_If_Null_Throws_MaybeCannotBeNullException(Maybe<int> input)
+	[Fact]
+	public override void Test02_If_Null_Throws_MaybeCannotBeNullException()
 	{
 		var some = Substitute.For<Func<int, string>>();
 		var none = Substitute.For<Func<IMsg, string>>();
-		Test02(() => F.Switch(input, some, none));
+		Test02(() => F.Switch(null!, some, none));
 	}
 
 	[Fact]
@@ -122,12 +121,11 @@ public class Switch_Tests : Abstracts.Switch_Tests
 		Test15(mbe => F.Switch(mbe, some, none));
 	}
 
-	[Theory]
-	[InlineData(null)]
-	public override void Test16_If_Null_Returns_None_With_MaybeCannotBeNullMsg(Maybe<int> input)
+	[Fact]
+	public override void Test16_If_Null_Returns_None_With_MaybeCannotBeNullMsg()
 	{
 		var some = Substitute.For<Func<int, Maybe<string>>>();
 		var none = Substitute.For<Func<Maybe<string>>>();
-		Test16(() => F.Switch(input, some, none));
+		Test16(() => F.Switch(null!, some, none));
 	}
 }

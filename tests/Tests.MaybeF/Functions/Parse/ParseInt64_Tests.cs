@@ -5,11 +5,11 @@ namespace MaybeF.Functions.Parse_Tests;
 
 public class ParseInt64_Tests : Abstracts.Parse_Tests<long>
 {
-	public static IEnumerable<object[]> Extreme_Long_Input()
-	{
-		yield return new object[] { long.MinValue.ToString() };
-		yield return new object[] { long.MaxValue.ToString() };
-	}
+	public static TheoryData<string> Extreme_Long_Input() =>
+		[
+			long.MinValue.ToString(),
+			long.MaxValue.ToString()
+		];
 
 	[Theory]
 	[MemberData(nameof(ParseInt16_Tests.Valid_Integer_Input), MemberType = typeof(ParseInt16_Tests))]

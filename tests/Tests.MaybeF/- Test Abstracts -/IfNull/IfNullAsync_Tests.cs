@@ -98,7 +98,7 @@ public abstract class IfNullAsync_Tests
 		Assert.Same(message, none);
 	}
 
-	public abstract Task Test05_Null_Maybe_Runs_IfNull_Func(Maybe<int> input);
+	public abstract Task Test05_Null_Maybe_Runs_IfNull_Func();
 
 	protected static async Task Test05(Func<Func<Task<Maybe<int>>>, Task<Maybe<int>>> act)
 	{

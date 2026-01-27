@@ -22,11 +22,11 @@ public partial class Operator_Tests
 		Assert.Equal(input, some);
 	}
 
-	[Theory]
-	[InlineData(null)]
-	public void Implicit_With_Null_Returns_None(object input)
+	[Fact]
+	public void Implicit_With_Null_Returns_None()
 	{
 		// Arrange
+		object input = null!;
 
 		// Act
 		Maybe<object> result = input;

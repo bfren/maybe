@@ -88,10 +88,8 @@ public class SwitchIf_Tests : Abstracts.SwitchIf_Tests
 
 	#region Unused
 
-	[Theory]
-	[InlineData(null)]
-	public override void Test01_If_Null_Returns_None_With_MaybeCannotBeNullMsg(Maybe<int> input) =>
-		Assert.Null(input);
+	public override void Test01_If_Null_Returns_None_With_MaybeCannotBeNullMsg() =>
+		throw new NotImplementedException();
 
 	#endregion Unused
 }

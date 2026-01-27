@@ -5,24 +5,24 @@ namespace MaybeF.Functions.Parse_Tests;
 
 public class ParseTimeOnly_Tests : Abstracts.Parse_Tests<TimeOnly>
 {
-	public static IEnumerable<object[]> Valid_TimeOnly_Input()
-	{
-		yield return new object[] { "13:59" };
-		yield return new object[] { "1:59 PM" };
-		yield return new object[] { "13:59 PM" };
-		yield return new object[] { "13:59:59" };
-		yield return new object[] { "1:59:59 PM" };
-		yield return new object[] { "1.59.59 PM" };
-	}
+	public static TheoryData<string> Valid_TimeOnly_Input() =>
+		[
+			"13:59",
+			"1:59 PM",
+			"13:59 PM",
+			"13:59:59",
+			"1:59:59 PM",
+			"1.59.59 PM"
+		];
 
-	public static IEnumerable<object[]> Invalid_TimeOnly_Input()
-	{
-		yield return new object[] { "Invalid" };
-		yield return new object[] { "1:59.59 PM" };
-		yield return new object[] { "24:59" };
-		yield return new object[] { "13:79" };
-		yield return new object[] { "1:79 PM" };
-	}
+	public static TheoryData<string> Invalid_TimeOnly_Input() =>
+		[
+			"Invalid",
+			"1:59.59 PM",
+			"24:59",
+			"13:79",
+			"1:79 PM"
+		];
 
 	[Theory]
 	[MemberData(nameof(Valid_TimeOnly_Input))]

@@ -7,14 +7,13 @@ namespace MaybeF.F_Tests;
 
 public class Catch_Tests
 {
-	[Theory]
-	[InlineData(null)]
-	public void Catches_Null_Maybe(Func<Maybe<int>> input)
+	[Fact]
+	public void Catches_Null_Maybe()
 	{
 		// Arrange
 
 		// Act
-		var result = F.Catch(input, F.DefaultHandler);
+		var result = F.Catch<int>(null!, F.DefaultHandler);
 
 		// Assert
 		result.AssertNone().AssertType<MaybeCannotBeNullMsg>();

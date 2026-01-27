@@ -110,15 +110,13 @@ public class SwitchAsync_Tests : Abstracts.SwitchAsync_Tests
 
 	#region Unused
 
-	[Theory]
-	[InlineData(null)]
-	public override Task Test01_If_Null_Throws_MaybeCannotBeNullException(Maybe<int> input) =>
-		Task.FromResult(input);
+	[Fact]
+	public override Task Test01_If_Null_Throws_MaybeCannotBeNullException() =>
+		Task.FromResult((Maybe<int>)null!);
 
-	[Theory]
-	[InlineData(null)]
-	public override Task Test11_If_Null_Returns_None_With_MaybeCannotBeNullMsg(Maybe<int> input) =>
-		Task.FromResult(input);
+	[Fact]
+	public override Task Test11_If_Null_Returns_None_With_MaybeCannotBeNullMsg() =>
+		Task.FromResult((Maybe<int>)null!);
 
 	#endregion Unused
 }

@@ -49,9 +49,8 @@ public abstract class Filter_Tests
 		var result = act(list, predicate);
 
 		// Assert
-		Assert.Collection(result,
-			x => Assert.Equal(v1, x)
-		);
+		var x = Assert.Single(result);
+		Assert.Equal(v1, x);
 	}
 
 	public abstract void Test02_Null_Input_Returns_Empty_List();

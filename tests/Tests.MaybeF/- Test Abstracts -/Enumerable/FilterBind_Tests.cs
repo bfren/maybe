@@ -64,9 +64,8 @@ public abstract class FilterBind_Tests
 		var r0 = act(list, bind, predicate);
 
 		// Assert
-		Assert.Collection(r0,
-			x => Assert.Equal(v1.ToString(), x)
-		);
+		var x = Assert.Single(r0);
+		Assert.Equal(v1.ToString(), x);
 		bind.ReceivedWithAnyArgs(1).Invoke(Arg.Any<int>());
 	}
 

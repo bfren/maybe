@@ -14,14 +14,13 @@ public class SwitchAsync_Tests : Abstracts.SwitchAsync_Tests
 		await Test00(mbe => F.SwitchAsync(mbe.AsTask(), some, none));
 	}
 
-	[Theory]
-	[InlineData(null)]
-	public override async Task Test01_If_Null_Throws_MaybeCannotBeNullException(Maybe<int> input)
+	[Fact]
+	public override async Task Test01_If_Null_Throws_MaybeCannotBeNullException()
 	{
 		var some = Substitute.For<Func<int, Task<string>>>();
 		var none = Substitute.For<Func<IMsg, Task<string>>>();
-		await Test01(() => F.SwitchAsync(input, some, none));
-		await Test01(() => F.SwitchAsync(Task.FromResult(input), some, none));
+		await Test01(() => F.SwitchAsync((Maybe<int>)null!, some, none));
+		await Test01(() => F.SwitchAsync(Task.FromResult((Maybe<int>)null!), some, none));
 	}
 
 	[Fact]
@@ -97,13 +96,12 @@ public class SwitchAsync_Tests : Abstracts.SwitchAsync_Tests
 		await Test10(mbe => F.SwitchAsync(mbe.AsTask(), some, none));
 	}
 
-	[Theory]
-	[InlineData(null)]
-	public override async Task Test11_If_Null_Returns_None_With_MaybeCannotBeNullMsg(Maybe<int> input)
+	[Fact]
+	public override async Task Test11_If_Null_Returns_None_With_MaybeCannotBeNullMsg()
 	{
 		var some = Substitute.For<Func<int, Task<Maybe<string>>>>();
 		var none = Substitute.For<Func<Task<Maybe<string>>>>();
-		await Test11(() => F.SwitchAsync(input, some, none));
-		await Test11(() => F.SwitchAsync(Task.FromResult(input), some, none));
+		await Test11(() => F.SwitchAsync((Maybe<int>)null!, some, none));
+		await Test11(() => F.SwitchAsync(Task.FromResult((Maybe<int>)null!), some, none));
 	}
 }
